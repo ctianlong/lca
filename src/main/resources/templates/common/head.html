@@ -1,0 +1,46 @@
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta id="csrf_token" th:content="${_csrf}?${_csrf.token}"/>
+<!-- Bootstrap css -->
+<link href="https://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+<!-- font-awesome -->
+<link href="https://cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- iCheck -->
+<link href="https://cdn.bootcss.com/iCheck/1.0.2/skins/flat/blue.css" rel="stylesheet">
+<!-- dataTables -->
+<link href="https://cdn.bootcss.com/datatables/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet">
+<!-- kendo ui css -->
+<!-- <link href="https://magicbox.bkclouds.cc/static_api/v3/assets/kendoui-2015.2.624/styles/kendo.common.min.css" rel="stylesheet"/>
+<link href="https://magicbox.bkclouds.cc/static_api/v3/assets/kendoui-2015.2.624/styles/kendo.default.min.css" rel="stylesheet"/> -->
+<!--蓝鲸提供的公用样式库 -->
+<link th:href="@{/css/tx/static_api/v3/bk/css/bk.css}" rel="stylesheet"/>
+<style type="text/css">
+/* 修改默认选项卡样式 */
+.tab-content {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+}
+.king-nav-tabs2 {
+    border: 1px solid #ddd;
+    background: #fff;
+}
+.king-nav-tabs2>li>a {
+    border: none;
+    margin-right: 0;
+    background: #fff;
+    color: #645F63;
+}
+.king-tab-primary.king-nav-tabs2>li.active>a {
+    margin-top: -1px;
+    border-top: 3px solid #5c90d2 !important;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+/* 去掉默认面板头大写转换 */
+.panel .panel-heading {
+    text-transform: none;
+}
+</style>

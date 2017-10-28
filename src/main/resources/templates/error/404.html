@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>页面走丢了</title>
+<div th:replace="common/head"></div>
+</head>
+<body>
+	<div class="container">
+		<div class="row data-panel">
+			<div class="col-lg-12">
+				<div class="king-widget2">
+					<div class="king-widget-content p20">
+						<div class="king-counter king-counter-lg">
+							<div class="king-counter-number-group">
+								<span class="king-counter-icon ml10 white">
+								<i class="fa fa-warning fa-3x show"></i>
+								</span> <span class="king-counter-number">404</span>
+							</div>
+							<div class="king-counter-label f16 text-muted">页面走丢了</div>
+							<br/>
+							<a th:href="@{/}" class="king-btn king-info king-radius">返回首页</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="common/script"></div>
+</body>
+</html>

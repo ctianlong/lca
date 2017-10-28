@@ -1,0 +1,51 @@
+<!-- jQuery -->
+<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<!-- bootstrap　-->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<!-- artDialog -->
+<script src="https://cdn.bootcss.com/artDialog/7.0.0/dialog.js"></script>
+<!-- jquery.serializejson -->
+<script src="https://cdn.bootcss.com/jquery.serializeJSON/2.8.1/jquery.serializejson.min.js"></script>
+<!-- jquery validation -->
+<script src="https://cdn.bootcss.com/jquery-validate/1.14.0/jquery.validate.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-validate/1.14.0/localization/messages_zh.min.js"></script>
+<!-- iCheck -->
+<script src="https://cdn.bootcss.com/iCheck/1.0.2/icheck.min.js"></script>
+<!-- dataTables -->
+<script src="https://cdn.bootcss.com/datatables/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.bootcss.com/datatables/1.10.16/js/dataTables.bootstrap.min.js"></script>
+<!-- 包括所有kendoui的js插件或者可以根据需要使用的js插件调用　-->
+<!-- <script src="https://magicbox.bkclouds.cc/static_api/v3/assets/kendoui-2015.2.624/js/kendo.all.min.js"></script> -->
+<!-- span.js 修改版，加遮罩 -->
+<script th:src="@{/js/jquery.spin.merge.js}"></script>
+<!-- 以下两个插件用于在IE8以及以下版本浏览器支持HTML5元素和媒体查询，如果不需要用可以移除 -->
+<!--[if lt IE 9]>
+<script src="https://magicbox.bkclouds.cc/static_api/v3/assets/js/html5shiv.min.js"></script>
+<script src="https://magicbox.bkclouds.cc/static_api/v3/assets/js/respond.min.js"></script>
+<![endif]-->
+<script th:inline="javascript">
+/*<![CDATA[*/
+    var ctxPath = /*[[${#httpServletRequest.getContextPath()}]]*/ '';
+/*]]>*/
+</script>
+<script>
+	$(function () {
+	    $(":radio").iCheck({
+	        radioClass: 'iradio_flat-blue'
+	    });
+	    $(":checkbox").iCheck({
+	        checkboxClass: 'icheckbox_flat-blue'
+	    });
+	});
+	$.ajaxSetup({headers:{'X-CSRF-TOKEN':$("#csrf_token").attr("content")}});
+	// 用户名正则验证
+	jQuery.validator.addMethod("usernameRegex", function(value, element, param) {
+	    var reg = /^[_A-Za-z][_A-Za-z0-9]*$/;
+	    return this.optional(element) || (reg.test(value));
+	}, "只包含字母、数字、下划线且不以数字开头");
+	// 首尾不含空格验证
+	jQuery.validator.addMethod("notFirstLastSpace", function(value, element, param) {
+	    var reg = /(^\S.*\S$)|(^\S$)/;
+	    return this.optional(element) || (reg.test(value));
+	}, "首尾不能含空格");
+</script>

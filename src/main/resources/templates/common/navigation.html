@@ -1,0 +1,68 @@
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" th:href="@{/}">
+            <i class="fa fa-road f20 mr5"></i>
+                                路面综合管理评价系统
+        </a>
+    </div>
+    <!-- Top Menu Items -->
+    <ul class="nav navbar-right top-nav">
+        <li class="dropdown">
+            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span sec:authentication="principal.chname"></span> <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a th:href="@{/user/{username}(username=${#authentication.principal.username})}"><i class="fa fa-fw fa-user"></i> 个人中心</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <!-- 超链接表单提交，CSRF开启的情况下要求 POST 提交 logout -->
+                    <a href="javascript:document.logoutForm.submit();"><i class="fa fa-fw fa-power-off"></i> 退出</a>
+                    <form name="logoutForm" th:action="@{/logout}" method="post" style="display:none"></form>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav side-nav" th:with="relativePath=${#httpServletRequest.getServletPath()}">
+            <li th:class="${relativePath eq '/' or #strings.startsWith(relativePath,'/?')} ? 'active'">
+                <a th:href="@{/}"><i class="fa fa-fw fa-dashboard"></i> 首页</a>
+            </li>
+            <li th:class="${#strings.startsWith(relativePath,'/tool')} ? 'active'">
+                <a th:href="@{/tool}"><i class="fa fa-fw fa-wrench"></i> LCA工具</a>
+            </li>
+            <li sec:authorize="hasRole(T(tk.mybatis.springboot.security.RoleConstants).ADMIN)" th:class="${#strings.startsWith(relativePath,'/users')} ? 'active'">
+                <a th:href="@{/users}"><i class="fa fa-fw fa-user"></i> 用户管理</a>
+            </li>
+            <li>
+                <a href="javascript:;" data-toggle="collapse" data-target="#database1"><i class="fa fa-fw fa-database"></i> 清单分析数据库<i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                <ul id="database1" class="collapse">
+                    <li>
+                        <a th:href="@{/}"><i class="fa fa-fw fa-circle-o"></i> 材料清单</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/}"><i class="fa fa-fw fa-circle-o"></i> 燃料清单</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/}"><i class="fa fa-fw fa-circle-o"></i> 施工清单</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/}"><i class="fa fa-fw fa-circle-o"></i> LCI 清单</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;"><i class="fa fa-fw fa-database"></i> 影响评价数据库</a>
+            </li>
+        </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+</nav>

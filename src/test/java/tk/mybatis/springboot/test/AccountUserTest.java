@@ -1,0 +1,58 @@
+package tk.mybatis.springboot.test;
+
+import java.util.Date;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import tk.mybatis.springboot.mapper.AccountUserMapper;
+import tk.mybatis.springboot.model.AccountUser;
+import tk.mybatis.springboot.service.query.AccountUserQuery;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class AccountUserTest {
+	
+	@Autowired
+	private AccountUserMapper userMapper;
+	
+	public static void main(String[] args) {
+		int i = 1222;
+		Integer i2 = new Integer(1222);
+		System.out.println(i == i2);
+		int[] ia = new int[1];
+		Integer[] iaa = new Integer[1];
+		System.out.println(ia);
+		System.out.println(iaa);
+	}
+	
+	@Test
+	public void test1() {
+		AccountUser user = new AccountUser();
+		user.setAddress("上海");
+		user.setChname("张三");
+		user.setCompany("同济");
+		user.setGmtCreate(new Date());
+		user.setGmtModified(new Date());
+		user.setPassword("123456");
+		user.setPhone("18811112222");
+		user.setUsername("admin");
+		user.setSuperuser(true);
+		userMapper.insert(user);
+//		assertEquals(2, (int) user.getId());
+	}
+	
+	@Test
+	public void test2() {
+//		System.out.println(userMapper.listByUsernameOnLogin("admin"));
+		AccountUserQuery query = new AccountUserQuery();
+		query.setUsername("%%");
+//		query.setChname("%管理%");
+//		query.setSuperuser(false);
+		System.out.println(userMapper.listAllWithBaseInfo(query));
+	}
+
+}
