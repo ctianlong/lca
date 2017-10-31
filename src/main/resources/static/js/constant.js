@@ -52,8 +52,25 @@ var CONSTANT = {
                     return '<span title="' + data + '">' + data + '</span>';
                 },
                 DATE: function (data, type, row, meta) {
-                	return (new Date(data)).toLocaleDateString();
+                	var date = new Date(data);
+                	return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+                },
+                SCIENTIFIC_NOTATION: function (data, type, row, meta) {
+                	if(data){
+                		return '<span title="' + data.toExponential() + '">' + data.toExponential(2) + '</span>';
+                	}
+                	return "";
                 }
             }
         }
 };
+/*渲染代码表辅助函数*/
+function handleCd(cd, data){
+	if(data){
+		for(var i in cd) {
+			if(cd[i].id==data)
+				return cd[i].text;
+		}
+	}
+	return "";
+}

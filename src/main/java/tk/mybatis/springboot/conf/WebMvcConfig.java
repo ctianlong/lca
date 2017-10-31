@@ -18,8 +18,12 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		registry.addViewController("/").setViewName("index");
 		registry.addViewController("/login").setViewName("login");
 		registry.addViewController("/users").setViewName("users/list");
-		registry.addViewController("/tool").setViewName("tool/input");
+		registry.addViewController("/tool").setViewName("tool/tool");
 		registry.addViewController("/user/{username:^[_A-Za-z][_A-Za-z0-9]*$}").setViewName("user/info");
+		registry.addViewController("/db/inventory/material").setViewName("db/inventory/material/list");
+		registry.addViewController("/db/inventory/fuel").setViewName("db/inventory/fuel/list");
+		registry.addViewController("/db/inventory/construction").setViewName("db/inventory/construction/list");
+		registry.addViewController("/db/influence/default").setViewName("/db/influence/default/list");
 //		registry.addViewController("/401").setViewName("error/401");
 //		registry.addViewController("/403").setViewName("error/403");
 //		registry.addViewController("/404").setViewName("error/404");

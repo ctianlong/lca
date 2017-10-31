@@ -14,6 +14,9 @@
 <!-- dataTables -->
 <script src="https://cdn.bootcss.com/datatables/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.bootcss.com/datatables/1.10.16/js/dataTables.bootstrap.min.js"></script>
+<!-- select2 -->
+<script src="https://cdn.bootcss.com/select2/4.0.4/js/select2.min.js"></script>
+<script src="https://cdn.bootcss.com/select2/4.0.4/js/i18n/zh-CN.js"></script>
 <!-- 包括所有kendoui的js插件或者可以根据需要使用的js插件调用　-->
 <!-- <script src="https://magicbox.bkclouds.cc/static_api/v3/assets/kendoui-2015.2.624/js/kendo.all.min.js"></script> -->
 <!-- span.js 修改版，加遮罩 -->
@@ -23,6 +26,13 @@
 <script src="https://magicbox.bkclouds.cc/static_api/v3/assets/js/html5shiv.min.js"></script>
 <script src="https://magicbox.bkclouds.cc/static_api/v3/assets/js/respond.min.js"></script>
 <![endif]-->
+<div sec:authorize="isAuthenticated()">
+<script th:inline="javascript">
+/*<![CDATA[*/
+	var userId = /*[[${#authentication.principal.id}]]*/ '';
+/*]]>*/
+</script>
+</div>
 <script th:inline="javascript">
 /*<![CDATA[*/
     var ctxPath = /*[[${#httpServletRequest.getContextPath()}]]*/ '';

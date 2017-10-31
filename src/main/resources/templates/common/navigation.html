@@ -44,23 +44,20 @@
             </li>
             <li>
                 <a href="javascript:;" data-toggle="collapse" data-target="#database1"><i class="fa fa-fw fa-database"></i> 清单分析数据库<i class="fa fa-fw fa-angle-down pull-right"></i></a>
-                <ul id="database1" class="collapse">
-                    <li>
-                        <a th:href="@{/}"><i class="fa fa-fw fa-circle-o"></i> 材料清单</a>
+                <ul id="database1" class="collapse" th:classappend="${#strings.startsWith(relativePath,'/db/inventory')} ? 'in'">
+                    <li th:class="${#strings.startsWith(relativePath,'/db/inventory/material')} ? 'active'">
+                        <a th:href="@{/db/inventory/material}"><i class="fa fa-fw fa-circle-o"></i> 材料清单</a>
                     </li>
-                    <li>
-                        <a th:href="@{/}"><i class="fa fa-fw fa-circle-o"></i> 燃料清单</a>
+                    <li th:class="${#strings.startsWith(relativePath,'/db/inventory/fuel')} ? 'active'">
+                        <a th:href="@{/db/inventory/fuel}"><i class="fa fa-fw fa-circle-o"></i> 燃料清单</a>
                     </li>
-                    <li>
-                        <a th:href="@{/}"><i class="fa fa-fw fa-circle-o"></i> 施工清单</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/}"><i class="fa fa-fw fa-circle-o"></i> LCI 清单</a>
+                    <li th:class="${#strings.startsWith(relativePath,'/db/inventory/construction')} ? 'active'">
+                        <a th:href="@{/db/inventory/construction}"><i class="fa fa-fw fa-circle-o"></i> 施工清单</a>
                     </li>
                 </ul>
             </li>
-            <li>
-                <a href="javascript:;"><i class="fa fa-fw fa-database"></i> 影响评价数据库</a>
+            <li th:class="${#strings.startsWith(relativePath,'/db/influence/default')} ? 'active'">
+                <a th:href="@{/db/influence/default}"><i class="fa fa-fw fa-database"></i> 影响评价数据库</a>
             </li>
         </ul>
     </div>

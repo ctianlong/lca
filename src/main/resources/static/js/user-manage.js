@@ -1,7 +1,10 @@
 $(function(){
+	var cdSuperuser=[
+		{id:1,text:"管理员"},
+		{id:0,text:"普通"}
+	]
     var userManage = {
 		    currentItem : null,
-		    fuzzySearch : false,
 		    getQueryCondition : function(data) {
 				var param = {};
 		        //组装排序参数
@@ -320,6 +323,15 @@ $(function(){
         }
     })).api();
 	
+	// 下拉菜单初始化，select2
+	$("#superuserQuery").select2({
+		data:cdSuperuser,
+		placeholder:"全部",
+		allowClear:true,
+		minimumResultsForSearch:-1,
+		language:"zh-CN"
+	});
+	
 	// 添加按钮
 	$("#btn-add").click(function(){
 		userManage.currentItem = null;
@@ -336,6 +348,7 @@ $(function(){
     // 刷新按钮
     $("#btn-reset-refresh").click(function(){
     	$("#form-user-query")[0].reset();
+    	$("#superuserQuery").val(null).trigger("change");
     	_table.order([]);
     	_table.draw();
     });
@@ -373,14 +386,12 @@ $(function(){
 //        !$(event.target).is(":checkbox") && $(":checkbox",this).trigger("click");
     }).on("click",".btn-edit",function() {
         //点击编辑按钮
-    	$(this).closest('tr').addClass("active").siblings().removeClass("active");
         var item = _table.row($(this).closest('tr')).data();
         userManage.currentItem = item;
         userManage.editItemInit(item);
     }).on("click",".btn-del",function() {
         //点击删除按钮
         var item = _table.row($(this).closest('tr')).data();
-        $(this).closest('tr').addClass("active").siblings().removeClass("active");
         userManage.deleteItem([item]);
     });
     

@@ -27,6 +27,10 @@ public class AccountUserTest {
 		Integer[] iaa = new Integer[1];
 		System.out.println(ia);
 		System.out.println(iaa);
+		System.out.println("5~2".split("~")[0]);
+		System.out.println("¥");
+		Double d1 = 1.2e-2;
+		System.out.println(d1);
 	}
 	
 	@Test
