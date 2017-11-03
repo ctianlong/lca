@@ -226,9 +226,9 @@ ul.alert-dropdown .label{width:100%;display:inline-block;}
     color: #df8a13;
 }
 .page-header{margin-top:5px;}
-.form-control{
+/* .form-control{
     width: 90%;
-}
+} */
 .charts .chart {
     height: 300px;
 }

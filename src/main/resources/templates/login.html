@@ -2,11 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>登录</title>
-    <div th:replace="common/head"></div>
-    <!-- NProgress -->
-    <link href="https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-    <!-- Animate.css -->
-    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<meta id="csrf_token" th:content="${_csrf}?${_csrf.token}"/>
+	<!-- Bootstrap css -->
+	<link href="https://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+	<!-- font-awesome -->
+	<link href="https://cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+	<!-- nprogress -->
+	<link href="https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+	<!-- Animate.css -->
+	<link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link th:href="@{/css/custom.min.css}" rel="stylesheet">
   </head>
@@ -15,11 +22,10 @@
     <div>
       <a class="hiddenanchor" id="signup"></a>
       <a class="hiddenanchor" id="signin"></a>
-
       <div class="login_wrapper">
-        <div class="animate form login_form">
+        <div class="animated form login_form">
           <section class="login_content">
-            <form th:action="@{/login}" method="post" id="form-login">
+            <form id="form-login">
               <h1>登  录</h1>
               <div></div>
               <div>
@@ -29,23 +35,18 @@
               <div>
                 <input type="password" class="form-control" name="password" placeholder="密码"/>
               </div>
-              <p th:if="${param.error}" class="text-danger">您输入的账号或密码有误</p>
-              <p th:if="${param.logout}">您已退出登录</p>
+              <p id="loginMsg" class="text-danger"></p>
               <div>
                 <button type="submit" class="btn btn-default submit">登录</button>
                 <!--<a class="reset_pass" href="#">忘记密码？</a>-->
               </div>
-
               <div class="clearfix"></div>
-
               <div class="separator">
-                <p class="change_link">新用户？
-                  <a href="#signup" class="to_register"> 注册 </a>
+                <p class="change_link">新用户?&nbsp;
+                  <a href="#signup" class="to_register"> <b>注册</b></a>
                 </p>
-
                 <div class="clearfix"></div>
                 <br />
-
                 <div>
                   <h1><i class="fa fa-road"></i> 路面综合管理评价系统</h1>
                   <!-- <p>全生命周期经济成本与环境影响评价</p>-->
@@ -55,8 +56,7 @@
             </form>
           </section>
         </div>
-
-        <div id="register" class="animate form registration_form">
+        <div id="register" class="animated form registration_form">
           <section class="login_content">
             <form id="form-register">
               <h1>注  册</h1>
@@ -76,15 +76,14 @@
               <div>
                 <input type="password" class="form-control" name="password_confirm" id="password_confirm" placeholder="确认新密码"/>
               </div>
+              <p id="registerMsg" class="text-danger"></p>
               <div>
                 <button type="submit" class="btn btn-default submit">注册</button>
               </div>
-
               <div class="clearfix"></div>
-
               <div class="separator">
-                <p class="change_link">已有账号？
-                  <a href="#signin" class="to_register"> 登录 </a>
+                <p class="change_link">已有账号?&nbsp;
+                  <a href="#signin" class="to_register"> <b>登录</b></a>
                 </p>
 
                 <div class="clearfix"></div>
@@ -100,9 +99,44 @@
         </div>
       </div>
     </div>
-    
-    <div th:replace="common/script"></div>
+    <!-- jQuery -->
+	<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+	<!-- bootstrap　-->
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<!-- jquery.serializejson -->
+	<script src="https://cdn.bootcss.com/jquery.serializeJSON/2.8.1/jquery.serializejson.min.js"></script>
+	<!-- jquery validation -->
+	<script src="https://cdn.bootcss.com/jquery-validate/1.14.0/jquery.validate.min.js"></script>
+	<script src="https://cdn.bootcss.com/jquery-validate/1.14.0/localization/messages_zh.min.js"></script>
+	<!-- nprogress -->
+	<script src="https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+	<!-- 以下两个插件用于在IE8以及以下版本浏览器支持HTML5元素和媒体查询，如果不需要用可以移除 -->
+	<!--[if lt IE 9]>
+	<script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	    var ctxPath = /*[[${#httpServletRequest.getContextPath()}]]*/ '';
+	/*]]>*/
+	</script>
+	<script>
+	    $.ajaxSetup({headers:{'X-CSRF-TOKEN':$("#csrf_token").attr("content")}});
+	    // 用户名正则验证
+	    jQuery.validator.addMethod("usernameRegex", function(value, element, param) {
+	        var reg = /^[_A-Za-z][_A-Za-z0-9]*$/;
+	        return this.optional(element) || (reg.test(value));
+	    }, "只包含字母、数字、下划线且不以数字开头");
+	    // 首尾不含空格验证
+	    jQuery.validator.addMethod("notFirstLastSpace", function(value, element, param) {
+	        var reg = /(^\S.*\S$)|(^\S$)/;
+	        return this.optional(element) || (reg.test(value));
+	    }, "首尾不能含空格");
+	    NProgress.configure({
+	    	minimum: 0.2,
+	    	showSpinner: false
+	    });
+	</script>
     <script th:src="@{/js/login.js}"></script>
-    
   </body>
 </html>

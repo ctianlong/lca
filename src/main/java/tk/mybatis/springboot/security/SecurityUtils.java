@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
@@ -90,28 +91,38 @@ public class SecurityUtils {
     }
     
     /**
-     * 手动登录方式，不通过 form-post-login
+     * 手动登录方式，不通过 form-post-login，若登录成功，返回之前用户访问的url（或者默认url）
+     * 若登录失败，抛异常AuthenticationException
      * @param username
      * @param password
      * @return 登陆后需要重定向的 URL
      */
-    public static String login(String username, String password) {
+    public static String loginReturnUrl(String username, String password) {
     	HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
 		String defaultTargetUrl = "/"; // 默认登陆成功的页面
-        String redirectUrl = "/login?error"; // 默认为登陆错误页面
-        try {
-        	UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
-//			token.setDetails(new WebAuthenticationDetails(request)); // 经测试，可不加
-        	Authentication authentication = authenticationManager.authenticate(token); // 登陆
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-//			request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext()); // 经测试，可不加
-            // 重定向到登陆前的页面
-            SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request, response);
-            redirectUrl = (savedRequest != null) ? savedRequest.getRedirectUrl() : defaultTargetUrl;
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+		String redirectUrl = "/login?error";
+		try {
+			login(username, password);
+			// 重定向到登陆前的页面
+			SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request, response);
+			redirectUrl = (savedRequest != null) ? savedRequest.getRedirectUrl() : defaultTargetUrl;
+		} catch (AuthenticationException e) {
+			System.out.println(e.getMessage());
+		}
     	return redirectUrl;
+    }
+    
+    /**
+     * 手动登录，不通过 form-post-login，若登录失败抛异常AuthenticationException
+     * @param username
+     * @param password
+     */
+    public static void login(String username, String password) throws AuthenticationException {
+    	UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
+//		token.setDetails(new WebAuthenticationDetails(request)); // 经测试，可不加
+    	Authentication authentication = authenticationManager.authenticate(token); // 登陆
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+//		request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext()); // 经测试，可不加
     }
 }

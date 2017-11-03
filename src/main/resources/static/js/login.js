@@ -22,6 +22,27 @@ $(function(){
                     required:"请输入密码"
                 }
             },
+            submitHandler:function(form){
+        	    NProgress.start();
+                $.ajax({
+                    url:ctxPath+"/api/common/user/login",
+                    type:"post",
+                    data: $("#form-login").serialize(),
+                    success:function (data, textStatus, jqXHR) {
+                    	NProgress.done();
+                        $(location).prop("href",ctxPath+"/");
+                    },
+                    error:function (XMLHttpRequest, textStatus, errorThrown) {
+                    	NProgress.done();
+                        var status=XMLHttpRequest.status;
+                        var msg="登录失败";
+                        if(status==401){
+                            msg="您输入的账号或密码有误";
+                        }
+                        $("#loginMsg").text(msg);
+                    }
+                });
+   	        },
             onkeyup:false
     	});
     	
@@ -72,41 +93,31 @@ $(function(){
    	        submitHandler:function(form){
    	        	var data=$("#form-register").serializeJSON();
    	        	delete data.password_confirm;
+   	        	NProgress.start();
                 $.ajax({
                     url:ctxPath+"/api/common/user/registerAndLogin",
                     type:"post",
                     contentType:"application/json;charset=utf-8",
                     data: JSON.stringify(data),
                     success:function (data, textStatus, jqXHR) {
-                    	var redirectUrl=data.redirectUrl;
-                        var d = dialog({
-                        	content:'<div class="king-notice3 king-notice-success"><span class="king-notice-img"></span><div class="king-notice-text"><p class="f24">注册成功</p><p class="f12"><span class="king-notice3-color">3秒</span>后跳转至应用页面</p></div></div>',
-                        	width:260
-                        });
-                        d.show();
-                        setTimeout(function() {
-                            d.close().remove();
-                            $(location).prop('href',redirectUrl);
-                        }, 3000);
+                    	NProgress.done();
+                        $(location).prop("href",ctxPath+"/user?register");
                     },
                     error:function (XMLHttpRequest, textStatus, errorThrown) {
+                    	NProgress.done();
                         var status=XMLHttpRequest.status;
                         var msg="注册用户失败";
                         if(status==400){
                             msg="您的输入格式有误";
                         }else if(status==422){
                             msg="该用户名已存在";
+                        }else if(status==401){
+                        	msg="注册成功，自动登录失败，请手动登录";
                         }
-                        var d = dialog({
-                             content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+msg+'</p></div>'
-                         });
-                         d.show();
-                         setTimeout(function() {
-                             d.close().remove();
-                         }, 1500);
+                        $("#registerMsg").text(msg);
                     }
                 });
    	        },
    	        onkeyup:false
    	    });
-      });
+});

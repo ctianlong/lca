@@ -16,16 +16,14 @@
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">
         <li class="dropdown">
-            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span sec:authentication="principal.chname"></span> <b class="caret"></b></a>
+            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span id="chnameNav" sec:authentication="principal.chname"></span> <b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li>
-                    <a th:href="@{/user/{username}(username=${#authentication.principal.username})}"><i class="fa fa-fw fa-user"></i> 个人中心</a>
+                    <a th:href="@{/user}"><i class="fa fa-fw fa-user"></i> 个人中心</a>
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <!-- 超链接表单提交，CSRF开启的情况下要求 POST 提交 logout -->
-                    <a href="javascript:document.logoutForm.submit();"><i class="fa fa-fw fa-power-off"></i> 退出</a>
-                    <form name="logoutForm" th:action="@{/logout}" method="post" style="display:none"></form>
+                    <a id="link-logout" href="javascript:void(0);"><i class="fa fa-fw fa-power-off"></i> 退出</a>
                 </li>
             </ul>
         </li>

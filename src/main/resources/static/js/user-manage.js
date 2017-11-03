@@ -119,7 +119,7 @@ $(function(){
 	                type:"put",
 	                contentType:"application/json;charset=utf-8",
 	                data: JSON.stringify(data),
-	                success:function (data, textStatus, jqXHR) {
+	                success:function (result, textStatus, jqXHR) {
 	                	$("#modal-default").modal("hide");
 	                	var d = dialog({
 	                        content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">修改用户成功</p></div>'
@@ -128,6 +128,9 @@ $(function(){
 	                    setTimeout(function() {
 	                        d.close().remove();
 	                        _table.draw(false);
+	                        if(data.id==loginUserId){
+	                        	$("#chnameNav").text(data.chname);
+	                        }
 	                    }, 1500);
 	                },
 	                error:function (XMLHttpRequest, textStatus, errorThrown) {
@@ -165,10 +168,12 @@ $(function(){
 				        zIndex: 2048,
 				        okValue: '确定',
 				        ok: function() {
+				        	NProgress.start();
 				            $.ajax({
 				            	url:ctxPath+"/api/users/"+selectedItems[0].id,
 			                    type:"delete",
 			                    success:function (data, textStatus, jqXHR) {
+			                    	NProgress.done();
 			                    	 var d = dialog({
 			                             content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">删除用户成功</p></div>'
 			                         });
@@ -179,6 +184,7 @@ $(function(){
 			                         }, 1500);
 			                    },
 			                    error:function (XMLHttpRequest, textStatus, errorThrown) {
+			                    	NProgress.done();
 			                    	var status=XMLHttpRequest.status;
 			                    	var msg="删除用户失败";
 			                    	if(status==403){
@@ -214,6 +220,7 @@ $(function(){
         ajax : function(data, callback, settings) {//ajax配置为function,手动调用异步查询
             //手动控制遮罩
             $wrapper.spinModal("small");
+            NProgress.start();
             //封装请求参数
             var param = userManage.getQueryCondition(data);
             $.ajax({
@@ -230,6 +237,7 @@ $(function(){
                         returnData.data = result.list;
                         //关闭遮罩
                         $wrapper.spinModal(false);
+                        NProgress.done();
                         //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
                         //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
                         callback(returnData);
@@ -243,6 +251,7 @@ $(function(){
                             d.close().remove();
                         }, 1500);
                         $wrapper.spinModal(false);
+                        NProgress.done();
                     }
                 });
         },

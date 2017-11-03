@@ -19,7 +19,7 @@ $(function(){
         async:false,
         timeout:3000,
         success:function (data) {
-        	cdMaterialCategory=date;
+        	cdMaterialCategory=data;
         }
 	});
     var materialManage = {
@@ -30,11 +30,53 @@ $(function(){
 		        if (data.order&&data.order.length&&data.order[0]) {
 		            switch (data.order[0].column) {
 		            case 0:
-		                param.orderColumn = "materialName";
+		                param.orderColumn = "material_name";
 		                break;
 					case 1:
-		                param.orderColumn = "materialCategoryCd";
+		                param.orderColumn = "material_category_cd";
 		                break;
+					case 2:
+						param.orderColumn = "unit";
+						break;
+					case 3:
+						param.orderColumn = "cost";
+						break;
+					case 4:
+						param.orderColumn = "cost_source";
+						break;
+					case 5:
+						param.orderColumn = "energy_consume";
+						break;
+					case 6:
+						param.orderColumn = "emission_co2";
+						break;
+					case 7:
+						param.orderColumn = "emission_ch4";
+						break;
+					case 8:
+						param.orderColumn = "emission_n2o";
+						break;
+					case 9:
+						param.orderColumn = "emission_co";
+						break;
+					case 10:
+						param.orderColumn = "emission_so2";
+						break;
+					case 11:
+						param.orderColumn = "emission_nox";
+						break;
+					case 12:
+						param.orderColumn = "emission_pb";
+						break;
+					case 13:
+						param.orderColumn = "emission_zn";
+						break;
+					case 14:
+						param.orderColumn = "data_source";
+						break;
+					case 15:
+						param.orderColumn = "collect_time";
+						break;
 		            default:
 		                break;
 		            }
@@ -54,8 +96,7 @@ $(function(){
 				validator.resetForm();
 		        $("#form-material")[0].reset();
 		        $("#id").val('');
-		
-		
+				$("#materialCategoryCd").val(cdMaterialCategory[0].id).trigger("change");
 		 		$("#modal-default").modal("show");
 		    },
 		    editItemInit : function(item) {
@@ -66,22 +107,35 @@ $(function(){
 				validator.resetForm();
 		        $("#form-material")[0].reset();
 		        $("#id").val(item.id);
-		
-		
+				$("#materialName").val(item.materialName);
+				$("#materialCategoryCd").val(item.materialCategoryCd).trigger("change");
+				$("#unit").val(item.unit);
+				$("#cost").val(item.cost);
+				$("#costSource").val(item.costSource);
+				$("#energyConsume").val(item.energyConsume ? item.energyConsume.toExponential() : null);
+				$("#emissionCo2").val(item.emissionCo2 ? item.emissionCo2.toExponential() : null);
+				$("#emissionCh4").val(item.emissionCh4 ? item.emissionCh4.toExponential() : null);
+				$("#emissionN2o").val(item.emissionN2o ? item.emissionN2o.toExponential() : null);
+				$("#emissionCo").val(item.emissionCo ? item.emissionCo.toExponential() : null);
+				$("#emissionSo2").val(item.emissionSo2 ? item.emissionSo2.toExponential() : null);
+				$("#emissionNox").val(item.emissionNox ? item.emissionNox.toExponential() : null);
+				$("#emissionPb").val(item.emissionPb ? item.emissionPb.toExponential() : null);
+				$("#emissionZn").val(item.emissionZn ? item.emissionZn.toExponential() : null);
+				$("#dataSource").val(item.dataSource);
+				$("#collectTime").val(item.collectTime);
 		 		$("#modal-default").modal("show");
 		    },
 		    addItemSubmit : function() {
 				var data=$("#form-material").serializeJSON();
 	            $.ajax({
-	                url:ctxPath+"/api/",
+	                url:ctxPath+"/api/db/inventory/materials",
 	                type:"post",
 	                contentType:"application/json;charset=utf-8",
 	                data: JSON.stringify(data),
 	                success:function (data, textStatus, jqXHR) {
 	                	$("#modal-default").modal("hide");
 	                	var d = dialog({
-                            content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">新增材料成功</p></div>',
-                            zIndex:2048
+                            content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">新增材料成功</p></div>'
                         });
                         d.show();
                         setTimeout(function() {
@@ -109,7 +163,7 @@ $(function(){
 		    editItemSubmit : function() {
 				var data=$("#form-material").serializeJSON();
 	            $.ajax({
-	                url:ctxPath+"/api//"+data.id,
+	                url:ctxPath+"/api/db/inventory/materials/"+data.id,
 	                type:"put",
 	                contentType:"application/json;charset=utf-8",
 	                data: JSON.stringify(data),
@@ -157,10 +211,12 @@ $(function(){
 				        zIndex: 2048,
 				        okValue: '确定',
 				        ok: function() {
+				        	NProgress.start();
 				            $.ajax({
-				            	url:ctxPath+"/api//"+selectedItems[0].id,
+				            	url:ctxPath+"/api/"+selectedItems[0].id,
 			                    type:"delete",
 			                    success:function (data, textStatus, jqXHR) {
+			                    	NProgress.done();
 			                    	 var d = dialog({
 			                             content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">删除材料成功</p></div>'
 			                         });
@@ -171,6 +227,7 @@ $(function(){
 			                         }, 1500);
 			                    },
 			                    error:function (XMLHttpRequest, textStatus, errorThrown) {
+			                    	NProgress.done();
 			                    	var status=XMLHttpRequest.status;
 			                    	var msg="删除材料失败";
 			                    	if(status==403){
@@ -206,6 +263,7 @@ $(function(){
         ajax : function(data, callback, settings) {//ajax配置为function,手动调用异步查询
             //手动控制遮罩
             $wrapper.spinModal("small");
+            NProgress.start();
             //封装请求参数
             var param = materialManage.getQueryCondition(data);
             $.ajax({
@@ -222,6 +280,7 @@ $(function(){
                         returnData.data = result.list;
                         //关闭遮罩
                         $wrapper.spinModal(false);
+                        NProgress.done();
                         //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
                         //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
                         callback(returnData);
@@ -235,6 +294,7 @@ $(function(){
                             d.close().remove();
                         }, 1500);
                         $wrapper.spinModal(false);
+                        NProgress.done();
                     }
                 });
         },
@@ -356,7 +416,7 @@ $(function(){
             //给当前行某列加样式
             //$('td', row).eq(5).addClass(data.superuser?"text-primary":"");
             //不使用render，改用jquery文档操作呈现单元格
-        	if(data.createUserId==userId){
+        	if(data.createUserId==loginUserId){
         		var $btnEdit = $('<a class="king-btn king-info king-radius king-btn-mini btn-edit"><i class="fa fa-edit btn-icon"></i> 修改</a>');
         		var $btnDel = $('<a class="king-btn king-danger king-radius king-btn-mini btn-del"><i class="fa fa-close btn-icon"></i> 删除</a>');
         		$('td', row).eq(16).append($btnEdit).append($btnDel);
@@ -379,6 +439,14 @@ $(function(){
 		minimumResultsForSearch:-1,
 		language:"zh-CN"
 	});
+	
+	$("#materialCategoryCd").select2({
+		data:cdMaterialCategory,
+		minimumResultsForSearch:-1,
+		language:"zh-CN"
+	});
+	
+	
 	
 	// 添加按钮
 	$("#btn-add").click(function(){
@@ -447,11 +515,8 @@ $(function(){
         errorClass: 'text-danger',
     	rules:{
     		materialName:{
-    			required:true
-    		}
-    	},
-    	messages:{
-    		materialName:{
+    			required:true,
+    			notFirstLastSpace:true
     		}
     	},
     	submitHandler:function(form){

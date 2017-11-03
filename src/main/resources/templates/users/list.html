@@ -3,10 +3,6 @@
 <head>
     <title>用户列表</title>
     <div th:replace="common/head"></div>
-    <!-- 当前项目样式文件 -->
-    <link th:href="@{/css/sb-admin.css}" rel="stylesheet">
-    <link th:href="@{/css/sb-bk-theme.css}" rel="stylesheet">
-
     <!-- 用户管理样式 -->    
     <link th:href="@{/css/myTable.css}" rel="stylesheet"/>
 </head>
@@ -38,6 +34,16 @@
                 	<div class='panel-body'>
                 		<form role="form" id="form-user-query">
                 		    <div class="row">
+                			<div class="col-sm-6 col-md-6 col-lg-4">           
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">权限</div>
+                                        <select id="superuserQuery" class="form-control" style="width: 100%">
+	                                        <option></option>
+	                                    </select>
+                                    </div>
+                                </div>
+                            </div>
                 			<div class="col-sm-6 col-md-6 col-lg-4">
 							            <div class="form-group">
 							                <div class="input-group">
@@ -47,23 +53,13 @@
 							            </div>
 							</div>
 							<div class="col-sm-6 col-md-6 col-lg-4">           
-							            <div class="form-group">
-							            	<div class="input-group">
-							                    <div class="input-group-addon">姓名</div>
-							                	<input id="chnameQuery" type="text" class="form-control" placeholder="请输入姓名">
-							                </div>
-							            </div>
+					            <div class="form-group">
+					            	<div class="input-group">
+					                    <div class="input-group-addon">姓名</div>
+					                	<input id="chnameQuery" type="text" class="form-control" placeholder="请输入姓名">
+					                </div>
+					            </div>
                 			</div>
-                			<div class="col-sm-6 col-md-6 col-lg-4">           
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon">权限</div>
-                                                <select id="superuserQuery" class="form-control">
-		                                            <option></option>
-		                                        </select>
-                                            </div>
-                                        </div>
-                            </div>
                 		    </div>
                             <div class="row">
                             <div class="col-lg-12">

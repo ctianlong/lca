@@ -1,6 +1,5 @@
 package tk.mybatis.springboot.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 
 import tk.mybatis.springboot.model.AccountUser;
+import tk.mybatis.springboot.security.SecurityUser;
 import tk.mybatis.springboot.security.SecurityUtils;
 import tk.mybatis.springboot.service.AccountUserService;
 import tk.mybatis.springboot.service.query.AccountUserQuery;
@@ -92,6 +93,11 @@ public class AccountUserController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 		logger.info("修改用户成功，用户ID：{}", id);
+		if (id.equals(SecurityUtils.getCurrentId())) {
+			SecurityUser securityUser = SecurityUtils.getCurrentUser();
+			securityUser.setChname(userUpdate.getChname());
+			securityUser.setUsername(userUpdate.getUsername());
+		}
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 	
@@ -123,7 +129,7 @@ public class AccountUserController {
 	
 	@PostMapping("/api/common/user/registerAndLogin")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> registerAndLogin(@RequestBody @Valid AccountUser user) {
+	public ResponseEntity<Void> registerAndLogin(@RequestBody @Valid AccountUser user) {
 		if (!userService.checkPasswordLength(user.getPassword())) {
 			return ResponseEntity.badRequest().build();
 		}
@@ -143,19 +149,18 @@ public class AccountUserController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 		logger.info("注册用户成功，用户名：{}", user.getUsername());
-		logger.info("注册后重定向，用户名：{}", user.getUsername());
-		Map<String, Object> result = new HashMap<>();
-		String redirectUrl = SecurityUtils.login(user.getUsername(), rawPassword);
-		result.put("redirectUrl", redirectUrl);
-		return ResponseEntity.status(HttpStatus.CREATED).body(result);
+		// 注册后自动登录，此处仅判断自动登录是否抛异常，具体跳转url由前端控制
+		try {
+			SecurityUtils.login(user.getUsername(), rawPassword);
+		} catch (AuthenticationException e) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+		}
+		return ResponseEntity.ok().build();
 	}
 	
 	@GetMapping("/api/user")
 	@ResponseBody
 	public ResponseEntity<AccountUser> getCurrentUserInfo() {
-		if (!SecurityUtils.isAuthenticated()) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-		}
 		AccountUser user = null;
 		try {
 			user = userService.getOneWithUserInfoById(SecurityUtils.getCurrentId());
@@ -172,9 +177,6 @@ public class AccountUserController {
 	@PutMapping("/api/user")
 	@ResponseBody
 	public ResponseEntity<AccountUser> updateCurrentUserInfo(@RequestBody @Valid AccountUser user) {
-		if (!SecurityUtils.isAuthenticated()) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-		}
 		Integer id = SecurityUtils.getCurrentId();
 		if (!userService.checkUsername(id, user.getUsername())) {
 			return ResponseEntity.unprocessableEntity().build();
@@ -192,15 +194,15 @@ public class AccountUserController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 		logger.info("修改用户成功，用户ID：{}", id);
+		SecurityUser securityUser = SecurityUtils.getCurrentUser();
+		securityUser.setChname(userUpdate.getChname());
+		securityUser.setUsername(userUpdate.getUsername());
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 	
 	@PutMapping("/api/user/password")
 	@ResponseBody
 	public ResponseEntity<Void> updateCurrentUserPassword(@RequestBody Map<String, Object> map) {
-		if (!SecurityUtils.isAuthenticated()) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-		}
 		String oldPassword = (String) map.get("oldPassword");
 		String newPassword = (String) map.get("newPassword");
 		if (!userService.checkPasswordLength(oldPassword) || !userService.checkPasswordLength(newPassword)) {

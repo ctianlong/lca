@@ -3,6 +3,10 @@ package tk.mybatis.springboot.model;
 import java.io.Serializable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import tk.mybatis.springboot.conf.Constants;
 
 public class Material implements Serializable {
     /**
@@ -21,12 +25,15 @@ public class Material implements Serializable {
      * 材料名称
      */
     @Column(name = "material_name")
+    @NotNull
+    @Pattern(regexp = Constants.NO_FIRST_LAST_SPACE_REGEX)
     private String materialName;
 
     /**
      * 材料类别代码
      */
     @Column(name = "material_category_cd")
+    @NotNull
     private Integer materialCategoryCd;
 
     /**

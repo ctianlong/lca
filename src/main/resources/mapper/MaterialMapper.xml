@@ -24,4 +24,15 @@
     <result column="collect_time" property="collectTime" jdbcType="VARCHAR" />
     <result column="create_user_id" property="createUserId" jdbcType="INTEGER" />
   </resultMap>
+  <!-- 查询cd表 -->
+  <select id="getMaterialCategoryCd" resultType="tk.mybatis.springboot.service.cd.CdObject">
+    SELECT
+    material_category_cd AS id, name AS text
+    FROM cd_material_category
+  </select>
+  
+  <select id="getCreateUserIdById" parameterType="int" resultType="int">
+    SELECT create_user_id FROM material WHERE id = #{_parameter}
+  </select>
+  
 </mapper>

@@ -17,21 +17,21 @@
 <!-- select2 -->
 <script src="https://cdn.bootcss.com/select2/4.0.4/js/select2.min.js"></script>
 <script src="https://cdn.bootcss.com/select2/4.0.4/js/i18n/zh-CN.js"></script>
-<!-- 包括所有kendoui的js插件或者可以根据需要使用的js插件调用　-->
-<!-- <script src="https://magicbox.bkclouds.cc/static_api/v3/assets/kendoui-2015.2.624/js/kendo.all.min.js"></script> -->
+<!-- nprogress -->
+<script src="https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
 <!-- span.js 修改版，加遮罩 -->
 <script th:src="@{/js/jquery.spin.merge.js}"></script>
 <!-- 以下两个插件用于在IE8以及以下版本浏览器支持HTML5元素和媒体查询，如果不需要用可以移除 -->
 <!--[if lt IE 9]>
-<script src="https://magicbox.bkclouds.cc/static_api/v3/assets/js/html5shiv.min.js"></script>
-<script src="https://magicbox.bkclouds.cc/static_api/v3/assets/js/respond.min.js"></script>
+<script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 <div sec:authorize="isAuthenticated()">
-<script th:inline="javascript">
-/*<![CDATA[*/
-	var userId = /*[[${#authentication.principal.id}]]*/ '';
-/*]]>*/
-</script>
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+		var loginUserId = /*[[${#authentication.principal.id}]]*/ '';
+	/*]]>*/
+	</script>
 </div>
 <script th:inline="javascript">
 /*<![CDATA[*/
@@ -40,12 +40,26 @@
 </script>
 <script>
 	$(function () {
-	    $(":radio").iCheck({
-	        radioClass: 'iradio_flat-blue'
-	    });
-	    $(":checkbox").iCheck({
-	        checkboxClass: 'icheckbox_flat-blue'
-	    });
+		$('input').iCheck({
+		    checkboxClass: 'icheckbox_square-blue',
+		    radioClass: 'iradio_square-blue',
+		    increaseArea: '20%' // optional
+		});
+		$("#link-logout").click(function(){
+			NProgress.start();
+			$.ajax({
+                url:ctxPath+"/api/common/user/logout",
+                type:"post",
+                success:function (data, textStatus, jqXHR) {
+                	NProgress.done();
+                    $(location).prop("href",ctxPath+"/login");
+                },
+                error:function (XMLHttpRequest, textStatus, errorThrown) {
+                	NProgress.done();
+                	$(location).prop("href",ctxPath+"/login");
+                }
+            });
+		});
 	});
 	$.ajaxSetup({headers:{'X-CSRF-TOKEN':$("#csrf_token").attr("content")}});
 	// 用户名正则验证
@@ -58,4 +72,8 @@
 	    var reg = /(^\S.*\S$)|(^\S$)/;
 	    return this.optional(element) || (reg.test(value));
 	}, "首尾不能含空格");
+	NProgress.configure({
+		minimum: 0.2,
+		showSpinner: false
+	});
 </script>

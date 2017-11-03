@@ -1,13 +1,16 @@
 $(function(){
 	var userInfoManager={
 		getUserInfo:function(){
+			NProgress.start();
 			$.ajax({
 		        url:ctxPath+"/api/user",
 		        type:"get",
 		        success:function (data, textStatus, jqXHR) {
+		        	NProgress.done();
 		        	userInfoManager.showUserInfo(data);
 		        },
 		        error:function (XMLHttpRequest, textStatus, errorThrown) {
+		        	NProgress.done();
 		        	var status=XMLHttpRequest.status;
 		        	var msg="个人信息获取失败";
 		        	if(status==401){
@@ -30,12 +33,16 @@ $(function(){
 				$("#phone1").text(data.phone||"");
 				$("#company1").text(data.company||"");
 				$("#address1").text(data.address||"");
+				$("#chnameLeftPanel").text(data.chname||"");
+				$("#usernameLeftPanel").text(data.username||"");
 			}else {
 				$("#username1").empty();
 				$("#chname1").empty();
 				$("#phone1").empty();
 				$("#company1").empty();
 				$("#address1").empty();
+				$("#chnameLeftPanel").empty();
+				$("#usernameLeftPanel").empty();
 			}
 		},
 		editUserInfoInit:function(){
@@ -64,6 +71,7 @@ $(function(){
                     setTimeout(function() {
                         d.close().remove();
                         userInfoManager.showUserInfo(param);
+                        $("#chnameNav").text(param.chname);
                     }, 1500);
                 },
                 error:function (XMLHttpRequest, textStatus, errorThrown) {
@@ -166,12 +174,14 @@ $(function(){
         submitHandler:function(form){
         	var data=$("#form-password").serializeJSON();
         	delete data.newPassword_confirm;
+        	NProgress.start();
 	        $.ajax({
 	            url:ctxPath+"/api/user/password",
 	            type:"put",
 	            contentType:"application/json;charset=utf-8",
 	            data: JSON.stringify(data),
 	            success:function (data, textStatus, jqXHR) {
+	            	NProgress.done();
 	                var d = dialog({
 	                	content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">修改密码成功</p></div>'
 	                });
@@ -182,6 +192,7 @@ $(function(){
 	                }, 1500);
 	            },
 	            error:function (XMLHttpRequest, textStatus, errorThrown) {
+	            	NProgress.done();
 	                var status=XMLHttpRequest.status;
 	                var msg="修改密码失败";
 	                if(status==403){
