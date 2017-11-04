@@ -213,7 +213,7 @@ $(function(){
 				        ok: function() {
 				        	NProgress.start();
 				            $.ajax({
-				            	url:ctxPath+"/api/"+selectedItems[0].id,
+				            	url:ctxPath+"/api/db/inventory/materials/"+selectedItems[0].id,
 			                    type:"delete",
 			                    success:function (data, textStatus, jqXHR) {
 			                    	NProgress.done();

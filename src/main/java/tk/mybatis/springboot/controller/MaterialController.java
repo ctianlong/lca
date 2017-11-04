@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -69,21 +70,50 @@ public class MaterialController {
 	@ResponseBody
 	public ResponseEntity<Material> saveOne(@RequestBody @Valid Material material) {
 		material.setCreateUserId(SecurityUtils.getCurrentId());
-		if (materialMapper.insertSelective(material) != 1) {
+		try {
+			if (materialMapper.insertSelective(material) != 1) {
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			}
+		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 	
-	@PutMapping("db/inventory/materials/{id:^\\d+$}")
+	@PutMapping("/api/db/inventory/materials/{id:^\\d+$}")
 	@ResponseBody
 	public ResponseEntity<Material> updateOneFully(@PathVariable Integer id, @RequestBody @Valid Material material) {
 		Integer createUserId = materialMapper.getCreateUserIdById(id);
 		if (!SecurityUtils.isCurrentUserInRole(RoleConstants.ADMIN) && !SecurityUtils.getCurrentId().equals(createUserId)) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 		}
-		
+		material.setId(id);
+		material.setCreateUserId(createUserId);
+		try {
+			if (materialMapper.updateByPrimaryKey(material) != 1) {
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			}
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
 		return ResponseEntity.status(HttpStatus.CREATED).build();
+	}
+	
+	@DeleteMapping("/api/db/inventory/materials/{id:^\\d+$}")
+	@ResponseBody
+	public ResponseEntity<Void> deleteOne(@PathVariable Integer id) {
+		Integer createUserId = materialMapper.getCreateUserIdById(id);
+		if (!SecurityUtils.isCurrentUserInRole(RoleConstants.ADMIN) && !SecurityUtils.getCurrentId().equals(createUserId)) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
+		try {
+			if (materialMapper.deleteByPrimaryKey(id) != 1) {
+				return ResponseEntity.notFound().build();
+			}
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+		return ResponseEntity.noContent().build();
 	}
 	
 	@GetMapping("/api/cd/material-category")
