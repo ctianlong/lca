@@ -56,7 +56,7 @@ var CONSTANT = {
                 	return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
                 },
                 SCIENTIFIC_NOTATION: function (data, type, row, meta) {
-                	if(data){
+                	if(data != null){
                 		return '<span title="' + data.toExponential() + '">' + data.toExponential(2) + '</span>';
                 	}
                 	return "";
