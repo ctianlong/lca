@@ -3,8 +3,11 @@ package tk.mybatis.springboot.model;
 import java.io.Serializable;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import tk.mybatis.springboot.conf.Constants;
 
@@ -39,11 +42,13 @@ public class Material implements Serializable {
     /**
      * 单位
      */
+    @Pattern(regexp = Constants.NO_FIRST_LAST_SPACE_OR_EMPTY_REGEX)
     private String unit;
 
     /**
      * 成本
      */
+    @Pattern(regexp = Constants.NON_NEGATIVE_NUMBER_RANGE_OR_EMPTY_REGEX)
     private String cost;
 
     /**
@@ -116,6 +121,7 @@ public class Material implements Serializable {
      * 数据收集时间
      */
     @Column(name = "collect_time")
+    @Pattern(regexp = Constants.COLLECT_TIME_OR_EMPTY_REGEX)
     private String collectTime;
 
     /**

@@ -416,7 +416,7 @@ $(function(){
             //给当前行某列加样式
             //$('td', row).eq(5).addClass(data.superuser?"text-primary":"");
             //不使用render，改用jquery文档操作呈现单元格
-        	if(data.createUserId==loginUserId){
+        	if(data.createUserId==loginUserId || isSuperuser==true){
         		var $btnEdit = $('<a class="king-btn king-info king-radius king-btn-mini btn-edit"><i class="fa fa-edit btn-icon"></i> 修改</a>');
         		var $btnDel = $('<a class="king-btn king-danger king-radius king-btn-mini btn-del"><i class="fa fa-close btn-icon"></i> 删除</a>');
         		$('td', row).eq(16).append($btnEdit).append($btnDel);
@@ -445,8 +445,6 @@ $(function(){
 		minimumResultsForSearch:-1,
 		language:"zh-CN"
 	});
-	
-	
 	
 	// 添加按钮
 	$("#btn-add").click(function(){
@@ -510,13 +508,49 @@ $(function(){
         materialManage.deleteItem([item]);
     });
     
-    //用户表单校验规则
+    // 材料表单校验规则
     var validator = $("#form-material").validate({
         errorClass: 'text-danger',
     	rules:{
     		materialName:{
     			required:true,
     			notFirstLastSpace:true
+    		},
+    		unit:{
+    			notFirstLastSpace:true
+    		},
+    		cost:{
+    			costRule:true
+    		},
+    		energyConsume:{
+    			scientificNotation:true
+    		},
+    		emissionCo2:{
+    			scientificNotation:true
+    		},
+    		emissionCh4:{
+    			scientificNotation:true
+    		},
+    		emissionN2o:{
+    			scientificNotation:true
+    		},
+    		emissionCo:{
+    			scientificNotation:true
+    		},
+    		emissionSo2:{
+    			scientificNotation:true
+    		},
+    		emissionNox:{
+    			scientificNotation:true
+    		},
+    		emissionPb:{
+    			scientificNotation:true
+    		},
+    		emissionZn:{
+    			scientificNotation:true
+    		},
+    		collectTime:{
+    			collectTimeYear:true
     		}
     	},
     	submitHandler:function(form){

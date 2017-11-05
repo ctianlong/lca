@@ -26,13 +26,12 @@
 <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-<div sec:authorize="isAuthenticated()">
-	<script th:inline="javascript">
+	<script sec:authorize="isAuthenticated()" th:inline="javascript">
 	/*<![CDATA[*/
 		var loginUserId = /*[[${#authentication.principal.id}]]*/ '';
+		var isSuperuser = /*[[${#authorization.expression('hasRole(T(tk.mybatis.springboot.security.RoleConstants).ADMIN)')}]]*/ false;
 	/*]]>*/
 	</script>
-</div>
 <script th:inline="javascript">
 /*<![CDATA[*/
     var ctxPath = /*[[${#httpServletRequest.getContextPath()}]]*/ '';
@@ -71,7 +70,31 @@
 	jQuery.validator.addMethod("notFirstLastSpace", function(value, element, param) {
 	    var reg = /(^\S.*\S$)|(^\S$)/;
 	    return this.optional(element) || (reg.test(value));
-	}, "首尾不能含空格");
+	}, "首尾不能包含空格");
+	// 材料成本验证  0.1~0.2 或 1
+	jQuery.validator.addMethod("costRule", function(value, element, param) {
+		if(this.optional(element)) return true;
+	    var reg = /^(0|([1-9]\d*))(\.\d+)?(~(0|([1-9]\d*))(\.\d+)?)?$/; // 非负整数或小数，且头部不能有多余的0，可匹配单个数，也可用~分割的区间
+	    if(reg.test(value)){
+	    	if(value.indexOf("~")!=-1){
+		    	var nums=value.split("~");
+		    	if(nums[0]<=nums[1]) return true;
+	    	}else{
+	    		return true;
+	    	}
+	    }
+	    return false;
+	}, "您的输入格式或大小有误");
+	// 非负，整数、小数、科学计数法
+	jQuery.validator.addMethod("scientificNotation", function(value, element, param) {
+        var reg = /^(0|([1-9]\d*))(\.\d+)?([Ee]{1}([+-]?\d+))?$/;
+        return this.optional(element) || (reg.test(value));
+    }, "您的输入格式或大小有误");
+	// 四位数年份 [1900,2100)
+	jQuery.validator.addMethod("collectTimeYear", function(value, element, param) {
+        var reg = /^((19)|(20))\d\d$/;
+        return this.optional(element) || (reg.test(value));
+    }, "请输入正确的年份");
 	NProgress.configure({
 		minimum: 0.2,
 		showSpinner: false

@@ -123,4 +123,32 @@ public class MaterialController {
 		return ResponseEntity.ok(list);
 	}
 	
+	/*
+	 * 检查材料的能耗及排放量（均为double）是否都大于0，但是允许为null
+	 * 程序中暂时不使用，太费事了，前端验证已经可靠，考虑到也不会有什么攻击
+	 */
+	private boolean checkMaterialDouble(Material material) {
+		return !((material.getEnergyConsume() != null && material.getEnergyConsume() < 0.0)
+			|| (material.getEmissionCo2() != null && material.getEmissionCo2() < 0.0)
+			|| (material.getEmissionCh4() != null && material.getEmissionCh4() < 0.0)
+			|| (material.getEmissionN2o() != null && material.getEmissionN2o() < 0.0)
+			|| (material.getEmissionCo() != null && material.getEmissionCo() < 0.0)
+			|| (material.getEmissionSo2() != null && material.getEmissionSo2() < 0.0)
+			|| (material.getEmissionNox() != null && material.getEmissionNox() < 0.0)
+			|| (material.getEmissionPb() != null && material.getEmissionPb() < 0.0)
+			|| (material.getEmissionZn() != null && material.getEmissionZn() < 0.0));
+	}
+	
+	/*
+	 * 检查材料的成本区间下限是否小于上限
+	 * 程序中暂时不使用，太费事了，前端验证已经可靠，考虑到也不会有什么攻击
+	 */
+	private boolean checkMaterialCost(Material material) {
+		if(material.getCost() != null && material.getCost().contains("~")) {
+			String[] nums = material.getCost().split("~");
+			if (Double.parseDouble(nums[0]) > Double.parseDouble(nums[1])) return false;
+		}
+		return true;
+	}
+	
 }

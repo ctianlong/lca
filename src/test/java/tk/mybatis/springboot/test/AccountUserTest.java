@@ -20,17 +20,24 @@ public class AccountUserTest {
 	private AccountUserMapper userMapper;
 	
 	public static void main(String[] args) {
-		int i = 1222;
-		Integer i2 = new Integer(1222);
-		System.out.println(i == i2);
-		int[] ia = new int[1];
-		Integer[] iaa = new Integer[1];
-		System.out.println(ia);
-		System.out.println(iaa);
-		System.out.println("5~2".split("~")[0]);
-		System.out.println("¥");
-		Double d1 = 1.2e-2;
-		System.out.println(d1);
+//		int i = 1222;
+//		Integer i2 = new Integer(1222);
+//		System.out.println(i == i2);
+//		int[] ia = new int[1];
+//		Integer[] iaa = new Integer[1];
+//		System.out.println(ia);
+//		System.out.println(iaa);
+//		System.out.println("5~2".split("~")[0]);
+//		System.out.println("¥");
+//		Double d1 = 1.2e-2;
+//		System.out.println(d1);
+//		Double d2 = 1.;
+//		System.out.println(d2);
+//		Double d3 = 0.00000000404168695687693;
+//		Double d4 = 0.00000000000000000000005;
+//		System.out.println(d3 + d4);
+//		System.out.println(0.00000000000000000000001 > 0.0);
+		System.out.println(Double.valueOf("0.00000000000000000000001") >= 0.0);
 	}
 	
 	@Test
