@@ -124,7 +124,7 @@ public class MaterialController {
 	}
 	
 	/*
-	 * 检查材料的能耗及排放量（均为double）是否都大于0，但是允许为null
+	 * 后台检查材料的能耗及排放量（均为double）是否都大于0，但是允许为null
 	 * 程序中暂时不使用，太费事了，前端验证已经可靠，考虑到也不会有什么攻击
 	 */
 	private boolean checkMaterialDouble(Material material) {
@@ -140,7 +140,7 @@ public class MaterialController {
 	}
 	
 	/*
-	 * 检查材料的成本区间下限是否小于上限
+	 * 后台检查材料的成本区间下限是否小于上限
 	 * 程序中暂时不使用，太费事了，前端验证已经可靠，考虑到也不会有什么攻击
 	 */
 	private boolean checkMaterialCost(Material material) {
