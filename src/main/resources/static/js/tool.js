@@ -24,11 +24,15 @@ $(function(){
 		{id:5,text:"水泥、石灰稳定土",density:1.8},
 		{id:6,text:"级配碎石",density:2.1}
 	];
+	var cdConcreteSurfaceMaterial=[
+		{id:1,text:"苏混凝土路面",density:2.4},
+		{id:2,text:"配筋式混凝土路面",density:2.4}
+	];
 	
 	var $roadType=$("#roadType").select2({
 		data:cdRoadType,
-		minimumResultsForSearch:-1,
-		language:"zh-CN"
+		//minimumResultsForSearch:-1,
+		language:iMsg.select2LangCode
 	});
 	var $topLayerAsphaltType=$("#topLayerAsphaltType").select2({
 		data:cdAsphaltType,

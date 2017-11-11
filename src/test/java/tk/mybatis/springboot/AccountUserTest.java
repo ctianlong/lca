@@ -1,4 +1,4 @@
-package tk.mybatis.springboot.test;
+package tk.mybatis.springboot;
 
 import java.util.Date;
 

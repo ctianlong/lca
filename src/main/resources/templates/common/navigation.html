@@ -9,21 +9,31 @@
             <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" th:href="@{/}">
-            <i class="fa fa-road f20 mr5"></i>
-                                路面综合管理评价系统
+            <i class="fa fa-road f20 mr5"> <span th:text="#{system.name}"></span></i>
         </a>
     </div>
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">
         <li class="dropdown">
-            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span id="chnameNav" sec:authentication="principal.chname"></span> <b class="caret"></b></a>
+            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-language"></i> <span th:text="#{system.lang.name}"></span> <b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li>
-                    <a th:href="@{/user}"><i class="fa fa-fw fa-user"></i> 个人中心</a>
+                    <a href="javascript:void(0);" onclick="changeLanguage('zh_CN')">简体中文</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" onclick="changeLanguage('en_US')">English</a>
+                </li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span id="chnameNav" sec:authentication="principal.chname"></span> <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a th:href="@{/user}"><span class="ellipsis" style="display: inline-block;max-width: 160px;"><i class="fa fa-fw fa-user"></i> <span th:text="#{system.user.info-center}"></span></span></a>
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <a id="link-logout" href="javascript:void(0);"><i class="fa fa-fw fa-power-off"></i> 退出</a>
+                    <a id="link-logout" href="javascript:void(0);"><i class="fa fa-fw fa-power-off"></i> <span th:text="#{system.logout}"></span></a>
                 </li>
             </ul>
         </li>
@@ -32,30 +42,30 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav" th:with="relativePath=${#httpServletRequest.getServletPath()}">
             <li th:class="${relativePath eq '/' or #strings.startsWith(relativePath,'/?')} ? 'active'">
-                <a th:href="@{/}"><i class="fa fa-fw fa-dashboard"></i> 首页</a>
+                <a th:href="@{/}"><i class="fa fa-fw fa-dashboard"></i> <span th:text="#{system.home}"></span></a>
             </li>
             <li th:class="${#strings.startsWith(relativePath,'/tool')} ? 'active'">
-                <a th:href="@{/tool}"><i class="fa fa-fw fa-wrench"></i> LCA工具</a>
+                <a th:href="@{/tool}"><i class="fa fa-fw fa-wrench"></i> <span th:text="#{system.lca-tool}"></span></a>
             </li>
             <li sec:authorize="hasRole(T(tk.mybatis.springboot.security.RoleConstants).ADMIN)" th:class="${#strings.startsWith(relativePath,'/users')} ? 'active'">
-                <a th:href="@{/users}"><i class="fa fa-fw fa-user"></i> 用户管理</a>
+                <a th:href="@{/users}"><i class="fa fa-fw fa-user"></i> <sapn th:text="#{system.users.manage}"></sapn></a>
             </li>
             <li>
-                <a href="javascript:;" data-toggle="collapse" data-target="#database1"><i class="fa fa-fw fa-database"></i> 清单分析数据库<i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                <a href="javascript:;" data-toggle="collapse" data-target="#database1"><span class="ellipsis" style="display: inline-block;max-width: 160px;"><i class="fa fa-fw fa-database"></i> <span th:title="#{system.db.inventory}" th:text="#{system.db.inventory}"></span></span><i class="fa fa-fw fa-angle-down pull-right"></i></a>
                 <ul id="database1" class="collapse" th:classappend="${#strings.startsWith(relativePath,'/db/inventory')} ? 'in'">
                     <li th:class="${#strings.startsWith(relativePath,'/db/inventory/material')} ? 'active'">
-                        <a th:href="@{/db/inventory/material}"><i class="fa fa-fw fa-circle-o"></i> 材料清单</a>
+                        <a th:href="@{/db/inventory/material}"><i class="fa fa-fw fa-circle-o"></i> <span th:text="#{system.db.inventory.material}"></span></a>
                     </li>
                     <li th:class="${#strings.startsWith(relativePath,'/db/inventory/fuel')} ? 'active'">
-                        <a th:href="@{/db/inventory/fuel}"><i class="fa fa-fw fa-circle-o"></i> 燃料清单</a>
+                        <a th:href="@{/db/inventory/fuel}"><i class="fa fa-fw fa-circle-o"></i> -</a>
                     </li>
                     <li th:class="${#strings.startsWith(relativePath,'/db/inventory/construction')} ? 'active'">
-                        <a th:href="@{/db/inventory/construction}"><i class="fa fa-fw fa-circle-o"></i> 施工清单</a>
+                        <a th:href="@{/db/inventory/construction}"><span class="ellipsis" style="display: inline-block;max-width: 160px;"><i class="fa fa-fw fa-circle-o"></i> <span th:title="#{system.db.inventory.construction}" th:text="#{system.db.inventory.construction}"></span></span></a>
                     </li>
                 </ul>
             </li>
             <li th:class="${#strings.startsWith(relativePath,'/db/influence/default')} ? 'active'">
-                <a th:href="@{/db/influence/default}"><i class="fa fa-fw fa-database"></i> 影响评价数据库</a>
+                <a th:href="@{/db/influence/default}"><span class="ellipsis" style="display: inline-block;max-width: 160px;"><i class="fa fa-fw fa-database"></i> <span th:title="#{system.db.influence.default}" th:text="#{system.db.influence.default}"></span></span></a>
             </li>
         </ul>
     </div>

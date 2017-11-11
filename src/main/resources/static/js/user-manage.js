@@ -84,7 +84,7 @@ $(function(){
 	                success:function (data, textStatus, jqXHR) {
 	                	$("#modal-default").modal("hide");
 	                	var d = dialog({
-                            content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">添加用户成功</p></div>',
+                            content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">'+iMsg.addSuccess+'</p></div>',
                             zIndex:2048
                         });
                         d.show();
