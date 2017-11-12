@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>页面走丢了</title>
+<title th:text="#{system.error.404}"></title>
 <div th:replace="common/head"></div>
 </head>
 <body>
@@ -16,9 +16,9 @@
 								<i class="fa fa-warning fa-3x show"></i>
 								</span> <span class="king-counter-number">404</span>
 							</div>
-							<div class="king-counter-label f16 text-muted">页面走丢了</div>
+							<div class="king-counter-label f16 text-muted"><span th:text="#{system.error.404}"></span></div>
 							<br/>
-							<a th:href="@{/}" class="king-btn king-info king-radius">返回首页</a>
+							<a th:href="@{/}" class="king-btn king-info king-radius"><span th:text="#{system.returnhome}"></span></a>
 						</div>
 					</div>
 				</div>

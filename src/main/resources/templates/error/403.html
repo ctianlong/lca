@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>您权限不足</title>
+    <title th:text="#{system.error.403}"></title>
     <div th:replace="common/head"></div>
 </head>
 <body>
@@ -16,9 +16,9 @@
                                 <i class="fa fa-warning fa-3x show"></i>
                                 </span> <span class="king-counter-number">403</span>
                             </div>
-                            <div class="king-counter-label f16 text-muted">您权限不足</div>
+                            <div class="king-counter-label f16 text-muted"><span th:text="#{system.error.403}"></span></div>
                             <br/>
-                            <a th:href="@{/}" class="king-btn king-info king-radius">返回首页</a>
+                            <a th:href="@{/}" class="king-btn king-info king-radius"><span th:text="#{system.returnhome}"></span></a>
                         </div>
                     </div>
                 </div>

@@ -3,28 +3,28 @@ var CONSTANT = {
         DATA_TABLES : {
             DEFAULT_OPTION : { //DataTables初始化选项
                 language: {
-                    "sProcessing":   "处理中...",
-                    "sLengthMenu":   "每页 _MENU_ 项",
-                    "sZeroRecords":  "没有匹配结果",
-                    "sInfo":         "共 _PAGES_ 页，共 _TOTAL_ 条记录 ",
-                    "sInfoEmpty":    "当前显示第 0 至 0 项，共 0 项",
-                    "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-                    "sInfoPostFix":  "",
-                    "sSearch":       "搜索:",
-                    "sUrl":          "",
-                    "sEmptyTable":     "没有找到记录",
-                    "sLoadingRecords": "载入中...",
-                    "sInfoThousands":  ",",
+                    "sProcessing":   iMsg.sProcessing,
+                    "sLengthMenu":   iMsg.sLengthMenu,
+                    "sZeroRecords":  iMsg.sZeroRecords,
+                    "sInfo":         iMsg.sInfo,
+                    "sInfoEmpty":    iMsg.sInfoEmpty,
+                    "sInfoFiltered": iMsg.sInfoFiltered,
+                    "sInfoPostFix":  iMsg.sInfoPostFix,
+                    "sSearch":       iMsg.sSearch,
+                    "sUrl":          iMsg.sUrl,
+                    "sEmptyTable":   iMsg.sEmptyTable,
+                    "sLoadingRecords": iMsg.sLoadingRecords,
+                    "sInfoThousands":  iMsg.sInfoThousands,
                     "oPaginate": {
-                        "sFirst":    "首页",
-                        "sPrevious": "上页",
-                        "sNext":     "下页",
-                        "sLast":     "末页",
-                        "sJump":     "跳转"
+                        "sFirst":    iMsg.sFirst,
+                        "sPrevious": iMsg.sPrevious,
+                        "sNext":     iMsg.sNext,
+                        "sLast":     iMsg.sLast,
+                        "sJump":     iMsg.sJump
                     },
                     "oAria": {
-                        "sSortAscending":  ": 以升序排列此列",
-                        "sSortDescending": ": 以降序排列此列"
+                        "sSortAscending":  iMsg.sSortAscending,
+                        "sSortDescending": iMsg.sSortDescending
                     }
                 },
                 autoWidth: false,   //禁用自动调整列宽

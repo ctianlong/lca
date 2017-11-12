@@ -16,10 +16,10 @@ $(function(){
             },
             messages:{
                 username:{
-                    required:"请输入用户名"
+                    required:iMsg.inputUsername
                 },
                 password:{
-                    required:"请输入密码"
+                    required:iMsg.inputPassword
                 }
             },
             submitHandler:function(form){
@@ -35,9 +35,9 @@ $(function(){
                     error:function (XMLHttpRequest, textStatus, errorThrown) {
                     	NProgress.done();
                         var status=XMLHttpRequest.status;
-                        var msg="登录失败";
+                        var msg=iMsg.loginFail;
                         if(status==401){
-                            msg="您输入的账号或密码有误";
+                            msg=iMsg.unamePassErr;
                         }
                         $("#loginMsg").text(msg);
                     }
@@ -74,20 +74,20 @@ $(function(){
    	        },
    	        messages:{
    	            username:{
-   	            	required:"请输入用户名",
-   	                remote:"该用户名已存在"
+   	            	required:iMsg.inputUsername,
+   	                remote:iMsg.RepeatedUname
    	            },
    	            chname:{
-   	            	required:"请输入真实姓名"
+   	            	required:iMsg.inputChname
    	            },
    	            password:{
-   	            	required:"请输入新密码",
-   	            	rangelength:$.validator.format("密码长度为{0}-{1}个字符")
+   	            	required:iMsg.inputNewPassword,
+   	            	rangelength:$.validator.format(iMsg.passLength)
    	            },
 	   	        password_confirm:{
-	   	        	required:"请确认新密码",
-	   	        	rangelength:$.validator.format("密码长度为{0}-{1}个字符"),
-	   	        	equalTo: "两次密码输入不一致"
+	   	        	required:iMsg.confirmPassword,
+	   	        	rangelength:$.validator.format(iMsg.passLength),
+	   	        	equalTo: iMsg.InconsistentPassword
 	            }
    	        },
    	        submitHandler:function(form){
@@ -106,13 +106,13 @@ $(function(){
                     error:function (XMLHttpRequest, textStatus, errorThrown) {
                     	NProgress.done();
                         var status=XMLHttpRequest.status;
-                        var msg="注册用户失败";
+                        var msg=iMsg.registerFail;
                         if(status==400){
-                            msg="您的输入格式有误";
+                            msg=iMsg.formatSizeErr;
                         }else if(status==422){
-                            msg="该用户名已存在";
+                            msg=iMsg.RepeatedUname;
                         }else if(status==401){
-                        	msg="注册成功，自动登录失败，请手动登录";
+                        	msg=iMsg.registerNoLogin;
                         }
                         $("#registerMsg").text(msg);
                     }

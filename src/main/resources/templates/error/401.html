@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>您还未登录</title>
+    <title th:text="#{system.error.401}"></title>
     <div th:replace="common/head"></div>
 </head>
 <body>
@@ -16,9 +16,9 @@
                                 <i class="fa fa-warning fa-3x show"></i>
                                 </span> <span class="king-counter-number">401</span>
                             </div>
-                            <div class="king-counter-label f16 text-muted">您还未登录</div>
+                            <div class="king-counter-label f16 text-muted"><span th:text="#{system.error.401}"></span></div>
                             <br/>
-                            <a th:href="@{/login}" class="king-btn king-info king-radius">立即登录</a>
+                            <a th:href="@{/login}" class="king-btn king-info king-radius"><span th:text="#{system.login}"></span></a>
                         </div>
                     </div>
                 </div>

@@ -68,12 +68,12 @@
 	jQuery.validator.addMethod("usernameRegex", function(value, element, param) {
 	    var reg = /^[_A-Za-z][_A-Za-z0-9]*$/;
 	    return this.optional(element) || (reg.test(value));
-	}, "只包含字母、数字、下划线且不以数字开头");
+	}, iMsg.usernameRegFailMsg);
 	// 首尾不含空格验证
 	jQuery.validator.addMethod("notFirstLastSpace", function(value, element, param) {
 	    var reg = /(^\S.*\S$)|(^\S$)/;
 	    return this.optional(element) || (reg.test(value));
-	}, "首尾不能包含空格");
+	}, iMsg.notFirLasSpaceMsg);
 	// 材料成本验证  0.1~0.2 或 1
 	jQuery.validator.addMethod("costRule", function(value, element, param) {
 		if(this.optional(element)) return true;
@@ -87,33 +87,30 @@
 	    	}
 	    }
 	    return false;
-	}, "您的输入格式或大小有误");
+	}, iMsg.formatSizeErr);
 	// 非负，整数、小数、科学计数法
 	jQuery.validator.addMethod("scientificNotation", function(value, element, param) {
         var reg = /^(0|([1-9]\d*))(\.\d+)?([Ee]{1}([+-]?\d+))?$/;
         return this.optional(element) || (reg.test(value));
-    }, "您的输入格式或大小有误");
+    }, iMsg.formatSizeErr);
 	// 四位数年份 [1900,2100)
 	jQuery.validator.addMethod("collectTimeYear", function(value, element, param) {
         var reg = /^((19)|(20))\d\d$/;
         return this.optional(element) || (reg.test(value));
-    }, "请输入正确的年份");
+    }, iMsg.correctYear);
 	NProgress.configure({
 		minimum: 0.2,
 		showSpinner: false
 	});
 	function changeLanguage(language){
-		NProgress.start();
 		$.ajax({
 		    type: "POST",
 		    url: ctxPath + "/api/common/changelanguage",
 		    data: {lang:language},
 		    error: function(data, error) {
-		    	NProgress.done();
-		    	alert("change lang error!");
+		    	alert("change language error!");
 		    },
 		    success: function(data){
-		    	NProgress.done();
 		        window.location.reload();
 		    }
 		});

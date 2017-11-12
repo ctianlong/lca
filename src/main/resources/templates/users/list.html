@@ -1,34 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>用户列表</title>
+    <title th:text="#{system.user.manage}"></title>
     <div th:replace="common/head"></div>
     <!-- 用户管理样式 -->    
     <link th:href="@{/css/myTable.css}" rel="stylesheet"/>
 </head>
 
 <body>
-
     <div id="wrapper">
         <div th:replace="common/navigation"></div>
-
         <div id="page-wrapper">
-
             <div class="container-fluid">
                 <div class="row page-header-box">
                     <div class="col-lg-12">
-                        <h1 class="page-header">
-                            用户管理
-                        </h1>
+                        <h1 class="page-header" th:text="#{system.user.manage}"></h1>
                     </div>
                 </div>
                 <!-- Page Heading -->
                 <div class="panel king-panel1">
                     <div class="panel-heading king-panel-head1 king-panel-top3" role="tab" id="headingOne">
                         <div class="king-panel-control">
-				            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="fa fa-minus-square-o fa-lg" title="折叠"></a>
+				            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="fa fa-minus-square-o fa-lg"></a>
 				        </div>
-                        <h3 class="panel-title">查询条件</h3>
+                        <h3 class="panel-title" th:text="#{system.query.condition}"></h3>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                 	<div class='panel-body'>
@@ -37,7 +32,7 @@
                 			<div class="col-sm-6 col-md-6 col-lg-4">           
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <div class="input-group-addon">权限</div>
+                                        <div class="input-group-addon" th:text="#{system.permission}"></div>
                                         <select id="superuserQuery" class="form-control" style="width: 100%">
 	                                        <option></option>
 	                                    </select>
@@ -47,16 +42,16 @@
                 			<div class="col-sm-6 col-md-6 col-lg-4">
 							            <div class="form-group">
 							                <div class="input-group">
-							                    <div class="input-group-addon">用户名</div>
-							                    <input id="usernameQuery" class="form-control" type="text" placeholder="请输入用户名">
+							                    <div class="input-group-addon" th:text="#{system.username}"></div>
+							                    <input id="usernameQuery" class="form-control" type="text" th:placeholder="#{system.username}">
 							                </div>
 							            </div>
 							</div>
 							<div class="col-sm-6 col-md-6 col-lg-4">           
 					            <div class="form-group">
 					            	<div class="input-group">
-					                    <div class="input-group-addon">姓名</div>
-					                	<input id="chnameQuery" type="text" class="form-control" placeholder="请输入姓名">
+					                    <div class="input-group-addon" th:text="#{system.fullname}"></div>
+					                	<input id="chnameQuery" type="text" class="form-control" th:placeholder="#{system.fullname}">
 					                </div>
 					            </div>
                 			</div>
@@ -64,9 +59,9 @@
                             <div class="row">
                             <div class="col-lg-12">
                                 <hr class="mt5 mb15">
-                                <button type="submit" class="king-btn king-info king-radius"><i class="fa fa-search"></i> 查询</button> 
-                                <button type="button" class="king-btn king-success king-radius" id="btn-reset-refresh"><i class="fa fa-refresh"></i> 刷新</button>
-                                <button type="button" class="king-btn king-radius king-warning" id="btn-add"><i class="fa fa-plus"></i> 添加</button>
+                                <button type="submit" class="king-btn king-info king-radius"><i class="fa fa-search"></i> <span th:text="#{system.query}"></span></button> 
+                                <button type="button" class="king-btn king-success king-radius" id="btn-reset-refresh"><i class="fa fa-refresh"></i> <span th:text="#{system.refresh}"></span></button>
+                                <button type="button" class="king-btn king-radius king-warning" id="btn-add"><i class="fa fa-plus"></i> <span th:text="#{system.add}"></span></button>
                             </div>
                             </div>
                 			</form>
@@ -77,9 +72,9 @@
                 <div class="panel king-panel1">
                 	<div class="panel-heading king-panel-head1 king-panel-top3" role="tab" id="headingTwo">
 	               	    <div class="king-panel-control">
-				            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" class="fa fa-minus-square-o fa-lg" title="折叠"></a>
+				            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" class="fa fa-minus-square-o fa-lg"></a>
 				        </div>
-				        <h3 class="panel-title">用户列表</h3>
+				        <h3 class="panel-title" th:text="#{system.user.list}"></h3>
                 	</div>
                 	<div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
                 	<div class='panel-body'>
@@ -87,14 +82,14 @@
                             <table id="table-user" class="table table-bordered table-hover table-striped table-condensed">
                                 <thead>
                                     <tr>
-                                        <th>用户名</th>
-                                        <th>姓名</th>
-                                        <th>联系方式</th>
-                                        <th>工作单位</th>
-                                        <th>通讯地址</th>
-                                        <th>权限</th>
-                                        <th>注册时间</th>
-                                        <th>操作</th>
+                                        <th><span th:text="#{system.username}"></span></th>
+                                        <th><span th:text="#{system.fullname}"></span></th>
+                                        <th><span th:text="#{system.phone}"></span></th>
+                                        <th><span th:text="#{system.company}"></span></th>
+                                        <th><span th:text="#{system.address}"></span></th>
+                                        <th><span th:text="#{system.permission}"></span></th>
+                                        <th><span th:text="#{system.register.time}"></span></th>
+                                        <th><span th:text="#{system.operation}"></span></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -121,49 +116,49 @@
 	                        <div class="col-md-12">
 	                                <input type="hidden" name="id" id="id"/>
 	                                <div class="form-group">
-	                                    <label class="col-md-3 control-label" title="必填"><span class="king-required-tip text-danger mr5">*</span>用户名：</label>
+	                                    <label class="col-md-3 control-label" th:title="#{system.required}"><span class="king-required-tip text-danger mr5">*</span><span th:text="#{system.username}"></span>：</label>
 	                                    <div class="col-md-6">
-	                                        <input type="text" name="username" class="form-control" id="username" placeholder="请输入用户名"/>
+	                                        <input type="text" name="username" class="form-control" id="username" th:placeholder="#{system.username}"/>
 	                                        
 	                                    </div>
 	                                </div>
 	                                <div class="form-group">
-	                                    <label class="col-md-3 control-label" title="必填"><span class="king-required-tip text-danger mr5">*</span>姓名：</label>
+	                                    <label class="col-md-3 control-label" th:title="#{system.required}"><span class="king-required-tip text-danger mr5">*</span><span th:text="#{system.fullname}"></span>：</label>
 	                                    <div class="col-md-6">
-	                                       <input type="text" name="chname" class="form-control" id="chname" placeholder="真实姓名"/>
+	                                       <input type="text" name="chname" class="form-control" id="chname" th:placeholder="#{system.fullname}"/>
 	                                    </div>
 	                                </div>
 	                                <div class="form-group">
-	                                    <label class="col-md-3 control-label">联系方式：</label>
+	                                    <label class="col-md-3 control-label"><span th:text="#{system.phone}"></span>：</label>
 	                                    <div class="col-md-6">
-	                                       <input type="text" name="phone" class="form-control" id="phone" placeholder="电话，手机号码"/>
+	                                       <input type="text" name="phone" class="form-control" id="phone" th:placeholder="#{system.telephone}"/>
 	                                    </div>
 	                                </div>
 	                                <div class="form-group">
-	                                    <label class="col-md-3 control-label">工作单位：</label>
+	                                    <label class="col-md-3 control-label"><span th:text="#{system.company}"></span>：</label>
 	                                    <div class="col-md-6">
-	                                       <input type="text" name="company" class="form-control" id="company" placeholder="请输入工作单位"/>
+	                                       <input type="text" name="company" class="form-control" id="company" th:placeholder="#{system.company}"/>
 	                                    </div>
 	                                </div>
 	                                <div class="form-group">
-	                                    <label class="col-md-3 control-label">通讯地址：</label>
+	                                    <label class="col-md-3 control-label"><span th:text="#{system.address}"></span>：</label>
 	                                    <div class="col-md-6">
-	                                       <input type="text" name="address" class="form-control" id="address" placeholder="请输入通讯地址"/>
+	                                       <input type="text" name="address" class="form-control" id="address" th:placeholder="#{system.address}"/>
 	                                    </div>
 	                                </div>
 	                                <div class="form-group">
-	                                    <label class="col-md-3 control-label" title="必填"><span class="king-required-tip text-danger mr5">*</span>权限：</label>
+	                                    <label class="col-md-3 control-label" th:title="#{system.required}"><span class="king-required-tip text-danger mr5">*</span><span th:text="#{system.permission}"></span>：</label>
 	                                    <div class="col-md-6 mt5">
-										  <label class="mr5"><input type="radio" name="superuser" id="superuser-true" value="true"> 管理员</label>
-										  <label class="mr5"><input type="radio" name="superuser" id="superuser-false" value="false"> 普通</label>
+										  <label class="mr5"><input type="radio" name="superuser" id="superuser-true" value="true"> <span th:text="#{system.superuser}"></span></label>
+										  <label class="mr5"><input type="radio" name="superuser" id="superuser-false" value="false"> <span th:text="#{system.normal}"></span></label>
 	                                    </div>
 	                                </div>
 	                        </div>
 	                    </div>
 	                  </div>
 	                  <div class="modal-footer">
-	                    <button type="submit" class="king-btn king-radius king-primary">保存</button>
-	                    <button type="button" class="king-btn king-radius king-default" data-dismiss="modal">取消</button>
+	                    <button type="submit" class="king-btn king-radius king-primary"><span th:text="#{system.save}"></span></button>
+	                    <button type="button" class="king-btn king-radius king-default" data-dismiss="modal"><span th:text="#{system.cancel}"></span></button>
 	                  </div>
 	                  </form>
 	                </div>

@@ -12,9 +12,9 @@ $(function(){
 		        error:function (XMLHttpRequest, textStatus, errorThrown) {
 		        	NProgress.done();
 		        	var status=XMLHttpRequest.status;
-		        	var msg="个人信息获取失败";
+		        	var msg=iMsg.queryFail;
 		        	if(status==401){
-		        		msg="您已退出登录，请重新登录";
+		        		msg=iMsg.reLogin;
 		        	}
 		        	var d = dialog({
 		                 content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+msg+'</p></div>'
@@ -65,7 +65,7 @@ $(function(){
                 success:function (data, textStatus, jqXHR) {
                 	$("#modal-default").modal("hide");
                 	var d = dialog({
-                        content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">修改用户成功</p></div>'
+                        content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">'+iMsg.editSuccess+'</p></div>'
                     });
                     d.show();
                     setTimeout(function() {
@@ -76,13 +76,13 @@ $(function(){
                 },
                 error:function (XMLHttpRequest, textStatus, errorThrown) {
                 	var status=XMLHttpRequest.status;
-                	var msg="修改用户失败";
+                	var msg=iMsg.editFail;
                 	if(status==400){
-                		msg="您的输入格式有误";
+                		msg=iMsg.formatSizeErr;
                 	}else if(status==422){
-                		msg="该用户名已存在";
+                		msg=iMsg.RepeatedUname;
                 	}else if(status=401){
-                		msg="您已退出登录，请重新登录";
+                		msg=iMsg.reLogin;
                 	}
                 	var d = dialog({
                          content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+msg+'</p></div>',
@@ -96,13 +96,10 @@ $(function(){
             });
 		}
 	}
-	
 	userInfoManager.getUserInfo();
-	
 	$("#btn-edit-userinfo").click(function(){
 		userInfoManager.editUserInfoInit();
 	});
-	
 	//用户表单校验规则
     var validator = $("#form-userInfo").validate({
         errorClass: 'text-danger',
@@ -129,7 +126,7 @@ $(function(){
     	},
     	messages:{
     		username:{
-    			remote:"该用户名已存在"
+    			remote:iMsg.RepeatedUname
     		}
     	},
     	submitHandler:function(form){
@@ -158,17 +155,17 @@ $(function(){
         },
         messages:{
         	oldPassword:{
-        		required:"请输入旧密码",
-        		rangelength:$.validator.format("密码长度为{0}-{1}个字符")
+        		required:iMsg.inputOldPassword,
+        		rangelength:$.validator.format(iMsg.passLength)
         	},
             newPassword:{
-            	required:"请输入新密码",
-            	rangelength:$.validator.format("密码长度为{0}-{1}个字符")
+            	required:iMsg.inputNewPassword,
+            	rangelength:$.validator.format(iMsg.passLength)
             },
 	        newPassword_confirm:{
-	        	required:"请确认新密码",
-	        	rangelength:$.validator.format("密码长度为{0}-{1}个字符"),
-	        	equalTo: "两次密码输入不一致"
+	        	required:iMsg.confirmPassword,
+	        	rangelength:$.validator.format(iMsg.passLength),
+	        	equalTo:iMsg.InconsistentPassword
 	        }
         },
         submitHandler:function(form){
@@ -183,7 +180,7 @@ $(function(){
 	            success:function (data, textStatus, jqXHR) {
 	            	NProgress.done();
 	                var d = dialog({
-	                	content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">修改密码成功</p></div>'
+	                	content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">'+iMsg.editSuccess+'</p></div>'
 	                });
 	                d.show();
 	                setTimeout(function() {
@@ -194,13 +191,13 @@ $(function(){
 	            error:function (XMLHttpRequest, textStatus, errorThrown) {
 	            	NProgress.done();
 	                var status=XMLHttpRequest.status;
-	                var msg="修改密码失败";
+	                var msg=iMsg.editFail;
 	                if(status==403){
-	                	msg="旧密码验证错误";
+	                	msg=iMsg.oldPassErr;
 	                }else if(status==400){
-	                	msg="您的输入格式有误";
+	                	msg=iMsg.formatSizeErr;
 	                }else if(status==401){
-	                	msg="您已退出登录，请重新登录";
+	                	msg=iMsg.reLogin;
 	                }
 	                var d = dialog({
 	                     content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+msg+'</p></div>'

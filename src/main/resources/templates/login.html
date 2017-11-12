@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>登录</title>
+    <title th:text="#{system.login}"></title>
     <meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -17,7 +17,6 @@
     <!-- Custom Theme Style -->
     <link th:href="@{/css/custom.min.css}" rel="stylesheet">
   </head>
-
   <body class="login">
     <div>
       <a class="hiddenanchor" id="signup"></a>
@@ -26,29 +25,34 @@
         <div class="animated form login_form">
           <section class="login_content">
             <form id="form-login">
-              <h1>登  录</h1>
+              <h1 th:text="#{system.login}"></h1>
               <div></div>
               <div>
-                <input type="text" class="form-control" name="username" placeholder="用户名"/>
+                <input type="text" class="form-control" name="username" th:placeholder="#{system.username}"/>
               </div>
               <div></div>
               <div>
-                <input type="password" class="form-control" name="password" placeholder="密码"/>
+                <input type="password" class="form-control" name="password" th:placeholder="#{system.password}"/>
               </div>
               <p id="loginMsg" class="text-danger"></p>
               <div>
-                <button type="submit" class="btn btn-default submit">登录</button>
+                <button type="submit" class="btn btn-default submit"><span th:text="#{system.login}"></span></button>
                 <!--<a class="reset_pass" href="#">忘记密码？</a>-->
               </div>
               <div class="clearfix"></div>
               <div class="separator">
-                <p class="change_link">新用户?&nbsp;
-                  <a href="#signup" class="to_register"> <b>注册</b></a>
+                <p class="change_link"><span th:text="#{system.newuser}"></span>?&nbsp;
+                  <a href="#signup" class="to_register"> <b><span th:text="#{system.register}"></span></b></a>
                 </p>
-                <div class="clearfix"></div>
+                <div th:if="#{system.lang.code} == 'zh_CN' or #{system.lang.code} == null" class="clearfix">
+                    <a href="javascript:void(0);" onclick="changeLanguage('en_US')">English</a>
+                </div>
+                <div th:if="#{system.lang.code} == 'en_US'" class="clearfix">
+	                <a href="javascript:void(0);" onclick="changeLanguage('zh_CN')">简体中文</a>
+                </div>
                 <br />
                 <div>
-                  <h1><i class="fa fa-road"></i> 路面综合管理评价系统</h1>
+                  <h1><i class="fa fa-road"></i> <span th:text="#{system.name}"></span></h1>
                   <!-- <p>全生命周期经济成本与环境影响评价</p>-->
                   <p>©2017 All Rights Reserved.</p>
                 </div>
@@ -59,38 +63,41 @@
         <div id="register" class="animated form registration_form">
           <section class="login_content">
             <form id="form-register">
-              <h1>注  册</h1>
+              <h1 th:text="#{system.register}"></h1>
               <div></div>
               <div>
-                <input type="text" class="form-control" name="username" id="username" placeholder="请输入用户名"/>
+                <input type="text" class="form-control" name="username" id="username" th:placeholder="#{system.username}"/>
               </div>
               <div></div>
               <div>
-                <input type="text" class="form-control" name="chname" id="chname" placeholder="请输入真实姓名"/>
+                <input type="text" class="form-control" name="chname" id="chname" th:placeholder="#{system.fullname}"/>
               </div>
               <div></div>
               <div>
-                <input type="password" class="form-control" name="password" id="password" placeholder="请输入新密码"/>
+                <input type="password" class="form-control" name="password" id="password" th:placeholder="#{system.password}"/>
               </div>
               <div></div>
               <div>
-                <input type="password" class="form-control" name="password_confirm" id="password_confirm" placeholder="确认新密码"/>
+                <input type="password" class="form-control" name="password_confirm" id="password_confirm" th:placeholder="#{system.confirmpass}"/>
               </div>
               <p id="registerMsg" class="text-danger"></p>
               <div>
-                <button type="submit" class="btn btn-default submit">注册</button>
+                <button type="submit" class="btn btn-default submit"><span th:text="#{system.register}"></span></button>
               </div>
               <div class="clearfix"></div>
               <div class="separator">
-                <p class="change_link">已有账号?&nbsp;
-                  <a href="#signin" class="to_register"> <b>登录</b></a>
+                <p class="change_link"><span th:text="#{system.olduser}"></span>?&nbsp;
+                  <a href="#signin" class="to_register"> <b><span th:text="#{system.login}"></span></b></a>
                 </p>
-
-                <div class="clearfix"></div>
-                <br />
-
+                <div th:if="#{system.lang.code} == 'zh_CN' or #{system.lang.code} == null" class="clearfix">
+                    <a href="javascript:void(0);" onclick="changeLanguage('en_US')">English</a>
+                </div>
+                <div th:if="#{system.lang.code} == 'en_US'" class="clearfix">
+                    <a href="javascript:void(0);" onclick="changeLanguage('zh_CN')">简体中文</a>
+                </div>
+                <br/>
                 <div>
-                  <h1><i class="fa fa-road"></i> 路面综合管理评价系统</h1>
+                  <h1><i class="fa fa-road"></i> <span th:text="#{system.name}"></span></h1>
                   <p>©2017 All Rights Reserved.</p>
                 </div>
               </div>
@@ -107,7 +114,6 @@
 	<script src="https://cdn.bootcss.com/jquery.serializeJSON/2.8.1/jquery.serializejson.min.js"></script>
 	<!-- jquery validation -->
 	<script src="https://cdn.bootcss.com/jquery-validate/1.14.0/jquery.validate.min.js"></script>
-	<script src="https://cdn.bootcss.com/jquery-validate/1.14.0/localization/messages_zh.min.js"></script>
 	<!-- nprogress -->
 	<script src="https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
 	<!-- 以下两个插件用于在IE8以及以下版本浏览器支持HTML5元素和媒体查询，如果不需要用可以移除 -->
@@ -115,6 +121,10 @@
 	<script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 	<script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
 	<![endif]-->
+	<!-- i18n control -->
+	<script th:if="#{system.lang.code} == 'zh_CN' or #{system.lang.code} == null" th:src="@{/js/i18n/messages_zh_CN.js}"></script>
+	<script th:if="#{system.lang.code} == 'zh_CN' or #{system.lang.code} == null" src="https://cdn.bootcss.com/jquery-validate/1.14.0/localization/messages_zh.min.js"></script>
+	<script th:if="#{system.lang.code} == 'en_US'" th:src="@{/js/i18n/messages_en_US.js}"></script>
 	<script th:inline="javascript">
 	/*<![CDATA[*/
 	    var ctxPath = /*[[${#httpServletRequest.getContextPath()}]]*/ '';
@@ -126,16 +136,29 @@
 	    jQuery.validator.addMethod("usernameRegex", function(value, element, param) {
 	        var reg = /^[_A-Za-z][_A-Za-z0-9]*$/;
 	        return this.optional(element) || (reg.test(value));
-	    }, "只包含字母、数字、下划线且不以数字开头");
+	    }, iMsg.usernameRegFailMsg);
 	    // 首尾不含空格验证
 	    jQuery.validator.addMethod("notFirstLastSpace", function(value, element, param) {
 	        var reg = /(^\S.*\S$)|(^\S$)/;
 	        return this.optional(element) || (reg.test(value));
-	    }, "首尾不能含空格");
+	    }, iMsg.notFirLasSpaceMsg);
 	    NProgress.configure({
 	    	minimum: 0.2,
 	    	showSpinner: false
 	    });
+	    function changeLanguage(language){
+	        $.ajax({
+	            type: "POST",
+	            url: ctxPath + "/api/common/changelanguage",
+	            data: {lang:language},
+	            error: function(data, error) {
+	                alert("change language error!");
+	            },
+	            success: function(data){
+	                window.location.reload();
+	            }
+	        });
+	    }
 	</script>
     <script th:src="@{/js/login.js}"></script>
   </body>

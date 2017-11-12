@@ -1,7 +1,7 @@
 $(function(){
 	var cdSuperuser=[
-		{id:1,text:"管理员"},
-		{id:0,text:"普通"}
+		{id:1,text:iMsg.superuser},
+		{id:0,text:iMsg.normal}
 	]
     var userManage = {
 		    currentItem : null,
@@ -47,7 +47,7 @@ $(function(){
 		        return param;
 		    },
 		    addItemInit : function() {
-				$("#myModalLabel").text("添加用户");
+				$("#myModalLabel").text(iMsg.add);
 				validator.resetForm();
 		        $("#form-user")[0].reset();
 		        $("#id").val('');
@@ -58,7 +58,7 @@ $(function(){
 		        if (!item) {
 		            return;
 		        }
-				$("#myModalLabel").text("修改用户");
+				$("#myModalLabel").text(iMsg.edit);
 				validator.resetForm();
 		        $("#form-user")[0].reset();
 		        $("#id").val(item.id);
@@ -84,8 +84,7 @@ $(function(){
 	                success:function (data, textStatus, jqXHR) {
 	                	$("#modal-default").modal("hide");
 	                	var d = dialog({
-                            content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">'+iMsg.addSuccess+'</p></div>',
-                            zIndex:2048
+                            content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">'+iMsg.addSuccess+'</p></div>'
                         });
                         d.show();
                         setTimeout(function() {
@@ -95,11 +94,11 @@ $(function(){
 	                },
 	                error:function (XMLHttpRequest, textStatus, errorThrown) {
 	                	var status=XMLHttpRequest.status;
-                    	var msg="添加用户失败";
+                    	var msg=iMsg.addFail;
                     	if(status==400){
-                    		msg="您的输入格式有误";
+                    		msg=iMsg.formatSizeErr;
                     	}else if(status==422){
-                    		msg="该用户名已存在";
+                    		msg=iMsg.RepeatedUname;
                     	}
                     	var d = dialog({
                              content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+msg+'</p></div>',
@@ -122,7 +121,7 @@ $(function(){
 	                success:function (result, textStatus, jqXHR) {
 	                	$("#modal-default").modal("hide");
 	                	var d = dialog({
-	                        content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">修改用户成功</p></div>'
+	                        content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">'+iMsg.editSuccess+'</p></div>'
 	                    });
 	                    d.show();
 	                    setTimeout(function() {
@@ -135,13 +134,13 @@ $(function(){
 	                },
 	                error:function (XMLHttpRequest, textStatus, errorThrown) {
 	                	var status=XMLHttpRequest.status;
-	                	var msg="修改用户失败";
+	                	var msg=iMsg.editFail;
 	                	if(status==400){
-	                		msg="您的输入格式有误";
+	                		msg=iMsg.formatSizeErr;
 	                	}else if(status==422){
-	                		msg="该用户名已存在";
+	                		msg=iMsg.RepeatedUname;
 	                	}else if(status==403) {
-							msg="无法修改当前登录管理员权限";
+							msg=iMsg.denyEditSuperuserPerm;
 						}
 	                	var d = dialog({
 	                         content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+msg+'</p></div>',
@@ -158,15 +157,15 @@ $(function(){
 		        var message;
 		        if (selectedItems&&selectedItems.length) {
 		            if (selectedItems.length == 1) {
-		                message = "确认删除用户 '"+selectedItems[0].username+"' 吗?";
+		                message = iMsg.removeOne.fillArgs(selectedItems[0].username);
 		            }else{
-		                message = "确认删除选中的"+selectedItems.length+"个用户吗?";
+		                message = iMsg.removeMultiple.fillArgs(selectedItems.length);
 		            }
 					dialog({
-				        title: '确认',
+				        title: iMsg.confirm,
 				        content: message,
 				        zIndex: 2048,
-				        okValue: '确定',
+				        okValue: iMsg.ok,
 				        ok: function() {
 				        	NProgress.start();
 				            $.ajax({
@@ -175,7 +174,7 @@ $(function(){
 			                    success:function (data, textStatus, jqXHR) {
 			                    	NProgress.done();
 			                    	 var d = dialog({
-			                             content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">删除用户成功</p></div>'
+			                             content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">'+iMsg.removeSuccess+'</p></div>'
 			                         });
 			                         d.show();
 			                         setTimeout(function() {
@@ -186,11 +185,11 @@ $(function(){
 			                    error:function (XMLHttpRequest, textStatus, errorThrown) {
 			                    	NProgress.done();
 			                    	var status=XMLHttpRequest.status;
-			                    	var msg="删除用户失败";
+			                    	var msg=iMsg.removeFail;
 			                    	if(status==403){
-			                    		msg="无法删除当前登录管理员用户";
+			                    		msg=iMsg.denyRemoveSuperuser;
 			                    	}else if(status==404){
-			                    		msg="该用户不存在或已经被删除";
+			                    		msg=iMsg.userNotExist;
 			                    	}
 			                    	var d = dialog({
 			                             content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+msg+'</p></div>'
@@ -205,7 +204,7 @@ $(function(){
 			                    }
 			                });
 				        },
-				        cancelValue: '取消',
+				        cancelValue: iMsg.cancel,
 				        cancel: function() {}
 				    }).showModal();
 		        }else{
@@ -244,7 +243,7 @@ $(function(){
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
                     	var d = dialog({
-                            content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">查询用户失败</p></div>'
+                            content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.queryFail+'</p></div>'
                         });
                         d.show();
                         setTimeout(function() {
@@ -293,7 +292,7 @@ $(function(){
             	data: "superuser",
             	width: "80px",
             	render : function(data, type, row, meta) {
-                    return data?'<i class="fa fa-users"></i> 管理员':'<i class="fa fa-user"></i> 普通';
+                    return data?'<i class="fa fa-users"></i> '+iMsg.superuser:'<i class="fa fa-user"></i> '+iMsg.normal;
                 }
             },
             {
@@ -318,8 +317,8 @@ $(function(){
             //给当前行某列加样式
             $('td', row).eq(5).addClass(data.superuser?"text-primary":"");
             //不使用render，改用jquery文档操作呈现单元格
-            var $btnEdit = $('<a class="king-btn king-info king-radius king-btn-mini btn-edit"><i class="fa fa-edit btn-icon"></i> 修改</a>');
-            var $btnDel = $('<a class="king-btn king-danger king-radius king-btn-mini btn-del"><i class="fa fa-close btn-icon"></i> 删除</a>');
+            var $btnEdit = $('<a class="king-btn king-info king-radius king-btn-mini btn-edit"><i class="fa fa-edit btn-icon"></i> '+iMsg.edit+'</a>');
+            var $btnDel = $('<a class="king-btn king-danger king-radius king-btn-mini btn-del"><i class="fa fa-close btn-icon"></i> '+iMsg.remove+'</a>');
             $('td', row).eq(7).append($btnEdit).append($btnDel);
  
         },
@@ -335,10 +334,10 @@ $(function(){
 	// 下拉菜单初始化，select2
 	$("#superuserQuery").select2({
 		data:cdSuperuser,
-		placeholder:"全部",
+		placeholder:iMsg.all,
 		allowClear:true,
 		minimumResultsForSearch:-1,
-		language:"zh-CN"
+		language:iMsg.select2LangCode
 	});
 	
 	// 添加按钮
@@ -430,7 +429,7 @@ $(function(){
     	},
     	messages:{
     		username:{
-    			remote:"该用户名已存在"
+    			remote:iMsg.RepeatedUname
     		}
     	},
     	submitHandler:function(form){
