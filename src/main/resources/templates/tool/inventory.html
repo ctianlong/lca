@@ -5,7 +5,7 @@
 			<div class="king-panel-control">
 				<a role="button" data-toggle="collapse" data-parent="#accordion"
 					href="#collapse2" aria-expanded="true" aria-controls="collapse2"
-					class="fa fa-minus-square-o fa-lg" title="折叠"></a>
+					class="fa fa-minus-square-o fa-lg"></a>
 			</div>
 			<h3 class="panel-title">材料</h3>
 		</div>
@@ -13,8 +13,7 @@
 			aria-labelledby="heading2">
 			<div class="panel-body">
 				<div class="table-responsive">
-					<table
-						class="table table-bordered table-hover table-striped table-condensed">
+					<table id="materialInventoryTable" class="table table-bordered table-hover table-striped table-condensed">
 						<thead>
 						    <tr>
 	                            <th rowspan="2" class="text-center">材料名称</th>
@@ -34,194 +33,90 @@
 	                            <th class="text-center">Zn</th>
 						</thead>
 						<tbody class="text-center">
-							<tr>
-								<td>碎石集料</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>水泥</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>普通沥青</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>改性沥青</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>高粘度沥青</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>钢筋</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>速凝剂</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>加气剂</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>增塑剂</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>强力增塑剂</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>缓凝剂</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>减水剂</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>混凝土砖</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
 						</tbody>
 					</table>
+					<script id="tpl-materialInventoryTable" type="text/template">
+                       <tr>
+                           <td>#materialName#</td>
+                           <td>#amount#</td>
+                           <td>#cost#</td>
+                           <td>#energyConsume#</td>
+                           <td>#emissionCo2#</td>
+                           <td>#emissionCh4#</td>
+                           <td>#emissionN2o#</td>
+                           <td>#emissionCo#</td>
+                           <td>#emissionSo2#</td>
+                           <td>#emissionNox#</td>
+                           <td>#emissionPb#</td>
+                           <td>#emissionZn#</td>
+                       </tr>
+                    </script>
 				</div>
+				<form class="form-horizontal" role="form" id="">
+					<fieldset>
+	                    <legend>请选择具体材料：</legend>
+	                    <div class="row">
+	                        <div class="col-md-6" id="gravelSelect" style="display: none;">
+		                    <div class="form-group">
+		                        <label class="col-md-3 control-label">碎石集料：</label>
+		                        <div class="col-md-9">
+		                            <select id="gravel" name="gravel" class="form-control" style="width: 100%">
+		                            </select>
+		                        </div>
+		                    </div>
+	                        </div>
+	                        <div class="col-md-6" id="ordinaryAsphaltSelect" style="display: none;">
+		                    <div class="form-group">
+		                        <label class="col-md-3 control-label">普通沥青：</label>
+		                        <div class="col-md-9">
+		                            <select id="ordinaryAsphalt" name="ordinaryAsphalt" class="form-control" style="width: 100%">
+		                            </select>
+		                        </div>
+		                    </div>
+		                    </div>
+		                    <div class="col-md-6" id="modifiedAsphaltSelect" style="display: none;">
+		                    <div class="form-group">
+		                        <label class="col-md-3 control-label">改性沥青：</label>
+		                        <div class="col-md-9">
+		                            <select id="modifiedAsphalt" name="modifiedAsphalt" class="form-control" style="width: 100%">
+		                            </select>
+		                        </div>
+		                    </div>
+		                    </div>
+		                    <div class="col-md-6" id="highViscosityAsphaltSelect" style="display: none;">
+		                    <div class="form-group">
+		                       <label class="col-md-3 control-label">高粘度沥青：</label>
+		                        <div class="col-md-9">
+		                            <select id="highViscosityAsphalt" name="highViscosityAsphalt" class="form-control" style="width: 100%">
+		                            </select>
+		                        </div>
+		                    </div>
+		                    </div>
+		                    <div class="col-md-6" id="cementSelect" style="display: none;">
+		                    <div class="form-group">
+		                        <label class="col-md-3 control-label">水泥：</label>
+		                        <div class="col-md-9">
+		                            <select id="cement" name="cement" class="form-control" style="width: 100%">
+		                            </select>
+		                        </div>
+		                    </div>
+		                    </div>
+		                    <div class="col-md-6" id="limeSelect" style="display: none;">
+		                    <div class="form-group">
+		                       <label class="col-md-3 control-label">石灰：</label>
+		                        <div class="col-md-9">
+		                            <select id="lime" name="lime" class="form-control" style="width: 100%">
+		                            </select>
+		                        </div>
+		                    </div>
+		                    </div>
+		                </div>
+	                </fieldset>
+				</form>
 			</div>
 		</div>
 	</div>
+	
 	<div class="panel king-panel1">
 		<div class="panel-heading king-panel-head1 king-panel-top3">
 			<h3 class="panel-title">施工</h3>
@@ -638,7 +533,7 @@
 	<div class="panel king-panel1">
          <div class="panel-heading king-panel-head1 king-panel-top3">
             <div class="text-center">
-                <button class="king-btn king-radius king-success mr10" type="button" id="inventory-lastStep">
+                <button class="king-btn king-radius king-success" type="button" id="inventory-lastStep">
                     <i class="fa fa-arrow-left btn-icon"></i>上一步
                 </button>
                 <!-- 

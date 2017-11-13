@@ -1,4 +1,6 @@
 $(function(){
+	$("#step-inventory").hide();
+	
 	var cdRoadType=[
 		{id:1,text:"沥青路面"},
 		{id:2,text:"混凝土路面"},
@@ -97,6 +99,61 @@ $(function(){
 		minimumResultsForSearch:-1,
 		language:iMsg.select2LangCode
 	});
+	// 显示各种原材料列表
+	function formatRepo(repo) {
+	  if (repo.loading) {
+		  return repo.text;
+	  }
+	  var markup="<div class='row'><div class='col-sm-6'><strong>"+repo.materialName+"</strong></div>"+
+	  	"<div class='col-sm-6'>来源："+(repo.dataSource||'（空）')+"</div></div>"+
+	  	"<div class='row'><div class='col-sm-6'>成本："+(repo.cost||'（空）')+"</div>"+
+	  	"<div class='col-sm-6'>能耗："+(repo.energyConsume!=null?repo.energyConsume.toExponential(1):'（空）')+"</div></div>"+
+	  	"<div class='row'><div class='col-sm-3'>CO<sub>2</sub>："+(repo.emissionCo2!=null?repo.emissionCo2.toExponential(1):'（空）')+"</div>"+
+	  	"<div class='col-sm-3'>CH<sub>4</sub>："+(repo.emissionCh4!=null?repo.emissionCh4.toExponential(1):'（空）')+"</div>"+
+	  	"<div class='col-sm-3'>N<sub>2</sub>O："+(repo.emissionN2o!=null?repo.emissionN2o.toExponential(1):'（空）')+"</div>"+
+	  	"<div class='col-sm-3'>CO："+(repo.emissionCo!=null?repo.emissionCo.toExponential(1):'（空）')+"</div></div>"+
+	  	"<div class='row'><div class='col-sm-3'>SO<sub>2</sub>："+(repo.emissionSo2!=null?repo.emissionSo2.toExponential(1):'（空）')+"</div>"+
+	  	"<div class='col-sm-3'>NO<sub>x</sub>："+(repo.emissionNox!=null?repo.emissionNox.toExponential(1):'（空）')+"</div>"+
+	  	"<div class='col-sm-3'>Pb："+(repo.emissionPb!=null?repo.emissionPb.toExponential(1):'（空）')+"</div>"+
+	  	"<div class='col-sm-3'>Zn："+(repo.emissionZn!=null?repo.emissionZn.toExponential(1):'（空）')+"</div></div>";
+	  return markup;
+	}
+	function formatRepoSelection(repo) {
+		if(repo.materialName){
+			return repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+		}
+		return repo.text;
+	}
+	$("#gravel").select2({
+		ajax:{
+			url:ctxPath+"/api/db/inventory/materials",
+			dataType:'json',
+			delay:100,
+			data:function(params){
+				return {
+					page:params.page,
+					materialCategoryCd:1
+				};
+			},
+			processResults:function(data,params){
+				params.page=params.page||1;
+				return {
+					results:data.list,
+					pagination:{
+						more:data.hasNextPage
+					}
+				};
+			},
+			cache:true
+		},
+		placeholder:'请选择一种材料',
+		allowClear:true,
+		minimumResultsForSearch:-1,
+		language:"zh-CN",
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatRepo,
+		templateSelection: formatRepoSelection
+	});
 	
 	$baseLayerMaterial.on("select2:select",function(e){
 		switch (e.params.data.id) {
@@ -185,7 +242,7 @@ $(function(){
 			$("#step"+priv).removeClass("done").addClass("current");
 		}
 	}
-	$("#step-inventory").hide();
+	
 	$("#form-input").submit(function(){
 		var area=$("#roadLength").val()*$("#roadWidth").val();
 		if($roadType.val()==1){
@@ -339,7 +396,50 @@ $(function(){
 			default:
 				break;
 			}
-			
+			materialList=[];
+			$("#gravelSelect").hide();
+			$("#ordinaryAsphaltSelect").hide();
+			$("#modifiedAsphaltSelect").hide();
+			$("#highViscosityAsphaltSelect").hide();
+			$("#cementSelect").hide();
+			$("#limeSelect").hide();
+			if(gravel>0){
+				var item={materialMark:"gravel",materialName:"碎石集料",amount:gravel.toFixed(3)};
+				materialList.push(item);
+				$("#gravelSelect").show();
+			}
+			if(ordinaryAsphalt>0){
+				var item={materialMark:"ordinaryAsphalt",materialName:"普通沥青",amount:ordinaryAsphalt.toFixed(3)};
+				materialList.push(item);
+				$("#ordinaryAsphaltSelect").show();
+			}
+			if(modifiedAsphalt>0){
+				var item={materialMark:"modifiedAsphalt",materialName:"改性沥青",amount:modifiedAsphalt.toFixed(3)};
+				materialList.push(item);
+				$("#modifiedAsphaltSelect").show();
+			}
+			if(highViscosityAsphalt>0){
+				var item={materialMark:"highViscosityAsphalt",materialName:"高粘度沥青",amount:highViscosityAsphalt.toFixed(3)};
+				materialList.push(item);
+				$("#highViscosityAsphaltSelect").show();
+			}
+			if(cement>0){
+				var item={materialMark:"cement",materialName:"水泥",amount:cement.toFixed(3)};
+				materialList.push(item);
+				$("#cementSelect").show();
+			}
+			if(lime>0){
+				var item={materialMark:"lime",materialName:"石灰",amount:lime.toFixed(3)};
+				materialList.push(item);
+				$("#limeSelect").show();
+			}
+			var _html='';
+            var tpl=$('#tpl-materialInventoryTable').html();
+            for (var i=0,len=materialList.length; i < len; i++){
+                var item = materialList[i];
+                _html += renderTpl(tpl, item);
+            }
+            $('#materialInventoryTable tbody').html(_html);
 			
 			
 		}
@@ -357,3 +457,15 @@ $(function(){
 		$("#step-input").show();
 	});
 });
+
+function renderTpl(str, cfg) {
+    var re = /(#(.+?)#)/g;
+    return str.replace(re, function() {
+//        var val = cfg[arguments[2]]+'';
+//        if(val=='undefined'||val=='null') {
+//            val = '';
+//        }
+//        return val;
+    	return cfg[arguments[2]]||'';
+    });
+}

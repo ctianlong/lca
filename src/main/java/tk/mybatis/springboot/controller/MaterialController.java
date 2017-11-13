@@ -63,7 +63,11 @@ public class MaterialController {
         }
         List<Material> materials = materialMapper.selectByExample(example);
 		PageInfo<Material> result = new PageInfo<>(materials);
-		return ResponseEntity.ok().header("x-app-draw", query.getDraw().toString()).body(result);
+		if (query.getDraw() != null) {
+			return ResponseEntity.ok().header("x-app-draw", query.getDraw().toString()).body(result);
+		} else {
+			return ResponseEntity.ok().body(result);
+		}
 	}
 	
 	@PostMapping("/api/db/inventory/materials")
