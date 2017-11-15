@@ -128,11 +128,161 @@ $(function(){
 		ajax:{
 			url:ctxPath+"/api/db/inventory/materials",
 			dataType:'json',
-			delay:100,
+			delay:200,
 			data:function(params){
 				return {
 					page:params.page,
 					materialCategoryCd:1
+				};
+			},
+			processResults:function(data,params){
+				params.page=params.page||1;
+				return {
+					results:data.list,
+					pagination:{
+						more:data.hasNextPage
+					}
+				};
+			},
+			cache:true
+		},
+		placeholder:'请选择一种材料',
+		allowClear:true,
+		minimumResultsForSearch:-1,
+		language:"zh-CN",
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatRepo,
+		templateSelection: formatRepoSelection
+	});
+	$("#ordinaryAsphalt").select2({
+		ajax:{
+			url:ctxPath+"/api/db/inventory/materials",
+			dataType:'json',
+			delay:200,
+			data:function(params){
+				return {
+					page:params.page,
+					materialCategoryCd:2
+				};
+			},
+			processResults:function(data,params){
+				params.page=params.page||1;
+				return {
+					results:data.list,
+					pagination:{
+						more:data.hasNextPage
+					}
+				};
+			},
+			cache:true
+		},
+		placeholder:'请选择一种材料',
+		allowClear:true,
+		minimumResultsForSearch:-1,
+		language:"zh-CN",
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatRepo,
+		templateSelection: formatRepoSelection
+	});
+	$("#modifiedAsphalt").select2({
+		ajax:{
+			url:ctxPath+"/api/db/inventory/materials",
+			dataType:'json',
+			delay:200,
+			data:function(params){
+				return {
+					page:params.page,
+					materialCategoryCd:2
+				};
+			},
+			processResults:function(data,params){
+				params.page=params.page||1;
+				return {
+					results:data.list,
+					pagination:{
+						more:data.hasNextPage
+					}
+				};
+			},
+			cache:true
+		},
+		placeholder:'请选择一种材料',
+		allowClear:true,
+		minimumResultsForSearch:-1,
+		language:"zh-CN",
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatRepo,
+		templateSelection: formatRepoSelection
+	});
+	$("#highViscosityAsphalt").select2({
+		ajax:{
+			url:ctxPath+"/api/db/inventory/materials",
+			dataType:'json',
+			delay:200,
+			data:function(params){
+				return {
+					page:params.page,
+					materialCategoryCd:2
+				};
+			},
+			processResults:function(data,params){
+				params.page=params.page||1;
+				return {
+					results:data.list,
+					pagination:{
+						more:data.hasNextPage
+					}
+				};
+			},
+			cache:true
+		},
+		placeholder:'请选择一种材料',
+		allowClear:true,
+		minimumResultsForSearch:-1,
+		language:"zh-CN",
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatRepo,
+		templateSelection: formatRepoSelection
+	});
+	$("#cement").select2({
+		ajax:{
+			url:ctxPath+"/api/db/inventory/materials",
+			dataType:'json',
+			delay:200,
+			data:function(params){
+				return {
+					page:params.page,
+					materialCategoryCd:8
+				};
+			},
+			processResults:function(data,params){
+				params.page=params.page||1;
+				return {
+					results:data.list,
+					pagination:{
+						more:data.hasNextPage
+					}
+				};
+			},
+			cache:true
+		},
+		placeholder:'请选择一种材料',
+		allowClear:true,
+		minimumResultsForSearch:-1,
+		language:"zh-CN",
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatRepo,
+		templateSelection: formatRepoSelection
+	});
+	$("#lime").select2({
+		ajax:{
+			url:ctxPath+"/api/db/inventory/materials",
+			dataType:'json',
+			delay:200,
+			data:function(params){
+				return {
+					page:params.page,
+					materialCategoryCd:5
 				};
 			},
 			processResults:function(data,params){
@@ -243,195 +393,379 @@ $(function(){
 		}
 	}
 	
-	$("#form-input").submit(function(){
-		var area=$("#roadLength").val()*$("#roadWidth").val();
-		if($roadType.val()==1){
-			var topWeight=area*$("#asphaltTopLayerThickness").val()*$asphaltTopLayerMaterial.select2("data")[0].density;
-			var middleWeight=area*$("#asphaltMiddleLayerThickness").val()*$asphaltMiddleLayerMaterial.select2("data")[0].density;
-			var belowWeight=area*$("#asphaltBelowLayerThickness").val()*$asphaltBelowLayerMaterial.select2("data")[0].density;
-			var baseWeight=area*$("#baseLayerThickness").val()*$baseLayerMaterial.select2("data")[0].density;
-			var bottomBaseWeight=area*$("#bottomBaseLayerThickness").val()*$bottomBaseLayerMaterial.select2("data")[0].density;
-			var cushionWeight=area*$("#cushionLayerThickness").val()*$cushionLayerMaterial.select2("data")[0].density;
-			// 上、中、下面层碎石
-			var gravel=topWeight/(1+$("#asphaltTopLayerWhetstoneRatio").val()/100)+middleWeight/(1+$("#asphaltMiddleLayerWhetstoneRatio").val()/100)+belowWeight/(1+$("#asphaltBelowLayerWhetstoneRatio").val()/100);
-			var ordinaryAsphalt=0;
-			var modifiedAsphalt=0;
-			var highViscosityAsphalt=0;
-			var cement=0;
-			var lime=0;
-			// 基、底基、垫层碎石和沥青
-			switch ($baseLayerMaterial.select2("data")[0].id) {
-			case "1":case "2":
-				gravel+=baseWeight/(1+$("#baseLayerWhetstoneRatio").val()/100);
-				switch ($baseLayerAsphaltType.select2("data")[0].id) {
-				case "1":
-					ordinaryAsphalt+=baseWeight*$("#baseLayerWhetstoneRatio").val()/(100+parseFloat($("#baseLayerWhetstoneRatio").val()));
-					break;
-				case "2":
-					modifiedAsphalt+=baseWeight*$("#baseLayerWhetstoneRatio").val()/(100+parseFloat($("#baseLayerWhetstoneRatio").val()));
-					break;
-				case "3":
-					highViscosityAsphalt+=baseWeight*$("#baseLayerWhetstoneRatio").val()/(100+parseFloat($("#baseLayerWhetstoneRatio").val()));
-					break;
-				default:
-					break;
+	var materialList=[];
+	
+	var validator = $("#form-input").validate({
+		errorClass: 'text-danger',
+    	rules:{
+    		roadLength:{
+    			required:true,
+    			number:true,
+    			min:0
+    		},
+    		roadWidth:{
+    			required:true,
+    			number:true,
+    			min:0
+    		},
+    		asphaltTopLayerThickness:{
+    			required:true,
+    			number:true,
+    			min:0
+    		},
+    		asphaltTopLayerWhetstoneRatio:{
+    			required:true,
+    			number:true,
+    			range:[0,100]
+    		},
+    		asphaltMiddleLayerThickness:{
+    			required:true,
+    			number:true,
+    			min:0
+    		},
+    		asphaltMiddleLayerWhetstoneRatio:{
+    			required:true,
+    			number:true,
+    			range:[0,100]
+    		},
+    		asphaltBelowLayerThickness:{
+    			required:true,
+    			number:true,
+    			min:0
+    		},
+    		asphaltBelowLayerWhetstoneRatio:{
+    			required:true,
+    			number:true,
+    			range:[0,100]
+    		},
+    		baseLayerThickness:{
+    			required:true,
+    			number:true,
+    			min:0
+    		},
+    		baseLayerWhetstoneRatio:{
+    			required:true,
+    			number:true,
+    			range:[0,100]
+    		},
+    		baseLayerCement:{
+    			required:true,
+    			number:true,
+    			range:[0,100]
+    		},
+    		baseLayerLime:{
+    			required:true,
+    			number:true,
+    			range:[0,100]
+    		},
+    		bottomBaseLayerThickness:{
+    			required:true,
+    			number:true,
+    			min:0
+    		},
+    		bottomBaseLayerWhetstoneRatio:{
+    			required:true,
+    			number:true,
+    			range:[0,100]
+    		},
+    		bottomBaseLayerCement:{
+    			required:true,
+    			number:true,
+    			range:[0,100]
+    		},
+    		bottomBaseLayerLime:{
+    			required:true,
+    			number:true,
+    			range:[0,100]
+    		},
+    		cushionLayerThickness:{
+    			required:true,
+    			number:true,
+    			min:0
+    		},
+    		cushionLayerWhetstoneRatio:{
+    			required:true,
+    			number:true,
+    			range:[0,100]
+    		},
+    		cushionLayerCement:{
+    			required:true,
+    			number:true,
+    			range:[0,100]
+    		},
+    		cushionLayerLime:{
+    			required:true,
+    			number:true,
+    			range:[0,100]
+    		}
+    	},
+    	errorPlacement: function(error, element) {
+    		if (element.parent().hasClass("input-group")) {
+    			error.appendTo(element.parent().parent());
+    		} else {
+    			error.appendTo(element.parent());
+    		}
+		},
+    	submitHandler:function(form){
+    		var area=$("#roadLength").val()*$("#roadWidth").val();
+    		if($roadType.val()==1){
+    			var topWeight=area*$("#asphaltTopLayerThickness").val()*$asphaltTopLayerMaterial.select2("data")[0].density;
+    			var middleWeight=area*$("#asphaltMiddleLayerThickness").val()*$asphaltMiddleLayerMaterial.select2("data")[0].density;
+    			var belowWeight=area*$("#asphaltBelowLayerThickness").val()*$asphaltBelowLayerMaterial.select2("data")[0].density;
+    			var baseWeight=area*$("#baseLayerThickness").val()*$baseLayerMaterial.select2("data")[0].density;
+    			var bottomBaseWeight=area*$("#bottomBaseLayerThickness").val()*$bottomBaseLayerMaterial.select2("data")[0].density;
+    			var cushionWeight=area*$("#cushionLayerThickness").val()*$cushionLayerMaterial.select2("data")[0].density;
+    			// 上、中、下面层碎石
+    			var gravel=topWeight/(1+$("#asphaltTopLayerWhetstoneRatio").val()/100)+middleWeight/(1+$("#asphaltMiddleLayerWhetstoneRatio").val()/100)+belowWeight/(1+$("#asphaltBelowLayerWhetstoneRatio").val()/100);
+    			var ordinaryAsphalt=0;
+    			var modifiedAsphalt=0;
+    			var highViscosityAsphalt=0;
+    			var cement=0;
+    			var lime=0;
+    			// 基、底基、垫层碎石和沥青
+    			switch ($baseLayerMaterial.select2("data")[0].id) {
+    			case "1":case "2":
+    				gravel+=baseWeight/(1+$("#baseLayerWhetstoneRatio").val()/100);
+    				switch ($baseLayerAsphaltType.select2("data")[0].id) {
+    				case "1":
+    					ordinaryAsphalt+=baseWeight*$("#baseLayerWhetstoneRatio").val()/(100+parseFloat($("#baseLayerWhetstoneRatio").val()));
+    					break;
+    				case "2":
+    					modifiedAsphalt+=baseWeight*$("#baseLayerWhetstoneRatio").val()/(100+parseFloat($("#baseLayerWhetstoneRatio").val()));
+    					break;
+    				case "3":
+    					highViscosityAsphalt+=baseWeight*$("#baseLayerWhetstoneRatio").val()/(100+parseFloat($("#baseLayerWhetstoneRatio").val()));
+    					break;
+    				default:
+    					break;
+    				}
+    				break;
+    			case "3":case "4":
+    				gravel+=baseWeight/(1+$("#baseLayerCement").val()/100+$("#baseLayerLime").val()/100);
+    				cement+=baseWeight*$("#baseLayerCement").val()/100/(1+$("#baseLayerCement").val()/100+$("#baseLayerLime").val()/100);
+    				lime+=baseWeight*$("#baseLayerLime").val()/100/(1+$("#baseLayerCement").val()/100+$("#baseLayerLime").val()/100);
+    				break;
+    			case "5":
+    				cement+=baseWeight*$("#baseLayerCement").val()/100/(1+$("#baseLayerCement").val()/100+$("#baseLayerLime").val()/100);
+    				lime+=baseWeight*$("#baseLayerLime").val()/100/(1+$("#baseLayerCement").val()/100+$("#baseLayerLime").val()/100);
+    				break;
+    			case "6":
+    				gravel+=baseWeight;
+    				break;
+    			default:
+    				break;
+    			}
+    			switch ($bottomBaseLayerMaterial.select2("data")[0].id) {
+    			case "1":case "2":
+    				gravel+=bottomBaseWeight/(1+$("#bottomBaseLayerWhetstoneRatio").val()/100);
+    				switch ($bottomBaseLayerAsphaltType.select2("data")[0].id) {
+    				case "1":
+    					ordinaryAsphalt+=bottomBaseWeight*$("#bottomBaseLayerWhetstoneRatio").val()/(100+parseFloat($("#bottomBaseLayerWhetstoneRatio").val()));
+    					break;
+    				case "2":
+    					modifiedAsphalt+=bottomBaseWeight*$("#bottomBaseLayerWhetstoneRatio").val()/(100+parseFloat($("#bottomBaseLayerWhetstoneRatio").val()));
+    					break;
+    				case "3":
+    					highViscosityAsphalt+=bottomBaseWeight*$("#bottomBaseLayerWhetstoneRatio").val()/(100+parseFloat($("#bottomBaseLayerWhetstoneRatio").val()));
+    					break;
+    				default:
+    					break;
+    				}
+    				break;
+    			case "3":case "4":
+    				gravel+=bottomBaseWeight/(1+$("#bottomBaseLayerCement").val()/100+$("#bottomBaseLayerLime").val()/100);
+    				cement+=bottomBaseWeight*$("#bottomBaseLayerCement").val()/100/(1+$("#bottomBaseLayerCement").val()/100+$("#bottomBaseLayerLime").val()/100);
+    				lime+=bottomBaseWeight*$("#bottomBaseLayerLime").val()/100/(1+$("#bottomBaseLayerCement").val()/100+$("#bottomBaseLayerLime").val()/100);
+    				break;
+    			case "5":
+    				cement+=bottomBaseWeight*$("#bottomBaseLayerCement").val()/100/(1+$("#bottomBaseLayerCement").val()/100+$("#bottomBaseLayerLime").val()/100);
+    				lime+=bottomBaseWeight*$("#bottomBaseLayerLime").val()/100/(1+$("#bottomBaseLayerCement").val()/100+$("#bottomBaseLayerLime").val()/100);
+    				break;
+    			case "6":
+    				gravel+=bottomBaseWeight;
+    				break;
+    			default:
+    				break;
+    			}
+    			switch ($cushionLayerMaterial.select2("data")[0].id) {
+    			case "1":case "2":
+    				gravel+=cushionWeight/(1+$("#cushionLayerWhetstoneRatio").val()/100);
+    				switch ($cushionLayerAsphaltType.select2("data")[0].id) {
+    				case "1":
+    					ordinaryAsphalt+=cushionWeight*$("#cushionLayerWhetstoneRatio").val()/(100+parseFloat($("#cushionLayerWhetstoneRatio").val()));
+    					break;
+    				case "2":
+    					modifiedAsphalt+=cushionWeight*$("#cushionLayerWhetstoneRatio").val()/(100+parseFloat($("#cushionLayerWhetstoneRatio").val()));
+    					break;
+    				case "3":
+    					highViscosityAsphalt+=cushionWeight*$("#cushionLayerWhetstoneRatio").val()/(100+parseFloat($("#cushionLayerWhetstoneRatio").val()));
+    					break;
+    				default:
+    					break;
+    				}
+    				break;
+    			case "3":case "4":
+    				gravel+=cushionWeight/(1+$("#cushionLayerCement").val()/100+$("#cushionLayerLime").val()/100);
+    				cement+=cushionWeight*$("#cushionLayerCement").val()/100/(1+$("#cushionLayerCement").val()/100+$("#cushionLayerLime").val()/100);
+    				lime+=cushionWeight*$("#cushionLayerLime").val()/100/(1+$("#cushionLayerCement").val()/100+$("#cushionLayerLime").val()/100);
+    				break;
+    			case "5":
+    				cement+=cushionWeight*$("#cushionLayerCement").val()/100/(1+$("#cushionLayerCement").val()/100+$("#cushionLayerLime").val()/100);
+    				lime+=cushionWeight*$("#cushionLayerLime").val()/100/(1+$("#cushionLayerCement").val()/100+$("#cushionLayerLime").val()/100);
+    				break;
+    			case "6":
+    				gravel+=cushionWeight;
+    				break;
+    			default:
+    				break;
+    			}
+    			// 上、中、下面层沥青
+    			switch ($topLayerAsphaltType.select2("data")[0].id) {
+    			case "1":
+    				ordinaryAsphalt+=topWeight*$("#asphaltTopLayerWhetstoneRatio").val()/(100+parseFloat($("#asphaltTopLayerWhetstoneRatio").val()));
+    				break;
+    			case "2":
+    				modifiedAsphalt+=topWeight*$("#asphaltTopLayerWhetstoneRatio").val()/(100+parseFloat($("#asphaltTopLayerWhetstoneRatio").val()));
+    				break;
+    			case "3":
+    				highViscosityAsphalt+=topWeight*$("#asphaltTopLayerWhetstoneRatio").val()/(100+parseFloat($("#asphaltTopLayerWhetstoneRatio").val()));
+    				break;
+    			default:
+    				break;
+    			}
+    			switch ($middleLayerAsphaltType.select2("data")[0].id) {
+    			case "1":
+    				ordinaryAsphalt+=middleWeight*$("#asphaltMiddleLayerWhetstoneRatio").val()/(100+parseFloat($("#asphaltMiddleLayerWhetstoneRatio").val()));
+    				break;
+    			case "2":
+    				modifiedAsphalt+=middleWeight*$("#asphaltMiddleLayerWhetstoneRatio").val()/(100+parseFloat($("#asphaltMiddleLayerWhetstoneRatio").val()));
+    				break;
+    			case "3":
+    				highViscosityAsphalt+=middleWeight*$("#asphaltMiddleLayerWhetstoneRatio").val()/(100+parseFloat($("#asphaltMiddleLayerWhetstoneRatio").val()));
+    				break;
+    			default:
+    				break;
+    			}
+    			switch ($belowLayerAsphaltType.select2("data")[0].id) {
+    			case "1":
+    				ordinaryAsphalt+=belowWeight*$("#asphaltBelowLayerWhetstoneRatio").val()/(100+parseFloat($("#asphaltBelowLayerWhetstoneRatio").val()));
+    				break;
+    			case "2":
+    				modifiedAsphalt+=belowWeight*$("#asphaltBelowLayerWhetstoneRatio").val()/(100+parseFloat($("#asphaltBelowLayerWhetstoneRatio").val()));
+    				break;
+    			case "3":
+    				highViscosityAsphalt+=belowWeight*$("#asphaltBelowLayerWhetstoneRatio").val()/(100+parseFloat($("#asphaltBelowLayerWhetstoneRatio").val()));
+    				break;
+    			default:
+    				break;
+    			}
+    			materialList=[];
+    			$("#gravelSelect").hide();
+    			$("#ordinaryAsphaltSelect").hide();
+    			$("#modifiedAsphaltSelect").hide();
+    			$("#highViscosityAsphaltSelect").hide();
+    			$("#cementSelect").hide();
+    			$("#limeSelect").hide();
+    			if(gravel>0){
+    				var item={materialMark:"gravel",materialName:"碎石集料",amount:gravel.toFixed(3)};
+    				materialList.push(item);
+    				$("#gravelSelect").show();
+    			}
+    			if(ordinaryAsphalt>0){
+    				var item={materialMark:"ordinaryAsphalt",materialName:"普通沥青",amount:ordinaryAsphalt.toFixed(3)};
+    				materialList.push(item);
+    				$("#ordinaryAsphaltSelect").show();
+    			}
+    			if(modifiedAsphalt>0){
+    				var item={materialMark:"modifiedAsphalt",materialName:"改性沥青",amount:modifiedAsphalt.toFixed(3)};
+    				materialList.push(item);
+    				$("#modifiedAsphaltSelect").show();
+    			}
+    			if(highViscosityAsphalt>0){
+    				var item={materialMark:"highViscosityAsphalt",materialName:"高粘度沥青",amount:highViscosityAsphalt.toFixed(3)};
+    				materialList.push(item);
+    				$("#highViscosityAsphaltSelect").show();
+    			}
+    			if(cement>0){
+    				var item={materialMark:"cement",materialName:"水泥",amount:cement.toFixed(3)};
+    				materialList.push(item);
+    				$("#cementSelect").show();
+    			}
+    			if(lime>0){
+    				var item={materialMark:"lime",materialName:"石灰",amount:lime.toFixed(3)};
+    				materialList.push(item);
+    				$("#limeSelect").show();
+    			}
+    			var _html='';
+                var tpl=$('#tpl-materialInventoryTable').html();
+                for (var i=0,len=materialList.length; i < len; i++){
+                    var item = materialList[i];
+                    _html += renderTpl(tpl, item);
+                }
+                $('#materialInventoryTable tbody').html(_html);
+    			
+    			
+    		}
+    		
+    		tool.stepGo(1,2);
+    		$("#step-input").hide();
+    		$("#step-inventory").show();
+    	},
+    	onkeyup:false
+	});
+	
+	$("#inventoryMaterialForm").submit(function(){
+		if(materialList.length>0){
+			for (var i = 0; i < materialList.length; i++) {
+				var item=materialList[i];
+				var res=$("#"+item.materialMark).select2("data")[0];
+				if(res==undefined){
+					var d = dialog({
+                        content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您选择相应材料'+'</p></div>'
+                    });
+                    d.show();
+                    setTimeout(function() {
+                        d.close().remove();
+                    }, 1500);
+                    return false;
+				}else{
+					var amount=item.amount;
+					if(res.cost!=null){
+						if(res.cost.indexOf("~")!=-1){
+					    	var nums=res.cost.split("~");
+					    	item.cost=(nums[0]*amount).toFixed(3)+"~"+(nums[1]*amount).toFixed(3);
+				    	}else{
+				    		item.cost=res.cost*amount;
+				    	}
+					}
+					if(res.energyConsume!=null){
+						item.energyConsume=(res.energyConsume*amount).toExponential(2);
+					}
+					if(res.emissionCo2!=null){
+						item.emissionCo2=(res.emissionCo2*amount).toExponential(2);
+					}
+					if(res.emissionCh4!=null){
+						item.emissionCh4=(res.emissionCh4*amount).toExponential(2);
+					}
+					if(res.emissionN2o!=null){
+						item.emissionN2o=(res.emissionN2o*amount).toExponential(2);
+					}
+					if(res.emissionCo!=null){
+						item.emissionCo=(res.emissionCo*amount).toExponential(2);
+					}
+					if(res.emissionSo2!=null){
+						item.emissionSo2=(res.emissionSo2*amount).toExponential(2);
+					}
+					if(res.emissionNox!=null){
+						item.emissionNox=(res.emissionNox*amount).toExponential(2);
+					}
+					if(res.emissionPb!=null){
+						item.emissionPb=(res.emissionPb*amount).toExponential(2);
+					}
+					if(res.emissionZn!=null){
+						item.emissionZn=(res.emissionZn*amount).toExponential(2);
+					}
 				}
-				break;
-			case "3":case "4":
-				gravel+=baseWeight/(1+$("#baseLayerCement").val()/100+$("#baseLayerLime").val()/100);
-				cement+=baseWeight*$("#baseLayerCement").val()/100/(1+$("#baseLayerCement").val()/100+$("#baseLayerLime").val()/100);
-				lime+=baseWeight*$("#baseLayerLime").val()/100/(1+$("#baseLayerCement").val()/100+$("#baseLayerLime").val()/100);
-				break;
-			case "5":
-				cement+=baseWeight*$("#baseLayerCement").val()/100/(1+$("#baseLayerCement").val()/100+$("#baseLayerLime").val()/100);
-				lime+=baseWeight*$("#baseLayerLime").val()/100/(1+$("#baseLayerCement").val()/100+$("#baseLayerLime").val()/100);
-				break;
-			case "6":
-				gravel+=baseWeight;
-				break;
-			default:
-				break;
-			}
-			switch ($bottomBaseLayerMaterial.select2("data")[0].id) {
-			case "1":case "2":
-				gravel+=bottomBaseWeight/(1+$("#bottomBaseLayerWhetstoneRatio").val()/100);
-				switch ($bottomBaseLayerAsphaltType.select2("data")[0].id) {
-				case "1":
-					ordinaryAsphalt+=bottomBaseWeight*$("#bottomBaseLayerWhetstoneRatio").val()/(100+parseFloat($("#bottomBaseLayerWhetstoneRatio").val()));
-					break;
-				case "2":
-					modifiedAsphalt+=bottomBaseWeight*$("#bottomBaseLayerWhetstoneRatio").val()/(100+parseFloat($("#bottomBaseLayerWhetstoneRatio").val()));
-					break;
-				case "3":
-					highViscosityAsphalt+=bottomBaseWeight*$("#bottomBaseLayerWhetstoneRatio").val()/(100+parseFloat($("#bottomBaseLayerWhetstoneRatio").val()));
-					break;
-				default:
-					break;
-				}
-				break;
-			case "3":case "4":
-				gravel+=bottomBaseWeight/(1+$("#bottomBaseLayerCement").val()/100+$("#bottomBaseLayerLime").val()/100);
-				cement+=bottomBaseWeight*$("#bottomBaseLayerCement").val()/100/(1+$("#bottomBaseLayerCement").val()/100+$("#bottomBaseLayerLime").val()/100);
-				lime+=bottomBaseWeight*$("#bottomBaseLayerLime").val()/100/(1+$("#bottomBaseLayerCement").val()/100+$("#bottomBaseLayerLime").val()/100);
-				break;
-			case "5":
-				cement+=bottomBaseWeight*$("#bottomBaseLayerCement").val()/100/(1+$("#bottomBaseLayerCement").val()/100+$("#bottomBaseLayerLime").val()/100);
-				lime+=bottomBaseWeight*$("#bottomBaseLayerLime").val()/100/(1+$("#bottomBaseLayerCement").val()/100+$("#bottomBaseLayerLime").val()/100);
-				break;
-			case "6":
-				gravel+=bottomBaseWeight;
-				break;
-			default:
-				break;
-			}
-			switch ($cushionLayerMaterial.select2("data")[0].id) {
-			case "1":case "2":
-				gravel+=cushionWeight/(1+$("#cushionLayerWhetstoneRatio").val()/100);
-				switch ($cushionLayerAsphaltType.select2("data")[0].id) {
-				case "1":
-					ordinaryAsphalt+=cushionWeight*$("#cushionLayerWhetstoneRatio").val()/(100+parseFloat($("#cushionLayerWhetstoneRatio").val()));
-					break;
-				case "2":
-					modifiedAsphalt+=cushionWeight*$("#cushionLayerWhetstoneRatio").val()/(100+parseFloat($("#cushionLayerWhetstoneRatio").val()));
-					break;
-				case "3":
-					highViscosityAsphalt+=cushionWeight*$("#cushionLayerWhetstoneRatio").val()/(100+parseFloat($("#cushionLayerWhetstoneRatio").val()));
-					break;
-				default:
-					break;
-				}
-				break;
-			case "3":case "4":
-				gravel+=cushionWeight/(1+$("#cushionLayerCement").val()/100+$("#cushionLayerLime").val()/100);
-				cement+=cushionWeight*$("#cushionLayerCement").val()/100/(1+$("#cushionLayerCement").val()/100+$("#cushionLayerLime").val()/100);
-				lime+=cushionWeight*$("#cushionLayerLime").val()/100/(1+$("#cushionLayerCement").val()/100+$("#cushionLayerLime").val()/100);
-				break;
-			case "5":
-				cement+=cushionWeight*$("#cushionLayerCement").val()/100/(1+$("#cushionLayerCement").val()/100+$("#cushionLayerLime").val()/100);
-				lime+=cushionWeight*$("#cushionLayerLime").val()/100/(1+$("#cushionLayerCement").val()/100+$("#cushionLayerLime").val()/100);
-				break;
-			case "6":
-				gravel+=cushionWeight;
-				break;
-			default:
-				break;
-			}
-			// 上、中、下面层沥青
-			switch ($topLayerAsphaltType.select2("data")[0].id) {
-			case "1":
-				ordinaryAsphalt+=topWeight*$("#asphaltTopLayerWhetstoneRatio").val()/(100+parseFloat($("#asphaltTopLayerWhetstoneRatio").val()));
-				break;
-			case "2":
-				modifiedAsphalt+=topWeight*$("#asphaltTopLayerWhetstoneRatio").val()/(100+parseFloat($("#asphaltTopLayerWhetstoneRatio").val()));
-				break;
-			case "3":
-				highViscosityAsphalt+=topWeight*$("#asphaltTopLayerWhetstoneRatio").val()/(100+parseFloat($("#asphaltTopLayerWhetstoneRatio").val()));
-				break;
-			default:
-				break;
-			}
-			switch ($middleLayerAsphaltType.select2("data")[0].id) {
-			case "1":
-				ordinaryAsphalt+=middleWeight*$("#asphaltMiddleLayerWhetstoneRatio").val()/(100+parseFloat($("#asphaltMiddleLayerWhetstoneRatio").val()));
-				break;
-			case "2":
-				modifiedAsphalt+=middleWeight*$("#asphaltMiddleLayerWhetstoneRatio").val()/(100+parseFloat($("#asphaltMiddleLayerWhetstoneRatio").val()));
-				break;
-			case "3":
-				highViscosityAsphalt+=middleWeight*$("#asphaltMiddleLayerWhetstoneRatio").val()/(100+parseFloat($("#asphaltMiddleLayerWhetstoneRatio").val()));
-				break;
-			default:
-				break;
-			}
-			switch ($belowLayerAsphaltType.select2("data")[0].id) {
-			case "1":
-				ordinaryAsphalt+=belowWeight*$("#asphaltBelowLayerWhetstoneRatio").val()/(100+parseFloat($("#asphaltBelowLayerWhetstoneRatio").val()));
-				break;
-			case "2":
-				modifiedAsphalt+=belowWeight*$("#asphaltBelowLayerWhetstoneRatio").val()/(100+parseFloat($("#asphaltBelowLayerWhetstoneRatio").val()));
-				break;
-			case "3":
-				highViscosityAsphalt+=belowWeight*$("#asphaltBelowLayerWhetstoneRatio").val()/(100+parseFloat($("#asphaltBelowLayerWhetstoneRatio").val()));
-				break;
-			default:
-				break;
-			}
-			materialList=[];
-			$("#gravelSelect").hide();
-			$("#ordinaryAsphaltSelect").hide();
-			$("#modifiedAsphaltSelect").hide();
-			$("#highViscosityAsphaltSelect").hide();
-			$("#cementSelect").hide();
-			$("#limeSelect").hide();
-			if(gravel>0){
-				var item={materialMark:"gravel",materialName:"碎石集料",amount:gravel.toFixed(3)};
-				materialList.push(item);
-				$("#gravelSelect").show();
-			}
-			if(ordinaryAsphalt>0){
-				var item={materialMark:"ordinaryAsphalt",materialName:"普通沥青",amount:ordinaryAsphalt.toFixed(3)};
-				materialList.push(item);
-				$("#ordinaryAsphaltSelect").show();
-			}
-			if(modifiedAsphalt>0){
-				var item={materialMark:"modifiedAsphalt",materialName:"改性沥青",amount:modifiedAsphalt.toFixed(3)};
-				materialList.push(item);
-				$("#modifiedAsphaltSelect").show();
-			}
-			if(highViscosityAsphalt>0){
-				var item={materialMark:"highViscosityAsphalt",materialName:"高粘度沥青",amount:highViscosityAsphalt.toFixed(3)};
-				materialList.push(item);
-				$("#highViscosityAsphaltSelect").show();
-			}
-			if(cement>0){
-				var item={materialMark:"cement",materialName:"水泥",amount:cement.toFixed(3)};
-				materialList.push(item);
-				$("#cementSelect").show();
-			}
-			if(lime>0){
-				var item={materialMark:"lime",materialName:"石灰",amount:lime.toFixed(3)};
-				materialList.push(item);
-				$("#limeSelect").show();
 			}
 			var _html='';
             var tpl=$('#tpl-materialInventoryTable').html();
@@ -443,11 +777,6 @@ $(function(){
 			
 			
 		}
-		
-		
-		tool.stepGo(1,2);
-		$("#step-input").hide();
-		$("#step-inventory").show();
 		return false;
 	});
 	
