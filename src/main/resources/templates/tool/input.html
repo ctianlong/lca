@@ -152,15 +152,102 @@
 	                    <div class="form-group">
 	                        <label class="col-md-2 control-label"><span
 	                            class="king-required-tip text-danger mr5">*</span>上面层厚度：</label>
-	                        <div class="col-md-3">
-	                            <input type="text" class="form-control" placeholder="请输入上面层厚度" id=""
-	                                name="">
+	                        <div class="col-md-2">
+	                            <input type="text" class="form-control" placeholder="请输入上面层厚度" id="concreteTopLayerThickness"
+	                                name="concreteTopLayerThickness">
 	                        </div>
 	                        <label class="col-md-2 control-label">面层材料：</label>
-	                        <div class="col-md-3">
-	                            <select id="" name="" class="form-control" style="width: 100%">
+	                        <div class="col-md-2">
+	                            <select id="concreteTopLayerMaterial" name="concreteTopLayerMaterial" class="form-control" style="width: 100%">
 	                            </select>
 	                        </div>
+	                        <div id="topReinforcementRateDiv" style="display: none;">
+		                        <label class="col-md-2 control-label">配筋率：</label>
+	                            <div class="col-md-2">
+	                                <input type="text" class="form-control" placeholder="请输入配筋率" id="topReinforcementRate"
+	                                    name="topReinforcementRate">
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="form-group">
+	                       <label class="col-md-2 control-label">配合比x：</label>
+	                        <div class="col-md-2">
+	                            <input type="text" class="form-control" placeholder="比值" id="topMixProportionX"
+	                                name="topMixProportionX">
+	                        </div>
+	                       <label class="col-md-2 control-label">配合比y：</label>
+	                        <div class="col-md-2">
+	                            <input type="text" class="form-control" placeholder="比值" id="topMixProportionY"
+	                                name="topMixProportionY">
+	                        </div>
+	                       <label class="col-md-2 control-label">配合比z：</label>
+	                        <div class="col-md-2">
+	                            <input type="text" class="form-control" placeholder="比值" id="topMixProportionZ"
+	                                name="topMixProportionZ">
+	                        </div>
+	                    </div>
+	                    <div class="form-group">
+	                       <label class="col-md-2 control-label">外加剂种类：</label>
+	                       <div class="col-md-3">
+                                <select id="topCementAdmixture" name="topCementAdmixture" class="form-control" style="width: 100%">
+                                </select>
+                            </div>
+	                    </div>
+	                    <div class="row">
+	                       <div id="snjDiv" class="col-md-4" style="display: none;">
+	                           <div class="form-group">
+	                               <label class="col-md-6 control-label">速凝剂掺量：</label>
+		                            <div class="col-md-6">
+		                                <input type="text" class="form-control" placeholder="请输入" id="snj"
+		                                    name="snj">
+		                            </div>
+	                           </div>
+	                       </div>
+	                       <div id="jqjDiv" class="col-md-4" style="display: none;">
+	                           <div class="form-group">
+	                               <label class="col-md-6 control-label">加气剂掺量：</label>
+		                            <div class="col-md-6">
+		                                <input type="text" class="form-control" placeholder="请输入" id="jqj"
+		                                    name="jqj">
+		                            </div>
+	                           </div>
+	                       </div>
+	                       <div id="zsjDiv" class="col-md-4" style="display: none;">
+	                           <div class="form-group">
+	                               <label class="col-md-6 control-label">增塑剂掺量：</label>
+		                            <div class="col-md-6">
+		                                <input type="text" class="form-control" placeholder="请输入" id="zsj"
+		                                    name="zsj">
+		                            </div>
+	                           </div>
+	                       </div>
+	                       <div id="qlzsjDiv" class="col-md-4" style="display: none;">
+	                           <div class="form-group">
+	                               <label class="col-md-6 control-label">强力增塑剂掺量：</label>
+		                            <div class="col-md-6">
+		                                <input type="text" class="form-control" placeholder="请输入" id="qlzsj"
+		                                    name="qlzsj">
+		                            </div>
+	                           </div>
+	                       </div>
+	                       <div id="hnjDiv" class="col-md-4" style="display: none;">
+	                           <div class="form-group">
+	                               <label class="col-md-6 control-label">缓凝剂掺量：</label>
+		                            <div class="col-md-6">
+		                                <input type="text" class="form-control" placeholder="请输入" id="hnj"
+		                                    name="hnj">
+		                            </div>
+	                           </div>
+	                       </div>
+	                       <div id="jsjDiv" class="col-md-4" style="display: none;">
+	                           <div class="form-group">
+	                               <label class="col-md-6 control-label">减水剂掺量：</label>
+		                            <div class="col-md-6">
+		                                <input type="text" class="form-control" placeholder="请输入" id="jsj"
+		                                    name="jsj">
+		                            </div>
+	                           </div>
+	                       </div>
 	                    </div>
 	                </fieldset>
 	                <fieldset>
@@ -168,16 +255,104 @@
 	                    <div class="form-group">
 	                        <label class="col-md-2 control-label"><span
 	                            class="king-required-tip text-danger mr5">*</span>下面层厚度：</label>
-	                        <div class="col-md-3">
-	                            <input type="text" class="form-control" placeholder="请输入下面层厚度" id=""
-	                                name="">
+	                        <div class="col-md-2">
+	                            <input type="text" class="form-control" placeholder="请输入下面层厚度" id="concreteBelowLayerThickness"
+	                                name="concreteBelowLayerThickness">
 	                        </div>
 	                        <label class="col-md-2 control-label">面层材料：</label>
-	                        <div class="col-md-3">
-	                            <select id="" name="" class="form-control" style="width: 100%">
+	                        <div class="col-md-2">
+	                            <select id="concreteBelowLayerMaterial" name="concreteBelowLayerMaterial" class="form-control" style="width: 100%">
 	                            </select>
 	                        </div>
+	                        <div id="belowReinforcementRateDiv" style="display: none;">
+                                <label class="col-md-2 control-label">配筋率：</label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="请输入配筋率" id="belowReinforcementRate"
+                                        name="belowReinforcementRate">
+                                </div>
+                            </div>
 	                    </div>
+	                    <div class="form-group">
+                           <label class="col-md-2 control-label">配合比x：</label>
+                            <div class="col-md-2">
+                                <input type="text" class="form-control" placeholder="比值" id="belowMixProportionX"
+                                    name="belowMixProportionX">
+                            </div>
+                           <label class="col-md-2 control-label">配合比y：</label>
+                            <div class="col-md-2">
+                                <input type="text" class="form-control" placeholder="比值" id="belowMixProportionY"
+                                    name="belowMixProportionY">
+                            </div>
+                           <label class="col-md-2 control-label">配合比z：</label>
+                            <div class="col-md-2">
+                                <input type="text" class="form-control" placeholder="比值" id="belowMixProportionZ"
+                                    name="belowMixProportionZ">
+                            </div>
+                        </div>
+                        <!-- 待修改 -->
+                        <div class="form-group">
+                           <label class="col-md-2 control-label">外加剂种类：</label>
+                           <div class="col-md-3">
+                                <select id="topCementAdmixture" name="topCementAdmixture" class="form-control" style="width: 100%">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                           <div id="snjDiv" class="col-md-4" style="display: none;">
+                               <div class="form-group">
+                                   <label class="col-md-6 control-label">速凝剂掺量：</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" placeholder="请输入" id="snj"
+                                            name="snj">
+                                    </div>
+                               </div>
+                           </div>
+                           <div id="jqjDiv" class="col-md-4" style="display: none;">
+                               <div class="form-group">
+                                   <label class="col-md-6 control-label">加气剂掺量：</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" placeholder="请输入" id="jqj"
+                                            name="jqj">
+                                    </div>
+                               </div>
+                           </div>
+                           <div id="zsjDiv" class="col-md-4" style="display: none;">
+                               <div class="form-group">
+                                   <label class="col-md-6 control-label">增塑剂掺量：</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" placeholder="请输入" id="zsj"
+                                            name="zsj">
+                                    </div>
+                               </div>
+                           </div>
+                           <div id="qlzsjDiv" class="col-md-4" style="display: none;">
+                               <div class="form-group">
+                                   <label class="col-md-6 control-label">强力增塑剂掺量：</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" placeholder="请输入" id="qlzsj"
+                                            name="qlzsj">
+                                    </div>
+                               </div>
+                           </div>
+                           <div id="hnjDiv" class="col-md-4" style="display: none;">
+                               <div class="form-group">
+                                   <label class="col-md-6 control-label">缓凝剂掺量：</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" placeholder="请输入" id="hnj"
+                                            name="hnj">
+                                    </div>
+                               </div>
+                           </div>
+                           <div id="jsjDiv" class="col-md-4" style="display: none;">
+                               <div class="form-group">
+                                   <label class="col-md-6 control-label">减水剂掺量：</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" placeholder="请输入" id="jsj"
+                                            name="jsj">
+                                    </div>
+                               </div>
+                           </div>
+                        </div>
 	                </fieldset>
 				</div>
 				<div id="shopBrickSurface" style="display: none;">

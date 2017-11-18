@@ -31,6 +31,15 @@ $(function(){
 		{id:2,text:"配筋式混凝土路面",density:2.4}
 	];
 	
+	var cdCementAdmixture=[
+		{id:1,text:"速凝剂"},
+		{id:2,text:"加气剂"},
+		{id:3,text:"增塑剂"},
+		{id:4,text:"强力增塑剂"},
+		{id:5,text:"缓凝剂"},
+		{id:6,text:"减水剂"}
+	];
+	
 	var $roadType=$("#roadType").select2({
 		data:cdRoadType,
 		minimumResultsForSearch:-1,
@@ -66,6 +75,99 @@ $(function(){
 		minimumResultsForSearch:-1,
 		language:iMsg.select2LangCode
 	});
+	
+	// 混凝土上、下面层
+	var $concreteTopLayerMaterial=$("#concreteTopLayerMaterial").select2({
+		data:cdConcreteSurfaceMaterial,
+		minimumResultsForSearch:-1,
+		language:iMsg.select2LangCode
+	});
+	var $topCementAdmixture=$("#topCementAdmixture").select2({
+		data:cdCementAdmixture,
+		language:iMsg.select2LangCode,
+		placeholder:"可多选",
+		multiple: true
+	});
+	var $concreteBelowLayerMaterial=$("#concreteBelowLayerMaterial").select2({
+		data:cdConcreteSurfaceMaterial,
+		minimumResultsForSearch:-1,
+		language:iMsg.select2LangCode
+	});
+	$concreteTopLayerMaterial.on("select2:select",function(e){
+		switch (e.params.data.id) {
+		case "1":
+			$("#topReinforcementRateDiv").hide();
+			break;
+		case "2":
+			$("#topReinforcementRateDiv").show();
+			break;
+		default:
+			break;
+		}
+	});
+	$topCementAdmixture.on("select2:select",function(e){
+		switch (e.params.data.id) {
+		case "1":
+			$("#snjDiv").show();
+			break;
+		case "2":
+			$("#jqjDiv").show();
+			break;
+		case "3":
+			$("#zsjDiv").show();
+			break;
+		case "4":
+			$("#qlzsjDiv").show();
+			break;
+		case "5":
+			$("#hnjDiv").show();
+			break;
+		case "6":
+			$("#jsjDiv").show();
+			break;
+		default:
+			break;
+		}
+	});
+	$topCementAdmixture.on("select2:unselect",function(e){
+		switch (e.params.data.id) {
+		case "1":
+			$("#snjDiv").hide();
+			break;
+		case "2":
+			$("#jqjDiv").hide();
+			break;
+		case "3":
+			$("#zsjDiv").hide();
+			break;
+		case "4":
+			$("#qlzsjDiv").hide();
+			break;
+		case "5":
+			$("#hnjDiv").hide();
+			break;
+		case "6":
+			$("#jsjDiv").hide();
+			break;
+		default:
+			break;
+		}
+	});
+	$concreteBelowLayerMaterial.on("select2:select",function(e){
+		switch (e.params.data.id) {
+		case "1":
+			$("#belowReinforcementRateDiv").hide();
+			break;
+		case "2":
+			$("#belowReinforcementRateDiv").show();
+			break;
+		default:
+			break;
+		}
+	});
+	
+	
+	
 	// 基层
 	var $baseLayerMaterial=$("#baseLayerMaterial").select2({
 		data:cdLayerMaterial,
