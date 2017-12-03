@@ -27,7 +27,8 @@
         <javaClientGenerator targetPackage="tk.mybatis.springboot.mapper" targetProject="src/main/java"
                              type="XMLMAPPER"/>
 
-        <table tableName="material">
+        <!-- mvn mybatis-generator:generate -->
+        <table tableName="transport">
             <!--mysql 配置-->
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
             <!--oracle 配置-->

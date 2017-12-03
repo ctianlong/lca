@@ -1,41 +1,35 @@
 <div id="step-inventory">
 	<div class="panel king-panel1">
-		<div class="panel-heading king-panel-head1 king-panel-top3" role="tab"
-			id="heading2">
-			<div class="king-panel-control">
-				<a role="button" data-toggle="collapse" data-parent="#accordion"
-					href="#collapse2" aria-expanded="true" aria-controls="collapse2"
-					class="fa fa-minus-square-o fa-lg"></a>
-			</div>
+		<div class="panel-heading king-panel-head1 king-panel-top3">
 			<h3 class="panel-title">材料</h3>
 		</div>
-		<div id="collapse2" class="panel-collapse collapse in" role="tabpanel"
-			aria-labelledby="heading2">
-			<div class="panel-body">
-				<div class="table-responsive">
-					<table id="materialInventoryTable" class="table table-bordered table-hover table-striped table-condensed">
-						<thead>
-						    <tr>
-	                            <th rowspan="2" class="text-center">材料名称</th>
-	                            <th rowspan="2" class="text-center">用量</th>
-	                            <th rowspan="2" class="text-center">成本</th>
-	                            <th rowspan="2" class="text-center">能耗(MJ)</th>
-	                            <th colspan="8" class="text-center">排放(kg)</th>
-	                        </tr>
-	                        <tr>
-	                            <th class="text-center">CO<sub>2</sub></th>
-	                            <th class="text-center">CH<sub>4</sub></th>
-	                            <th class="text-center">N<sub>2</sub>O</th>
-	                            <th class="text-center">CO</th>
-	                            <th class="text-center">SO<sub>2</sub></th>
-	                            <th class="text-center">NO<sub>x</sub></th>
-	                            <th class="text-center">Pb</th>
-	                            <th class="text-center">Zn</th>
-						</thead>
-						<tbody class="text-center">
-						</tbody>
-					</table>
-					<script id="tpl-materialInventoryTable" type="text/template">
+		<div class="panel-body">
+			<div class="table-responsive">
+				<table id="materialInventoryTable"
+					class="table table-bordered table-hover table-striped table-condensed">
+					<thead>
+						<tr>
+							<th rowspan="2" class="text-center">材料名称</th>
+							<th rowspan="2" class="text-center">用量</th>
+							<th rowspan="2" class="text-center">成本</th>
+							<th rowspan="2" class="text-center">能耗(MJ)</th>
+							<th colspan="8" class="text-center">排放(kg)</th>
+						</tr>
+						<tr>
+							<th class="text-center">CO<sub>2</sub></th>
+							<th class="text-center">CH<sub>4</sub></th>
+							<th class="text-center">N<sub>2</sub>O
+							</th>
+							<th class="text-center">CO</th>
+							<th class="text-center">SO<sub>2</sub></th>
+							<th class="text-center">NO<sub>x</sub></th>
+							<th class="text-center">Pb</th>
+							<th class="text-center">Zn</th>
+					</thead>
+					<tbody class="text-center">
+					</tbody>
+				</table>
+				<script id="tpl-materialInventoryTable" type="text/template">
                        <tr>
                            <td>#materialName#</td>
                            <td>#amount#</td>
@@ -51,141 +45,207 @@
                            <td>#emissionZn#</td>
                        </tr>
                     </script>
-				</div>
-				<form id="inventoryMaterialForm" class="form-horizontal" role="form">
-					<fieldset>
-	                    <legend>请选择具体材料：</legend>
-	                    <div class="row">
-	                        <div class="col-md-6" id="gravelSelect" style="display: none;">
-		                    <div class="form-group">
-		                        <label class="col-md-3 control-label">碎石集料：</label>
-		                        <div class="col-md-9">
-		                            <select id="gravel" name="gravel" class="form-control" style="width: 100%">
-		                            </select>
-		                        </div>
-		                    </div>
-	                        </div>
-	                        <div class="col-md-6" id="ordinaryAsphaltSelect" style="display: none;">
-		                    <div class="form-group">
-		                        <label class="col-md-3 control-label">普通沥青：</label>
-		                        <div class="col-md-9">
-		                            <select id="ordinaryAsphalt" name="ordinaryAsphalt" class="form-control" style="width: 100%">
-		                            </select>
-		                        </div>
-		                    </div>
-		                    </div>
-		                    <div class="col-md-6" id="modifiedAsphaltSelect" style="display: none;">
-		                    <div class="form-group">
-		                        <label class="col-md-3 control-label">改性沥青：</label>
-		                        <div class="col-md-9">
-		                            <select id="modifiedAsphalt" name="modifiedAsphalt" class="form-control" style="width: 100%">
-		                            </select>
-		                        </div>
-		                    </div>
-		                    </div>
-		                    <div class="col-md-6" id="highViscosityAsphaltSelect" style="display: none;">
-		                    <div class="form-group">
-		                       <label class="col-md-3 control-label">高粘度沥青：</label>
-		                        <div class="col-md-9">
-		                            <select id="highViscosityAsphalt" name="highViscosityAsphalt" class="form-control" style="width: 100%">
-		                            </select>
-		                        </div>
-		                    </div>
-		                    </div>
-		                    <div class="col-md-6" id="cementSelect" style="display: none;">
-		                    <div class="form-group">
-		                        <label class="col-md-3 control-label">水泥：</label>
-		                        <div class="col-md-9">
-		                            <select id="cement" name="cement" class="form-control" style="width: 100%">
-		                            </select>
-		                        </div>
-		                    </div>
-		                    </div>
-		                    <div class="col-md-6" id="limeSelect" style="display: none;">
-		                    <div class="form-group">
-		                       <label class="col-md-3 control-label">石灰：</label>
-		                        <div class="col-md-9">
-		                            <select id="lime" name="lime" class="form-control" style="width: 100%">
-		                            </select>
-		                        </div>
-		                    </div>
-		                    </div>
-		                    <div class="col-md-6" id="rebarSelect" style="display: none;">
-		                    <div class="form-group">
-		                       <label class="col-md-3 control-label">钢筋：</label>
-		                        <div class="col-md-9">
-		                            <select id="rebar" name="rebar" class="form-control" style="width: 100%">
-		                            </select>
-		                        </div>
-		                    </div>
-		                    </div>
-		                    <div class="col-md-6" id="snjSelect" style="display: none;">
-		                    <div class="form-group">
-		                       <label class="col-md-3 control-label">速凝剂：</label>
-		                        <div class="col-md-9">
-		                            <select id="snjType" name="snjType" class="form-control" style="width: 100%">
-		                            </select>
-		                        </div>
-		                    </div>
-		                    </div>
-		                    <div class="col-md-6" id="jqjSelect" style="display: none;">
-		                    <div class="form-group">
-		                       <label class="col-md-3 control-label">加气剂：</label>
-		                        <div class="col-md-9">
-		                            <select id="jqjType" name="jqjType" class="form-control" style="width: 100%">
-		                            </select>
-		                        </div>
-		                    </div>
-		                    </div>
-		                    <div class="col-md-6" id="zsjSelect" style="display: none;">
-		                    <div class="form-group">
-		                       <label class="col-md-3 control-label">增塑剂：</label>
-		                        <div class="col-md-9">
-		                            <select id="zsjType" name="zsjType" class="form-control" style="width: 100%">
-		                            </select>
-		                        </div>
-		                    </div>
-		                    </div>
-		                    <div class="col-md-6" id="qlzsjSelect" style="display: none;">
-		                    <div class="form-group">
-		                       <label class="col-md-3 control-label">强力增塑剂：</label>
-		                        <div class="col-md-9">
-		                            <select id="qlzsjType" name="qlzsjType" class="form-control" style="width: 100%">
-		                            </select>
-		                        </div>
-		                    </div>
-		                    </div>
-		                    <div class="col-md-6" id="hnjSelect" style="display: none;">
-		                    <div class="form-group">
-		                       <label class="col-md-3 control-label">缓凝剂：</label>
-		                        <div class="col-md-9">
-		                            <select id="hnjType" name="hnjType" class="form-control" style="width: 100%">
-		                            </select>
-		                        </div>
-		                    </div>
-		                    </div>
-		                    <div class="col-md-6" id="jsjSelect" style="display: none;">
-		                    <div class="form-group">
-		                       <label class="col-md-3 control-label">减水剂：</label>
-		                        <div class="col-md-9">
-		                            <select id="jsjType" name="jsjType" class="form-control" style="width: 100%">
-		                            </select>
-		                        </div>
-		                    </div>
-		                    </div>
-		                </div>
-	                </fieldset>
-	                <hr class="mt5 mb15">
-	                <div class="text-center">
-		                <button class="king-btn king-radius king-success" type="submit">
-		                    计算材料清单
-		                </button>
-		            </div>
-				</form>
 			</div>
+			<form id="inventoryMaterialForm" class="form-horizontal" role="form">
+				<fieldset>
+					<legend>请选择具体材料：</legend>
+					<div class="row">
+						<div class="col-md-6" id="gravelSelect" style="display: none;">
+							<div class="form-group">
+								<label class="col-md-3 control-label">碎石集料：</label>
+								<div class="col-md-9">
+									<select id="gravel" name="gravel" class="form-control"
+										style="width: 100%">
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6" id="ordinaryAsphaltSelect"
+							style="display: none;">
+							<div class="form-group">
+								<label class="col-md-3 control-label">普通沥青：</label>
+								<div class="col-md-9">
+									<select id="ordinaryAsphalt" name="ordinaryAsphalt"
+										class="form-control" style="width: 100%">
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6" id="modifiedAsphaltSelect"
+							style="display: none;">
+							<div class="form-group">
+								<label class="col-md-3 control-label">改性沥青：</label>
+								<div class="col-md-9">
+									<select id="modifiedAsphalt" name="modifiedAsphalt"
+										class="form-control" style="width: 100%">
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6" id="highViscosityAsphaltSelect"
+							style="display: none;">
+							<div class="form-group">
+								<label class="col-md-3 control-label">高粘度沥青：</label>
+								<div class="col-md-9">
+									<select id="highViscosityAsphalt" name="highViscosityAsphalt"
+										class="form-control" style="width: 100%">
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6" id="cementSelect" style="display: none;">
+							<div class="form-group">
+								<label class="col-md-3 control-label">水泥：</label>
+								<div class="col-md-9">
+									<select id="cement" name="cement" class="form-control"
+										style="width: 100%">
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6" id="limeSelect" style="display: none;">
+							<div class="form-group">
+								<label class="col-md-3 control-label">石灰：</label>
+								<div class="col-md-9">
+									<select id="lime" name="lime" class="form-control"
+										style="width: 100%">
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6" id="rebarSelect" style="display: none;">
+							<div class="form-group">
+								<label class="col-md-3 control-label">钢筋：</label>
+								<div class="col-md-9">
+									<select id="rebar" name="rebar" class="form-control"
+										style="width: 100%">
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6" id="snjSelect" style="display: none;">
+							<div class="form-group">
+								<label class="col-md-3 control-label">速凝剂：</label>
+								<div class="col-md-9">
+									<select id="snjType" name="snjType" class="form-control"
+										style="width: 100%">
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6" id="jqjSelect" style="display: none;">
+							<div class="form-group">
+								<label class="col-md-3 control-label">加气剂：</label>
+								<div class="col-md-9">
+									<select id="jqjType" name="jqjType" class="form-control"
+										style="width: 100%">
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6" id="zsjSelect" style="display: none;">
+							<div class="form-group">
+								<label class="col-md-3 control-label">增塑剂：</label>
+								<div class="col-md-9">
+									<select id="zsjType" name="zsjType" class="form-control"
+										style="width: 100%">
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6" id="qlzsjSelect" style="display: none;">
+							<div class="form-group">
+								<label class="col-md-3 control-label">强力增塑剂：</label>
+								<div class="col-md-9">
+									<select id="qlzsjType" name="qlzsjType" class="form-control"
+										style="width: 100%">
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6" id="hnjSelect" style="display: none;">
+							<div class="form-group">
+								<label class="col-md-3 control-label">缓凝剂：</label>
+								<div class="col-md-9">
+									<select id="hnjType" name="hnjType" class="form-control"
+										style="width: 100%">
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6" id="jsjSelect" style="display: none;">
+							<div class="form-group">
+								<label class="col-md-3 control-label">减水剂：</label>
+								<div class="col-md-9">
+									<select id="jsjType" name="jsjType" class="form-control"
+										style="width: 100%">
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+				<hr class="mt5 mb15">
+				<div class="text-center">
+					<button class="king-btn king-radius king-success" type="submit">
+						计算材料清单</button>
+				</div>
+			</form>
 		</div>
 	</div>
-	
+
+	<div class="panel king-panel1">
+		<div class="panel-heading king-panel-head1 king-panel-top3">
+			<h3 class="panel-title">运输</h3>
+		</div>
+		<div class='panel-body'>
+		  <div class="table-responsive">
+                <table id="transportInventoryTable"
+                    class="table table-bordered table-hover table-striped table-condensed">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" class="text-center">材料名称</th>
+                            <th rowspan="2" class="text-center">运输量/t</th>
+                            <th rowspan="2" class="text-center">车辆型号</th>
+                            <th rowspan="2" class="text-center">运输距离/km</th>
+                            <th rowspan="2" class="text-center">成本</th>
+                            <th rowspan="2" class="text-center">能耗(MJ)</th>
+                            <th colspan="8" class="text-center">排放(kg)</th>
+                        </tr>
+                        <tr>
+                            <th class="text-center">CO<sub>2</sub></th>
+                            <th class="text-center">CH<sub>4</sub></th>
+                            <th class="text-center">N<sub>2</sub>O
+                            </th>
+                            <th class="text-center">CO</th>
+                            <th class="text-center">SO<sub>2</sub></th>
+                            <th class="text-center">NO<sub>x</sub></th>
+                            <th class="text-center">Pb</th>
+                            <th class="text-center">Zn</th>
+                    </thead>
+                    <tbody class="text-center">
+                    </tbody>
+                </table>
+                <script id="tpl-materialInventoryTable" type="text/template">
+                       <tr>
+                           <td>#materialName#</td>
+                           <td>#amount#</td>
+                           <td>#cost#</td>
+                           <td>#energyConsume#</td>
+                           <td>#emissionCo2#</td>
+                           <td>#emissionCh4#</td>
+                           <td>#emissionN2o#</td>
+                           <td>#emissionCo#</td>
+                           <td>#emissionSo2#</td>
+                           <td>#emissionNox#</td>
+                           <td>#emissionPb#</td>
+                           <td>#emissionZn#</td>
+                       </tr>
+                    </script>
+            </div>
+		</div>
+	</div>
+
 	<div class="panel king-panel1">
 		<div class="panel-heading king-panel-head1 king-panel-top3">
 			<h3 class="panel-title">施工</h3>
@@ -600,17 +660,18 @@
 		</div>
 	</div> -->
 	<div class="panel king-panel1">
-         <div class="panel-heading king-panel-head1 king-panel-top3">
-            <div class="text-center">
-                <button class="king-btn king-radius king-success" type="button" id="inventory-lastStep">
-                    <i class="fa fa-arrow-left btn-icon"></i>上一步
-                </button>
-                <!-- 
+		<div class="panel-heading king-panel-head1 king-panel-top3">
+			<div class="text-center">
+				<button class="king-btn king-radius king-success" type="button"
+					id="inventory-lastStep">
+					<i class="fa fa-arrow-left btn-icon"></i>上一步
+				</button>
+				<!-- 
                 <a class="king-btn king-radius king-default" title="返回"> <i
                     class="fa fa-mail-reply-all btn-icon"></i>返回
                 </a>
                  -->
-            </div>
-        </div>
-    </div>
+			</div>
+		</div>
+	</div>
 </div>

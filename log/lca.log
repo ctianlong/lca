@@ -1,0 +1,334 @@
+2017-11-19 22:02:16.532  INFO 13788 --- [restartedMain] tk.mybatis.springboot.Application        : Starting Application on DESKTOP-NNS9DQT with PID 13788 (D:\java\eclipse\workspaces\lca\target\classes started by Tianlong in D:\java\eclipse\workspaces\lca)
+2017-11-19 22:02:16.533  INFO 13788 --- [restartedMain] tk.mybatis.springboot.Application        : The following profiles are active: prod
+2017-11-19 22:02:16.535  INFO 13788 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@79f3c988: startup date [Sun Nov 19 22:02:16 CST 2017]; root of context hierarchy
+2017-11-19 22:02:17.357  INFO 13788 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8088 (http)
+2017-11-19 22:02:17.358  INFO 13788 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2017-11-19 22:02:17.358  INFO 13788 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.20
+2017-11-19 22:02:17.375  INFO 13788 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2017-11-19 22:02:17.376  INFO 13788 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 841 ms
+2017-11-19 22:02:17.582  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-11-19 22:02:17.583  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-11-19 22:02:17.583  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-11-19 22:02:17.583  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2017-11-19 22:02:17.583  INFO 13788 --- [localhost-startStop-1] .s.DelegatingFilterProxyRegistrationBean : Mapping filter: 'springSecurityFilterChain' to: [/*]
+2017-11-19 22:02:17.583  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'webStatFilter' to urls: [/*]
+2017-11-19 22:02:17.583  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2017-11-19 22:02:17.583  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'statViewServlet' to [/druid/*]
+2017-11-19 22:02:19.295  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/swagger-ui.html'], []
+2017-11-19 22:02:19.296  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/swagger-resources/**'], []
+2017-11-19 22:02:19.296  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/v2/api-docs/**'], []
+2017-11-19 22:02:19.296  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/**/favicon.ico'], []
+2017-11-19 22:02:19.296  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/webjars/**'], []
+2017-11-19 22:02:19.296  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/js/**'], []
+2017-11-19 22:02:19.296  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/css/**'], []
+2017-11-19 22:02:19.296  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/img/**'], []
+2017-11-19 22:02:19.357  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4dff7def, org.springframework.security.web.context.SecurityContextPersistenceFilter@54954da7, org.springframework.security.web.header.HeaderWriterFilter@7158853, org.springframework.security.web.csrf.CsrfFilter@6db0387c, org.springframework.security.web.authentication.logout.LogoutFilter@26eae8, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@27f3a2e0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4437cb27, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6f4b94e2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7c80bc93, org.springframework.security.web.session.SessionManagementFilter@380af102, org.springframework.security.web.access.ExceptionTranslationFilter@2ec7deac, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4185a270]
+2017-11-19 22:02:19.629  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@79f3c988: startup date [Sun Nov 19 22:02:16 CST 2017]; root of context hierarchy
+2017-11-19 22:02:19.701  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/users],methods=[GET]}" onto public org.springframework.http.ResponseEntity<com.github.pagehelper.PageInfo<tk.mybatis.springboot.model.AccountUser>> tk.mybatis.springboot.controller.AccountUserController.list(tk.mybatis.springboot.service.query.AccountUserQuery)
+2017-11-19 22:02:19.702  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/users/{id:^\d+$}],methods=[PUT]}" onto public org.springframework.http.ResponseEntity<tk.mybatis.springboot.model.AccountUser> tk.mybatis.springboot.controller.AccountUserController.updateOnePartly(java.lang.Integer,tk.mybatis.springboot.model.AccountUser)
+2017-11-19 22:02:19.703  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/users],methods=[POST]}" onto public org.springframework.http.ResponseEntity<tk.mybatis.springboot.model.AccountUser> tk.mybatis.springboot.controller.AccountUserController.saveOne(tk.mybatis.springboot.model.AccountUser)
+2017-11-19 22:02:19.704  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/common/user/check/username],methods=[GET]}" onto public org.springframework.http.ResponseEntity<java.lang.Boolean> tk.mybatis.springboot.controller.AccountUserController.checkDuplication(java.lang.String,java.lang.String)
+2017-11-19 22:02:19.705  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/common/user/registerAndLogin],methods=[POST]}" onto public org.springframework.http.ResponseEntity<java.lang.Void> tk.mybatis.springboot.controller.AccountUserController.registerAndLogin(tk.mybatis.springboot.model.AccountUser)
+2017-11-19 22:02:19.706  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/users/{id:^\d+$}],methods=[DELETE]}" onto public org.springframework.http.ResponseEntity<java.lang.Void> tk.mybatis.springboot.controller.AccountUserController.deleteOne(java.lang.Integer)
+2017-11-19 22:02:19.707  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/user],methods=[PUT]}" onto public org.springframework.http.ResponseEntity<tk.mybatis.springboot.model.AccountUser> tk.mybatis.springboot.controller.AccountUserController.updateCurrentUserInfo(tk.mybatis.springboot.model.AccountUser)
+2017-11-19 22:02:19.707  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/user],methods=[GET]}" onto public org.springframework.http.ResponseEntity<tk.mybatis.springboot.model.AccountUser> tk.mybatis.springboot.controller.AccountUserController.getCurrentUserInfo()
+2017-11-19 22:02:19.708  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/user/password],methods=[PUT]}" onto public org.springframework.http.ResponseEntity<java.lang.Void> tk.mybatis.springboot.controller.AccountUserController.updateCurrentUserPassword(java.util.Map<java.lang.String, java.lang.Object>)
+2017-11-19 22:02:19.709  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/common/changelanguage],methods=[POST]}" onto public org.springframework.http.ResponseEntity<java.lang.Void> tk.mybatis.springboot.controller.CommonApiController.changeLanguage(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse,java.lang.String)
+2017-11-19 22:02:19.711  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/db/inventory/materials],methods=[GET]}" onto public org.springframework.http.ResponseEntity<com.github.pagehelper.PageInfo<tk.mybatis.springboot.model.Material>> tk.mybatis.springboot.controller.MaterialController.list(tk.mybatis.springboot.service.query.MaterialQuery)
+2017-11-19 22:02:19.712  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/db/inventory/materials],methods=[POST]}" onto public org.springframework.http.ResponseEntity<tk.mybatis.springboot.model.Material> tk.mybatis.springboot.controller.MaterialController.saveOne(tk.mybatis.springboot.model.Material)
+2017-11-19 22:02:19.713  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/db/inventory/materials/{id:^\d+$}],methods=[DELETE]}" onto public org.springframework.http.ResponseEntity<java.lang.Void> tk.mybatis.springboot.controller.MaterialController.deleteOne(java.lang.Integer)
+2017-11-19 22:02:19.714  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/db/inventory/materials/{id:^\d+$}],methods=[PUT]}" onto public org.springframework.http.ResponseEntity<tk.mybatis.springboot.model.Material> tk.mybatis.springboot.controller.MaterialController.updateOneFully(java.lang.Integer,tk.mybatis.springboot.model.Material)
+2017-11-19 22:02:19.714  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/cd/material-category],methods=[GET]}" onto public org.springframework.http.ResponseEntity<java.util.List<tk.mybatis.springboot.service.cd.CdObject>> tk.mybatis.springboot.controller.MaterialController.getMaterialCategoryCd()
+2017-11-19 22:02:19.717  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-11-19 22:02:19.718  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-11-19 22:02:19.792  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Root mapping to handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:02:19.792  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/login] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:02:19.792  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/users] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:02:19.792  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/tool] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:02:19.792  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/user] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:02:19.793  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/db/inventory/material] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:02:19.793  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/db/inventory/fuel] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:02:19.793  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/db/inventory/construction] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:02:19.793  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/db/influence/default] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:02:19.872  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-11-19 22:02:19.872  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-11-19 22:02:19.938  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-11-19 22:02:20.296  INFO 13788 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2017-11-19 22:02:20.798  INFO 13788 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-11-19 22:02:20.800  INFO 13788 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'statFilter' has been autodetected for JMX exposure
+2017-11-19 22:02:20.800  INFO 13788 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2017-11-19 22:02:20.807  INFO 13788 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.spring.boot.autoconfigure:name=dataSource,type=DruidDataSourceWrapper]
+2017-11-19 22:02:20.810  INFO 13788 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'statFilter': registering with JMX server as MBean [com.alibaba.druid.filter.stat:name=statFilter,type=StatFilter]
+2017-11-19 22:02:20.823  INFO 13788 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8088 (http)
+2017-11-19 22:02:20.829  INFO 13788 --- [restartedMain] tk.mybatis.springboot.Application        : 服务启动完成!
+2017-11-19 22:02:20.831  INFO 13788 --- [restartedMain] tk.mybatis.springboot.Application        : Started Application in 4.357 seconds (JVM running for 100.401)
+2017-11-19 22:02:28.232  INFO 13788 --- [Thread-15] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@79f3c988: startup date [Sun Nov 19 22:02:16 CST 2017]; root of context hierarchy
+2017-11-19 22:02:28.235  INFO 13788 --- [Thread-15] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2017-11-19 22:02:28.235  INFO 13788 --- [Thread-15] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans
+2017-11-19 22:02:28.827  INFO 13788 --- [restartedMain] tk.mybatis.springboot.Application        : Starting Application on DESKTOP-NNS9DQT with PID 13788 (D:\java\eclipse\workspaces\lca\target\classes started by Tianlong in D:\java\eclipse\workspaces\lca)
+2017-11-19 22:02:28.828  INFO 13788 --- [restartedMain] tk.mybatis.springboot.Application        : The following profiles are active: prod
+2017-11-19 22:02:28.831  INFO 13788 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@2997fe18: startup date [Sun Nov 19 22:02:28 CST 2017]; root of context hierarchy
+2017-11-19 22:02:29.364  WARN 13788 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[tk.mybatis.springboot.mapper]' package. Please check your configuration.
+2017-11-19 22:02:29.425  WARN 13788 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[tk.mybatis.springboot]' package. Please check your configuration.
+2017-11-19 22:02:29.934  INFO 13788 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8088 (http)
+2017-11-19 22:02:29.935  INFO 13788 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2017-11-19 22:02:29.935  INFO 13788 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.20
+2017-11-19 22:02:29.988  INFO 13788 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2017-11-19 22:02:29.998  INFO 13788 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1167 ms
+2017-11-19 22:02:30.152  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-11-19 22:02:30.153  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-11-19 22:02:30.153  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-11-19 22:02:30.153  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2017-11-19 22:02:30.153  INFO 13788 --- [localhost-startStop-1] .s.DelegatingFilterProxyRegistrationBean : Mapping filter: 'springSecurityFilterChain' to: [/*]
+2017-11-19 22:02:30.154  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'webStatFilter' to urls: [/*]
+2017-11-19 22:02:30.154  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2017-11-19 22:02:30.155  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'statViewServlet' to [/druid/*]
+2017-11-19 22:02:30.203 ERROR 13788 --- [localhost-startStop-1] o.a.catalina.session.StandardManager     : Exception loading sessions from persistent storage
+
+java.lang.ClassNotFoundException: tk.mybatis.springboot.security.SecurityUser
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedWebappClassLoader.loadClass(TomcatEmbeddedWebappClassLoader.java:52)
+	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1119)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:348)
+	at org.apache.catalina.util.CustomObjectInputStream.resolveClass(CustomObjectInputStream.java:160)
+	at java.io.ObjectInputStream.readNonProxyDesc(ObjectInputStream.java:1620)
+	at java.io.ObjectInputStream.readClassDesc(ObjectInputStream.java:1521)
+	at java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:1781)
+	at java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1353)
+	at java.io.ObjectInputStream.defaultReadFields(ObjectInputStream.java:2018)
+	at java.io.ObjectInputStream.readSerialData(ObjectInputStream.java:1942)
+	at java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:1808)
+	at java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1353)
+	at java.io.ObjectInputStream.defaultReadFields(ObjectInputStream.java:2018)
+	at java.io.ObjectInputStream.readSerialData(ObjectInputStream.java:1942)
+	at java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:1808)
+	at java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1353)
+	at java.io.ObjectInputStream.readObject(ObjectInputStream.java:373)
+	at org.apache.catalina.session.StandardSession.doReadObject(StandardSession.java:1611)
+	at org.apache.catalina.session.StandardSession.readObjectData(StandardSession.java:1077)
+	at org.apache.catalina.session.StandardManager.doLoad(StandardManager.java:218)
+	at org.apache.catalina.session.StandardManager.load(StandardManager.java:162)
+	at org.apache.catalina.session.StandardManager.startInternal(StandardManager.java:356)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5224)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1419)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1409)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+2017-11-19 22:02:30.522  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@2997fe18: startup date [Sun Nov 19 22:02:28 CST 2017]; root of context hierarchy
+2017-11-19 22:02:30.548  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-11-19 22:02:30.549  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-11-19 22:02:30.572  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-11-19 22:02:30.572  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-11-19 22:02:30.631  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-11-19 22:02:32.295  WARN 13788 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\java\eclipse\workspaces\lca\target\classes\mapper\AccountUserMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'AccountUser'.  Cause: java.lang.ClassNotFoundException: Cannot find class: AccountUser
+2017-11-19 22:02:32.296  INFO 13788 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2017-11-19 22:02:32.370  INFO 13788 --- [restartedMain] utoConfigurationReportLoggingInitializer : 
+
+Error starting ApplicationContext. To display the auto-configuration report re-run your application with 'debug' enabled.
+2017-11-19 22:02:32.384 ERROR 13788 --- [restartedMain] o.s.boot.SpringApplication               : Application startup failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\java\eclipse\workspaces\lca\target\classes\mapper\AccountUserMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'AccountUser'.  Cause: java.lang.ClassNotFoundException: Cannot find class: AccountUser
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:599)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1173)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1067)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:513)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:761)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:543)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:122)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:693)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:360)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107)
+	at tk.mybatis.springboot.Application.main(Application.java:26)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\java\eclipse\workspaces\lca\target\classes\mapper\AccountUserMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'AccountUser'.  Cause: java.lang.ClassNotFoundException: Cannot find class: AccountUser
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:189)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:588)
+	... 23 common frames omitted
+Caused by: org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\java\eclipse\workspaces\lca\target\classes\mapper\AccountUserMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'AccountUser'.  Cause: java.lang.ClassNotFoundException: Cannot find class: AccountUser
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:523)
+	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:380)
+	at org.mybatis.spring.SqlSessionFactoryBean.getObject(SqlSessionFactoryBean.java:547)
+	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration.sqlSessionFactory(MybatisAutoConfiguration.java:153)
+	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$6c6c87b9.CGLIB$sqlSessionFactory$0(<generated>)
+	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$6c6c87b9$$FastClassBySpringCGLIB$$8f26af1e.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:358)
+	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$6c6c87b9.sqlSessionFactory(<generated>)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:162)
+	... 24 common frames omitted
+Caused by: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'AccountUser'.  Cause: java.lang.ClassNotFoundException: Cannot find class: AccountUser
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:120)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.parse(XMLMapperBuilder.java:92)
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:521)
+	... 37 common frames omitted
+Caused by: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'AccountUser'.  Cause: java.lang.ClassNotFoundException: Cannot find class: AccountUser
+	at org.apache.ibatis.builder.BaseBuilder.resolveClass(BaseBuilder.java:118)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.resultMapElement(XMLMapperBuilder.java:265)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.resultMapElement(XMLMapperBuilder.java:252)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.resultMapElements(XMLMapperBuilder.java:244)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:116)
+	... 39 common frames omitted
+Caused by: org.apache.ibatis.type.TypeException: Could not resolve type alias 'AccountUser'.  Cause: java.lang.ClassNotFoundException: Cannot find class: AccountUser
+	at org.apache.ibatis.type.TypeAliasRegistry.resolveAlias(TypeAliasRegistry.java:120)
+	at org.apache.ibatis.builder.BaseBuilder.resolveAlias(BaseBuilder.java:149)
+	at org.apache.ibatis.builder.BaseBuilder.resolveClass(BaseBuilder.java:116)
+	... 43 common frames omitted
+Caused by: java.lang.ClassNotFoundException: Cannot find class: AccountUser
+	at org.apache.ibatis.io.ClassLoaderWrapper.classForName(ClassLoaderWrapper.java:200)
+	at org.apache.ibatis.io.ClassLoaderWrapper.classForName(ClassLoaderWrapper.java:89)
+	at org.apache.ibatis.io.Resources.classForName(Resources.java:261)
+	at org.apache.ibatis.type.TypeAliasRegistry.resolveAlias(TypeAliasRegistry.java:116)
+	... 45 common frames omitted
+
+2017-11-19 22:02:34.426  INFO 13788 --- [restartedMain] tk.mybatis.springboot.Application        : Starting Application on DESKTOP-NNS9DQT with PID 13788 (D:\java\eclipse\workspaces\lca\target\classes started by Tianlong in D:\java\eclipse\workspaces\lca)
+2017-11-19 22:02:34.427  INFO 13788 --- [restartedMain] tk.mybatis.springboot.Application        : The following profiles are active: prod
+2017-11-19 22:02:34.442  INFO 13788 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@51cd8851: startup date [Sun Nov 19 22:02:34 CST 2017]; root of context hierarchy
+2017-11-19 22:02:35.647  INFO 13788 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8088 (http)
+2017-11-19 22:02:35.648  INFO 13788 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2017-11-19 22:02:35.648  INFO 13788 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.20
+2017-11-19 22:02:35.664  INFO 13788 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2017-11-19 22:02:35.665  INFO 13788 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1223 ms
+2017-11-19 22:02:35.920  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-11-19 22:02:35.920  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-11-19 22:02:35.920  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-11-19 22:02:35.920  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2017-11-19 22:02:35.920  INFO 13788 --- [localhost-startStop-1] .s.DelegatingFilterProxyRegistrationBean : Mapping filter: 'springSecurityFilterChain' to: [/*]
+2017-11-19 22:02:35.920  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'webStatFilter' to urls: [/*]
+2017-11-19 22:02:35.920  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2017-11-19 22:02:35.921  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'statViewServlet' to [/druid/*]
+2017-11-19 22:02:37.975  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/swagger-ui.html'], []
+2017-11-19 22:02:37.975  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/swagger-resources/**'], []
+2017-11-19 22:02:37.976  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/v2/api-docs/**'], []
+2017-11-19 22:02:37.976  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/**/favicon.ico'], []
+2017-11-19 22:02:37.976  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/webjars/**'], []
+2017-11-19 22:02:37.976  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/js/**'], []
+2017-11-19 22:02:37.976  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/css/**'], []
+2017-11-19 22:02:37.976  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/img/**'], []
+2017-11-19 22:02:38.043  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3f795025, org.springframework.security.web.context.SecurityContextPersistenceFilter@75877015, org.springframework.security.web.header.HeaderWriterFilter@78a32537, org.springframework.security.web.csrf.CsrfFilter@1702b7c8, org.springframework.security.web.authentication.logout.LogoutFilter@7f8b4367, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@6e8955dc, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@20c91260, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@41a201d3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2f606ddc, org.springframework.security.web.session.SessionManagementFilter@773925cd, org.springframework.security.web.access.ExceptionTranslationFilter@4222f722, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@24ce0b65]
+2017-11-19 22:02:38.361  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@51cd8851: startup date [Sun Nov 19 22:02:34 CST 2017]; root of context hierarchy
+2017-11-19 22:02:38.441  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/users],methods=[GET]}" onto public org.springframework.http.ResponseEntity<com.github.pagehelper.PageInfo<tk.mybatis.springboot.model.AccountUser>> tk.mybatis.springboot.controller.AccountUserController.list(tk.mybatis.springboot.service.query.AccountUserQuery)
+2017-11-19 22:02:38.442  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/users/{id:^\d+$}],methods=[PUT]}" onto public org.springframework.http.ResponseEntity<tk.mybatis.springboot.model.AccountUser> tk.mybatis.springboot.controller.AccountUserController.updateOnePartly(java.lang.Integer,tk.mybatis.springboot.model.AccountUser)
+2017-11-19 22:02:38.442  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/users],methods=[POST]}" onto public org.springframework.http.ResponseEntity<tk.mybatis.springboot.model.AccountUser> tk.mybatis.springboot.controller.AccountUserController.saveOne(tk.mybatis.springboot.model.AccountUser)
+2017-11-19 22:02:38.443  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/common/user/check/username],methods=[GET]}" onto public org.springframework.http.ResponseEntity<java.lang.Boolean> tk.mybatis.springboot.controller.AccountUserController.checkDuplication(java.lang.String,java.lang.String)
+2017-11-19 22:02:38.443  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/common/user/registerAndLogin],methods=[POST]}" onto public org.springframework.http.ResponseEntity<java.lang.Void> tk.mybatis.springboot.controller.AccountUserController.registerAndLogin(tk.mybatis.springboot.model.AccountUser)
+2017-11-19 22:02:38.444  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/users/{id:^\d+$}],methods=[DELETE]}" onto public org.springframework.http.ResponseEntity<java.lang.Void> tk.mybatis.springboot.controller.AccountUserController.deleteOne(java.lang.Integer)
+2017-11-19 22:02:38.444  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/user],methods=[PUT]}" onto public org.springframework.http.ResponseEntity<tk.mybatis.springboot.model.AccountUser> tk.mybatis.springboot.controller.AccountUserController.updateCurrentUserInfo(tk.mybatis.springboot.model.AccountUser)
+2017-11-19 22:02:38.445  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/user],methods=[GET]}" onto public org.springframework.http.ResponseEntity<tk.mybatis.springboot.model.AccountUser> tk.mybatis.springboot.controller.AccountUserController.getCurrentUserInfo()
+2017-11-19 22:02:38.445  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/user/password],methods=[PUT]}" onto public org.springframework.http.ResponseEntity<java.lang.Void> tk.mybatis.springboot.controller.AccountUserController.updateCurrentUserPassword(java.util.Map<java.lang.String, java.lang.Object>)
+2017-11-19 22:02:38.446  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/common/changelanguage],methods=[POST]}" onto public org.springframework.http.ResponseEntity<java.lang.Void> tk.mybatis.springboot.controller.CommonApiController.changeLanguage(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse,java.lang.String)
+2017-11-19 22:02:38.449  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/db/inventory/materials],methods=[GET]}" onto public org.springframework.http.ResponseEntity<com.github.pagehelper.PageInfo<tk.mybatis.springboot.model.Material>> tk.mybatis.springboot.controller.MaterialController.list(tk.mybatis.springboot.service.query.MaterialQuery)
+2017-11-19 22:02:38.450  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/db/inventory/materials],methods=[POST]}" onto public org.springframework.http.ResponseEntity<tk.mybatis.springboot.model.Material> tk.mybatis.springboot.controller.MaterialController.saveOne(tk.mybatis.springboot.model.Material)
+2017-11-19 22:02:38.450  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/db/inventory/materials/{id:^\d+$}],methods=[DELETE]}" onto public org.springframework.http.ResponseEntity<java.lang.Void> tk.mybatis.springboot.controller.MaterialController.deleteOne(java.lang.Integer)
+2017-11-19 22:02:38.451  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/db/inventory/materials/{id:^\d+$}],methods=[PUT]}" onto public org.springframework.http.ResponseEntity<tk.mybatis.springboot.model.Material> tk.mybatis.springboot.controller.MaterialController.updateOneFully(java.lang.Integer,tk.mybatis.springboot.model.Material)
+2017-11-19 22:02:38.451  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/cd/material-category],methods=[GET]}" onto public org.springframework.http.ResponseEntity<java.util.List<tk.mybatis.springboot.service.cd.CdObject>> tk.mybatis.springboot.controller.MaterialController.getMaterialCategoryCd()
+2017-11-19 22:02:38.453  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-11-19 22:02:38.454  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-11-19 22:02:38.542  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Root mapping to handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:02:38.542  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/login] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:02:38.542  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/users] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:02:38.542  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/tool] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:02:38.542  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/user] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:02:38.542  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/db/inventory/material] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:02:38.542  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/db/inventory/fuel] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:02:38.542  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/db/inventory/construction] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:02:38.542  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/db/influence/default] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:02:38.646  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-11-19 22:02:38.650  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-11-19 22:02:38.822  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-11-19 22:02:40.001  INFO 13788 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2017-11-19 22:02:40.474  INFO 13788 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-11-19 22:02:40.475  INFO 13788 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'statFilter' has been autodetected for JMX exposure
+2017-11-19 22:02:40.476  INFO 13788 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2017-11-19 22:02:40.480  INFO 13788 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.spring.boot.autoconfigure:name=dataSource,type=DruidDataSourceWrapper]
+2017-11-19 22:02:40.482  INFO 13788 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'statFilter': registering with JMX server as MBean [com.alibaba.druid.filter.stat:name=statFilter,type=StatFilter]
+2017-11-19 22:02:40.496  INFO 13788 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8088 (http)
+2017-11-19 22:02:40.499  INFO 13788 --- [restartedMain] tk.mybatis.springboot.Application        : 服务启动完成!
+2017-11-19 22:02:40.500  INFO 13788 --- [restartedMain] tk.mybatis.springboot.Application        : Started Application in 6.173 seconds (JVM running for 120.07)
+2017-11-19 22:03:11.607  INFO 13788 --- [Thread-25] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@51cd8851: startup date [Sun Nov 19 22:02:34 CST 2017]; root of context hierarchy
+2017-11-19 22:03:11.611  INFO 13788 --- [Thread-25] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2017-11-19 22:03:11.614  INFO 13788 --- [Thread-25] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans
+2017-11-19 22:03:12.095  INFO 13788 --- [restartedMain] tk.mybatis.springboot.Application        : Starting Application on DESKTOP-NNS9DQT with PID 13788 (D:\java\eclipse\workspaces\lca\target\classes started by Tianlong in D:\java\eclipse\workspaces\lca)
+2017-11-19 22:03:12.095  INFO 13788 --- [restartedMain] tk.mybatis.springboot.Application        : The following profiles are active: dev
+2017-11-19 22:03:12.098  INFO 13788 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@650c50d5: startup date [Sun Nov 19 22:03:12 CST 2017]; root of context hierarchy
+2017-11-19 22:03:12.915  INFO 13788 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8080 (http)
+2017-11-19 22:03:12.916  INFO 13788 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2017-11-19 22:03:12.916  INFO 13788 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.20
+2017-11-19 22:03:12.932  INFO 13788 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2017-11-19 22:03:12.933  INFO 13788 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 835 ms
+2017-11-19 22:03:13.147  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-11-19 22:03:13.147  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-11-19 22:03:13.147  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-11-19 22:03:13.147  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2017-11-19 22:03:13.147  INFO 13788 --- [localhost-startStop-1] .s.DelegatingFilterProxyRegistrationBean : Mapping filter: 'springSecurityFilterChain' to: [/*]
+2017-11-19 22:03:13.147  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'webStatFilter' to urls: [/*]
+2017-11-19 22:03:13.147  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2017-11-19 22:03:13.148  INFO 13788 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'statViewServlet' to [/druid/*]
+2017-11-19 22:03:15.263  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/swagger-ui.html'], []
+2017-11-19 22:03:15.263  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/swagger-resources/**'], []
+2017-11-19 22:03:15.263  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/v2/api-docs/**'], []
+2017-11-19 22:03:15.264  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/**/favicon.ico'], []
+2017-11-19 22:03:15.264  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/webjars/**'], []
+2017-11-19 22:03:15.264  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/js/**'], []
+2017-11-19 22:03:15.264  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/css/**'], []
+2017-11-19 22:03:15.264  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/img/**'], []
+2017-11-19 22:03:15.318  INFO 13788 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7c7e82ae, org.springframework.security.web.context.SecurityContextPersistenceFilter@25b75607, org.springframework.security.web.header.HeaderWriterFilter@a601586, org.springframework.security.web.csrf.CsrfFilter@55035864, org.springframework.security.web.authentication.logout.LogoutFilter@94f42b5, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@67be969e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2e068b11, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@24c07772, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@b14eb31, org.springframework.security.web.session.SessionManagementFilter@6a38e35c, org.springframework.security.web.access.ExceptionTranslationFilter@ce0fb43, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6fc5a77f]
+2017-11-19 22:03:15.563  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@650c50d5: startup date [Sun Nov 19 22:03:12 CST 2017]; root of context hierarchy
+2017-11-19 22:03:15.631  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/users],methods=[GET]}" onto public org.springframework.http.ResponseEntity<com.github.pagehelper.PageInfo<tk.mybatis.springboot.model.AccountUser>> tk.mybatis.springboot.controller.AccountUserController.list(tk.mybatis.springboot.service.query.AccountUserQuery)
+2017-11-19 22:03:15.632  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/users/{id:^\d+$}],methods=[PUT]}" onto public org.springframework.http.ResponseEntity<tk.mybatis.springboot.model.AccountUser> tk.mybatis.springboot.controller.AccountUserController.updateOnePartly(java.lang.Integer,tk.mybatis.springboot.model.AccountUser)
+2017-11-19 22:03:15.632  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/users],methods=[POST]}" onto public org.springframework.http.ResponseEntity<tk.mybatis.springboot.model.AccountUser> tk.mybatis.springboot.controller.AccountUserController.saveOne(tk.mybatis.springboot.model.AccountUser)
+2017-11-19 22:03:15.632  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/common/user/check/username],methods=[GET]}" onto public org.springframework.http.ResponseEntity<java.lang.Boolean> tk.mybatis.springboot.controller.AccountUserController.checkDuplication(java.lang.String,java.lang.String)
+2017-11-19 22:03:15.632  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/common/user/registerAndLogin],methods=[POST]}" onto public org.springframework.http.ResponseEntity<java.lang.Void> tk.mybatis.springboot.controller.AccountUserController.registerAndLogin(tk.mybatis.springboot.model.AccountUser)
+2017-11-19 22:03:15.633  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/users/{id:^\d+$}],methods=[DELETE]}" onto public org.springframework.http.ResponseEntity<java.lang.Void> tk.mybatis.springboot.controller.AccountUserController.deleteOne(java.lang.Integer)
+2017-11-19 22:03:15.633  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/user],methods=[PUT]}" onto public org.springframework.http.ResponseEntity<tk.mybatis.springboot.model.AccountUser> tk.mybatis.springboot.controller.AccountUserController.updateCurrentUserInfo(tk.mybatis.springboot.model.AccountUser)
+2017-11-19 22:03:15.633  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/user],methods=[GET]}" onto public org.springframework.http.ResponseEntity<tk.mybatis.springboot.model.AccountUser> tk.mybatis.springboot.controller.AccountUserController.getCurrentUserInfo()
+2017-11-19 22:03:15.634  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/user/password],methods=[PUT]}" onto public org.springframework.http.ResponseEntity<java.lang.Void> tk.mybatis.springboot.controller.AccountUserController.updateCurrentUserPassword(java.util.Map<java.lang.String, java.lang.Object>)
+2017-11-19 22:03:15.635  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/common/changelanguage],methods=[POST]}" onto public org.springframework.http.ResponseEntity<java.lang.Void> tk.mybatis.springboot.controller.CommonApiController.changeLanguage(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse,java.lang.String)
+2017-11-19 22:03:15.639  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/db/inventory/materials],methods=[GET]}" onto public org.springframework.http.ResponseEntity<com.github.pagehelper.PageInfo<tk.mybatis.springboot.model.Material>> tk.mybatis.springboot.controller.MaterialController.list(tk.mybatis.springboot.service.query.MaterialQuery)
+2017-11-19 22:03:15.639  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/db/inventory/materials],methods=[POST]}" onto public org.springframework.http.ResponseEntity<tk.mybatis.springboot.model.Material> tk.mybatis.springboot.controller.MaterialController.saveOne(tk.mybatis.springboot.model.Material)
+2017-11-19 22:03:15.640  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/db/inventory/materials/{id:^\d+$}],methods=[DELETE]}" onto public org.springframework.http.ResponseEntity<java.lang.Void> tk.mybatis.springboot.controller.MaterialController.deleteOne(java.lang.Integer)
+2017-11-19 22:03:15.640  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/db/inventory/materials/{id:^\d+$}],methods=[PUT]}" onto public org.springframework.http.ResponseEntity<tk.mybatis.springboot.model.Material> tk.mybatis.springboot.controller.MaterialController.updateOneFully(java.lang.Integer,tk.mybatis.springboot.model.Material)
+2017-11-19 22:03:15.641  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/cd/material-category],methods=[GET]}" onto public org.springframework.http.ResponseEntity<java.util.List<tk.mybatis.springboot.service.cd.CdObject>> tk.mybatis.springboot.controller.MaterialController.getMaterialCategoryCd()
+2017-11-19 22:03:15.644  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-11-19 22:03:15.644  INFO 13788 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-11-19 22:03:15.728  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Root mapping to handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:03:15.728  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/login] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:03:15.728  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/users] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:03:15.728  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/tool] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:03:15.728  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/user] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:03:15.729  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/db/inventory/material] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:03:15.729  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/db/inventory/fuel] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:03:15.729  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/db/inventory/construction] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:03:15.729  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/db/influence/default] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-19 22:03:15.801  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-11-19 22:03:15.801  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-11-19 22:03:15.870  INFO 13788 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-11-19 22:03:16.251  INFO 13788 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2017-11-19 22:03:16.628  INFO 13788 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-11-19 22:03:16.628  INFO 13788 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'statFilter' has been autodetected for JMX exposure
+2017-11-19 22:03:16.628  INFO 13788 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2017-11-19 22:03:16.635  INFO 13788 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.spring.boot.autoconfigure:name=dataSource,type=DruidDataSourceWrapper]
+2017-11-19 22:03:16.637  INFO 13788 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'statFilter': registering with JMX server as MBean [com.alibaba.druid.filter.stat:name=statFilter,type=StatFilter]
+2017-11-19 22:03:16.652  INFO 13788 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
+2017-11-19 22:03:16.659  INFO 13788 --- [restartedMain] tk.mybatis.springboot.Application        : 服务启动完成!
+2017-11-19 22:03:16.667  INFO 13788 --- [restartedMain] tk.mybatis.springboot.Application        : Started Application in 4.634 seconds (JVM running for 156.236)

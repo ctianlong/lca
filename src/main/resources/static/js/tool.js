@@ -682,6 +682,148 @@ $(function(){
 		templateSelection: formatRepoSelection
 	});
 	
+	// 运输条件车辆型号选择
+	function formatTransport(repo) {
+	  if (repo.loading) {
+		  return repo.text;
+	  }
+	  var markup="<div class='row'><div class='col-sm-6'><strong>"+repo.vehicleType+"</strong></div>"+
+	  	"<div class='col-sm-6'>来源："+(repo.dataSource||'（空）')+"</div></div>"+
+	  	"<div class='row'><div class='col-sm-6'>成本："+(repo.cost||'（空）')+"</div>"+
+	  	"<div class='col-sm-6'>能耗："+(repo.energyConsume!=null?repo.energyConsume.toExponential(1):'（空）')+"</div></div>"+
+	  	"<div class='row'><div class='col-sm-3'>CO<sub>2</sub>："+(repo.emissionCo2!=null?repo.emissionCo2.toExponential(1):'（空）')+"</div>"+
+	  	"<div class='col-sm-3'>CH<sub>4</sub>："+(repo.emissionCh4!=null?repo.emissionCh4.toExponential(1):'（空）')+"</div>"+
+	  	"<div class='col-sm-3'>N<sub>2</sub>O："+(repo.emissionN2o!=null?repo.emissionN2o.toExponential(1):'（空）')+"</div>"+
+	  	"<div class='col-sm-3'>CO："+(repo.emissionCo!=null?repo.emissionCo.toExponential(1):'（空）')+"</div></div>"+
+	  	"<div class='row'><div class='col-sm-3'>SO<sub>2</sub>："+(repo.emissionSo2!=null?repo.emissionSo2.toExponential(1):'（空）')+"</div>"+
+	  	"<div class='col-sm-3'>NO<sub>x</sub>："+(repo.emissionNox!=null?repo.emissionNox.toExponential(1):'（空）')+"</div>"+
+	  	"<div class='col-sm-3'>Pb："+(repo.emissionPb!=null?repo.emissionPb.toExponential(1):'（空）')+"</div>"+
+	  	"<div class='col-sm-3'>Zn："+(repo.emissionZn!=null?repo.emissionZn.toExponential(1):'（空）')+"</div></div>";
+	  return markup;
+	}
+	function formatTransportSelection(repo) {
+		if(repo.vehicleType){
+			return repo.vehicleType+' （来源：'+(repo.dataSource||'（空）')+'）';
+		}
+		return repo.text;
+	}
+	$("#aggregateVehicleModel").select2({
+		ajax:{
+			url:ctxPath+"/api/db/inventory/transport",
+			dataType:'json',
+			delay:200,
+			data:function(params){
+				return {
+					page:params.page,
+					vehicleType:params.term
+				};
+			},
+			processResults:function(data,params){
+				params.page=params.page||1;
+				return {
+					results:data.list,
+					pagination:{
+						more:data.hasNextPage
+					}
+				};
+			},
+			cache:true
+		},
+		placeholder:'请选择一种车辆，可根据名称搜索',
+		allowClear:true,
+		language:"zh-CN",
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatTransport,
+		templateSelection: formatTransportSelection
+	});
+	$("#asphaltVehicleModel").select2({
+		ajax:{
+			url:ctxPath+"/api/db/inventory/transport",
+			dataType:'json',
+			delay:200,
+			data:function(params){
+				return {
+					page:params.page,
+					vehicleType:params.term
+				};
+			},
+			processResults:function(data,params){
+				params.page=params.page||1;
+				return {
+					results:data.list,
+					pagination:{
+						more:data.hasNextPage
+					}
+				};
+			},
+			cache:true
+		},
+		placeholder:'请选择一种车辆，可根据名称搜索',
+		allowClear:true,
+		language:"zh-CN",
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatTransport,
+		templateSelection: formatTransportSelection
+	});
+	$("#cementVehicleModel").select2({
+		ajax:{
+			url:ctxPath+"/api/db/inventory/transport",
+			dataType:'json',
+			delay:200,
+			data:function(params){
+				return {
+					page:params.page,
+					vehicleType:params.term
+				};
+			},
+			processResults:function(data,params){
+				params.page=params.page||1;
+				return {
+					results:data.list,
+					pagination:{
+						more:data.hasNextPage
+					}
+				};
+			},
+			cache:true
+		},
+		placeholder:'请选择一种车辆，可根据名称搜索',
+		allowClear:true,
+		language:"zh-CN",
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatTransport,
+		templateSelection: formatTransportSelection
+	});
+	$("#mixtureVehicleModel").select2({
+		ajax:{
+			url:ctxPath+"/api/db/inventory/transport",
+			dataType:'json',
+			delay:200,
+			data:function(params){
+				return {
+					page:params.page,
+					vehicleType:params.term
+				};
+			},
+			processResults:function(data,params){
+				params.page=params.page||1;
+				return {
+					results:data.list,
+					pagination:{
+						more:data.hasNextPage
+					}
+				};
+			},
+			cache:true
+		},
+		placeholder:'请选择一种车辆，可根据名称搜索',
+		allowClear:true,
+		language:"zh-CN",
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatTransport,
+		templateSelection: formatTransportSelection
+	});
+	
 	$baseLayerMaterial.on("select2:select",function(e){
 		switch (e.params.data.id) {
 		case "1":case "2":
