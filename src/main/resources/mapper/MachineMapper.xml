@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tk.mybatis.springboot.mapper.MachineMapper" >
+  <resultMap id="BaseResultMap" type="tk.mybatis.springboot.model.Machine" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type_cd" property="typeCd" jdbcType="INTEGER" />
+    <result column="host_model" property="hostModel" jdbcType="VARCHAR" />
+    <result column="constant_fee" property="constantFee" jdbcType="DOUBLE" />
+    <result column="labor" property="labor" jdbcType="INTEGER" />
+    <result column="gasoline" property="gasoline" jdbcType="DOUBLE" />
+    <result column="diesel" property="diesel" jdbcType="DOUBLE" />
+    <result column="heavy_oil" property="heavyOil" jdbcType="DOUBLE" />
+    <result column="coal" property="coal" jdbcType="DOUBLE" />
+    <result column="electricity" property="electricity" jdbcType="DOUBLE" />
+    <result column="water" property="water" jdbcType="DOUBLE" />
+    <result column="firewood" property="firewood" jdbcType="DOUBLE" />
+    <result column="tax" property="tax" jdbcType="DOUBLE" />
+    <result column="base_price" property="basePrice" jdbcType="DOUBLE" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="energy_consume" property="energyConsume" jdbcType="DOUBLE" />
+    <result column="emission_co2" property="emissionCo2" jdbcType="DOUBLE" />
+    <result column="emission_ch4" property="emissionCh4" jdbcType="DOUBLE" />
+    <result column="emission_n2o" property="emissionN2o" jdbcType="DOUBLE" />
+    <result column="emission_co" property="emissionCo" jdbcType="DOUBLE" />
+    <result column="emission_so2" property="emissionSo2" jdbcType="DOUBLE" />
+    <result column="emission_nox" property="emissionNox" jdbcType="DOUBLE" />
+    <result column="emission_pb" property="emissionPb" jdbcType="DOUBLE" />
+    <result column="emission_zn" property="emissionZn" jdbcType="DOUBLE" />
+    <result column="data_source" property="dataSource" jdbcType="VARCHAR" />
+    <result column="collect_time" property="collectTime" jdbcType="VARCHAR" />
+    <result column="create_user_id" property="createUserId" jdbcType="INTEGER" />
+  </resultMap>
+</mapper>

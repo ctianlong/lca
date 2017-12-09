@@ -28,7 +28,7 @@
                              type="XMLMAPPER"/>
 
         <!-- mvn mybatis-generator:generate -->
-        <table tableName="transport">
+        <table tableName="machine">
             <!--mysql 配置-->
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
             <!--oracle 配置-->

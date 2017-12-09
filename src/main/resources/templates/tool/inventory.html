@@ -1,7 +1,7 @@
 <div id="step-inventory">
 	<div class="panel king-panel1">
 		<div class="panel-heading king-panel-head1 king-panel-top3">
-			<h3 class="panel-title">材料</h3>
+			<h3 class="panel-title">原材料获取</h3>
 		</div>
 		<div class="panel-body">
 			<div class="table-responsive">
@@ -185,10 +185,8 @@
 						</div>
 					</div>
 				</fieldset>
-				<hr class="mt5 mb15">
 				<div class="text-center">
-					<button class="king-btn king-radius king-success" type="submit">
-						计算材料清单</button>
+					<button class="king-btn king-radius king-success" type="submit">计算原材料获取清单</button>
 				</div>
 			</form>
 		</div>
@@ -196,7 +194,7 @@
 
 	<div class="panel king-panel1">
 		<div class="panel-heading king-panel-head1 king-panel-top3">
-			<h3 class="panel-title">运输</h3>
+			<h3 class="panel-title">运输和施工</h3>
 		</div>
 		<div class='panel-body'>
 		  <div class="table-responsive">
@@ -226,9 +224,110 @@
                     <tbody class="text-center">
                     </tbody>
                 </table>
-                <script id="tpl-materialInventoryTable" type="text/template">
+                <script id="tpl-transportInventoryTable" type="text/template">
                        <tr>
                            <td>#materialName#</td>
+                           <td>#amount#</td>
+                           <td>#vehicleModel#</td>
+                           <td>#distance#</td>
+                           <td>#cost#</td>
+                           <td>#energyConsume#</td>
+                           <td>#emissionCo2#</td>
+                           <td>#emissionCh4#</td>
+                           <td>#emissionN2o#</td>
+                           <td>#emissionCo#</td>
+                           <td>#emissionSo2#</td>
+                           <td>#emissionNox#</td>
+                           <td>#emissionPb#</td>
+                           <td>#emissionZn#</td>
+                       </tr>
+                    </script>
+            </div>
+            <form id="inventoryTransportForm" class="form-horizontal" role="form">
+                <fieldset>
+                    <legend>请输入运输条件：</legend>
+                    <div class="form-group" id="aggregateVehicleSelect" style="display: none;">
+                        <label class="col-md-3 control-label">车辆型号/载重（集料）：</label>
+                        <div class="col-md-5">
+                            <select id="aggregateVehicleModel" name="aggregateVehicleModel" class="form-control" style="width: 100%">
+                            </select>
+                        </div>
+                        <label class="col-md-2 control-label">运距（集料）：</label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" placeholder="请输入集料的运距" id="aggregateDistance"
+                                name="aggregateDistance">
+                        </div>
+                    </div>
+                    <div class="form-group" id="asphaltVehicleSelect" style="display: none;">
+                        <label class="col-md-3 control-label">车辆型号/载重（沥青）：</label>
+                        <div class="col-md-5">
+                            <select id="asphaltVehicleModel" name="asphaltVehicleModel" class="form-control" style="width: 100%">
+                            </select>
+                        </div>
+                        <label class="col-md-2 control-label">运距（沥青）：</label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" placeholder="请输入沥青的运距" id="asphaltDistance"
+                                name="asphaltDistance">
+                        </div>
+                    </div>
+                    <div class="form-group" id="cementVehicleSelect" style="display: none;">
+                        <label class="col-md-3 control-label">车辆型号/载重（水泥）：</label>
+                        <div class="col-md-5">
+                            <select id="cementVehicleModel" name="cementVehicleModel" class="form-control" style="width: 100%">
+                            </select>
+                        </div>
+                        <label class="col-md-2 control-label">运距（水泥）：</label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" placeholder="请输入水泥的运距" id="cementDistance"
+                                name="cementDistance">
+                        </div>
+                    </div>
+                    <div class="form-group" id="mixtureVehicleSelect" style="display: none;">
+                        <label class="col-md-3 control-label">车辆型号/载重（混合料）：</label>
+                        <div class="col-md-5">
+                            <select id="mixtureVehicleModel" name="mixtureVehicleModel" class="form-control" style="width: 100%">
+                            </select>
+                        </div>
+                        <label class="col-md-2 control-label">运距（混合料）：</label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" placeholder="请输入混合料的运距" id="mixtureDistance"
+                                name="mixtureDistance">
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="text-center">
+                    <button class="king-btn king-radius king-success" type="submit">计算运输清单</button>
+                </div>
+                <hr class="mt5 mb15">
+            </form>
+		  <div class="table-responsive">
+                <table id="mixPaveInventoryTable"
+                    class="table table-bordered table-hover table-striped table-condensed">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" class="text-center">燃料名称</th>
+                            <th rowspan="2" class="text-center">用量(kg)</th>
+                            <th rowspan="2" class="text-center">成本</th>
+                            <th rowspan="2" class="text-center">能耗(MJ)</th>
+                            <th colspan="8" class="text-center">排放(kg)</th>
+                        </tr>
+                        <tr>
+                            <th class="text-center">CO<sub>2</sub></th>
+                            <th class="text-center">CH<sub>4</sub></th>
+                            <th class="text-center">N<sub>2</sub>O
+                            </th>
+                            <th class="text-center">CO</th>
+                            <th class="text-center">SO<sub>2</sub></th>
+                            <th class="text-center">NO<sub>x</sub></th>
+                            <th class="text-center">Pb</th>
+                            <th class="text-center">Zn</th>
+                    </thead>
+                    <tbody class="text-center">
+                    </tbody>
+                </table>
+                <script id="tpl-mixPaveInventoryTable" type="text/template">
+                       <tr>
+                           <td>#fuelName#</td>
                            <td>#amount#</td>
                            <td>#cost#</td>
                            <td>#energyConsume#</td>
@@ -243,17 +342,74 @@
                        </tr>
                     </script>
             </div>
+            <form id="inventoryMixPaveForm" class="form-horizontal" role="form">
+                <fieldset>
+                    <legend>请选择施工设备：</legend>
+	                <div class="form-group">
+	                    <label class="col-md-2 control-label">拌合楼型号：</label>
+	                    <div class="col-md-4">
+	                        <select id="mixEqupType" name="mixEqupType" class="form-control" style="width: 100%">
+	                        </select>
+	                    </div>
+	                    <!-- 
+	                    <label class="col-md-2 control-label">拌合楼日产量：</label>
+	                    <div class="col-md-3">
+	                        <input type="text" class="form-control" placeholder="" id=""
+	                            name="">
+	                    </div>
+	                     -->
+	                </div>
+	                <div class="form-group">
+	                    <label class="col-md-2 control-label">摊铺车型号：</label>
+	                    <div class="col-md-4">
+	                        <select id="pavingEqupType" name="pavingEqupType" class="form-control" style="width: 100%">
+	                        </select>
+	                    </div>
+	                    <!-- 
+	                    <label class="col-md-2 control-label">摊铺车日工作量：</label>
+	                    <div class="col-md-2">
+	                        <input type="text" class="form-control" placeholder="请输入日工作量" id="pavingWorkLoad"
+	                            name="pavingWorkLoad">
+	                    </div>
+	                     -->
+	                </div>
+                </fieldset>
+                <fieldset>
+                    <legend>请选择具体燃料：</legend>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">汽油：</label>
+                        <div class="col-md-4">
+                            <select id="gasoline" name="gasoline" class="form-control" style="width: 100%">
+                            </select>
+                        </div>
+                        <label class="col-md-2 control-label">柴油：</label>
+                        <div class="col-md-4">
+                            <select id="diesel" name="diesel" class="form-control" style="width: 100%">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">重油：</label>
+                        <div class="col-md-4">
+                            <select id="heavyOil" name="heavyOil" class="form-control" style="width: 100%">
+                            </select>
+                        </div>
+                        <label class="col-md-2 control-label">电：</label>
+                        <div class="col-md-4">
+                            <select id="electricity" name="electricity" class="form-control" style="width: 100%">
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <hr class="mt5 mb15">
+                <div class="text-center">
+	                <button class="king-btn king-radius king-success" type="submit">
+	                               计算施工清单</button>
+                </div>
+            </form>
 		</div>
 	</div>
 
-	<div class="panel king-panel1">
-		<div class="panel-heading king-panel-head1 king-panel-top3">
-			<h3 class="panel-title">施工</h3>
-		</div>
-		<div class='panel-body'>
-			<p>暂无数据</p>
-		</div>
-	</div>
 	<div class="panel king-panel1">
 		<div class="panel-heading king-panel-head1 king-panel-top3">
 			<h3 class="panel-title">使用</h3>

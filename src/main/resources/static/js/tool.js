@@ -1,6 +1,35 @@
 $(function(){
 	$("#step-inventory").hide();
-	
+	var cfc={
+		bh:{
+			t320:{
+				lqhnt:{
+					zl:{qy:60.36,cy:291.33,zy:12829.70,d:7929.60}
+				},
+				lqmtz:{qy:61.61,cy:339.69,zy:15031.81,d:9290.65}
+			},
+			t240:{
+				lqhnt:{
+					zl:{qy:68.69,cy:461.51,zy:12638.21,d:7875.35}
+				},
+				lqmtz:{qy:89.50,cy:540.45,zy:14864.26,d:9262.48}
+			}
+		},
+		tp:{
+			t320:{
+				lqhnt:{
+					zl:{cy:608.10}
+				},
+				lqmtz:{cy:929.43}
+			},
+			t240:{
+				lqhnt:{
+					zl:{cy:591.09}
+				},
+				lqmtz:{cy:934.70}
+			}
+		}
+	};
 	var cdRoadType=[
 		{id:1,text:"沥青路面"},
 		{id:2,text:"混凝土路面"},
@@ -29,7 +58,6 @@ $(function(){
 		{id:1,text:"苏混凝土路面",density:2.4},
 		{id:2,text:"配筋式混凝土路面",density:2.4}
 	];
-	
 	var cdCementAdmixture=[
 		{id:1,text:"速凝剂"},
 		{id:2,text:"加气剂"},
@@ -38,7 +66,6 @@ $(function(){
 		{id:5,text:"缓凝剂"},
 		{id:6,text:"减水剂"}
 	];
-	
 	var $roadType=$("#roadType").select2({
 		data:cdRoadType,
 		minimumResultsForSearch:-1,
@@ -218,8 +245,208 @@ $(function(){
 			break;
 		}
 	});
-	
-	
+	// 拌和设备类型
+	var cdMixEquipmentType=[
+		{id:1,text:"320t/h 以内",lqhnt:{zl:{qy:60.36,cy:291.33,zy:12829.70,d:7929.60}},lqmtz:{qy:61.61,cy:339.69,zy:15031.81,d:9290.65}},
+		{id:2,text:"240t/h 以内",lqhnt:{zl:{qy:68.69,cy:461.51,zy:12638.21,d:7875.35}},lqmtz:{qy:89.50,cy:540.45,zy:14864.26,d:9262.48}}
+	];
+	var $mixEqupType=$("#mixEqupType").select2({
+		data:cdMixEquipmentType,
+		minimumResultsForSearch:-1,
+		language:iMsg.select2LangCode
+	});
+	// 摊铺设备类型
+	function formatPavingEqup(repo) {
+	  if (repo.loading) {
+		  return repo.text;
+	  }
+	  var markup="<div class='row'><div class='col-sm-12'><strong>"+repo.name+"</strong></div></div>"+
+	  	"<div class='row'><div class='col-sm-12'>来源："+(repo.dataSource||'（空）')+"</div></div>"+
+	  	"<div class='row'><div class='col-sm-12'>柴油用量（kg)："+(repo.diesel||'（空）')+"</div></div>";
+	  return markup;
+	}
+	function formatPavingEqupSelection(repo) {
+		if(repo.name){
+			return repo.name+' （来源：'+(repo.dataSource||'（空）')+'）';
+		}
+		return repo.text;
+	}
+	var $pavingEqupType=$("#pavingEqupType").select2({
+		ajax:{
+			url:ctxPath+"/api/db/inventory/machine",
+			dataType:'json',
+			delay:200,
+			data:function(params){
+				return {
+					page:params.page,
+					typeCd:2,
+					name:"摊铺"
+				};
+			},
+			processResults:function(data,params){
+				params.page=params.page||1;
+				return {
+					results:data.list,
+					pagination:{
+						more:data.hasNextPage
+					}
+				};
+			},
+			cache:true
+		},
+		placeholder:'不选即为默认值：320t/h 以内',
+		allowClear:true,
+		minimumResultsForSearch:-1, //如要搜索可去掉该选项
+		language:iMsg.select2LangCode,
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatPavingEqup,
+		templateSelection: formatPavingEqupSelection
+	});
+	// 燃料具体类型
+	function formatFuel(repo) {
+	  if (repo.loading) {
+		  return repo.text;
+	  }
+	  var markup="<div class='row'><div class='col-sm-6'><strong>"+repo.fuelType+"</strong></div>"+
+	  	"<div class='col-sm-6'>来源："+(repo.dataSource||'（空）')+"</div></div>"+
+	  	"<div class='row'><div class='col-sm-6'>价格："+(repo.cost||'（空）')+"</div>"+
+	  	"<div class='col-sm-6'>净热值："+(repo.energyConsume!=null?repo.energyConsume.toExponential(1):'（空）')+"</div></div>"+
+	  	"<div class='row'><div class='col-sm-3'>CO<sub>2</sub>："+(repo.emissionCo2!=null?repo.emissionCo2.toExponential(1):'（空）')+"</div>"+
+	  	"<div class='col-sm-3'>CH<sub>4</sub>："+(repo.emissionCh4!=null?repo.emissionCh4.toExponential(1):'（空）')+"</div>"+
+	  	"<div class='col-sm-3'>N<sub>2</sub>O："+(repo.emissionN2o!=null?repo.emissionN2o.toExponential(1):'（空）')+"</div>"+
+	  	"<div class='col-sm-3'>CO："+(repo.emissionCo!=null?repo.emissionCo.toExponential(1):'（空）')+"</div></div>"+
+	  	"<div class='row'><div class='col-sm-3'>SO<sub>2</sub>："+(repo.emissionSo2!=null?repo.emissionSo2.toExponential(1):'（空）')+"</div>"+
+	  	"<div class='col-sm-3'>NO<sub>x</sub>："+(repo.emissionNox!=null?repo.emissionNox.toExponential(1):'（空）')+"</div>"+
+	  	"<div class='col-sm-3'>Pb："+(repo.emissionPb!=null?repo.emissionPb.toExponential(1):'（空）')+"</div>"+
+	  	"<div class='col-sm-3'>Zn："+(repo.emissionZn!=null?repo.emissionZn.toExponential(1):'（空）')+"</div></div>";
+	  return markup;
+	}
+	function formatFuelSelection(repo) {
+		if(repo.fuelType){
+			return repo.fuelType+' （来源：'+(repo.dataSource||'（空）')+'）';
+		}
+		return repo.text;
+	}
+	$("#gasoline").select2({
+		ajax:{
+			url:ctxPath+"/api/db/inventory/fuel",
+			dataType:'json',
+			delay:200,
+			data:function(params){
+				return {
+					page:params.page,
+					fuelType:"汽油"
+				};
+			},
+			processResults:function(data,params){
+				params.page=params.page||1;
+				return {
+					results:data.list,
+					pagination:{
+						more:data.hasNextPage
+					}
+				};
+			},
+			cache:true
+		},
+		placeholder:'请选择一种具体燃料',
+		allowClear:true,
+		minimumResultsForSearch:-1, //如要搜索可去掉该选项
+		language:iMsg.select2LangCode,
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatFuel,
+		templateSelection: formatFuelSelection
+	});
+	$("#diesel").select2({
+		ajax:{
+			url:ctxPath+"/api/db/inventory/fuel",
+			dataType:'json',
+			delay:200,
+			data:function(params){
+				return {
+					page:params.page,
+					fuelType:"柴油"
+				};
+			},
+			processResults:function(data,params){
+				params.page=params.page||1;
+				return {
+					results:data.list,
+					pagination:{
+						more:data.hasNextPage
+					}
+				};
+			},
+			cache:true
+		},
+		placeholder:'请选择一种具体燃料',
+		allowClear:true,
+		minimumResultsForSearch:-1, //如要搜索可去掉该选项
+		language:iMsg.select2LangCode,
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatFuel,
+		templateSelection: formatFuelSelection
+	});
+	$("#heavyOil").select2({
+		ajax:{
+			url:ctxPath+"/api/db/inventory/fuel",
+			dataType:'json',
+			delay:200,
+			data:function(params){
+				return {
+					page:params.page,
+					fuelType:"重油"
+				};
+			},
+			processResults:function(data,params){
+				params.page=params.page||1;
+				return {
+					results:data.list,
+					pagination:{
+						more:data.hasNextPage
+					}
+				};
+			},
+			cache:true
+		},
+		placeholder:'请选择一种具体燃料',
+		allowClear:true,
+		minimumResultsForSearch:-1, //如要搜索可去掉该选项
+		language:iMsg.select2LangCode,
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatFuel,
+		templateSelection: formatFuelSelection
+	});
+	$("#electricity").select2({
+		ajax:{
+			url:ctxPath+"/api/db/inventory/fuel",
+			dataType:'json',
+			delay:200,
+			data:function(params){
+				return {
+					page:params.page,
+					fuelType:"电"
+				};
+			},
+			processResults:function(data,params){
+				params.page=params.page||1;
+				return {
+					results:data.list,
+					pagination:{
+						more:data.hasNextPage
+					}
+				};
+			},
+			cache:true
+		},
+		placeholder:'请选择一种具体燃料',
+		allowClear:true,
+		minimumResultsForSearch:-1, //如要搜索可去掉该选项
+		language:iMsg.select2LangCode,
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatFuel,
+		templateSelection: formatFuelSelection
+	});
 	
 	// 基层
 	var $baseLayerMaterial=$("#baseLayerMaterial").select2({
@@ -913,8 +1140,11 @@ $(function(){
 	}
 	
 	var materialList=[];
+	var transportList=[];
+	var mixPaveList=[];
+	var tempData={};
 	
-	var validator = $("#form-input").validate({
+	var validatorFormInput = $("#form-input").validate({
 		errorClass: 'text-danger',
     	rules:{
     		roadLength:{
@@ -1153,6 +1383,9 @@ $(function(){
     	submitHandler:function(form){
     		var area=$("#roadLength").val()*$("#roadWidth").val();
     		var gravel=0,ordinaryAsphalt=0,modifiedAsphalt=0,highViscosityAsphalt=0,cement=0,lime=0,rebar=0,snj=0,jqj=0,zsj=0,qlzsj=0,hnj=0,jsj=0,brick=0;
+    		// 拌和摊铺相关
+    		var lqhnthd=0,lqmtzhd=0;tphd=0;
+    		
     		var baseWeight=area*$("#baseLayerThickness").val()*$baseLayerMaterial.select2("data")[0].density;
 			var bottomBaseWeight=area*$("#bottomBaseLayerThickness").val()*$bottomBaseLayerMaterial.select2("data")[0].density;
 			var cushionWeight=area*$("#cushionLayerThickness").val()*$cushionLayerMaterial.select2("data")[0].density;
@@ -1160,6 +1393,33 @@ $(function(){
     			var topWeight=area*$("#asphaltTopLayerThickness").val()*$asphaltTopLayerMaterial.select2("data")[0].density;
     			var middleWeight=area*$("#asphaltMiddleLayerThickness").val()*$asphaltMiddleLayerMaterial.select2("data")[0].density;
     			var belowWeight=area*$("#asphaltBelowLayerThickness").val()*$asphaltBelowLayerMaterial.select2("data")[0].density;
+    			// 上、中、下面层拌和摊铺相关
+    			switch ($asphaltTopLayerMaterial.select2("data")[0].id) {
+				case "2":
+					lqmtzhd+=parseFloat($("#asphaltTopLayerThickness").val());
+					break;
+				default:
+					lqhnthd+=parseFloat($("#asphaltTopLayerThickness").val());
+					break;
+				}
+    			switch ($asphaltMiddleLayerMaterial.select2("data")[0].id) {
+    			case "2":
+    				lqmtzhd+=parseFloat($("#asphaltMiddleLayerThickness").val());
+    				break;
+    			default:
+    				lqhnthd+=parseFloat($("#asphaltMiddleLayerThickness").val());
+    			break;
+    			}
+    			switch ($asphaltBelowLayerMaterial.select2("data")[0].id) {
+    			case "2":
+    				lqmtzhd+=parseFloat($("#asphaltBelowLayerThickness").val());
+    				break;
+    			default:
+    				lqhnthd+=parseFloat($("#asphaltBelowLayerThickness").val());
+    			break;
+    			}
+    			tphd+=parseFloat($("#asphaltTopLayerThickness").val())+parseFloat($("#asphaltMiddleLayerThickness").val())+parseFloat($("#asphaltBelowLayerThickness").val());
+    			
     			// 上、中、下面层碎石、沥青
     			gravel+=topWeight/(1+$("#asphaltTopLayerWhetstoneRatio").val()/100)+middleWeight/(1+$("#asphaltMiddleLayerWhetstoneRatio").val()/100)+belowWeight/(1+$("#asphaltBelowLayerWhetstoneRatio").val()/100);
     			switch ($topLayerAsphaltType.select2("data")[0].id) {
@@ -1202,6 +1462,9 @@ $(function(){
     				break;
     			}
     		}else if($roadType.val()==2){
+    			// 拌和摊铺相关
+    			tphd+=parseFloat($("#concreteTopLayerThickness").val())+parseFloat($("#concreteBelowLayerThickness").val());
+    			
     			var topVolume=area*$("#concreteTopLayerThickness").val();
     			var belowVolume=area*$("#concreteBelowLayerThickness").val();
     			var topLayerMaterial=$concreteTopLayerMaterial.select2("data")[0];
@@ -1279,6 +1542,9 @@ $(function(){
     		// 基、底基、垫层碎石、沥青、水泥、石灰
 			switch ($baseLayerMaterial.select2("data")[0].id) {
 			case "1":case "2":
+				// 拌和摊铺相关
+				lqhnthd+=parseFloat($("#baseLayerThickness").val());
+				
 				gravel+=baseWeight/(1+$("#baseLayerWhetstoneRatio").val()/100);
 				switch ($baseLayerAsphaltType.select2("data")[0].id) {
 				case "1":
@@ -1311,6 +1577,9 @@ $(function(){
 			}
 			switch ($bottomBaseLayerMaterial.select2("data")[0].id) {
 			case "1":case "2":
+				// 拌和摊铺相关
+				lqhnthd+=parseFloat($("#bottomBaseLayerThickness").val());
+				
 				gravel+=bottomBaseWeight/(1+$("#bottomBaseLayerWhetstoneRatio").val()/100);
 				switch ($bottomBaseLayerAsphaltType.select2("data")[0].id) {
 				case "1":
@@ -1343,6 +1612,8 @@ $(function(){
 			}
 			switch ($cushionLayerMaterial.select2("data")[0].id) {
 			case "1":case "2":
+				// 拌和摊铺相关
+				lqhnthd+=parseFloat($("#cushionLayerThickness").val());
 				gravel+=cushionWeight/(1+$("#cushionLayerWhetstoneRatio").val()/100);
 				switch ($cushionLayerAsphaltType.select2("data")[0].id) {
 				case "1":
@@ -1373,6 +1644,7 @@ $(function(){
 			default:
 				break;
 			}
+			// 计算原材料获取
 			materialList=[];
 			$("#gravelSelect").hide();
 			$("#ordinaryAsphaltSelect").hide();
@@ -1449,7 +1721,60 @@ $(function(){
                 _html += renderTpl(tpl, item);
             }
             $('#materialInventoryTable tbody').html(_html);
-    		
+            
+            // 计算运输过程
+            transportList=[];
+            var allAsphalt=ordinaryAsphalt+modifiedAsphalt+highViscosityAsphalt;
+            var mixtureAmount=gravel+allAsphalt+cement;
+            $("#aggregateVehicleSelect").hide();
+            $("#asphaltVehicleSelect").hide();
+            $("#cementVehicleSelect").hide();
+            $("#mixtureVehicleSelect").hide();
+            if(gravel>0){
+            	transportList.push({materialMark:"aggregate",materialName:"集料",amount:gravel.toFixed(3)});
+            	$("#aggregateVehicleSelect").show();
+            }
+            if(allAsphalt>0){
+            	transportList.push({materialMark:"asphalt",materialName:"沥青",amount:allAsphalt.toFixed(3)});
+            	$("#asphaltVehicleSelect").show();
+            }
+            if(cement>0){
+            	transportList.push({materialMark:"cement",materialName:"水泥",amount:cement.toFixed(3)});
+            	$("#cementVehicleSelect").show();
+            }
+            if(mixtureAmount>0){
+            	transportList.push({materialMark:"mixture",materialName:"混合料",amount:mixtureAmount.toFixed(3)});
+            	$("#mixtureVehicleSelect").show();
+            }
+            _html='';
+            var tpl=$('#tpl-transportInventoryTable').html();
+            for (var i=0,len=transportList.length; i < len; i++){
+                var item = transportList[i];
+                _html += renderTpl(tpl, item);
+            }
+            $('#transportInventoryTable tbody').html(_html);
+            
+            // 计算拌和与摊铺
+            tphd+=parseFloat($("#baseLayerThickness").val())+parseFloat($("#bottomBaseLayerThickness").val())+parseFloat($("#cushionLayerThickness").val());
+            delete tempData.lqhnttj;
+            delete tempData.lqmtztj;
+            delete tempData.tptj;
+            tempData.lqhnttj=area*lqhnthd/1000;
+            tempData.lqmtztj=area*lqmtzhd/1000;
+            tempData.tptj=area*tphd/1000;
+            var tmpList=[];
+            tmpList.push({fuelName:"汽油"});
+            tmpList.push({fuelName:"柴油"});
+            tmpList.push({fuelName:"重油"});
+            tmpList.push({fuelName:"电"});
+            var _html='';
+            var tpl=$('#tpl-mixPaveInventoryTable').html();
+            for (var i=0,len=tmpList.length; i < len; i++){
+                var item = tmpList[i];
+                _html += renderTpl(tpl, item);
+            }
+            $('#mixPaveInventoryTable tbody').html(_html);
+            
     		tool.stepGo(1,2);
     		$("#step-input").hide();
     		$("#step-inventory").show();
@@ -1479,7 +1804,7 @@ $(function(){
 					    	var nums=res.cost.split("~");
 					    	item.cost=(nums[0]*amount).toFixed(3)+"~"+(nums[1]*amount).toFixed(3);
 				    	}else{
-				    		item.cost=res.cost*amount;
+				    		item.cost=(res.cost*amount).toFixed(3);
 				    	}
 					}
 					if(res.energyConsume!=null){
@@ -1518,10 +1843,188 @@ $(function(){
                 _html += renderTpl(tpl, item);
             }
             $('#materialInventoryTable tbody').html(_html);
-			
-			
 		}
 		return false;
+	});
+	
+	var validatorInventoryTransportForm = $("#inventoryTransportForm").validate({
+		errorClass: 'text-danger',
+    	rules:{
+    		aggregateDistance:{
+    			required:true,
+    			number:true,
+    			min:0
+    		},
+    		asphaltDistance:{
+    			required:true,
+    			number:true,
+    			min:0
+    		},
+    		cementDistance:{
+    			required:true,
+    			number:true,
+    			min:0
+    		},
+    		mixtureDistance:{
+    			required:true,
+    			number:true,
+    			min:0
+    		}
+    	},
+    	submitHandler:function(form){
+    		if(transportList.length>0){
+	    		for (var i = 0; i < transportList.length; i++) {
+					var item=transportList[i];
+					var res=$("#"+item.materialMark+"VehicleModel").select2("data")[0];
+					var distance=$("#"+item.materialMark+"Distance").val();
+					if(res==undefined){
+						var d = dialog({
+	                        content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您选择相应车辆型号'+'</p></div>'
+	                    });
+	                    d.show();
+	                    setTimeout(function() {
+	                        d.close().remove();
+	                    }, 1500);
+	                    return false;
+					}else{
+						item.vehicleModel=res.vehicleType;
+						item.distance=distance;
+						var amount=item.amount;
+						if(res.cost!=null){
+							item.cost=(res.cost*amount*distance).toFixed(3);
+						}
+						if(res.energyConsume!=null){
+							item.energyConsume=(res.energyConsume*amount*distance).toExponential(2);
+						}
+						if(res.emissionCo2!=null){
+							item.emissionCo2=(res.emissionCo2*amount*distance).toExponential(2);
+						}
+						if(res.emissionCh4!=null){
+							item.emissionCh4=(res.emissionCh4*amount*distance).toExponential(2);
+						}
+						if(res.emissionN2o!=null){
+							item.emissionN2o=(res.emissionN2o*amount*distance).toExponential(2);
+						}
+						if(res.emissionCo!=null){
+							item.emissionCo=(res.emissionCo*amount*distance).toExponential(2);
+						}
+						if(res.emissionSo2!=null){
+							item.emissionSo2=(res.emissionSo2*amount*distance).toExponential(2);
+						}
+						if(res.emissionNox!=null){
+							item.emissionNox=(res.emissionNox*amount*distance).toExponential(2);
+						}
+						if(res.emissionPb!=null){
+							item.emissionPb=(res.emissionPb*amount*distance).toExponential(2);
+						}
+						if(res.emissionZn!=null){
+							item.emissionZn=(res.emissionZn*amount*distance).toExponential(2);
+						}
+					}
+				}
+				var _html='';
+	            var tpl=$('#tpl-transportInventoryTable').html();
+	            for (var i=0,len=transportList.length; i < len; i++){
+	                var item = transportList[i];
+	                _html += renderTpl(tpl, item);
+	            }
+	            $('#transportInventoryTable tbody').html(_html);
+    		}
+    	},
+    	onkeyup:false
+	});
+	
+	var validatorInventoryMixPaveForm = $("#inventoryMixPaveForm").validate({
+		errorClass: 'text-danger',
+		rules:{},
+		submitHandler:function(form){
+			var gasoline=0,diesel=0,heavyOil=0,electricity=0;
+			var mixType=$mixEqupType.select2("data")[0];
+			var lqhnttj=tempData.lqhnttj,lqmtztj=tempData.lqmtztj,tptj=tempData.tptj;
+			if(lqhnttj>0){
+				var tmp=mixType.lqhnt.zl;
+				gasoline+=lqhnttj*tmp.qy;
+				diesel+=lqhnttj*tmp.cy;
+				heavyOil+=lqhnttj*tmp.zy;
+				electricity+=lqhnttj*tmp.d;
+			}
+			if(lqmtztj>0){
+				var tmp=mixType.lqmtz;
+				gasoline+=lqmtztj*tmp.qy;
+				diesel+=lqmtztj*tmp.cy;
+				heavyOil+=lqmtztj*tmp.zy;
+				electricity+=lqmtztj*tmp.d;
+			}
+			if(tptj>0){
+				var pavingType=$pavingEqupType.select2("data")[0];
+				if(pavingType==undefined){
+					diesel+=tptj*(cfc.tp.t320.lqhnt.zl.cy);
+				}else{
+					if(pavingType.diesel!=null){
+						diesel+=tptj*pavingType.diesel;
+					}
+				}
+			}
+			mixPaveList=[];
+			mixPaveList.push({fuelMark:"gasoline",fuelName:"汽油",amount:gasoline.toFixed(3)});
+            mixPaveList.push({fuelMark:"diesel",fuelName:"柴油",amount:diesel.toFixed(3)});
+            mixPaveList.push({fuelMark:"heavyOil",fuelName:"重油",amount:heavyOil.toFixed(3)});
+            mixPaveList.push({fuelMark:"electricity",fuelName:"电",amount:electricity.toFixed(3)});
+			for (var i = 0; i < mixPaveList.length; i++) {
+				var item=mixPaveList[i];
+				var res=$("#"+item.fuelMark).select2("data")[0];
+				if(res==undefined){
+					var d = dialog({
+						content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您选择相应燃料类型'+'</p></div>'
+					});
+					d.show();
+					setTimeout(function() {
+						d.close().remove();
+					}, 1500);
+					return false;
+				}else{
+					var amount=item.amount;
+					if(res.cost!=null){
+						item.cost=(res.cost*amount).toFixed(3);
+					}
+					if(res.energyConsume!=null){
+						item.energyConsume=(res.energyConsume*amount).toExponential(2);
+					}
+					if(res.emissionCo2!=null){
+						item.emissionCo2=(res.emissionCo2*amount).toExponential(2);
+					}
+					if(res.emissionCh4!=null){
+						item.emissionCh4=(res.emissionCh4*amount).toExponential(2);
+					}
+					if(res.emissionN2o!=null){
+						item.emissionN2o=(res.emissionN2o*amount).toExponential(2);
+					}
+					if(res.emissionCo!=null){
+						item.emissionCo=(res.emissionCo*amount).toExponential(2);
+					}
+					if(res.emissionSo2!=null){
+						item.emissionSo2=(res.emissionSo2*amount).toExponential(2);
+					}
+					if(res.emissionNox!=null){
+						item.emissionNox=(res.emissionNox*amount).toExponential(2);
+					}
+					if(res.emissionPb!=null){
+						item.emissionPb=(res.emissionPb*amount).toExponential(2);
+					}
+					if(res.emissionZn!=null){
+						item.emissionZn=(res.emissionZn*amount).toExponential(2);
+					}
+				}
+			}
+			var _html='';
+			var tpl=$('#tpl-mixPaveInventoryTable').html();
+			for (var i=0,len=mixPaveList.length; i < len; i++){
+				var item = mixPaveList[i];
+				_html += renderTpl(tpl, item);
+			}
+			$('#mixPaveInventoryTable tbody').html(_html);
+		},
+		onkeyup:false
 	});
 	
 	$("#inventory-lastStep").click(function(){
