@@ -409,23 +409,212 @@
 		</div>
 	</div>
 
-	<div class="panel king-panel1">
+	<div class="panel king-panel1" id="use1Inventory">
 		<div class="panel-heading king-panel-head1 king-panel-top3">
-			<h3 class="panel-title"><b>使用</b></h3>
+			<h3 class="panel-title"><b>使用（反射率）</b></h3>
 		</div>
 		<div class='panel-body'>
 			<p>暂无数据</p>
 		</div>
 	</div>
-	<div class="panel king-panel1">
+	<div class="panel king-panel1" id="use2Inventory">
+		<div class="panel-heading king-panel-head1 king-panel-top3">
+			<h3 class="panel-title"><b>使用（透水率）</b></h3>
+		</div>
+		<div class='panel-body'>
+			<p>暂无数据</p>
+		</div>
+	</div>
+	<div class="panel king-panel1" id="use3Inventory">
+		<div class="panel-heading king-panel-head1 king-panel-top3">
+			<h3 class="panel-title"><b>使用（滚动阻力）</b></h3>
+		</div>
+		<div class='panel-body'>
+			<p>暂无数据</p>
+		</div>
+	</div>
+	
+	<div class="panel king-panel1" id="conserveInventory">
 		<div class="panel-heading king-panel-head1 king-panel-top3">
 			<h3 class="panel-title"><b>养护</b></h3>
 		</div>
 		<div class='panel-body'>
-			<p>暂无数据</p>
+		    <div class="table-responsive">
+                <table id="conserveInventoryTable"
+                    class="table table-bordered table-hover table-striped table-condensed">
+                    <thead>
+                        <tr>
+                            <th colspan="4" class="text-center">原材料用量(封层或罩面层)</th>
+                            <th colspan="3" class="text-center">养护施工区域额外经济成本</th>
+                        </tr>
+                        <tr>
+                            <th class="text-center">体积</th>
+                            <th class="text-center">质量</th>
+                            <th class="text-center">碎石</th>
+                            <th class="text-center" id="conserveAsphalt">沥青</th>
+                            <th class="text-center">时间成本</th>
+                            <th class="text-center">车辆运行成本</th>
+                            <th class="text-center">安全成本</th>
+                    </thead>
+                    <tbody class="text-center">
+                    </tbody>
+                </table>
+                <script id="tpl-conserveInventoryTable" type="text/template">
+                       <tr>
+                           <td>#conserveVolume#</td>
+                           <td>#conserveWeight#</td>
+                           <td>#conserveGravel#</td>
+                           <td>#conserveAsphalt#</td>
+                           <td>#conserveTimeCost#</td>
+                           <td>#conserveCarOpsCost#</td>
+                           <td>#conserveSafeCost#</td>
+                       </tr>
+                    </script>
+            </div>
+			<form id="inventoryConserveForm" class="form-horizontal" role="form">
+                <fieldset>
+                    <legend>请输入养护经济环境成本计算基本信息：</legend>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">初始年平均日交通量：</label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" placeholder="请输入" id="conserveBase1"
+                                name="conserveBase1">
+                        </div>
+                        <label class="col-md-2 control-label">交通增长率：</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                            <input type="text" class="form-control" placeholder="百分比" id="conserveBase2"
+                                name="conserveBase2">
+                            <div class="input-group-addon">%</div>
+                            </div>
+                        </div>
+                        <label class="col-md-2 control-label">折现率：</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                            <input type="text" class="form-control" placeholder="百分比" id="conserveBase3"
+                                name="conserveBase3">
+                            <div class="input-group-addon">%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">时间成本：</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                            <input type="text" class="form-control" placeholder="请输入" id="conserveBase4"
+                                name="conserveBase4">
+                            <div class="input-group-addon">¥/车·小时</div>
+                            </div>
+                        </div>
+                        <label class="col-md-2 control-label">车辆运行成本：</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                            <input type="text" class="form-control" placeholder="请输入" id="conserveBase5"
+                                name="conserveBase5">
+                            <div class="input-group-addon">¥/车·千米</div>
+                            </div>
+                        </div>
+                        <label class="col-md-2 control-label">正常行车速度：</label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" placeholder="请输入" id="conserveBase6"
+                                name="conserveBase6">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">施工区域行车速度：</label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" placeholder="请输入" id="conserveBase7"
+                                name="conserveBase7">
+                        </div>
+                        <label class="col-md-2 control-label">施工区域堵塞长度：</label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" placeholder="请输入" id="conserveBase8"
+                                name="conserveBase8">
+                        </div>
+                        <label class="col-md-2 control-label">堵塞车辆百分比：</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                            <input type="text" class="form-control" placeholder="百分比" id="conserveBase9"
+                                name="conserveBase9">
+                            <div class="input-group-addon">%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">堵塞运行速度：</label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" placeholder="请输入" id="conserveBase10"
+                                name="conserveBase10">
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>请输入养护条目：</legend>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">养护措施：</label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" placeholder="请输入" id="conserveItem1"
+                                name="conserveItem1" value="薄层罩面">
+                        </div>
+                        <label class="col-md-2 control-label">养护时间：</label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" placeholder="请输入道路运营年数" id="conserveItem2"
+                                name="conserveItem2">
+                        </div>
+                        <label class="col-md-2 control-label">养护区封闭车道数/总车道数：</label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" placeholder="请输入分数，如 1/2" id="conserveItem3"
+                                name="conserveItem3">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">养护区长度(km)：</label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" placeholder="请输入" id="conserveItem4"
+                                name="conserveItem4">
+                        </div>
+                        <label class="col-md-2 control-label">养护时长(天)：</label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" placeholder="请输入" id="conserveItem5"
+                                name="conserveItem5">
+                        </div>
+                        <label class="col-md-2 control-label">养护区面积：</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                            <input type="text" class="form-control" placeholder="百分比" id="conserveItem6"
+                                name="conserveItem6">
+                            <div class="input-group-addon">%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">平均深度(cm)：</label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" placeholder="请输入" id="conserveItem7"
+                                name="conserveItem7">
+                        </div>
+                        <label class="col-md-2 control-label">沥青种类：</label>
+                        <div class="col-md-2">
+                            <select id="conserveItem8" name="conserveItem8" class="form-control" style="width: 100%">
+                            </select>
+                        </div>
+                        <label class="col-md-2 control-label">油石比：</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                            <input type="text" class="form-control" placeholder="百分比" id="conserveItem9"
+                                name="conserveItem9">
+                            <div class="input-group-addon">%</div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="text-center">
+                    <button class="king-btn king-radius king-success" type="submit">计算养护清单</button>
+                </div>
+            </form>
 		</div>
 	</div>
-	<div class="panel king-panel1">
+	<div class="panel king-panel1" id="recycleInventory">
 		<div class="panel-heading king-panel-head1 king-panel-top3">
 			<h3 class="panel-title"><b>回收</b></h3>
 		</div>

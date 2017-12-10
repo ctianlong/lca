@@ -1142,6 +1142,7 @@ $(function(){
 	var materialList=[];
 	var transportList=[];
 	var mixPaveList=[];
+	var conserveData={};
 	var tempData={};
 	var materialRange,transportRange,use1Range,use2Range,use3Range,conserveRange,recycleRange;
 	var energyRange,carbonRang,sourRange,EutrophicationRange,ozoneRange;
@@ -1150,6 +1151,7 @@ $(function(){
 		materialList=[];
 		transportList=[];
 		mixPaveList=[];
+		conserveData={};
 		tempData={};
 	}
 	
@@ -1404,6 +1406,7 @@ $(function(){
     		EutrophicationRange=$("#EutrophicationRange").is(":checked");
     		ozoneRange=$("#ozoneRange").is(":checked");
     		var area=$("#roadLength").val()*$("#roadWidth").val();
+    		tempData.area=area;
     		var gravel=0,ordinaryAsphalt=0,modifiedAsphalt=0,highViscosityAsphalt=0,cement=0,lime=0,rebar=0,snj=0,jqj=0,zsj=0,qlzsj=0,hnj=0,jsj=0,brick=0;
     		// 拌和摊铺相关
     		var lqhnthd=0,lqmtzhd=0;tphd=0;
@@ -1412,7 +1415,9 @@ $(function(){
 			var bottomBaseWeight=area*$("#bottomBaseLayerThickness").val()*$bottomBaseLayerMaterial.select2("data")[0].density;
 			var cushionWeight=area*$("#cushionLayerThickness").val()*$cushionLayerMaterial.select2("data")[0].density;
     		if($roadType.val()==1){
-    			var topWeight=area*$("#asphaltTopLayerThickness").val()*$asphaltTopLayerMaterial.select2("data")[0].density;
+    			var topVolume=area*$("#asphaltTopLayerThickness").val();
+    			tempData.topVolume=topVolume;
+    			var topWeight=topVolume*$asphaltTopLayerMaterial.select2("data")[0].density;
     			var middleWeight=area*$("#asphaltMiddleLayerThickness").val()*$asphaltMiddleLayerMaterial.select2("data")[0].density;
     			var belowWeight=area*$("#asphaltBelowLayerThickness").val()*$asphaltBelowLayerMaterial.select2("data")[0].density;
     			// 上、中、下面层拌和摊铺相关
@@ -1488,6 +1493,7 @@ $(function(){
     			tphd+=parseFloat($("#concreteTopLayerThickness").val())+parseFloat($("#concreteBelowLayerThickness").val());
     			
     			var topVolume=area*$("#concreteTopLayerThickness").val();
+    			tempData.topVolume=topVolume;
     			var belowVolume=area*$("#concreteBelowLayerThickness").val();
     			var topLayerMaterial=$concreteTopLayerMaterial.select2("data")[0];
     			var belowLayerMaterial=$concreteBelowLayerMaterial.select2("data")[0];
@@ -1801,6 +1807,39 @@ $(function(){
 			}else{
 				$("#transportInventory").hide();
 			}
+			
+			if(use1Range){
+				// 计算使用1
+				$("#use1Inventory").show();
+			}else{
+				$("#use1Inventory").hide();
+			}
+			if(use2Range){
+				// 计算使用2
+				$("#use2Inventory").show();
+			}else{
+				$("#use2Inventory").hide();
+			}
+			if(use3Range){
+				// 计算使用3
+				$("#use3Inventory").show();
+			}else{
+				$("#use3Inventory").hide();
+			}
+			
+			if(conserveRange){
+				// 计算养护
+				$("#conserveInventory").show();
+				$("#conserveAsphalt").text("沥青");
+			}else{
+				$("#conserveInventory").hide();
+			}
+			if(recycleRange){
+				// 计算回收
+				$("#recycleInventory").show();
+			}else{
+				$("#recycleInventory").hide();
+			}
             
     		tool.stepGo(1,2);
     		$("#step-input").hide();
@@ -2050,6 +2089,50 @@ $(function(){
 				_html += renderTpl(tpl, item);
 			}
 			$('#mixPaveInventoryTable tbody').html(_html);
+		},
+		onkeyup:false
+	});
+	
+	$("#conserveItem8").select2({
+		data:cdAsphaltType,
+		minimumResultsForSearch:-1,
+		language:iMsg.select2LangCode
+	});
+	var validatorInventoryConserveForm = $("#inventoryConserveForm").validate({
+		errorClass: 'text-danger',
+		rules:{},
+		submitHandler:function(form){
+			var b1=$("#conserveBase1").val();
+			var b2=$("#conserveBase2").val()/100.0;
+			var b3=$("#conserveBase3").val()/100.0;
+			var b4=$("#conserveBase4").val();
+			var b5=$("#conserveBase5").val();
+			var b6=$("#conserveBase6").val();
+			var b7=$("#conserveBase7").val();
+			var b8=$("#conserveBase8").val();
+			var b9=$("#conserveBase9").val()/100.0;
+			var b10=$("#conserveBase10").val();
+			var i1=$("#conserveItem1").val();
+			var i2=$("#conserveItem2").val();
+			var i3Nums=$("#conserveItem3").val().split("/");
+			var i3=i3Nums[0]/i3Nums[1];
+			var i4=$("#conserveItem4").val();
+			var i5=$("#conserveItem5").val();
+			var i6=$("#conserveItem6").val()/100.0;
+			var i7=$("#conserveItem7").val();
+			var i8=$("#conserveItem8").select2("data")[0].text;
+			var i9=$("#conserveItem9").val()/100.0;
+			conserveData.conserveVolume=tempData.area*i6*i7/100;
+			conserveData.conserveWeight=tempData.topVolume*2.35;
+			conserveData.conserveGravel=conserveData.conserveWeight/(1+i9);
+			conserveData.conserveAsphalt=conserveData.conserveWeight*i9/(1+i9);
+			conserveData.conserveTimeCost=(((i4/b7)-(i4/b6))+(b8/b10)*b9)*b1*Math.pow(1+b2,i2)*i5*b4/Math.pow(1+b3,i2);
+			conserveData.conserveCarOpsCost=b1*Math.pow(1+b2,i2)*i5*i4*b5/Math.pow(1+b3,i2);
+			conserveData.conserveSafeCost=b1*Math.pow(1+b2,i2)*i5*i4/160900000*0.45*(0.9*2275229+57.2*15151)*6.6/Math.pow(1+b3,i2);
+			var tpl=$('#tpl-conserveInventoryTable').html();
+			var _html = renderTpl(tpl, conserveData);
+			$('#conserveInventoryTable tbody').html(_html);
+			$("#conserveAsphalt").text(i8);
 		},
 		onkeyup:false
 	});
