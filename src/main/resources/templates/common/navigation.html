@@ -56,13 +56,14 @@
                     <li th:class="${#strings.startsWith(relativePath,'/db/inventory/material')} ? 'active'">
                         <a th:href="@{/db/inventory/material}"><i class="fa fa-fw fa-circle-o"></i> <span th:text="#{system.db.inventory.material}"></span></a>
                     </li>
-                    <!-- 
-                    <li th:class="${#strings.startsWith(relativePath,'/db/inventory/fuel')} ? 'active'">
-                        <a th:href="@{/db/inventory/fuel}"><i class="fa fa-fw fa-circle-o"></i> -</a>
+                    <li th:class="${#strings.startsWith(relativePath,'/db/inventory/transport')} ? 'active'">
+                        <a th:href="@{/db/inventory/transport}"><i class="fa fa-fw fa-circle-o"></i> <span th:text="#{system.db.inventory.transport}"></span></a>
                     </li>
-                     -->
-                    <li th:class="${#strings.startsWith(relativePath,'/db/inventory/construction')} ? 'active'">
-                        <a th:href="@{/db/inventory/construction}"><span class="ellipsis" style="display: inline-block;max-width: 160px;"><i class="fa fa-fw fa-circle-o"></i> <span th:title="#{system.db.inventory.construction}" th:text="#{system.db.inventory.construction}"></span></span></a>
+                    <li th:class="${#strings.startsWith(relativePath,'/db/inventory/machine')} ? 'active'">
+                        <a th:href="@{/db/inventory/machine}"><span class="ellipsis" style="display: inline-block;max-width: 160px;"><i class="fa fa-fw fa-circle-o"></i> <span th:title="#{system.db.inventory.machine}" th:text="#{system.db.inventory.machine}"></span></span></a>
+                    </li>
+                    <li th:class="${#strings.startsWith(relativePath,'/db/inventory/fuel')} ? 'active'">
+                        <a th:href="@{/db/inventory/fuel}"><i class="fa fa-fw fa-circle-o"></i> <span th:text="#{system.db.inventory.fuel}"></span></a>
                     </li>
                 </ul>
             </li>

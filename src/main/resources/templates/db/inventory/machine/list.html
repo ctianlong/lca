@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>燃料清单</title>
+    <title>机械清单</title>
     <div th:replace="common/head"></div>
     <!-- 表格样式 -->    
     <link th:href="@{/css/myTable.css}" rel="stylesheet"/>
@@ -17,7 +17,7 @@
                 <div class="row page-header-box">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            燃料清单管理
+                            机械清单管理
                         </h1>
                     </div>
                 </div>
@@ -31,13 +31,23 @@
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                     <div class='panel-body'>
-                        <form role="form" id="form-fuel-query">
+                        <form role="form" id="form-machine-query">
                             <div class="row">
+	                            <div class="col-sm-6 col-md-6 col-lg-4">           
+	                                <div class="form-group">
+	                                    <div class="input-group">
+	                                        <div class="input-group-addon">机械类别</div>
+	                                        <select id="typeCdQuery" class="form-control" style="width: 100%">
+	                                            <option></option>
+	                                        </select>
+	                                    </div>
+	                                </div>
+	                            </div>
 	                            <div class="col-sm-6 col-md-6 col-lg-4">
 		                            <div class="form-group">
 		                                <div class="input-group">
-		                                    <div class="input-group-addon">燃料种类</div>
-		                                    <input id="fuelTypeQuery" class="form-control" type="text" placeholder="请输入燃料种类">
+		                                    <div class="input-group-addon">机械名称</div>
+		                                    <input id="nameQuery" class="form-control" type="text" placeholder="请输入机械名称">
 		                                </div>
 		                            </div>
 	                            </div>
@@ -60,26 +70,38 @@
                         <div class="king-panel-control">
                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" class="fa fa-minus-square-o fa-lg"></a>
                         </div>
-                        <h3 class="panel-title">燃料清单</h3>
+                        <h3 class="panel-title">机械清单</h3>
                     </div>
                     <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
                     <div class='panel-body'>
                         <div id="div-table-container">
-                            <table id="table-fuel" class="table table-bordered table-hover table-striped table-condensed">
+                            <table id="table-machine" class="table table-bordered table-hover table-striped table-condensed">
                                 <thead>
                                     <tr>
-                                        <th rowspan="2">燃料种类</th>
-                                        <th rowspan="2">单位</th>
-                                        <th rowspan="2">价格</th>
-                                        <th rowspan="2">货币种类</th>
-                                        <th rowspan="2">价格来源</th>
-                                        <th rowspan="2">净热值(MJ)</th>
+                                        <th rowspan="2">代号</th>
+                                        <th rowspan="2">机械名称</th>
+                                        <th rowspan="2">机械类别</th>
+                                        <th rowspan="2">主机型号</th>
+                                        <th rowspan="2">不变费用</th>
+                                        <th class="text-center" colspan="9" style="width: 900px;">可变费用</th>
+                                        <th rowspan="2">定额基价</th>
+                                        <th rowspan="2">备注</th>
+                                        <th rowspan="2">能耗(MJ)</th>
                                         <th class="text-center" colspan="8" style="width: 800px;">排放(kg)</th>
                                         <th rowspan="2">数据来源</th>
                                         <th rowspan="2">数据收集时间</th>
                                         <th rowspan="2">操作</th>
                                     </tr>
                                     <tr>
+                                        <th>人工(工日)</th>
+                                        <th>汽油(kg)</th>
+                                        <th>柴油(kg)</th>
+                                        <th>重油(kg)</th>
+                                        <th>煤(kg)</th>
+                                        <th>电(kw·h)</th>
+                                        <th>水(m3)</th>
+                                        <th>木柴(kg)</th>
+                                        <th><span title="养路费及车船使用税(元)">养路费及车船使用税(元)</span></th>
                                         <th>CO<sub>2</sub></th>
                                         <th>CH<sub>4</sub></th>
                                         <th>N<sub>2</sub>O</th>
@@ -107,41 +129,24 @@
                           <span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="myModalLabel"></h4>
                       </div>
-                      <form id="form-fuel" class="form-horizontal">
+                      <form id="form-machine" class="form-horizontal">
                       <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <input type="hidden" name="id" id="id"/>
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label" title="必填"><span class="king-required-tip text-danger mr5">*</span>燃料种类：</label>
+                                    <label class="col-md-4 control-label" title="必填"><span class="king-required-tip text-danger mr5">*</span>机械名称：</label>
                                     <div class="col-md-8">
-                                        <input type="text" name="fuelType" class="form-control" id="fuelType" placeholder="请输入燃料种类"/>
+                                        <input type="text" name="name" class="form-control" id="name" placeholder="请输入机械名称"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">单位：</label>
+                                    <label class="col-md-4 control-label" title="必填"><span class="king-required-tip text-danger mr5">*</span>机械类别：</label>
                                     <div class="col-md-8">
-                                        <input type="text" name="unit" class="form-control" id="unit" placeholder="请输入单位，如 1kg"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">价格：</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="cost" class="form-control" id="cost" placeholder="请输入价格，如 0.2"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">货币种类：</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="currencyType" class="form-control" id="currencyType" placeholder="请输入货币种类，如 ¥"/>
+                                        <select id="typeCd" name="typeCd" class="form-control" style="width: 100%">
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -149,17 +154,135 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">价格来源：</label>
+                                    <label class="col-md-4 control-label">代号：</label>
                                     <div class="col-md-8">
-                                        <input type="text" name="costSource" class="form-control" id="costSource" placeholder="请输入价格来源"/>
+                                        <input type="text" name="code" class="form-control" id="code" placeholder="请输入代号"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">净热值(MJ)：</label>
+                                    <label class="col-md-4 control-label">主机型号：</label>
                                     <div class="col-md-8">
-                                        <input type="text" name="energyConsume" class="form-control" id="energyConsume" placeholder="请输入净热值，支持科学计数法"/>
+                                        <input type="text" name="hostModel" class="form-control" id="hostModel" placeholder="请输入主机型号"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">不变费用(元)：</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="constantFee" class="form-control" id="constantFee" placeholder="请输入不变费用"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">人工(工日)：</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="labor" class="form-control" id="labor" placeholder="请输入人工"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">汽油(kg)：</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="gasoline" class="form-control" id="gasoline" placeholder="请输入汽油"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">柴油(kg)：</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="diesel" class="form-control" id="diesel" placeholder="请输入柴油"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">重油(kg)：</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="heavyOil" class="form-control" id="heavyOil" placeholder="请输入重油"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">煤(kg)：</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="coal" class="form-control" id="coal" placeholder="请输入煤"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">电(kw·h)：</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="electricity" class="form-control" id="electricity" placeholder="请输入电"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">水(m3)：</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="water" class="form-control" id="water" placeholder="请输入水"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">木柴(kg)：</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="firewood" class="form-control" id="firewood" placeholder="请输入木柴"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">养路费及车船使用税(元)：</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="tax" class="form-control" id="tax" placeholder="请输入养路费及车船使用税"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">定额基价(元)：</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="basePrice" class="form-control" id="basePrice" placeholder="请输入定额基价"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">备注：</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="remarks" class="form-control" id="remarks" placeholder="请输入备注"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">能耗(MJ)：</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="energyConsume" class="form-control" id="energyConsume" placeholder="请输入能耗，支持科学计数法"/>
                                     </div>
                                 </div>
                             </div>
@@ -280,6 +403,6 @@
     
     <!-- js -->
     <script th:src="@{/js/constant.js}"></script>
-    <script th:src="@{/js/fuel-manage.js}"></script>
+    <script th:src="@{/js/machine-manage.js}"></script>
 </body>
 </html>

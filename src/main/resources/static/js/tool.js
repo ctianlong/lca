@@ -43,8 +43,8 @@ $(function(){
 	var cdAsphaltSurfaceMaterial=[
 		{id:1,text:"开级配沥青磨耗层(OGFC)",density:2.1},
 		{id:2,text:"沥青玛蹄脂面层(SMA)",density:2.45},
-		{id:3,text:"密级配沥青混合料(AC)",density:2.35},
-		{id:4,text:"其它",density:0}
+		{id:3,text:"密级配沥青混合料(AC)",density:2.35}
+		//{id:4,text:"其它",density:0}
 	];
 	var cdLayerMaterial=[
 		{id:1,text:"密级配沥青稳定碎石",density:2.3},
@@ -1143,6 +1143,15 @@ $(function(){
 	var transportList=[];
 	var mixPaveList=[];
 	var tempData={};
+	var materialRange,transportRange,use1Range,use2Range,use3Range,conserveRange,recycleRange;
+	var energyRange,carbonRang,sourRange,EutrophicationRange,ozoneRange;
+	
+	function initClean() {
+		materialList=[];
+		transportList=[];
+		mixPaveList=[];
+		tempData={};
+	}
 	
 	var validatorFormInput = $("#form-input").validate({
 		errorClass: 'text-danger',
@@ -1381,6 +1390,19 @@ $(function(){
     		}
 		},
     	submitHandler:function(form){
+    		initClean();
+    		materialRange=$("#materialRange").is(":checked");
+    		transportRange=$("#transportRange").is(":checked");
+    		use1Range=$("#use1Range").is(":checked");
+    		use2Range=$("#use2Range").is(":checked");
+    		use3Range=$("#use3Range").is(":checked");
+    		conserveRange=$("#conserveRange").is(":checked");
+    		recycleRange=$("#recycleRange").is(":checked");
+    		energyRange=$("#energyRange").is(":checked");
+    		carbonRange=$("#carbonRange").is(":checked");
+    		sourRange=$("#sourRange").is(":checked");
+    		EutrophicationRange=$("#EutrophicationRange").is(":checked");
+    		ozoneRange=$("#ozoneRange").is(":checked");
     		var area=$("#roadLength").val()*$("#roadWidth").val();
     		var gravel=0,ordinaryAsphalt=0,modifiedAsphalt=0,highViscosityAsphalt=0,cement=0,lime=0,rebar=0,snj=0,jqj=0,zsj=0,qlzsj=0,hnj=0,jsj=0,brick=0;
     		// 拌和摊铺相关
@@ -1645,139 +1667,145 @@ $(function(){
 				break;
 			}
 			// 计算原材料获取
-			materialList=[];
-			$("#gravelSelect").hide();
-			$("#ordinaryAsphaltSelect").hide();
-			$("#modifiedAsphaltSelect").hide();
-			$("#highViscosityAsphaltSelect").hide();
-			$("#cementSelect").hide();
-			$("#limeSelect").hide();
-			$("#rebarSelect").hide();
-			$("#snjSelect").hide();
-			$("#jqjSelect").hide();
-			$("#zsjSelect").hide();
-			$("#qlzsjSelect").hide();
-			$("#hnjSelect").hide();
-			$("#jsjSelect").hide();
-			if(gravel>0){
-				materialList.push({materialMark:"gravel",materialName:"碎石集料",amount:gravel.toFixed(3)});
-				$("#gravelSelect").show();
+			if(materialRange){
+				$("#materialInventory").show();
+				$("#gravelSelect").hide();
+				$("#ordinaryAsphaltSelect").hide();
+				$("#modifiedAsphaltSelect").hide();
+				$("#highViscosityAsphaltSelect").hide();
+				$("#cementSelect").hide();
+				$("#limeSelect").hide();
+				$("#rebarSelect").hide();
+				$("#snjSelect").hide();
+				$("#jqjSelect").hide();
+				$("#zsjSelect").hide();
+				$("#qlzsjSelect").hide();
+				$("#hnjSelect").hide();
+				$("#jsjSelect").hide();
+				if(gravel>0){
+					materialList.push({materialMark:"gravel",materialName:"碎石集料",amount:gravel.toFixed(3)});
+					$("#gravelSelect").show();
+				}
+				if(ordinaryAsphalt>0){
+					materialList.push({materialMark:"ordinaryAsphalt",materialName:"普通沥青",amount:ordinaryAsphalt.toFixed(3)});
+					$("#ordinaryAsphaltSelect").show();
+				}
+				if(modifiedAsphalt>0){
+					materialList.push({materialMark:"modifiedAsphalt",materialName:"改性沥青",amount:modifiedAsphalt.toFixed(3)});
+					$("#modifiedAsphaltSelect").show();
+				}
+				if(highViscosityAsphalt>0){
+					materialList.push({materialMark:"highViscosityAsphalt",materialName:"高粘度沥青",amount:highViscosityAsphalt.toFixed(3)});
+					$("#highViscosityAsphaltSelect").show();
+				}
+				if(cement>0){
+					materialList.push({materialMark:"cement",materialName:"水泥",amount:cement.toFixed(3)});
+					$("#cementSelect").show();
+				}
+				if(lime>0){
+					materialList.push({materialMark:"lime",materialName:"石灰",amount:lime.toFixed(3)});
+					$("#limeSelect").show();
+				}
+				if(rebar>0){
+					materialList.push({materialMark:"rebar",materialName:"钢筋",amount:rebar.toFixed(3)});
+					$("#rebarSelect").show();
+				}
+				if(snj>0){
+					materialList.push({materialMark:"snjType",materialName:"速凝剂",amount:snj.toFixed(3)});
+					$("#snjSelect").show();
+				}
+				if(jqj>0){
+					materialList.push({materialMark:"jqjType",materialName:"加气剂",amount:jqj.toFixed(3)});
+					$("#jqjSelect").show();
+				}
+				if(zsj>0){
+					materialList.push({materialMark:"zsjType",materialName:"增塑剂",amount:zsj.toFixed(3)});
+					$("#zsjSelect").show();
+				}
+				if(qlzsj>0){
+					materialList.push({materialMark:"qlzsjType",materialName:"强力增塑剂",amount:qlzsj.toFixed(3)});
+					$("#qlzsjSelect").show();
+				}
+				if(hnj>0){
+					materialList.push({materialMark:"hnjType",materialName:"缓凝剂",amount:hnj.toFixed(3)});
+					$("#hnjSelect").show();
+				}
+				if(jsj>0){
+					materialList.push({materialMark:"jsjType",materialName:"减水剂",amount:jsj.toFixed(3)});
+					$("#jsjSelect").show();
+				}
+				if(brick>0){
+					materialList.push({materialMark:"brick",materialName:"混凝土砖",amount:Math.ceil(brick)}); // 铺砖
+				}
+				var _html='';
+	            var tpl=$('#tpl-materialInventoryTable').html();
+	            for (var i=0,len=materialList.length; i < len; i++){
+	                var item = materialList[i];
+	                _html += renderTpl(tpl, item);
+	            }
+	            $('#materialInventoryTable tbody').html(_html);
+			}else{
+				$("#materialInventory").hide();
 			}
-			if(ordinaryAsphalt>0){
-				materialList.push({materialMark:"ordinaryAsphalt",materialName:"普通沥青",amount:ordinaryAsphalt.toFixed(3)});
-				$("#ordinaryAsphaltSelect").show();
-			}
-			if(modifiedAsphalt>0){
-				materialList.push({materialMark:"modifiedAsphalt",materialName:"改性沥青",amount:modifiedAsphalt.toFixed(3)});
-				$("#modifiedAsphaltSelect").show();
-			}
-			if(highViscosityAsphalt>0){
-				materialList.push({materialMark:"highViscosityAsphalt",materialName:"高粘度沥青",amount:highViscosityAsphalt.toFixed(3)});
-				$("#highViscosityAsphaltSelect").show();
-			}
-			if(cement>0){
-				materialList.push({materialMark:"cement",materialName:"水泥",amount:cement.toFixed(3)});
-				$("#cementSelect").show();
-			}
-			if(lime>0){
-				materialList.push({materialMark:"lime",materialName:"石灰",amount:lime.toFixed(3)});
-				$("#limeSelect").show();
-			}
-			if(rebar>0){
-				materialList.push({materialMark:"rebar",materialName:"钢筋",amount:rebar.toFixed(3)});
-				$("#rebarSelect").show();
-			}
-			if(snj>0){
-				materialList.push({materialMark:"snjType",materialName:"速凝剂",amount:snj.toFixed(3)});
-				$("#snjSelect").show();
-			}
-			if(jqj>0){
-				materialList.push({materialMark:"jqjType",materialName:"加气剂",amount:jqj.toFixed(3)});
-				$("#jqjSelect").show();
-			}
-			if(zsj>0){
-				materialList.push({materialMark:"zsjType",materialName:"增塑剂",amount:zsj.toFixed(3)});
-				$("#zsjSelect").show();
-			}
-			if(qlzsj>0){
-				materialList.push({materialMark:"qlzsjType",materialName:"强力增塑剂",amount:qlzsj.toFixed(3)});
-				$("#qlzsjSelect").show();
-			}
-			if(hnj>0){
-				materialList.push({materialMark:"hnjType",materialName:"缓凝剂",amount:hnj.toFixed(3)});
-				$("#hnjSelect").show();
-			}
-			if(jsj>0){
-				materialList.push({materialMark:"jsjType",materialName:"减水剂",amount:jsj.toFixed(3)});
-				$("#jsjSelect").show();
-			}
-			if(brick>0){
-				materialList.push({materialMark:"brick",materialName:"混凝土砖",amount:Math.ceil(brick)}); // 铺砖
-			}
-			var _html='';
-            var tpl=$('#tpl-materialInventoryTable').html();
-            for (var i=0,len=materialList.length; i < len; i++){
-                var item = materialList[i];
-                _html += renderTpl(tpl, item);
-            }
-            $('#materialInventoryTable tbody').html(_html);
             
-            // 计算运输过程
-            transportList=[];
-            var allAsphalt=ordinaryAsphalt+modifiedAsphalt+highViscosityAsphalt;
-            var mixtureAmount=gravel+allAsphalt+cement;
-            $("#aggregateVehicleSelect").hide();
-            $("#asphaltVehicleSelect").hide();
-            $("#cementVehicleSelect").hide();
-            $("#mixtureVehicleSelect").hide();
-            if(gravel>0){
-            	transportList.push({materialMark:"aggregate",materialName:"集料",amount:gravel.toFixed(3)});
-            	$("#aggregateVehicleSelect").show();
-            }
-            if(allAsphalt>0){
-            	transportList.push({materialMark:"asphalt",materialName:"沥青",amount:allAsphalt.toFixed(3)});
-            	$("#asphaltVehicleSelect").show();
-            }
-            if(cement>0){
-            	transportList.push({materialMark:"cement",materialName:"水泥",amount:cement.toFixed(3)});
-            	$("#cementVehicleSelect").show();
-            }
-            if(mixtureAmount>0){
-            	transportList.push({materialMark:"mixture",materialName:"混合料",amount:mixtureAmount.toFixed(3)});
-            	$("#mixtureVehicleSelect").show();
-            }
-            _html='';
-            var tpl=$('#tpl-transportInventoryTable').html();
-            for (var i=0,len=transportList.length; i < len; i++){
-                var item = transportList[i];
-                _html += renderTpl(tpl, item);
-            }
-            $('#transportInventoryTable tbody').html(_html);
+			if(transportRange){
+				$("#transportInventory").show();
+				// 计算运输过程
+	            var allAsphalt=ordinaryAsphalt+modifiedAsphalt+highViscosityAsphalt;
+	            var mixtureAmount=gravel+allAsphalt+cement;
+	            $("#aggregateVehicleSelect").hide();
+	            $("#asphaltVehicleSelect").hide();
+	            $("#cementVehicleSelect").hide();
+	            $("#mixtureVehicleSelect").hide();
+	            if(gravel>0){
+	            	transportList.push({materialMark:"aggregate",materialName:"集料",amount:gravel.toFixed(3)});
+	            	$("#aggregateVehicleSelect").show();
+	            }
+	            if(allAsphalt>0){
+	            	transportList.push({materialMark:"asphalt",materialName:"沥青",amount:allAsphalt.toFixed(3)});
+	            	$("#asphaltVehicleSelect").show();
+	            }
+	            if(cement>0){
+	            	transportList.push({materialMark:"cement",materialName:"水泥",amount:cement.toFixed(3)});
+	            	$("#cementVehicleSelect").show();
+	            }
+	            if(mixtureAmount>0){
+	            	transportList.push({materialMark:"mixture",materialName:"混合料",amount:mixtureAmount.toFixed(3)});
+	            	$("#mixtureVehicleSelect").show();
+	            }
+	            _html='';
+	            var tpl=$('#tpl-transportInventoryTable').html();
+	            for (var i=0,len=transportList.length; i < len; i++){
+	                var item = transportList[i];
+	                _html += renderTpl(tpl, item);
+	            }
+	            $('#transportInventoryTable tbody').html(_html);
             
-            // 计算拌和与摊铺
-            tphd+=parseFloat($("#baseLayerThickness").val())+parseFloat($("#bottomBaseLayerThickness").val())+parseFloat($("#cushionLayerThickness").val());
-            delete tempData.lqhnttj;
-            delete tempData.lqmtztj;
-            delete tempData.tptj;
-            tempData.lqhnttj=area*lqhnthd/1000;
-            tempData.lqmtztj=area*lqmtzhd/1000;
-            tempData.tptj=area*tphd/1000;
-            var tmpList=[];
-            tmpList.push({fuelName:"汽油"});
-            tmpList.push({fuelName:"柴油"});
-            tmpList.push({fuelName:"重油"});
-            tmpList.push({fuelName:"电"});
-            var _html='';
-            var tpl=$('#tpl-mixPaveInventoryTable').html();
-            for (var i=0,len=tmpList.length; i < len; i++){
-                var item = tmpList[i];
-                _html += renderTpl(tpl, item);
-            }
-            $('#mixPaveInventoryTable tbody').html(_html);
+	            // 计算拌和与摊铺
+	            tphd+=parseFloat($("#baseLayerThickness").val())+parseFloat($("#bottomBaseLayerThickness").val())+parseFloat($("#cushionLayerThickness").val());
+	            tempData.lqhnttj=area*lqhnthd/1000;
+	            tempData.lqmtztj=area*lqmtzhd/1000;
+	            tempData.tptj=area*tphd/1000;
+	            var tmpList=[];
+	            tmpList.push({fuelName:"汽油"});
+	            tmpList.push({fuelName:"柴油"});
+	            tmpList.push({fuelName:"重油"});
+	            tmpList.push({fuelName:"电"});
+	            var _html='';
+	            var tpl=$('#tpl-mixPaveInventoryTable').html();
+	            for (var i=0,len=tmpList.length; i < len; i++){
+	                var item = tmpList[i];
+	                _html += renderTpl(tpl, item);
+	            }
+	            $('#mixPaveInventoryTable tbody').html(_html);
+			}else{
+				$("#transportInventory").hide();
+			}
             
     		tool.stepGo(1,2);
     		$("#step-input").hide();
     		$("#step-inventory").show();
+    		$(window).scrollTop(0);
     	},
     	onkeyup:false
 	});
@@ -1965,7 +1993,6 @@ $(function(){
 					}
 				}
 			}
-			mixPaveList=[];
 			mixPaveList.push({fuelMark:"gasoline",fuelName:"汽油",amount:gasoline.toFixed(3)});
             mixPaveList.push({fuelMark:"diesel",fuelName:"柴油",amount:diesel.toFixed(3)});
             mixPaveList.push({fuelMark:"heavyOil",fuelName:"重油",amount:heavyOil.toFixed(3)});
