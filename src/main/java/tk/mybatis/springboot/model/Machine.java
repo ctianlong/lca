@@ -1,6 +1,10 @@
 package tk.mybatis.springboot.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import tk.mybatis.springboot.conf.Constants;
 
 public class Machine {
     /**
@@ -18,12 +22,15 @@ public class Machine {
     /**
      * 机械名称
      */
+    @NotNull
+    @Pattern(regexp = Constants.NO_FIRST_LAST_SPACE_REGEX)
     private String name;
 
     /**
      * 机械类别代码
      */
     @Column(name = "type_cd")
+    @NotNull
     private Integer typeCd;
 
     /**
@@ -159,6 +166,7 @@ public class Machine {
      * 数据收集时间
      */
     @Column(name = "collect_time")
+    @Pattern(regexp = Constants.COLLECT_TIME_OR_EMPTY_REGEX)
     private String collectTime;
 
     /**

@@ -246,7 +246,7 @@ $(function(){
 		        var message;
 		        if (selectedItems&&selectedItems.length) {
 		            if (selectedItems.length == 1) {
-		                message = "确认删除 '"+selectedItems[0].materialName+"' 吗?";
+		                message = "确认删除 '"+selectedItems[0].name+"' 吗?";
 		            }else{
 		                message = "确认删除选中的"+selectedItems.length+"条记录吗?";
 		            }

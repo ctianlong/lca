@@ -176,7 +176,7 @@ $(function(){
 		        var message;
 		        if (selectedItems&&selectedItems.length) {
 		            if (selectedItems.length == 1) {
-		                message = "确认删除 '"+selectedItems[0].vehicleType+"' 吗?";
+		                message = "确认删除 '"+selectedItems[0].fuelType+"' 吗?";
 		            }else{
 		                message = "确认删除选中的"+selectedItems.length+"条记录吗?";
 		            }
@@ -472,11 +472,9 @@ $(function(){
     			required:true,
     			notFirstLastSpace:true
     		},
-    		unit:{
-    			notFirstLastSpace:true
-    		},
     		cost:{
-    			costRule:true
+    			number:true,
+    			min:0
     		},
     		energyConsume:{
     			scientificNotation:true

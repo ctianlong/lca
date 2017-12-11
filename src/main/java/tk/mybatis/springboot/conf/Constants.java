@@ -17,6 +17,8 @@ public final class Constants {
 	// 非负数，单个或区间(~分隔)
 	public static final String NON_NEGATIVE_NUMBER_RANGE_OR_EMPTY_REGEX = "^((0|([1-9]\\d*))(\\.\\d+)?(~(0|([1-9]\\d*))(\\.\\d+)?)?)?$";
 	
+	public static final String NON_NEGATIVE_NUMBER_OR_EMPTY_REGEX = "^((0|([1-9]\\d*))(\\.\\d+)?)?$";
+	
 	public static final String COLLECT_TIME_OR_EMPTY_REGEX = "^(((19)|(20))\\d\\d)?$";
 	
 	//用户初始密码

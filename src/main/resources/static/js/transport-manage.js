@@ -462,11 +462,9 @@ $(function(){
     			required:true,
     			notFirstLastSpace:true
     		},
-    		unit:{
-    			notFirstLastSpace:true
-    		},
     		cost:{
-    			costRule:true
+    			number:true,
+    			min:0
     		},
     		energyConsume:{
     			scientificNotation:true
