@@ -1,5 +1,4 @@
 $(function(){
-	$("#step-inventory").hide();
 	var cfc={
 		bh:{
 			t320:{
@@ -66,6 +65,13 @@ $(function(){
 		{id:5,text:"缓凝剂"},
 		{id:6,text:"减水剂"}
 	];
+	var cdGwp=[
+		{id:1,title:"2007 IPCC AR4",year:"20年GWP",co2:1,ch4:72,n2o:289,ccl2f2:11000,chclf2:5160,cf4:5210,c2f6:8630,sf6:16300,nf3:12300},
+		{id:2,title:"2007 IPCC AR4",year:"50年GWP",co2:1,ch4:25,n2o:298,ccl2f2:10900,chclf2:1810,cf4:7390,c2f6:12200,sf6:22800,nf3:17200},
+		{id:3,title:"2007 IPCC AR4",year:"100年GWP",co2:1,ch4:7.6,n2o:153,ccl2f2:5200,chclf2:549,cf4:11200,c2f6:18200,sf6:32600,nf3:20700},
+		{id:4,title:"2013 IPCC AR5",year:"20年GWP",co2:1,ch4:84,n2o:264,ccl2f2:10800,chclf2:5280,cf4:4880,c2f6:8210,sf6:17500,nf3:12800},
+		{id:5,title:"2013 IPCC AR5",year:"100年GWP",co2:1,ch4:28,n2o:265,ccl2f2:10200,chclf2:1760,cf4:6630,c2f6:11100,sf6:23500,nf3:16100}
+	];
 	var $roadType=$("#roadType").select2({
 		data:cdRoadType,
 		minimumResultsForSearch:-1,
@@ -101,7 +107,6 @@ $(function(){
 		minimumResultsForSearch:-1,
 		language:iMsg.select2LangCode
 	});
-	
 	// 混凝土上、下面层
 	var $concreteTopLayerMaterial=$("#concreteTopLayerMaterial").select2({
 		data:cdConcreteSurfaceMaterial,
@@ -1127,6 +1132,37 @@ $(function(){
 			break;
 		}
 	});
+	// 温室效应GWP选择
+	function formatGwp(repo) {
+	  if (repo.loading) {
+		  return repo.text;
+	  }
+	  var markup="<div class='row'><div class='col-sm-9'><strong>"+repo.title+" / "+repo.year+"</strong></div>"+
+	  	"<div class='col-sm-3'>CO<sub>2</sub>："+(repo.co2||'')+"</div></div>"+
+	  	"<div class='row'><div class='col-sm-3'>CH<sub>4</sub>："+(repo.ch4||'')+"</div>"+
+	  	"<div class='col-sm-3'>N<sub>2</sub>O："+(repo.n2o||'')+"</div>"+
+	  	"<div class='col-sm-3'>CCl<sub>2</sub>F<sub>2</sub>："+(repo.ccl2f2||'')+"</div>"+
+	  	"<div class='col-sm-3'>CHClF<sub>2</sub>："+(repo.chclf2||'')+"</div></div>"+
+	  	"<div class='row'><div class='col-sm-3'>CF<sub>4</sub>："+(repo.cf4||'')+"</div>"+
+	  	"<div class='col-sm-3'>C<sub>2</sub>F<sub>6</sub>："+(repo.c2f6||'')+"</div>"+
+	  	"<div class='col-sm-3'>SF<sub>6</sub>："+(repo.sf6||'')+"</div>"+
+	  	"<div class='col-sm-3'>NF<sub>3</sub>："+(repo.nf3||'')+"</div></div>";
+	  return markup;
+	}
+	function formatGwpSelection(repo) {
+		if(repo.title){
+			return repo.title+" / "+repo.year;
+		}
+		return repo.text;
+	}
+	var $gwpSelect=$("#gwpSelect").select2({
+		data:cdGwp,
+		minimumResultsForSearch:-1, //如要搜索可去掉该选项
+		language:iMsg.select2LangCode,
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatGwp,
+		templateSelection: formatGwpSelection
+	});
 	
 	var tool={
 		stepGo:function(now,next){
@@ -1143,16 +1179,22 @@ $(function(){
 	var transportList=[];
 	var mixPaveList=[];
 	var conserveData={};
+	var greenHouseData={};
 	var tempData={};
-	var materialRange,transportRange,use1Range,use2Range,use3Range,conserveRange,recycleRange;
-	var energyRange,carbonRang,sourRange,EutrophicationRange,ozoneRange;
+	var materialRange,transConsRange,use1Range,use2Range,use3Range,conserveRange,recycleRange;
+	var energyRange,carbonRang,sourRange,eutrophicationRange,ozoneRange;
+	// 运输与施工特殊处理，因为一个范围中有两个表单，需要两个都完成才能使transConsRange=2
+	var transFlag,consFlag;
 	
 	function initClean() {
 		materialList=[];
 		transportList=[];
 		mixPaveList=[];
 		conserveData={};
+		greenHouseData={};
 		tempData={};
+		transFlag=false;
+		consFlag=false;
 	}
 	
 	var validatorFormInput = $("#form-input").validate({
@@ -1392,19 +1434,39 @@ $(function(){
     		}
 		},
     	submitHandler:function(form){
+    		materialRange=$("#materialRange").is(":checked")?1:0;
+    		transConsRange=$("#transConsRange").is(":checked")?1:0;
+    		use1Range=$("#use1Range").is(":checked")?1:0;
+    		use2Range=$("#use2Range").is(":checked")?1:0;
+    		use3Range=$("#use3Range").is(":checked")?1:0;
+    		conserveRange=$("#conserveRange").is(":checked")?1:0;
+    		recycleRange=$("#recycleRange").is(":checked")?1:0;
+    		energyRange=$("#energyRange").is(":checked")?1:0;
+    		carbonRange=$("#carbonRange").is(":checked")?1:0;
+    		sourRange=$("#sourRange").is(":checked")?1:0;
+    		eutrophicationRange=$("#eutrophicationRange").is(":checked")?1:0;
+    		ozoneRange=$("#ozoneRange").is(":checked")?1:0;
+    		if(!(materialRange||transConsRange||use1Range||use2Range||use3Range||conserveRange||recycleRange)){
+    			var d = dialog({
+                    content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请至少选择一个阶段范围'+'</p></div>'
+                });
+                d.show();
+                setTimeout(function() {
+                    d.close().remove();
+                }, 1500);
+                return false;
+    		}
+    		if(!(energyRange||carbonRange||sourRange||eutrophicationRange||ozoneRange)){
+    			var d = dialog({
+                    content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请至少选择一个评价范围'+'</p></div>'
+                });
+                d.show();
+                setTimeout(function() {
+                    d.close().remove();
+                }, 1500);
+                return false;
+    		}
     		initClean();
-    		materialRange=$("#materialRange").is(":checked");
-    		transportRange=$("#transportRange").is(":checked");
-    		use1Range=$("#use1Range").is(":checked");
-    		use2Range=$("#use2Range").is(":checked");
-    		use3Range=$("#use3Range").is(":checked");
-    		conserveRange=$("#conserveRange").is(":checked");
-    		recycleRange=$("#recycleRange").is(":checked");
-    		energyRange=$("#energyRange").is(":checked");
-    		carbonRange=$("#carbonRange").is(":checked");
-    		sourRange=$("#sourRange").is(":checked");
-    		EutrophicationRange=$("#EutrophicationRange").is(":checked");
-    		ozoneRange=$("#ozoneRange").is(":checked");
     		var area=$("#roadLength").val()*$("#roadWidth").val();
     		tempData.area=area;
     		var gravel=0,ordinaryAsphalt=0,modifiedAsphalt=0,highViscosityAsphalt=0,cement=0,lime=0,rebar=0,snj=0,jqj=0,zsj=0,qlzsj=0,hnj=0,jsj=0,brick=0;
@@ -1754,7 +1816,7 @@ $(function(){
 				$("#materialInventory").hide();
 			}
             
-			if(transportRange){
+			if(transConsRange){
 				$("#transportInventory").show();
 				// 计算运输过程
 	            var allAsphalt=ordinaryAsphalt+modifiedAsphalt+highViscosityAsphalt;
@@ -1911,6 +1973,7 @@ $(function(){
             }
             $('#materialInventoryTable tbody').html(_html);
 		}
+		materialRange=2;
 		return false;
 	});
 	
@@ -1996,6 +2059,10 @@ $(function(){
 	                _html += renderTpl(tpl, item);
 	            }
 	            $('#transportInventoryTable tbody').html(_html);
+    		}
+    		transFlag=true;
+    		if(consFlag){
+    			transConsRange=2;
     		}
     	},
     	onkeyup:false
@@ -2089,6 +2156,10 @@ $(function(){
 				_html += renderTpl(tpl, item);
 			}
 			$('#mixPaveInventoryTable tbody').html(_html);
+			consFlag=true;
+    		if(transFlag){
+    			transConsRange=2;
+    		}
 		},
 		onkeyup:false
 	});
@@ -2100,7 +2171,107 @@ $(function(){
 	});
 	var validatorInventoryConserveForm = $("#inventoryConserveForm").validate({
 		errorClass: 'text-danger',
-		rules:{},
+		rules:{
+			conserveBase1:{
+				required:true,
+				number:true,
+				min:0
+			},
+			conserveBase2:{
+				required:true,
+				number:true,
+				min:0,
+				max:100
+			},
+			conserveBase3:{
+				required:true,
+				number:true,
+				min:0,
+				max:100
+			},
+			conserveBase4:{
+				required:true,
+				number:true,
+				min:0
+			},
+			conserveBase5:{
+				required:true,
+				number:true,
+				min:0
+			},
+			conserveBase6:{
+				required:true,
+				number:true,
+				min:0
+			},
+			conserveBase7:{
+				required:true,
+				number:true,
+				min:0
+			},
+			conserveBase8:{
+				required:true,
+				number:true,
+				min:0
+			},
+			conserveBase9:{
+				required:true,
+				number:true,
+				min:0,
+				max:100
+			},
+			conserveBase10:{
+				required:true,
+				number:true,
+				min:0
+			},
+			conserveItem1:{
+				required:true
+			},
+			conserveItem2:{
+				required:true,
+				number:true,
+				min:0
+			},
+			conserveItem3:{
+				required:true,
+				fraction:true
+			},
+			conserveItem4:{
+				required:true,
+				number:true,
+				min:0
+			},
+			conserveItem5:{
+				required:true,
+				number:true,
+				min:0
+			},
+			conserveItem6:{
+				required:true,
+				number:true,
+				min:0,
+				max:100
+			},
+			conserveItem7:{
+				required:true,
+				number:true,
+				min:0
+			},
+			conserveItem9:{
+				required:true,
+				number:true,
+				min:0,
+				max:100
+			}
+		},
+		errorPlacement: function(error, element) {
+    		if (element.parent().hasClass("input-group")) {
+    			error.appendTo(element.parent().parent());
+    		} else {
+    			error.appendTo(element.parent());
+    		}
+		},
 		submitHandler:function(form){
 			var b1=$("#conserveBase1").val();
 			var b2=$("#conserveBase2").val()/100.0;
@@ -2133,17 +2304,116 @@ $(function(){
 			var _html = renderTpl(tpl, conserveData);
 			$('#conserveInventoryTable tbody').html(_html);
 			$("#conserveAsphalt").text(i8);
+			conserveRange=2;
 		},
 		onkeyup:false
 	});
-	
-	$("#inventory-lastStep").click(function(){
+	$("#inventory-prevStep").click(function(){
 		tool.stepBack(2,1);
 		$("#step-inventory").hide();
 		$("#step-input").show();
 	});
+	$("#inventory-nextStep").click(function(){
+		if(materialRange==1){
+			var d = dialog({
+				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成原材料获取清单'+'</p></div>'
+			});
+			d.show();
+			setTimeout(function() {
+				d.close().remove();
+			}, 1500);
+			return false;
+		}
+		if(transConsRange==1){
+			var d = dialog({
+				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成运输与施工清单'+'</p></div>'
+			});
+			d.show();
+			setTimeout(function() {
+				d.close().remove();
+			}, 1500);
+			return false;
+		}
+		if(conserveRange==1){
+			var d = dialog({
+				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成养护清单'+'</p></div>'
+			});
+			d.show();
+			setTimeout(function() {
+				d.close().remove();
+			}, 1500);
+			return false;
+		}
+		$("#gwpValue").empty();
+		tool.stepGo(2,3);
+		$("#step-inventory").hide();
+		$("#step-influence").show();
+		$(window).scrollTop(0);
+	});
+	// 影响评价
+	// 温室效应
+	$("#gwpForm").submit(function(){
+		var g=$gwpSelect.select2("data")[0];
+		if(g==undefined){
+			var d = dialog({
+				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您选择 GWP'+'</p></div>'
+			});
+			d.show();
+			setTimeout(function() {
+				d.close().remove();
+			}, 1500);
+			return false;
+		}else{
+			var co2=0,ch4=0,n2o=0;
+			for (var i = 0; i < materialList.length; i++) {
+				var item = materialList[i];
+				if(item.emissionCo2!=undefined){
+					co2+=parseFloat(item.emissionCo2);
+				}
+				if(item.emissionCh4!=undefined){
+					ch4+=parseFloat(item.emissionCh4);
+				}
+				if(item.emissionN2o!=undefined){
+					n2o+=parseFloat(item.emissionN2o);
+				}
+			}
+			for (var i = 0; i < transportList.length; i++) {
+				var item = transportList[i];
+				if(item.emissionCo2!=undefined){
+					co2+=parseFloat(item.emissionCo2);
+				}
+				if(item.emissionCh4!=undefined){
+					ch4+=parseFloat(item.emissionCh4);
+				}
+				if(item.emissionN2o!=undefined){
+					n2o+=parseFloat(item.emissionN2o);
+				}
+			}
+			for (var i = 0; i < mixPaveList.length; i++) {
+				var item = mixPaveList[i];
+				if(item.emissionCo2!=undefined){
+					co2+=parseFloat(item.emissionCo2);
+				}
+				if(item.emissionCh4!=undefined){
+					ch4+=parseFloat(item.emissionCh4);
+				}
+				if(item.emissionN2o!=undefined){
+					n2o+=parseFloat(item.emissionN2o);
+				}
+			}
+			greenHouseData.gwpValue=co2*g.co2+ch4*g.ch4+n2o*g.n2o;
+			$("#gwpValue").text(greenHouseData.gwpValue);
+		}
+		return false;
+	});
+	
+	$("#influence-prevStep").click(function(){
+		tool.stepBack(3,2);
+		$("#step-influence").hide();
+		$("#step-inventory").show();
+	});
+	
 });
-
 function renderTpl(str, cfg) {
     var re = /(#(.+?)#)/g;
     return str.replace(re, function() {
