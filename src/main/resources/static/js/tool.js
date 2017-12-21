@@ -1942,8 +1942,9 @@ $(function(){
 			if(conserveRange){
 				// 计算养护
 				$("#conserveInventory").show();
-				$("#conserveAsphalt").text("沥青");
-				$('#conserveInventoryTable tbody').empty();
+				conserveData.itemList=[];
+				conserveData.itemId=1;
+				$("#conserveUncertainty").val(30);
 			}else{
 				$("#conserveInventory").hide();
 			}
@@ -2623,8 +2624,8 @@ $(function(){
 		},
 		onkeyup:false
 	});
-	
-	$("#conserveItem8").select2({
+	// 养护
+	$("#conserveItem7").select2({
 		data:cdAsphaltType,
 		minimumResultsForSearch:-1,
 		language:iMsg.select2LangCode
@@ -2675,13 +2676,75 @@ $(function(){
     		}
 		},
 		submitHandler:function(form){
-			
-			
-			
-			
-			
+			if($("#itemId").val()){
+    			
+    		}else{
+    			var x={};
+    			var id=conserveData.itemId;
+    			x.id=id;
+    			x.i1=$("#conserveItem1").val();
+    			x.i2=$("#conserveItem2").val();
+    			x.i3=$("#conserveItem3").val();
+    			x.i4=$("#conserveItem4").val();
+    			x.i5=$("#conserveItem5").val();
+    			x.i6=$("#conserveItem6").val();
+    			var t=$("#conserveItem7").select2("data")[0];
+    			x.i7=t.id;
+    			x.i7Text=t.text;
+    			x.i8=$("#conserveItem8").val();
+    			conserveData.itemList.push(x);
+    			var tpl=$('#tpl-conserveInventoryItemTable').html();
+    			var _html = renderTpl(tpl, x);
+    			$('#conserveInventoryItemTable tbody').append($(_html));
+    			$("#delete"+id).click(function(){
+    				for (var i = 0; i < conserveData.itemList.length; i++) {
+						if(conserveData.itemList[i].id==id){
+							conserveData.itemList.splice(i,1);
+							break;
+						}
+					}
+    				var $tr = $(this).parent().parent();
+    				$tr.remove();
+    			});
+    			$("#edit"+id).click(function(){
+    				var data;
+    				for (var i = 0; i < conserveData.itemList.length; i++) {
+						if(conserveData.itemList[i].id==id){
+							data=conserveData.itemList[i];
+							break;
+						}
+					}
+    				if(data){
+    					$("#myModalLabel").text("编辑");
+    					validatorConserveItemInputForm.resetForm();
+    			        $("#conserveItemInputForm")[0].reset();
+    			        $("#itemId").val(data.id);
+    					$("#conserveItem1").val(data.i1);
+    					$("#conserveItem2").val(data.i2);
+    					$("#conserveItem3").val(data.i3);
+    					$("#conserveItem4").val(data.i4);
+    					$("#conserveItem5").val(data.i5);
+    					$("#conserveItem6").val(data.i6);
+    					$("#conserveItem7").val(data.i7).trigger("change");
+    					$("#conserveItem8").val(data.i8);
+    					$("#modal-default").modal("show");
+    				}
+    			});
+    			conserveData.itemId=conserveData.itemId+1;
+    			$("#modal-default").modal("hide");
+    		}
 		},
 		onkeyup:false
+	});
+	$("#addConserveItem").click(function(){
+		$("#myModalLabel").text("添加");
+		validatorConserveItemInputForm.resetForm();
+        $("#conserveItemInputForm")[0].reset();
+        $("#itemId").val('');
+		$("#conserveItem1").val("薄层罩面");
+		// 其它默认值操作暂时不作
+		$("#conserveItem7").val(cdAsphaltType[0].id).trigger("change");
+ 		$("#modal-default").modal("show");
 	});
 	var validatorInventoryConserveForm = $("#inventoryConserveForm").validate({
 		errorClass: 'text-danger',

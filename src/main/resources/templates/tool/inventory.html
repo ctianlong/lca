@@ -880,7 +880,7 @@
             </form>
             <form id="inventoryConserveItemForm" class="form-horizontal" role="form">
                 <fieldset>
-                    <legend>请输入养护条目：</legend>
+                    <legend>请输入养护时间表：</legend>
                     <div class="table-responsive">
                   <table id="conserveInventoryItemTable"
                     class="table table-bordered table-hover table-striped table-condensed">
@@ -894,39 +894,42 @@
                             <th class="text-center">平均深度（cm）</th>
                             <th class="text-center">沥青种类</th>
                             <th class="text-center">油石比（%）</th>
+                            <th class="text-center">操作</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
                     </tbody>
                 </table>
-                <script id="tpl-conserveInventoryMaterialTable" type="text/template">
+                <script id="tpl-conserveInventoryItemTable" type="text/template">
                        <tr>
                            <td>#i1#</td>
                            <td>#i2#</td>
                            <td>#i3#</td>
-                           <td>#i#</td>
-                           <td>#i#</td>
-                           <td>#i#</td>
-                           <td>#i#</td>
-                           <td>#i#</td>
+                           <td>#i4#</td>
+                           <td>#i5#</td>
+                           <td>#i6#</td>
+                           <td>#i7Text#</td>
+                           <td>#i8#</td>
+                           <td>
+                           <a id="edit#id#" class="king-btn king-info king-radius king-btn-mini"><i class="fa fa-edit btn-icon"></i></a>
+                           <a id="delete#id#" class="king-btn king-danger king-radius king-btn-mini"><i class="fa fa-close btn-icon"></i></a>
+                           </td>
                        </tr>
                     </script>
             </div>
-                    
-                    
                     <div class="form-group">
                         <label class="col-md-2 control-label">养护时间表不确定性：</label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="百分比，5~30之间" id="conserveItem3"
-                                name="conserveItem3" value="30">
+                            <input type="text" class="form-control" placeholder="百分比，5~30之间" id="conserveUncertainty"
+                                name="conserveUncertainty">
                             <div class="input-group-addon">%</div>
                             </div>
                         </div>
                     </div>
                 </fieldset>
                 <div class="text-center">
-                    <button class="king-btn king-radius king-primary" type="button" id="addConserveItem">添加养护条目</button>
+                    <button class="king-btn king-radius king-info" type="button" id="addConserveItem">添加养护条目</button>
                     <button class="king-btn king-radius king-success" type="submit">计算原材料用量</button>
                 </div>
             </form>
@@ -992,8 +995,8 @@
                     <thead>
                         <tr>
                             <th class="text-center">时间成本</th>
-                            <th class="text-center">车辆运行</th>
-                            <th class="text-center">安全</th>
+                            <th class="text-center">车辆运行成本</th>
+                            <th class="text-center">安全成本</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
@@ -1156,7 +1159,7 @@
 </div>
 <!-- 养护条目modal -->
 <div class="modal fade" data-backdrop="static" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content" style="border-radius:5px;">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -1191,7 +1194,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label">养护区封闭车道数/总车道数：</label>
                     <div class="col-md-8">
-                    <input type="text" class="form-control" placeholder="分数" id="conserveItem3"
+                    <input type="text" class="form-control" placeholder="分数，如 1/2" id="conserveItem3"
                                 name="conserveItem3">
                     </div>
                 </div>
