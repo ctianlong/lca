@@ -1,5 +1,33 @@
 <div id="step-influence" style="display:none;">
-	<div class="panel king-panel1" id="">
+    <div class="panel king-panel1" id="energyInfluence">
+        <div class="panel-heading king-panel-head1 king-panel-top3">
+            <h3 class="panel-title"><b>能耗</b></h3>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" role="form">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">能耗值：</label>
+                <div class="col-sm-10">
+                  <p id="energyValue" class="form-control-static"></p>
+                </div>
+              </div>
+            </form>
+            <form id="energyForm" class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">请选择数据集：</label>
+                    <div class="col-md-6">
+                        <select id="energySelect" name="energySelect" class="form-control"
+                            style="width: 100%">
+                        </select>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="king-btn king-radius king-success" type="submit">计算能耗影响</button>
+                </div>
+            </form>
+        </div>
+    </div>
+	<div class="panel king-panel1" id="carbonInfluence">
 		<div class="panel-heading king-panel-head1 king-panel-top3">
 			<h3 class="panel-title"><b>温室效应</b></h3>
 		</div>
@@ -14,7 +42,7 @@
 		    </form>
 			<form id="gwpForm" class="form-horizontal" role="form">
 				<div class="form-group">
-					<label class="col-md-2 control-label">请选择 GWP：</label>
+					<label class="col-md-2 control-label">请选择数据集/年份：</label>
 					<div class="col-md-6">
 						<select id="gwpSelect" name="gwpSelect" class="form-control"
 							style="width: 100%">
@@ -22,7 +50,65 @@
 					</div>
 				</div>
 				<div class="text-center">
-                    <button class="king-btn king-radius king-success" type="submit">计算温室效应</button>
+                    <button class="king-btn king-radius king-success" type="submit">计算温室效应影响</button>
+                </div>
+			</form>
+		</div>
+	</div>
+	
+	<div class="panel king-panel1" id="sourInfluence">
+		<div class="panel-heading king-panel-head1 king-panel-top3">
+			<h3 class="panel-title"><b>酸化</b></h3>
+		</div>
+		<div class="panel-body">
+		    <form class="form-horizontal" role="form">
+		      <div class="form-group">
+			    <label class="col-sm-2 control-label">酸化值：</label>
+			    <div class="col-sm-10">
+			      <p id="sourValue" class="form-control-static"></p>
+			    </div>
+			  </div>
+		    </form>
+			<form id="sourForm" class="form-horizontal" role="form">
+				<div class="form-group">
+					<label class="col-md-2 control-label">请选择数据集：</label>
+					<div class="col-md-6">
+						<select id="sourSelect" name="sourSelect" class="form-control"
+							style="width: 100%">
+						</select>
+					</div>
+				</div>
+				<div class="text-center">
+                    <button class="king-btn king-radius king-success" type="submit">计算酸化影响</button>
+                </div>
+			</form>
+		</div>
+	</div>
+	
+	<div class="panel king-panel1" id="eutrophicationInfluence">
+		<div class="panel-heading king-panel-head1 king-panel-top3">
+			<h3 class="panel-title"><b>富营养化</b></h3>
+		</div>
+		<div class="panel-body">
+		    <form class="form-horizontal" role="form">
+		      <div class="form-group">
+			    <label class="col-sm-2 control-label">富营养化值：</label>
+			    <div class="col-sm-10">
+			      <p id="eutrophicationValue" class="form-control-static"></p>
+			    </div>
+			  </div>
+		    </form>
+			<form id="eutrophicationForm" class="form-horizontal" role="form">
+				<div class="form-group">
+					<label class="col-md-2 control-label">请选择数据集：</label>
+					<div class="col-md-6">
+						<select id="eutrophicationSelect" name="eutrophicationSelect" class="form-control"
+							style="width: 100%">
+						</select>
+					</div>
+				</div>
+				<div class="text-center">
+                    <button class="king-btn king-radius king-success" type="submit">计算富营养化影响</button>
                 </div>
 			</form>
 		</div>
