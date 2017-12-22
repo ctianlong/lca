@@ -2676,14 +2676,45 @@ $(function(){
     		}
 		},
 		submitHandler:function(form){
-			if($("#itemId").val()){
-    			
+			var itemId=$("#itemId").val();
+			if(itemId){
+				var x;
+				for (var i = 0; i < conserveData.itemList.length; i++) {
+					if(conserveData.itemList[i].id==itemId){
+						x=conserveData.itemList[i];
+						break;
+					}
+				}
+				if(x){
+					x.i1=$("#conserveItem1").val();
+	    			x.i2=$("#conserveItem2").val();
+	    			x.i2Text="道路运营"+x.i2+"年后";
+	    			x.i3=$("#conserveItem3").val();
+	    			x.i4=$("#conserveItem4").val();
+	    			x.i5=$("#conserveItem5").val();
+	    			x.i6=$("#conserveItem6").val();
+	    			var t=$("#conserveItem7").select2("data")[0];
+	    			x.i7=t.id;
+	    			x.i7Text=t.text;
+	    			x.i8=$("#conserveItem8").val();
+	    			var tds=$("#edit"+itemId).parent().parent().children("td");
+	    			tds.eq(0).text(x.i1);
+	    			tds.eq(1).text(x.i2Text);
+	    			tds.eq(2).text(x.i3);
+	    			tds.eq(3).text(x.i4);
+	    			tds.eq(4).text(x.i5);
+	    			tds.eq(5).text(x.i6);
+	    			tds.eq(6).text(x.i7Text);
+	    			tds.eq(7).text(x.i8);
+	    			$("#modal-default").modal("hide");
+				}
     		}else{
     			var x={};
     			var id=conserveData.itemId;
     			x.id=id;
     			x.i1=$("#conserveItem1").val();
     			x.i2=$("#conserveItem2").val();
+    			x.i2Text="道路运营"+x.i2+"年后";
     			x.i3=$("#conserveItem3").val();
     			x.i4=$("#conserveItem4").val();
     			x.i5=$("#conserveItem5").val();
@@ -2742,9 +2773,47 @@ $(function(){
         $("#conserveItemInputForm")[0].reset();
         $("#itemId").val('');
 		$("#conserveItem1").val("薄层罩面");
-		// 其它默认值操作暂时不作
+		$("#conserveItem2").val(5);
+		$("#conserveItem3").val("1/2");
+		$("#conserveItem4").val(50);
+		$("#conserveItem5").val(20);
+		$("#conserveItem6").val(2);
 		$("#conserveItem7").val(cdAsphaltType[0].id).trigger("change");
  		$("#modal-default").modal("show");
+	});
+	var validatorInventoryConserveItemForm = $("#inventoryConserveItemForm").validate({
+		errorClass: 'text-danger',
+		rules:{
+			conserveUncertainty:{
+				required:true,
+				number:true,
+				min:5,
+				max:30
+			}
+		},
+		errorPlacement: function(error, element) {
+    		if (element.parent().hasClass("input-group")) {
+    			error.appendTo(element.parent().parent());
+    		} else {
+    			error.appendTo(element.parent());
+    		}
+		},
+		submitHandler:function(form){
+			if(conserveData.itemList.length==0){
+				var d = dialog({
+					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您至少添加一个养护条目'+'</p></div>'
+				});
+				d.show();
+				setTimeout(function() {
+					d.close().remove();
+				}, 1500);
+				return false;
+			}
+			
+			
+			
+		},
+		onkeyup:false
 	});
 	var validatorInventoryConserveForm = $("#inventoryConserveForm").validate({
 		errorClass: 'text-danger',
