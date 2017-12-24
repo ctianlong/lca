@@ -72,6 +72,12 @@ $(function(){
 		{id:4,title:"2013 IPCC AR5",year:"20年GWP",co2:1,ch4:84,n2o:264,ccl2f2:10800,chclf2:5280,cf4:4880,c2f6:8210,sf6:17500,nf3:12800},
 		{id:5,title:"2013 IPCC AR5",year:"100年GWP",co2:1,ch4:28,n2o:265,ccl2f2:10200,chclf2:1760,cf4:6630,c2f6:11100,sf6:23500,nf3:16100}
 	];
+	var cdSo2Equiv=[
+		{id:1,dataSet:"TRACI",so2:1,nox:0.7,nh3:1.88,hcl:0.88,hf:1.6,h2s:1.88,hno3:0.51,no2:0.51,no:1.07,h3po4:0.98,so3:0.8,h2so4:0.65}
+	];
+	var cdNEquiv=[
+		{id:1,dataSet:"TRACI",nh3kq:0.119,nh3s:0.779,tn:0.986,bodcod:0.05,xsykq:0.036,xsys:0.237,hno3kq:0.0345,hno3s:0.227,noxds:0.779,noxhs:0.291,noxkq:0.0443,lsykq:0.366,lsys:2.38,lskq:0.355,lss:2.31,lkq:1.12,ls:7.29}
+	];
 	var $roadType=$("#roadType").select2({
 		data:cdRoadType,
 		minimumResultsForSearch:-1,
@@ -1163,7 +1169,48 @@ $(function(){
 		templateResult: formatGwp,
 		templateSelection: formatGwpSelection
 	});
-	
+	// 酸化
+	function formatSour(repo) {
+	  if (repo.loading) {
+		  return repo.text;
+	  }
+	  return repo.dataSet;
+	}
+	function formatSourSelection(repo) {
+		if(repo.dataSet){
+			return repo.dataSet;
+		}
+		return repo.text;
+	}
+	var $sourSelect=$("#sourSelect").select2({
+		data:cdSo2Equiv,
+		minimumResultsForSearch:-1, //如要搜索可去掉该选项
+		language:iMsg.select2LangCode,
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatSour,
+		templateSelection: formatSourSelection
+	});
+	// 富营养化
+	function formatEutrophication(repo) {
+		if (repo.loading) {
+			return repo.text;
+		}
+		return repo.dataSet;
+	}
+	function formatEutrophicationSelection(repo) {
+		if(repo.dataSet){
+			return repo.dataSet;
+		}
+		return repo.text;
+	}
+	var $eutrophicationSelect=$("#eutrophicationSelect").select2({
+		data:cdNEquiv,
+		minimumResultsForSearch:-1, //如要搜索可去掉该选项
+		language:iMsg.select2LangCode,
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatEutrophication,
+		templateSelection: formatEutrophicationSelection
+	});
 	var tool={
 		stepGo:function(now,next){
 			$("#step"+now).removeClass("current").addClass("done");
@@ -1174,35 +1221,37 @@ $(function(){
 			$("#step"+priv).removeClass("done").addClass("current");
 		}
 	}
-	
-	var materialList=[];
-	var transportList=[];
-	var mixPaveList=[];
+	var materialData={};
+	var transConsData={};
 	var use1Data={};
 	var use2Data={};
 	var use3Data={};
 	var conserveData={};
-	var greenHouseData={};
+	var recycleData={};
+	var influenceData={};
+	var chartData={};
 	var basicData={};
 	var materialRange,transConsRange,use1Range,use2Range,use3Range,conserveRange,recycleRange;
 	var energyRange,carbonRang,sourRange,eutrophicationRange,ozoneRange;
 	// 运输与施工特殊处理，因为一个范围中有两个表单，需要两个都完成才能使transConsRange=2
 	var transFlag,consFlag;
-	
+	// 养护处理，需要先完成养护原材料清单才行
+	var conserveMaterialFlag;
 	function initClean() {
-		materialList=[];
-		transportList=[];
-		mixPaveList=[];
+		materialData={};
+		transConsData={};
 		use1Data={};
 		use2Data={};
 		use3Data={};
 		conserveData={};
-		greenHouseData={};
+		recycleData={};
+		influenceData={};
+		chartData={};
 		basicData={};
 		transFlag=false;
 		consFlag=false;
+		conserveMaterialFlag=false;
 	}
-	
 	var validatorFormInput = $("#form-input").validate({
 		errorClass: 'text-danger',
     	rules:{
@@ -1473,7 +1522,7 @@ $(function(){
                 return false;
     		}
     		initClean();
-    		var rLength=$("#roadLength").val()*1000.0;
+    		var rLength=$("#roadLength").val()*1000;
     		var rWidth=parseFloat($("#roadWidth").val());
     		var area=rLength*rWidth;
     		basicData.rLength=rLength;
@@ -1641,6 +1690,7 @@ $(function(){
     			brick+=area/($("#brickLength").val()*$("#brickWidth").val()); // 铺砖块数
     		}
     		tphd+=parseFloat($("#baseLayerThickness").val())+parseFloat($("#bottomBaseLayerThickness").val())+parseFloat($("#cushionLayerThickness").val());
+    		basicData.totalThickness=tphd;
     		// 基、底基、垫层碎石、沥青、水泥、石灰
 			switch ($baseLayerMaterial.select2("data")[0].id) {
 			case "1":case "2":
@@ -1762,72 +1812,72 @@ $(function(){
 				$("#qlzsjSelect").hide();
 				$("#hnjSelect").hide();
 				$("#jsjSelect").hide();
+				materialData.materialList=[];
 				if(gravel>0){
-					materialList.push({materialMark:"gravel",materialName:"碎石集料",amount:gravel.toFixed(3)});
+					materialData.materialList.push({materialMark:"gravel",materialName:"碎石集料",amount:gravel.toFixed(3)});
 					$("#gravelSelect").show();
 				}
 				if(ordinaryAsphalt>0){
-					materialList.push({materialMark:"ordinaryAsphalt",materialName:"普通沥青",amount:ordinaryAsphalt.toFixed(3)});
+					materialData.materialList.push({materialMark:"ordinaryAsphalt",materialName:"普通沥青",amount:ordinaryAsphalt.toFixed(3)});
 					$("#ordinaryAsphaltSelect").show();
 				}
 				if(modifiedAsphalt>0){
-					materialList.push({materialMark:"modifiedAsphalt",materialName:"改性沥青",amount:modifiedAsphalt.toFixed(3)});
+					materialData.materialList.push({materialMark:"modifiedAsphalt",materialName:"改性沥青",amount:modifiedAsphalt.toFixed(3)});
 					$("#modifiedAsphaltSelect").show();
 				}
 				if(highViscosityAsphalt>0){
-					materialList.push({materialMark:"highViscosityAsphalt",materialName:"高粘度沥青",amount:highViscosityAsphalt.toFixed(3)});
+					materialData.materialList.push({materialMark:"highViscosityAsphalt",materialName:"高粘度沥青",amount:highViscosityAsphalt.toFixed(3)});
 					$("#highViscosityAsphaltSelect").show();
 				}
 				if(cement>0){
-					materialList.push({materialMark:"cement",materialName:"水泥",amount:cement.toFixed(3)});
+					materialData.materialList.push({materialMark:"cement",materialName:"水泥",amount:cement.toFixed(3)});
 					$("#cementSelect").show();
 				}
 				if(lime>0){
-					materialList.push({materialMark:"lime",materialName:"石灰",amount:lime.toFixed(3)});
+					materialData.materialList.push({materialMark:"lime",materialName:"石灰",amount:lime.toFixed(3)});
 					$("#limeSelect").show();
 				}
 				if(rebar>0){
-					materialList.push({materialMark:"rebar",materialName:"钢筋",amount:rebar.toFixed(3)});
+					materialData.materialList.push({materialMark:"rebar",materialName:"钢筋",amount:rebar.toFixed(3)});
 					$("#rebarSelect").show();
 				}
 				if(snj>0){
-					materialList.push({materialMark:"snjType",materialName:"速凝剂",amount:snj.toFixed(3)});
+					materialData.materialList.push({materialMark:"snjType",materialName:"速凝剂",amount:snj.toFixed(3)});
 					$("#snjSelect").show();
 				}
 				if(jqj>0){
-					materialList.push({materialMark:"jqjType",materialName:"加气剂",amount:jqj.toFixed(3)});
+					materialData.materialList.push({materialMark:"jqjType",materialName:"加气剂",amount:jqj.toFixed(3)});
 					$("#jqjSelect").show();
 				}
 				if(zsj>0){
-					materialList.push({materialMark:"zsjType",materialName:"增塑剂",amount:zsj.toFixed(3)});
+					materialData.materialList.push({materialMark:"zsjType",materialName:"增塑剂",amount:zsj.toFixed(3)});
 					$("#zsjSelect").show();
 				}
 				if(qlzsj>0){
-					materialList.push({materialMark:"qlzsjType",materialName:"强力增塑剂",amount:qlzsj.toFixed(3)});
+					materialData.materialList.push({materialMark:"qlzsjType",materialName:"强力增塑剂",amount:qlzsj.toFixed(3)});
 					$("#qlzsjSelect").show();
 				}
 				if(hnj>0){
-					materialList.push({materialMark:"hnjType",materialName:"缓凝剂",amount:hnj.toFixed(3)});
+					materialData.materialList.push({materialMark:"hnjType",materialName:"缓凝剂",amount:hnj.toFixed(3)});
 					$("#hnjSelect").show();
 				}
 				if(jsj>0){
-					materialList.push({materialMark:"jsjType",materialName:"减水剂",amount:jsj.toFixed(3)});
+					materialData.materialList.push({materialMark:"jsjType",materialName:"减水剂",amount:jsj.toFixed(3)});
 					$("#jsjSelect").show();
 				}
 				if(brick>0){
-					materialList.push({materialMark:"brick",materialName:"混凝土砖",amount:Math.ceil(brick)}); // 铺砖
+					materialData.materialList.push({materialMark:"brick",materialName:"混凝土砖",amount:Math.ceil(brick)}); // 铺砖
 				}
 				var _html='';
 	            var tpl=$('#tpl-materialInventoryTable').html();
-	            for (var i=0,len=materialList.length; i < len; i++){
-	                var item = materialList[i];
+	            for (var i=0,len=materialData.materialList.length; i < len; i++){
+	                var item = materialData.materialList[i];
 	                _html += renderTpl(tpl, item);
 	            }
 	            $('#materialInventoryTable tbody').html(_html);
 			}else{
 				$("#materialInventory").hide();
 			}
-            
 			if(transConsRange){
 				$("#transportInventory").show();
 				// 计算运输过程
@@ -1837,26 +1887,27 @@ $(function(){
 	            $("#asphaltVehicleSelect").hide();
 	            $("#cementVehicleSelect").hide();
 	            $("#mixtureVehicleSelect").hide();
+	            transConsData.transportList=[];
 	            if(gravel>0){
-	            	transportList.push({materialMark:"aggregate",materialName:"集料",amount:gravel.toFixed(3)});
+	            	transConsData.transportList.push({materialMark:"aggregate",materialName:"集料",amount:gravel.toFixed(3)});
 	            	$("#aggregateVehicleSelect").show();
 	            }
 	            if(allAsphalt>0){
-	            	transportList.push({materialMark:"asphalt",materialName:"沥青",amount:allAsphalt.toFixed(3)});
+	            	transConsData.transportList.push({materialMark:"asphalt",materialName:"沥青",amount:allAsphalt.toFixed(3)});
 	            	$("#asphaltVehicleSelect").show();
 	            }
 	            if(cement>0){
-	            	transportList.push({materialMark:"cement",materialName:"水泥",amount:cement.toFixed(3)});
+	            	transConsData.transportList.push({materialMark:"cement",materialName:"水泥",amount:cement.toFixed(3)});
 	            	$("#cementVehicleSelect").show();
 	            }
 	            if(mixtureAmount>0){
-	            	transportList.push({materialMark:"mixture",materialName:"混合料",amount:mixtureAmount.toFixed(3)});
+	            	transConsData.transportList.push({materialMark:"mixture",materialName:"混合料",amount:mixtureAmount.toFixed(3)});
 	            	$("#mixtureVehicleSelect").show();
 	            }
 	            _html='';
 	            var tpl=$('#tpl-transportInventoryTable').html();
-	            for (var i=0,len=transportList.length; i < len; i++){
-	                var item = transportList[i];
+	            for (var i=0,len=transConsData.transportList.length; i < len; i++){
+	                var item = transConsData.transportList[i];
 	                _html += renderTpl(tpl, item);
 	            }
 	            $('#transportInventoryTable tbody').html(_html);
@@ -1935,26 +1986,54 @@ $(function(){
 				$("#use3Inventory").show();
 				$("#heavyAxleloadTimes").val(3);
 				$("#smallAxleloadTimes").val(0.01);
+				if(use2Range){
+					$("#use2ItemInUse3").hide();
+				}else{
+					$("#use2ItemInUse3").show();
+					$("#use2Item3InUse3").val(5000);
+					$("#use2Item4InUse3").val(10);
+					$("#use2Item5InUse3").val(0.0824);
+					$("#use2Item6InUse3").val(0.204);
+				}
+				var tmpList=[];
+	            tmpList.push({fuelName:"汽油"});
+	            tmpList.push({fuelName:"柴油"});
+	            var _html='';
+	            var tpl=$('#tpl-use3InventoryTable').html();
+	            for (var i=0,len=tmpList.length; i < len; i++){
+	                var item = tmpList[i];
+	                _html += renderTpl(tpl, item);
+	            }
+	            $('#use3InventoryTable tbody').html(_html);
 			}else{
 				$("#use3Inventory").hide();
 			}
-			
 			if(conserveRange){
 				// 计算养护
 				$("#conserveInventory").show();
 				conserveData.itemList=[];
 				conserveData.itemId=1;
+				$("#conserveBase2").val(5);
+				$("#conserveBase3").val(8);
+				$("#conserveBase4").val(100);
+				$("#conserveBase5").val(1);
 				$("#conserveUncertainty").val(30);
+				$("#inventoryConserveMaterialForm").hide();
+				$('#conserveInventoryMaterialTable tbody').empty();
+				$("#conserveInventoryItemTable tbody").empty();
+				$("#conserveInventoryEconomicTable tbody").empty();
 			}else{
 				$("#conserveInventory").hide();
 			}
 			if(recycleRange){
 				// 计算回收
 				$("#recycleInventory").show();
+				$("#recycleInventoryTable tbody").empty();
+				// 存混合料用量
+				recycleData.mixtureAmount=gravel+ordinaryAsphalt+modifiedAsphalt+highViscosityAsphalt+cement;
 			}else{
 				$("#recycleInventory").hide();
 			}
-            
     		tool.stepGo(1,2);
     		$("#step-input").hide();
     		$("#step-inventory").show();
@@ -1962,11 +2041,10 @@ $(function(){
     	},
     	onkeyup:false
 	});
-	
 	$("#inventoryMaterialForm").submit(function(){
-		if(materialList.length>0){
-			for (var i = 0; i < materialList.length; i++) {
-				var item=materialList[i];
+		if(materialData.materialList.length>0){
+			for (var i = 0; i < materialData.materialList.length; i++) {
+				var item=materialData.materialList[i];
 				if(item.materialMark=="brick") continue;
 				var res=$("#"+item.materialMark).select2("data")[0];
 				if(res==undefined){
@@ -2019,8 +2097,8 @@ $(function(){
 			}
 			var _html='';
             var tpl=$('#tpl-materialInventoryTable').html();
-            for (var i=0,len=materialList.length; i < len; i++){
-                var item = materialList[i];
+            for (var i=0,len=materialData.materialList.length; i < len; i++){
+                var item = materialData.materialList[i];
                 _html += renderTpl(tpl, item);
             }
             $('#materialInventoryTable tbody').html(_html);
@@ -2053,10 +2131,17 @@ $(function(){
     			min:0
     		}
     	},
+    	errorPlacement: function(error, element) {
+    		if (element.parent().hasClass("input-group")) {
+    			error.appendTo(element.parent().parent());
+    		} else {
+    			error.appendTo(element.parent());
+    		}
+		},
     	submitHandler:function(form){
-    		if(transportList.length>0){
-	    		for (var i = 0; i < transportList.length; i++) {
-					var item=transportList[i];
+    		if(transConsData.transportList.length>0){
+	    		for (var i = 0; i < transConsData.transportList.length; i++) {
+					var item=transConsData.transportList[i];
 					var res=$("#"+item.materialMark+"VehicleModel").select2("data")[0];
 					var distance=$("#"+item.materialMark+"Distance").val();
 					if(res==undefined){
@@ -2106,8 +2191,8 @@ $(function(){
 				}
 				var _html='';
 	            var tpl=$('#tpl-transportInventoryTable').html();
-	            for (var i=0,len=transportList.length; i < len; i++){
-	                var item = transportList[i];
+	            for (var i=0,len=transConsData.transportList.length; i < len; i++){
+	                var item = transConsData.transportList[i];
 	                _html += renderTpl(tpl, item);
 	            }
 	            $('#transportInventoryTable tbody').html(_html);
@@ -2151,12 +2236,13 @@ $(function(){
 					}
 				}
 			}
-			mixPaveList.push({fuelMark:"gasoline",fuelName:"汽油",amount:gasoline.toFixed(3)});
-            mixPaveList.push({fuelMark:"diesel",fuelName:"柴油",amount:diesel.toFixed(3)});
-            mixPaveList.push({fuelMark:"heavyOil",fuelName:"重油",amount:heavyOil.toFixed(3)});
-            mixPaveList.push({fuelMark:"electricity",fuelName:"电",amount:electricity.toFixed(3)});
-			for (var i = 0; i < mixPaveList.length; i++) {
-				var item=mixPaveList[i];
+			transConsData.mixPaveList=[];
+			transConsData.mixPaveList.push({fuelMark:"gasoline",fuelName:"汽油",amount:gasoline.toFixed(3)});
+			transConsData.mixPaveList.push({fuelMark:"diesel",fuelName:"柴油",amount:diesel.toFixed(3)});
+			transConsData.mixPaveList.push({fuelMark:"heavyOil",fuelName:"重油",amount:heavyOil.toFixed(3)});
+			transConsData.mixPaveList.push({fuelMark:"electricity",fuelName:"电",amount:electricity.toFixed(3)});
+			for (var i = 0; i < transConsData.mixPaveList.length; i++) {
+				var item=transConsData.mixPaveList[i];
 				var res=$("#"+item.fuelMark).select2("data")[0];
 				if(res==undefined){
 					var d = dialog({
@@ -2203,8 +2289,8 @@ $(function(){
 			}
 			var _html='';
 			var tpl=$('#tpl-mixPaveInventoryTable').html();
-			for (var i=0,len=mixPaveList.length; i < len; i++){
-				var item = mixPaveList[i];
+			for (var i=0,len=transConsData.mixPaveList.length; i < len; i++){
+				var item = transConsData.mixPaveList[i];
 				_html += renderTpl(tpl, item);
 			}
 			$('#mixPaveInventoryTable tbody').html(_html);
@@ -2312,7 +2398,7 @@ $(function(){
 			use2Item1:{
 				required:true,
 				number:true,
-				min:0
+				min:1
 			},
 			use2Item2:{
 				required:true,
@@ -2455,6 +2541,13 @@ $(function(){
 			var i20=$("#use2Item20").val();
 			var i21=$("#use2Item21").val();
 			var i22=$("#use2Item22").val();
+			use2Data.use3Para={};
+			use2Data.use3Para.i1=i1;
+			use2Data.use3Para.i3=i3;
+			use2Data.use3Para.i4=i4;
+			use2Data.use3Para.i5=i5;
+			use2Data.use3Para.i6=i6;
+			use2Data.use3Para.i7=i7;
 			if(i11/0.5>1){
 				use2Data.bypassRatio=1;
 			}else{
@@ -2486,12 +2579,12 @@ $(function(){
 			}
 			var y=(et0*0.8-i10*0.6)*3*basicData.area/1000;
 			var electricity=i1*i17*i18*(x>y?y:x);
-			use2Data.list=[];
-			use2Data.list.push({fuelMark:"gasolineUse2",fuelName:"汽油",amount:gasoline.toFixed(3)});
-			use2Data.list.push({fuelMark:"dieselUse2",fuelName:"柴油",amount:diesel.toFixed(3)});
-			use2Data.list.push({fuelMark:"electricityUse2",fuelName:"电",amount:electricity.toFixed(3)});
-			for (var i = 0; i < use2Data.list.length; i++) {
-				var item=use2Data.list[i];
+			use2Data.fuelList=[];
+			use2Data.fuelList.push({fuelMark:"gasolineUse2",fuelName:"汽油",amount:gasoline.toFixed(3)});
+			use2Data.fuelList.push({fuelMark:"dieselUse2",fuelName:"柴油",amount:diesel.toFixed(3)});
+			use2Data.fuelList.push({fuelMark:"electricityUse2",fuelName:"电",amount:electricity.toFixed(3)});
+			for (var i = 0; i < use2Data.fuelList.length; i++) {
+				var item=use2Data.fuelList[i];
 				var res=$("#"+item.fuelMark).select2("data")[0];
 				if(res==undefined){
 					var d = dialog({
@@ -2538,8 +2631,8 @@ $(function(){
 			}
 			var _html='';
 			var tpl=$('#tpl-use2InventoryTable').html();
-			for (var i=0,len=use2Data.list.length; i < len; i++){
-				var item = use2Data.list[i];
+			for (var i=0,len=use2Data.fuelList.length; i < len; i++){
+				var item = use2Data.fuelList[i];
 				_html += renderTpl(tpl, item);
 			}
 			$('#use2InventoryTable tbody').html(_html);
@@ -2588,6 +2681,66 @@ $(function(){
 		onkeyup:false
 	});
 	// 使用滚动阻力
+	$("#gasolineUse3").select2({
+		ajax:{
+			url:ctxPath+"/api/db/inventory/fuel",
+			dataType:'json',
+			delay:200,
+			data:function(params){
+				return {
+					page:params.page,
+					fuelType:"汽油"
+				};
+			},
+			processResults:function(data,params){
+				params.page=params.page||1;
+				return {
+					results:data.list,
+					pagination:{
+						more:data.hasNextPage
+					}
+				};
+			},
+			cache:true
+		},
+		placeholder:'请选择一种具体燃料',
+		allowClear:true,
+		minimumResultsForSearch:-1, //如要搜索可去掉该选项
+		language:iMsg.select2LangCode,
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatFuel,
+		templateSelection: formatFuelSelection
+	});
+	$("#dieselUse3").select2({
+		ajax:{
+			url:ctxPath+"/api/db/inventory/fuel",
+			dataType:'json',
+			delay:200,
+			data:function(params){
+				return {
+					page:params.page,
+					fuelType:"柴油"
+				};
+			},
+			processResults:function(data,params){
+				params.page=params.page||1;
+				return {
+					results:data.list,
+					pagination:{
+						more:data.hasNextPage
+					}
+				};
+			},
+			cache:true
+		},
+		placeholder:'请选择一种具体燃料',
+		allowClear:true,
+		minimumResultsForSearch:-1, //如要搜索可去掉该选项
+		language:iMsg.select2LangCode,
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatFuel,
+		templateSelection: formatFuelSelection
+	});
 	var validatorInventoryUse3Form = $("#inventoryUse3Form").validate({
 		errorClass: 'text-danger',
 		rules:{
@@ -2605,6 +2758,38 @@ $(function(){
 				required:true,
 				number:true,
 				min:0
+			},
+			use2Item1InUse3:{
+				required:true,
+				number:true,
+				min:1
+			},
+			use2Item3InUse3:{
+				required:true,
+				number:true,
+				min:0
+			},
+			use2Item4InUse3:{
+				required:true,
+				number:true,
+				min:0,
+				max:100
+			},
+			use2Item5InUse3:{
+				required:true,
+				number:true,
+				min:0
+			},
+			use2Item6InUse3:{
+				required:true,
+				number:true,
+				min:0
+			},
+			use2Item7InUse3:{
+				required:true,
+				number:true,
+				min:0,
+				max:100
 			}
 		},
 		errorPlacement: function(error, element) {
@@ -2615,11 +2800,121 @@ $(function(){
 			}
 		},
 		submitHandler:function(form){
+			if(conserveRange==1){
+				var d = dialog({
+					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成养护清单'+'</p></div>'
+				});
+				d.show();
+				setTimeout(function() {
+					d.close().remove();
+				}, 1500);
+				return false;
+			}
+			var i1,i3,i4,i5,i6,i7;
+			if(use2Range==1){
+				var d = dialog({
+					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成使用（透水率）清单'+'</p></div>'
+				});
+				d.show();
+				setTimeout(function() {
+					d.close().remove();
+				}, 1500);
+				return false;
+			}else if(use2Range==2){
+				i1=use2Data.use3Para.i1;
+				i3=use2Data.use3Para.i3;
+				i4=use2Data.use3Para.i4;
+				i5=use2Data.use3Para.i5;
+				i6=use2Data.use3Para.i6;
+				i7=use2Data.use3Para.i7;
+			}else{
+				i1=$("#use2Item1InUse3").val();
+				i3=$("#use2Item3InUse3").val();
+				i4=$("#use2Item4InUse3").val()/100;
+				i5=$("#use2Item5InUse3").val();
+				i6=$("#use2Item6InUse3").val();
+				i7=$("#use2Item7InUse3").val()/100;
+			}
 			var x=$("#initialIRI").val();
 			var y=$("#heavyAxleloadTimes").val();
 			var z=$("#smallAxleloadTimes").val();
-			
-			
+			var gasoline=0,diesel=0;
+			if(conserveRange==2){
+				for (var i = 1; i <= i1; i++) {
+					var cItems=conserveData.itemList;
+					var iri=Math.pow(-0.174+0.0000966*Math.sqrt((i3*i4*y+i3*(1-i4)*z)*365*(Math.pow(1+i7,i)-1)/i7)+1.15*Math.sqrt(x),2);
+					for (var ii = 0; ii < cItems.length; ii++) {
+						if(cItems[ii].i2==i){
+							irt=iri-(-0.6839+0.6197*iri);
+							break;
+						}
+					}
+					gasoline+=(iri-1)*0.0313*(i5*basicData.rLength/1000*i3*Math.pow(1+i7,i));
+					diesel+=(iri-1)*0.00739*(i6*basicData.rLength/1000*i3*Math.pow(1+i7,i));
+				}
+			}else{
+				for (var i = 1; i <= i1; i++) {
+					var iri=Math.pow(-0.174+0.0000966*Math.sqrt((i3*i4*y+i3*(1-i4)*z)*365*(Math.pow(1+i7,i)-1)/i7)+1.15*Math.sqrt(x),2);
+					gasoline+=(iri-1)*0.0313*(i5*basicData.rLength/1000*i3*Math.pow(1+i7,i));
+					diesel+=(iri-1)*0.00739*(i6*basicData.rLength/1000*i3*Math.pow(1+i7,i));
+				}
+			}
+			use3Data.fuelList=[];
+			use3Data.fuelList.push({fuelMark:"gasolineUse3",fuelName:"汽油",amount:gasoline.toFixed(3)});
+			use3Data.fuelList.push({fuelMark:"dieselUse3",fuelName:"柴油",amount:diesel.toFixed(3)});
+			for (var i = 0; i < use3Data.fuelList.length; i++) {
+				var item=use3Data.fuelList[i];
+				var res=$("#"+item.fuelMark).select2("data")[0];
+				if(res==undefined){
+					var d = dialog({
+						content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您选择相应燃料类型'+'</p></div>'
+					});
+					d.show();
+					setTimeout(function() {
+						d.close().remove();
+					}, 1500);
+					return false;
+				}else{
+					var amount=item.amount;
+					if(res.cost!=null){
+						item.cost=(res.cost*amount).toFixed(3);
+					}
+					if(res.energyConsume!=null){
+						item.energyConsume=(res.energyConsume*amount).toExponential(2);
+					}
+					if(res.emissionCo2!=null){
+						item.emissionCo2=(res.emissionCo2*amount).toExponential(2);
+					}
+					if(res.emissionCh4!=null){
+						item.emissionCh4=(res.emissionCh4*amount).toExponential(2);
+					}
+					if(res.emissionN2o!=null){
+						item.emissionN2o=(res.emissionN2o*amount).toExponential(2);
+					}
+					if(res.emissionCo!=null){
+						item.emissionCo=(res.emissionCo*amount).toExponential(2);
+					}
+					if(res.emissionSo2!=null){
+						item.emissionSo2=(res.emissionSo2*amount).toExponential(2);
+					}
+					if(res.emissionNox!=null){
+						item.emissionNox=(res.emissionNox*amount).toExponential(2);
+					}
+					if(res.emissionPb!=null){
+						item.emissionPb=(res.emissionPb*amount).toExponential(2);
+					}
+					if(res.emissionZn!=null){
+						item.emissionZn=(res.emissionZn*amount).toExponential(2);
+					}
+				}
+			}
+			var _html='';
+			var tpl=$('#tpl-use3InventoryTable').html();
+			for (var i=0,len=use3Data.fuelList.length; i < len; i++){
+				var item = use3Data.fuelList[i];
+				_html += renderTpl(tpl, item);
+			}
+			$('#use3InventoryTable tbody').html(_html);
 			use3Range=2;
 		},
 		onkeyup:false
@@ -2639,7 +2934,7 @@ $(function(){
 			conserveItem2:{
 				required:true,
 				number:true,
-				min:0
+				min:1
 			},
 			conserveItem3:{
 				required:true,
@@ -2707,6 +3002,12 @@ $(function(){
 	    			tds.eq(6).text(x.i7Text);
 	    			tds.eq(7).text(x.i8);
 	    			$("#modal-default").modal("hide");
+	    			conserveMaterialFlag=false;
+	    			conserveRange=1;
+	    			conserveData.materialList=[];
+	    			$("#inventoryConserveMaterialForm").hide();
+	    			$('#conserveInventoryMaterialTable tbody').empty();
+	    			$('#conserveInventoryEconomicTable tbody').empty();
 				}
     		}else{
     			var x={};
@@ -2736,6 +3037,12 @@ $(function(){
 					}
     				var $tr = $(this).parent().parent();
     				$tr.remove();
+    				conserveMaterialFlag=false;
+    				conserveRange=1;
+	    			conserveData.materialList=[];
+        			$("#inventoryConserveMaterialForm").hide();
+        			$('#conserveInventoryMaterialTable tbody').empty();
+        			$('#conserveInventoryEconomicTable tbody').empty();
     			});
     			$("#edit"+id).click(function(){
     				var data;
@@ -2763,6 +3070,12 @@ $(function(){
     			});
     			conserveData.itemId=conserveData.itemId+1;
     			$("#modal-default").modal("hide");
+    			conserveMaterialFlag=false;
+    			conserveRange=1;
+    			conserveData.materialList=[];
+    			$("#inventoryConserveMaterialForm").hide();
+    			$('#conserveInventoryMaterialTable tbody').empty();
+    			$('#conserveInventoryEconomicTable tbody').empty();
     		}
 		},
 		onkeyup:false
@@ -2780,6 +3093,126 @@ $(function(){
 		$("#conserveItem6").val(2);
 		$("#conserveItem7").val(cdAsphaltType[0].id).trigger("change");
  		$("#modal-default").modal("show");
+	});
+	$("#gravelConserve").select2({
+		ajax:{
+			url:ctxPath+"/api/db/inventory/materials",
+			dataType:'json',
+			delay:200,
+			data:function(params){
+				return {
+					page:params.page,
+					materialCategoryCd:1
+				};
+			},
+			processResults:function(data,params){
+				params.page=params.page||1;
+				return {
+					results:data.list,
+					pagination:{
+						more:data.hasNextPage
+					}
+				};
+			},
+			cache:true
+		},
+		placeholder:'请选择一种材料',
+		allowClear:true,
+		minimumResultsForSearch:-1,
+		language:"zh-CN",
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatRepo,
+		templateSelection: formatRepoSelection
+	});
+	$("#ordinaryAsphaltConserve").select2({
+		ajax:{
+			url:ctxPath+"/api/db/inventory/materials",
+			dataType:'json',
+			delay:200,
+			data:function(params){
+				return {
+					page:params.page,
+					materialCategoryCd:2
+				};
+			},
+			processResults:function(data,params){
+				params.page=params.page||1;
+				return {
+					results:data.list,
+					pagination:{
+						more:data.hasNextPage
+					}
+				};
+			},
+			cache:true
+		},
+		placeholder:'请选择一种材料',
+		allowClear:true,
+		minimumResultsForSearch:-1,
+		language:"zh-CN",
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatRepo,
+		templateSelection: formatRepoSelection
+	});
+	$("#modifiedAsphaltConserve").select2({
+		ajax:{
+			url:ctxPath+"/api/db/inventory/materials",
+			dataType:'json',
+			delay:200,
+			data:function(params){
+				return {
+					page:params.page,
+					materialCategoryCd:2
+				};
+			},
+			processResults:function(data,params){
+				params.page=params.page||1;
+				return {
+					results:data.list,
+					pagination:{
+						more:data.hasNextPage
+					}
+				};
+			},
+			cache:true
+		},
+		placeholder:'请选择一种材料',
+		allowClear:true,
+		minimumResultsForSearch:-1,
+		language:"zh-CN",
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatRepo,
+		templateSelection: formatRepoSelection
+	});
+	$("#highViscosityAsphaltConserve").select2({
+		ajax:{
+			url:ctxPath+"/api/db/inventory/materials",
+			dataType:'json',
+			delay:200,
+			data:function(params){
+				return {
+					page:params.page,
+					materialCategoryCd:2
+				};
+			},
+			processResults:function(data,params){
+				params.page=params.page||1;
+				return {
+					results:data.list,
+					pagination:{
+						more:data.hasNextPage
+					}
+				};
+			},
+			cache:true
+		},
+		placeholder:'请选择一种材料',
+		allowClear:true,
+		minimumResultsForSearch:-1,
+		language:"zh-CN",
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatRepo,
+		templateSelection: formatRepoSelection
 	});
 	var validatorInventoryConserveItemForm = $("#inventoryConserveItemForm").validate({
 		errorClass: 'text-danger',
@@ -2809,13 +3242,125 @@ $(function(){
 				}, 1500);
 				return false;
 			}
-			
-			
-			
+			conserveData.conserveUncertainty=$("#conserveUncertainty").val();
+			var gravel=0,ordinaryAsphalt=0,modifiedAsphalt=0,highViscosityAsphalt=0;
+			for (var i = 0; i < conserveData.itemList.length; i++) {
+				var item = conserveData.itemList[i];
+				var w=basicData.area*item.i5/100*item.i6/100*2.35;
+				var i8=item.i8/100;
+				gravel+=w/(1+i8);
+				switch (item.i7) {
+				case "1":
+					ordinaryAsphalt+=w*i8/(1+i8);
+					break;
+				case "2":
+					modifiedAsphalt+=w*i8/(1+i8);
+					break;
+				case "3":
+					highViscosityAsphalt+=w*i8/(1+i8);
+					break;
+				default:
+					break;
+				}
+			}
+			$("#gravelSelectConserve").hide();
+			$("#ordinaryAsphaltSelectConserve").hide();
+			$("#modifiedAsphaltSelectConserve").hide();
+			$("#highViscosityAsphaltSelectConserve").hide();
+			conserveData.materialList=[];
+			if(gravel>0){
+				conserveData.materialList.push({materialMark:"gravelConserve",materialName:"碎石",amount:gravel.toFixed(3)});
+				$("#gravelSelectConserve").show();
+			}
+			if(ordinaryAsphalt>0){
+				conserveData.materialList.push({materialMark:"ordinaryAsphaltConserve",materialName:"普通沥青",amount:ordinaryAsphalt.toFixed(3)});
+				$("#ordinaryAsphaltSelectConserve").show();
+			}
+			if(modifiedAsphalt>0){
+				conserveData.materialList.push({materialMark:"modifiedAsphaltConserve",materialName:"改性沥青",amount:modifiedAsphalt.toFixed(3)});
+				$("#modifiedAsphaltSelectConserve").show();
+			}
+			if(highViscosityAsphalt>0){
+				conserveData.materialList.push({materialMark:"highViscosityAsphaltConserve",materialName:"高粘度沥青",amount:highViscosityAsphalt.toFixed(3)});
+				$("#highViscosityAsphaltSelectConserve").show();
+			}
+			$("#inventoryConserveMaterialForm").show();
+			conserveMaterialFlag=false;
+			var _html='';
+            var tpl=$('#tpl-conserveInventoryMaterialTable').html();
+            for (var i=0,len=conserveData.materialList.length; i < len; i++){
+                var item = conserveData.materialList[i];
+                _html += renderTpl(tpl, item);
+            }
+            $('#conserveInventoryMaterialTable tbody').html(_html);
 		},
 		onkeyup:false
 	});
-	var validatorInventoryConserveForm = $("#inventoryConserveForm").validate({
+	$("#inventoryConserveMaterialForm").submit(function(){
+		if(conserveData.materialList.length>0){
+			for (var i = 0; i < conserveData.materialList.length; i++) {
+				var item=conserveData.materialList[i];
+				var res=$("#"+item.materialMark).select2("data")[0];
+				if(res==undefined){
+					var d = dialog({
+                        content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您选择相应材料'+'</p></div>'
+                    });
+                    d.show();
+                    setTimeout(function() {
+                        d.close().remove();
+                    }, 1500);
+                    return false;
+				}else{
+					var amount=item.amount;
+					if(res.cost!=null){
+						if(res.cost.indexOf("~")!=-1){
+					    	var nums=res.cost.split("~");
+					    	item.cost=(nums[0]*amount).toFixed(3)+"~"+(nums[1]*amount).toFixed(3);
+				    	}else{
+				    		item.cost=(res.cost*amount).toFixed(3);
+				    	}
+					}
+					if(res.energyConsume!=null){
+						item.energyConsume=(res.energyConsume*amount).toExponential(2);
+					}
+					if(res.emissionCo2!=null){
+						item.emissionCo2=(res.emissionCo2*amount).toExponential(2);
+					}
+					if(res.emissionCh4!=null){
+						item.emissionCh4=(res.emissionCh4*amount).toExponential(2);
+					}
+					if(res.emissionN2o!=null){
+						item.emissionN2o=(res.emissionN2o*amount).toExponential(2);
+					}
+					if(res.emissionCo!=null){
+						item.emissionCo=(res.emissionCo*amount).toExponential(2);
+					}
+					if(res.emissionSo2!=null){
+						item.emissionSo2=(res.emissionSo2*amount).toExponential(2);
+					}
+					if(res.emissionNox!=null){
+						item.emissionNox=(res.emissionNox*amount).toExponential(2);
+					}
+					if(res.emissionPb!=null){
+						item.emissionPb=(res.emissionPb*amount).toExponential(2);
+					}
+					if(res.emissionZn!=null){
+						item.emissionZn=(res.emissionZn*amount).toExponential(2);
+					}
+				}
+			}
+			var _html='';
+            var tpl=$('#tpl-conserveInventoryMaterialTable').html();
+            for (var i=0,len=conserveData.materialList.length; i < len; i++){
+                var item = conserveData.materialList[i];
+                _html += renderTpl(tpl, item);
+            }
+            $('#conserveInventoryMaterialTable tbody').html(_html);
+		}
+		conserveMaterialFlag=true;
+		return false;
+	});
+	var validatorInventoryConserveBaseForm = $("#inventoryConserveBaseForm").validate({
 		errorClass: 'text-danger',
 		rules:{
 			conserveBase1:{
@@ -2880,38 +3425,261 @@ $(function(){
     		}
 		},
 		submitHandler:function(form){
+			if(!conserveMaterialFlag){
+				var d = dialog({
+                    content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请先完成养护（原材料）清单'+'</p></div>'
+                });
+                d.show();
+                setTimeout(function() {
+                    d.close().remove();
+                }, 1500);
+                return false;
+			}
+			conserveData.costs={};
 			var b1=$("#conserveBase1").val();
-			var b2=$("#conserveBase2").val()/100.0;
-			var b3=$("#conserveBase3").val()/100.0;
+			var b2=$("#conserveBase2").val()/100;
+			var b3=$("#conserveBase3").val()/100;
 			var b4=$("#conserveBase4").val();
 			var b5=$("#conserveBase5").val();
 			var b6=$("#conserveBase6").val();
 			var b7=$("#conserveBase7").val();
 			var b8=$("#conserveBase8").val();
-			var b9=$("#conserveBase9").val()/100.0;
+			var b9=$("#conserveBase9").val()/100;
 			var b10=$("#conserveBase10").val();
-			var i1=$("#conserveItem1").val();
-			var i2=$("#conserveItem2").val();
-			var i3=$("#conserveItem3").val()/100.0;// 代表不确定性
-			var i4Nums=$("#conserveItem4").val().split("/");
-			var i4=i4Nums[0]/i4Nums[1];
-			var i5=$("#conserveItem5").val();
-			var i6=$("#conserveItem6").val()/100.0;
-			var i7=$("#conserveItem7").val();
-			var i8=$("#conserveItem8").select2("data")[0].text;
-			var i9=$("#conserveItem9").val()/100.0;
-			conserveData.conserveVolume=basicData.area*i6*i7/100;
-			conserveData.conserveWeight=basicData.topVolume*2.35;
-			conserveData.conserveGravel=conserveData.conserveWeight/(1+i9);
-			conserveData.conserveAsphalt=conserveData.conserveWeight*i9/(1+i9);
-			conserveData.conserveTimeCost=(((i4/b7)-(i4/b6))+(b8/b10)*b9)*b1*Math.pow(1+b2,i2)*i5*b4/Math.pow(1+b3,i2);
-			conserveData.conserveCarOpsCost=b1*Math.pow(1+b2,i2)*i5*i4*b5/Math.pow(1+b3,i2);
-			conserveData.conserveSafeCost=b1*Math.pow(1+b2,i2)*i5*i4/160900000*0.45*(0.9*2275229+57.2*15151)*6.6/Math.pow(1+b3,i2);
-			var tpl=$('#tpl-conserveInventoryTable').html();
-			var _html = renderTpl(tpl, conserveData);
-			$('#conserveInventoryTable tbody').html(_html);
-			$("#conserveAsphalt").text(i8);
+			var timeCost=0;carOpsCost=0;safeCost=0;
+			for (var i = 0; i < conserveData.itemList.length; i++) {
+				var item = conserveData.itemList[i];
+				var i2=item.i2;
+				var i3Nums=item.i3.split("/");
+				var i3=i3Nums[0]/i3Nums[1];
+				var i4=item.i4;
+				timeCost+=(((i3/b7)-(i3/b6))+(b8/b10)*b9)*b1*Math.pow(1+b2,i2)*i4*b4/Math.pow(1+b3,i2);
+				carOpsCost+=b1*Math.pow(1+b2,i2)*i4*i3*b5/Math.pow(1+b3,i2);
+				safeCost+=b1*Math.pow(1+b2,i2)*i4*i3/160900000*0.45*(0.9*2275229+57.2*15151)*6.6/Math.pow(1+b3,i2);
+			}
+			conserveData.costs.timeCost=timeCost;
+			conserveData.costs.carOpsCost=carOpsCost;
+			conserveData.costs.safeCost=safeCost;
+			var tpl=$('#tpl-conserveInventoryEconomicTable').html();
+			var _html = renderTpl(tpl, conserveData.costs);
+			$('#conserveInventoryEconomicTable tbody').html(_html);
 			conserveRange=2;
+		},
+		onkeyup:false
+	});
+	// 回收
+	$("#fuelTypeRecycle").select2({
+		ajax:{
+			url:ctxPath+"/api/db/inventory/fuel",
+			dataType:'json',
+			delay:200,
+			data:function(params){
+				return {
+					page:params.page,
+					fuelType:"油"
+				};
+			},
+			processResults:function(data,params){
+				params.page=params.page||1;
+				return {
+					results:data.list,
+					pagination:{
+						more:data.hasNextPage
+					}
+				};
+			},
+			cache:true
+		},
+		placeholder:'请选择一种具体燃料',
+		allowClear:true,
+		minimumResultsForSearch:-1, //如要搜索可去掉该选项
+		language:iMsg.select2LangCode,
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatFuel,
+		templateSelection: formatFuelSelection
+	});
+	$("#recycleVehicleModel").select2({
+		ajax:{
+			url:ctxPath+"/api/db/inventory/transport",
+			dataType:'json',
+			delay:200,
+			data:function(params){
+				return {
+					page:params.page,
+					vehicleType:params.term
+				};
+			},
+			processResults:function(data,params){
+				params.page=params.page||1;
+				return {
+					results:data.list,
+					pagination:{
+						more:data.hasNextPage
+					}
+				};
+			},
+			cache:true
+		},
+		placeholder:'请选择一种车辆，可根据名称搜索',
+		allowClear:true,
+		language:"zh-CN",
+		escapeMarkup: function (markup) { return markup; },
+		templateResult: formatTransport,
+		templateSelection: formatTransportSelection
+	});
+	var validatorInventoryRecycleForm = $("#inventoryRecycleForm").validate({
+		errorClass: 'text-danger',
+		rules:{
+			brokenEfficiencyRecycle:{
+				required:true,
+				number:true,
+				min:0
+			},
+			brokenFuelConsumption:{
+				required:true,
+				number:true,
+				min:0
+			},
+			recycleDistance:{
+				required:true,
+				number:true,
+				min:0
+			}
+		},
+		errorPlacement: function(error, element) {
+    		if (element.parent().hasClass("input-group")) {
+    			error.appendTo(element.parent().parent());
+    		} else {
+    			error.appendTo(element.parent());
+    		}
+		},
+		submitHandler:function(form){
+			recycleData.result={};
+			var cost=0,energyConsume=0,emissionCo2=0,emissionCh4=0,emissionN2o=0;
+			var emissionCo=0,emissionSo2=0,emissionNox=0,emissionPb=0,emissionZn=0;
+			var res=$("#fuelTypeRecycle").select2("data")[0];
+			if(res==undefined){
+				var d = dialog({
+					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您选择相应燃料类型'+'</p></div>'
+				});
+				d.show();
+				setTimeout(function() {
+					d.close().remove();
+				}, 1500);
+				return false;
+			}else{
+				var x=$("#brokenEfficiencyRecycle").val();
+				var y=$("#brokenFuelConsumption").val();
+				var amount=basicData.totalThickness*basicData.area/x*y;
+				if(res.cost!=null){
+					cost=res.cost*amount;
+				}
+				if(res.energyConsume!=null){
+					energyConsume=res.energyConsume*amount;
+				}
+				if(res.emissionCo2!=null){
+					emissionCo2=res.emissionCo2*amount;
+				}
+				if(res.emissionCh4!=null){
+					emissionCh4=res.emissionCh4*amount;
+				}
+				if(res.emissionN2o!=null){
+					emissionN2o=res.emissionN2o*amount;
+				}
+				if(res.emissionCo!=null){
+					emissionCo=res.emissionCo*amount;
+				}
+				if(res.emissionSo2!=null){
+					emissionSo2=res.emissionSo2*amount;
+				}
+				if(res.emissionNox!=null){
+					emissionNox=res.emissionNox*amount;
+				}
+				if(res.emissionPb!=null){
+					emissionPb=res.emissionPb*amount;
+				}
+				if(res.emissionZn!=null){
+					emissionZn=res.emissionZn*amount;
+				}
+			}
+			res=$("#recycleVehicleModel").select2("data")[0];
+			if(res==undefined){
+				var d = dialog({
+					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您选择相应车辆型号'+'</p></div>'
+				});
+				d.show();
+				setTimeout(function() {
+					d.close().remove();
+				}, 1500);
+				return false;
+			}else{
+				var amount=recycleData.mixtureAmount;
+				var distance=$("#recycleDistance").val();
+				if(res.cost!=null){
+					cost+=res.cost*amount*distance;
+				}
+				if(res.energyConsume!=null){
+					energyConsume+=res.energyConsume*amount*distance;
+				}
+				if(res.emissionCo2!=null){
+					emissionCo2+=res.emissionCo2*amount*distance;
+				}
+				if(res.emissionCh4!=null){
+					emissionCh4+=res.emissionCh4*amount*distance;
+				}
+				if(res.emissionN2o!=null){
+					emissionN2o+=res.emissionN2o*amount*distance;
+				}
+				if(res.emissionCo!=null){
+					emissionCo+=res.emissionCo*amount*distance;
+				}
+				if(res.emissionSo2!=null){
+					emissionSo2+=res.emissionSo2*amount*distance;
+				}
+				if(res.emissionNox!=null){
+					emissionNox+=res.emissionNox*amount*distance;
+				}
+				if(res.emissionPb!=null){
+					emissionPb+=res.emissionPb*amount*distance;
+				}
+				if(res.emissionZn!=null){
+					emissionZn+=res.emissionZn*amount*distance;
+				}
+			}
+			if(cost>0){
+				recycleData.result.cost=cost.toFixed(3);
+			}
+			if(energyConsume>0){
+				recycleData.result.energyConsume=energyConsume.toExponential(2);
+			}
+			if(emissionCo2>0){
+				recycleData.result.emissionCo2=emissionCo2.toExponential(2);
+			}
+			if(emissionCh4>0){
+				recycleData.result.emissionCh4=emissionCh4.toExponential(2);
+			}
+			if(emissionN2o>0){
+				recycleData.result.emissionN2o=emissionN2o.toExponential(2);
+			}
+			if(emissionCo>0){
+				recycleData.result.emissionCo=emissionCo.toExponential(2);
+			}
+			if(emissionSo2>0){
+				recycleData.result.emissionSo2=emissionSo2.toExponential(2);
+			}
+			if(emissionNox>0){
+				recycleData.result.emissionNox=emissionNox.toExponential(2);
+			}
+			if(emissionPb>0){
+				recycleData.result.emissionPb=emissionPb.toExponential(2);
+			}
+			if(emissionZn>0){
+				recycleData.result.emissionZn=emissionZn.toExponential(2);
+			}
+			var tpl=$('#tpl-recycleInventoryTable').html();
+			var _html = renderTpl(tpl, recycleData.result);
+			$('#recycleInventoryTable tbody').html(_html);
+			recycleRange=2;
 		},
 		onkeyup:false
 	});
@@ -2919,9 +3687,35 @@ $(function(){
 		tool.stepBack(2,1);
 		$("#step-inventory").hide();
 		$("#step-input").show();
+		$(window).scrollTop(0);
 	});
 	$("#inventory-nextStep").click(function(){
-		// 判断选择的阶段是否都已完成
+		// 初始化，影响评价重新计算
+		if(energyRange==2){
+			energyRange=1;
+		}
+		if(carbonRange==2){
+			carbonRange=1;
+		}
+		if(sourRange==2){
+			sourRange=1;
+		}
+		if(eutrophicationRange==2){
+			eutrophicationRange=1;
+		}
+		influenceData={};
+		influenceData.envEconomicCostFlag=false;
+		influenceData.cost=0;
+		influenceData.energyConsume=0;
+		influenceData.emissionCo2=0;
+		influenceData.emissionCh4=0;
+		influenceData.emissionN2o=0;
+		influenceData.emissionCo=0;
+		influenceData.emissionSo2=0;
+		influenceData.emissionNox=0;
+		influenceData.emissionPb=0;
+		influenceData.emissionZn=0;
+		// 判断选择的清单阶段是否都已完成，计算每个清单阶段各自的汇总，所有阶段的汇总
 		if(materialRange==1){
 			var d = dialog({
 				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成原材料获取清单'+'</p></div>'
@@ -2931,6 +3725,68 @@ $(function(){
 				d.close().remove();
 			}, 1500);
 			return false;
+		}else if(materialRange==2){
+			var cost=0,energyConsume=0,emissionCo2=0,emissionCh4=0,emissionN2o=0;
+			var emissionCo=0,emissionSo2=0,emissionNox=0,emissionPb=0,emissionZn=0;
+			for (var i = 0; i < materialData.materialList.length; i++) {
+				var item = materialData.materialList[i];
+				if(item.cost!=undefined){
+					if(item.cost.indexOf("~")!=-1){
+						var nums=item.cost.split("~");
+						cost+=(parseFloat(nums[0])+parseFloat(nums[1]))/2;
+					}else{
+						cost+=parseFloat(item.cost);
+					}
+				}
+				if(item.energyConsume!=undefined){
+					energyConsume+=parseFloat(item.energyConsume);
+				}
+				if(item.emissionCo2!=undefined){
+					emissionCo2+=parseFloat(item.emissionCo2);
+				}
+				if(item.emissionCh4!=undefined){
+					emissionCh4+=parseFloat(item.emissionCh4);
+				}
+				if(item.emissionN2o!=undefined){
+					emissionN2o+=parseFloat(item.emissionN2o);
+				}
+				if(item.emissionCo!=undefined){
+					emissionCo+=parseFloat(item.emissionCo);
+				}
+				if(item.emissionSo2!=undefined){
+					emissionSo2+=parseFloat(item.emissionSo2);
+				}
+				if(item.emissionNox!=undefined){
+					emissionNox+=parseFloat(item.emissionNox);
+				}
+				if(item.emissionPb!=undefined){
+					emissionPb+=parseFloat(item.emissionPb);
+				}
+				if(item.emissionZn!=undefined){
+					emissionZn+=parseFloat(item.emissionZn);
+				}
+			}
+			materialData.result={};
+			materialData.result.cost=cost;
+			materialData.result.energyConsume=energyConsume;
+			materialData.result.emissionCo2=emissionCo2;
+			materialData.result.emissionCh4=emissionCh4;
+			materialData.result.emissionN2o=emissionN2o;
+			materialData.result.emissionCo=emissionCo;
+			materialData.result.emissionSo2=emissionSo2;
+			materialData.result.emissionNox=emissionNox;
+			materialData.result.emissionPb=emissionPb;
+			materialData.result.emissionZn=emissionZn;
+			influenceData.cost+=cost;
+			influenceData.energyConsume+=energyConsume;
+			influenceData.emissionCo2+=emissionCo2;
+			influenceData.emissionCh4+=emissionCh4;
+			influenceData.emissionN2o+=emissionN2o;
+			influenceData.emissionCo+=emissionCo;
+			influenceData.emissionSo2+=emissionSo2;
+			influenceData.emissionNox+=emissionNox;
+			influenceData.emissionPb+=emissionPb;
+			influenceData.emissionZn+=emissionZn;
 		}
 		if(transConsRange==1){
 			var d = dialog({
@@ -2941,36 +3797,96 @@ $(function(){
 				d.close().remove();
 			}, 1500);
 			return false;
-		}
-		if(use1Range==1){
-			var d = dialog({
-				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成使用（反射率）清单'+'</p></div>'
-			});
-			d.show();
-			setTimeout(function() {
-				d.close().remove();
-			}, 1500);
-			return false;
-		}
-		if(use2Range==1){
-			var d = dialog({
-				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成使用（透水率）清单'+'</p></div>'
-			});
-			d.show();
-			setTimeout(function() {
-				d.close().remove();
-			}, 1500);
-			return false;
-		}
-		if(use3Range==1){
-			var d = dialog({
-				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成使用（滚动阻力）清单'+'</p></div>'
-			});
-			d.show();
-			setTimeout(function() {
-				d.close().remove();
-			}, 1500);
-			return false;
+		}else if(transConsRange==2){
+			var cost=0,energyConsume=0,emissionCo2=0,emissionCh4=0,emissionN2o=0;
+			var emissionCo=0,emissionSo2=0,emissionNox=0,emissionPb=0,emissionZn=0;
+			for (var i = 0; i < transConsData.transportList.length; i++) {
+				var item = transConsData.transportList[i];
+				if(item.cost!=undefined){
+					cost+=parseFloat(item.cost);
+				}
+				if(item.energyConsume!=undefined){
+					energyConsume+=parseFloat(item.energyConsume);
+				}
+				if(item.emissionCo2!=undefined){
+					emissionCo2+=parseFloat(item.emissionCo2);
+				}
+				if(item.emissionCh4!=undefined){
+					emissionCh4+=parseFloat(item.emissionCh4);
+				}
+				if(item.emissionN2o!=undefined){
+					emissionN2o+=parseFloat(item.emissionN2o);
+				}
+				if(item.emissionCo!=undefined){
+					emissionCo+=parseFloat(item.emissionCo);
+				}
+				if(item.emissionSo2!=undefined){
+					emissionSo2+=parseFloat(item.emissionSo2);
+				}
+				if(item.emissionNox!=undefined){
+					emissionNox+=parseFloat(item.emissionNox);
+				}
+				if(item.emissionPb!=undefined){
+					emissionPb+=parseFloat(item.emissionPb);
+				}
+				if(item.emissionZn!=undefined){
+					emissionZn+=parseFloat(item.emissionZn);
+				}
+			}
+			for (var i = 0; i < transConsData.mixPaveList.length; i++) {
+				var item = transConsData.mixPaveList[i];
+				if(item.cost!=undefined){
+					cost+=parseFloat(item.cost);
+				}
+				if(item.energyConsume!=undefined){
+					energyConsume+=parseFloat(item.energyConsume);
+				}
+				if(item.emissionCo2!=undefined){
+					emissionCo2+=parseFloat(item.emissionCo2);
+				}
+				if(item.emissionCh4!=undefined){
+					emissionCh4+=parseFloat(item.emissionCh4);
+				}
+				if(item.emissionN2o!=undefined){
+					emissionN2o+=parseFloat(item.emissionN2o);
+				}
+				if(item.emissionCo!=undefined){
+					emissionCo+=parseFloat(item.emissionCo);
+				}
+				if(item.emissionSo2!=undefined){
+					emissionSo2+=parseFloat(item.emissionSo2);
+				}
+				if(item.emissionNox!=undefined){
+					emissionNox+=parseFloat(item.emissionNox);
+				}
+				if(item.emissionPb!=undefined){
+					emissionPb+=parseFloat(item.emissionPb);
+				}
+				if(item.emissionZn!=undefined){
+					emissionZn+=parseFloat(item.emissionZn);
+				}
+			}
+			transConsData.result={};
+			transConsData.result.cost=cost;
+			transConsData.result.energyConsume=energyConsume;
+			transConsData.result.emissionCo2=emissionCo2;
+			transConsData.result.emissionCh4=emissionCh4;
+			transConsData.result.emissionN2o=emissionN2o;
+			transConsData.result.emissionCo=emissionCo;
+			transConsData.result.emissionSo2=emissionSo2;
+			transConsData.result.emissionNox=emissionNox;
+			transConsData.result.emissionPb=emissionPb;
+			transConsData.result.emissionZn=emissionZn;
+			influenceData.cost+=cost;
+			influenceData.energyConsume+=energyConsume;
+			influenceData.emissionCo2+=emissionCo2;
+			influenceData.emissionCh4+=emissionCh4;
+			influenceData.emissionN2o+=emissionN2o;
+			influenceData.emissionCo+=emissionCo;
+			influenceData.emissionSo2+=emissionSo2;
+			influenceData.emissionNox+=emissionNox;
+			influenceData.emissionPb+=emissionPb;
+			influenceData.emissionZn+=emissionZn;
 		}
 		if(conserveRange==1){
 			var d = dialog({
@@ -2981,31 +3897,328 @@ $(function(){
 				d.close().remove();
 			}, 1500);
 			return false;
+		}else if(conserveRange==2){
+			var cost=0,energyConsume=0,emissionCo2=0,emissionCh4=0,emissionN2o=0;
+			var emissionCo=0,emissionSo2=0,emissionNox=0,emissionPb=0,emissionZn=0;
+			for (var i = 0; i < conserveData.materialList.length; i++) {
+				var item = conserveData.materialList[i];
+				if(item.cost!=undefined){
+					if(item.cost.indexOf("~")!=-1){
+						var nums=item.cost.split("~");
+						cost+=(parseFloat(nums[0])+parseFloat(nums[1]))/2;
+					}else{
+						cost+=parseFloat(item.cost);
+					}
+				}
+				if(item.energyConsume!=undefined){
+					energyConsume+=parseFloat(item.energyConsume);
+				}
+				if(item.emissionCo2!=undefined){
+					emissionCo2+=parseFloat(item.emissionCo2);
+				}
+				if(item.emissionCh4!=undefined){
+					emissionCh4+=parseFloat(item.emissionCh4);
+				}
+				if(item.emissionN2o!=undefined){
+					emissionN2o+=parseFloat(item.emissionN2o);
+				}
+				if(item.emissionCo!=undefined){
+					emissionCo+=parseFloat(item.emissionCo);
+				}
+				if(item.emissionSo2!=undefined){
+					emissionSo2+=parseFloat(item.emissionSo2);
+				}
+				if(item.emissionNox!=undefined){
+					emissionNox+=parseFloat(item.emissionNox);
+				}
+				if(item.emissionPb!=undefined){
+					emissionPb+=parseFloat(item.emissionPb);
+				}
+				if(item.emissionZn!=undefined){
+					emissionZn+=parseFloat(item.emissionZn);
+				}
+			}
+			conserveData.result={};
+			conserveData.result.cost=conserveData.costs.timeCost+conserveData.costs.carOpsCost+conserveData.costs.safeCost+cost;
+			conserveData.result.energyConsume=energyConsume;
+			conserveData.result.emissionCo2=emissionCo2;
+			conserveData.result.emissionCh4=emissionCh4;
+			conserveData.result.emissionN2o=emissionN2o;
+			conserveData.result.emissionCo=emissionCo;
+			conserveData.result.emissionSo2=emissionSo2;
+			conserveData.result.emissionNox=emissionNox;
+			conserveData.result.emissionPb=emissionPb;
+			conserveData.result.emissionZn=emissionZn;
+//			conserveData.result.timeCost=conserveData.costs.timeCost;
+//			conserveData.result.carOpsCost=conserveData.costs.carOpsCost;
+//			conserveData.result.safeCost=conserveData.costs.safeCost;
+//			conserveData.result.totalCost=conserveData.costs.timeCost+conserveData.costs.carOpsCost+conserveData.costs.safeCost+cost;
+			influenceData.cost+=conserveData.result.cost;
+			influenceData.energyConsume+=energyConsume;
+			influenceData.emissionCo2+=emissionCo2;
+			influenceData.emissionCh4+=emissionCh4;
+			influenceData.emissionN2o+=emissionN2o;
+			influenceData.emissionCo+=emissionCo;
+			influenceData.emissionSo2+=emissionSo2;
+			influenceData.emissionNox+=emissionNox;
+			influenceData.emissionPb+=emissionPb;
+			influenceData.emissionZn+=emissionZn;
+		}
+		if(use1Range==1){
+			var d = dialog({
+				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成使用（反射率）清单'+'</p></div>'
+			});
+			d.show();
+			setTimeout(function() {
+				d.close().remove();
+			}, 1500);
+			return false;
+		}else if(use1Range==2){
+			// 只有电耗减少
+			influenceData.energyConsume-=use1Data.electricityReduce*3.6;
+		}
+		if(use2Range==1){
+			var d = dialog({
+				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成使用（透水率）清单'+'</p></div>'
+			});
+			d.show();
+			setTimeout(function() {
+				d.close().remove();
+			}, 1500);
+			return false;
+		} else if(use2Range==2){
+			var cost=0,energyConsume=0,emissionCo2=0,emissionCh4=0,emissionN2o=0;
+			var emissionCo=0,emissionSo2=0,emissionNox=0,emissionPb=0,emissionZn=0;
+			for (var i = 0; i < use2Data.fuelList.length; i++) {
+				var item = use2Data.fuelList[i];
+				if(item.cost!=undefined){
+					cost+=parseFloat(item.cost);
+				}
+				if(item.energyConsume!=undefined){
+					energyConsume+=parseFloat(item.energyConsume);
+				}
+				if(item.emissionCo2!=undefined){
+					emissionCo2+=parseFloat(item.emissionCo2);
+				}
+				if(item.emissionCh4!=undefined){
+					emissionCh4+=parseFloat(item.emissionCh4);
+				}
+				if(item.emissionN2o!=undefined){
+					emissionN2o+=parseFloat(item.emissionN2o);
+				}
+				if(item.emissionCo!=undefined){
+					emissionCo+=parseFloat(item.emissionCo);
+				}
+				if(item.emissionSo2!=undefined){
+					emissionSo2+=parseFloat(item.emissionSo2);
+				}
+				if(item.emissionNox!=undefined){
+					emissionNox+=parseFloat(item.emissionNox);
+				}
+				if(item.emissionPb!=undefined){
+					emissionPb+=parseFloat(item.emissionPb);
+				}
+				if(item.emissionZn!=undefined){
+					emissionZn+=parseFloat(item.emissionZn);
+				}
+			}
+			use2Data.result={};
+			use2Data.result.cost=cost;
+			use2Data.result.energyConsume=energyConsume;
+			use2Data.result.emissionCo2=emissionCo2;
+			use2Data.result.emissionCh4=emissionCh4;
+			use2Data.result.emissionN2o=emissionN2o;
+			use2Data.result.emissionCo=emissionCo;
+			use2Data.result.emissionSo2=emissionSo2;
+			use2Data.result.emissionNox=emissionNox;
+			use2Data.result.emissionPb=emissionPb;
+			use2Data.result.emissionZn=emissionZn;
+			influenceData.cost+=cost;
+			influenceData.energyConsume+=energyConsume;
+			influenceData.emissionCo2+=emissionCo2;
+			influenceData.emissionCh4+=emissionCh4;
+			influenceData.emissionN2o+=emissionN2o;
+			influenceData.emissionCo+=emissionCo;
+			influenceData.emissionSo2+=emissionSo2;
+			influenceData.emissionNox+=emissionNox;
+			influenceData.emissionPb+=emissionPb;
+			influenceData.emissionZn+=emissionZn;
+		}
+		if(use3Range==1){
+			var d = dialog({
+				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成使用（滚动阻力）清单'+'</p></div>'
+			});
+			d.show();
+			setTimeout(function() {
+				d.close().remove();
+			}, 1500);
+			return false;
+		}else if(use3Range==2){
+			var cost=0,energyConsume=0,emissionCo2=0,emissionCh4=0,emissionN2o=0;
+			var emissionCo=0,emissionSo2=0,emissionNox=0,emissionPb=0,emissionZn=0;
+			for (var i = 0; i < use3Data.fuelList.length; i++) {
+				var item = use3Data.fuelList[i];
+				if(item.cost!=undefined){
+					cost+=parseFloat(item.cost);
+				}
+				if(item.energyConsume!=undefined){
+					energyConsume+=parseFloat(item.energyConsume);
+				}
+				if(item.emissionCo2!=undefined){
+					emissionCo2+=parseFloat(item.emissionCo2);
+				}
+				if(item.emissionCh4!=undefined){
+					emissionCh4+=parseFloat(item.emissionCh4);
+				}
+				if(item.emissionN2o!=undefined){
+					emissionN2o+=parseFloat(item.emissionN2o);
+				}
+				if(item.emissionCo!=undefined){
+					emissionCo+=parseFloat(item.emissionCo);
+				}
+				if(item.emissionSo2!=undefined){
+					emissionSo2+=parseFloat(item.emissionSo2);
+				}
+				if(item.emissionNox!=undefined){
+					emissionNox+=parseFloat(item.emissionNox);
+				}
+				if(item.emissionPb!=undefined){
+					emissionPb+=parseFloat(item.emissionPb);
+				}
+				if(item.emissionZn!=undefined){
+					emissionZn+=parseFloat(item.emissionZn);
+				}
+			}
+			use3Data.result={};
+			use3Data.result.cost=cost;
+			use3Data.result.energyConsume=energyConsume;
+			use3Data.result.emissionCo2=emissionCo2;
+			use3Data.result.emissionCh4=emissionCh4;
+			use3Data.result.emissionN2o=emissionN2o;
+			use3Data.result.emissionCo=emissionCo;
+			use3Data.result.emissionSo2=emissionSo2;
+			use3Data.result.emissionNox=emissionNox;
+			use3Data.result.emissionPb=emissionPb;
+			use3Data.result.emissionZn=emissionZn;
+			influenceData.cost+=cost;
+			influenceData.energyConsume+=energyConsume;
+			influenceData.emissionCo2+=emissionCo2;
+			influenceData.emissionCh4+=emissionCh4;
+			influenceData.emissionN2o+=emissionN2o;
+			influenceData.emissionCo+=emissionCo;
+			influenceData.emissionSo2+=emissionSo2;
+			influenceData.emissionNox+=emissionNox;
+			influenceData.emissionPb+=emissionPb;
+			influenceData.emissionZn+=emissionZn;
+		}
+		if(recycleRange==1){
+			var d = dialog({
+				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成回收清单'+'</p></div>'
+			});
+			d.show();
+			setTimeout(function() {
+				d.close().remove();
+			}, 1500);
+			return false;
+		}else if(recycleRange==2){
+			if(recycleData.result.cost!=undefined){
+				recycleData.result.cost=parseFloat(recycleData.result.cost);
+			}else{
+				recycleData.result.cost=0;
+			}
+			if(recycleData.result.energyConsume!=undefined){
+				recycleData.result.energyConsume=parseFloat(recycleData.result.energyConsume);
+			}else{
+				recycleData.result.energyConsume=0;
+			}
+			if(recycleData.result.emissionCo2!=undefined){
+				recycleData.result.emissionCo2=parseFloat(recycleData.result.emissionCo2);
+			}else{
+				recycleData.result.emissionCo2=0;
+			}
+			if(recycleData.result.emissionCh4!=undefined){
+				recycleData.result.emissionCh4=parseFloat(recycleData.result.emissionCh4);
+			}else{
+				recycleData.result.emissionCh4=0;
+			}
+			if(recycleData.result.emissionN2o!=undefined){
+				recycleData.result.emissionN2o=parseFloat(recycleData.result.emissionN2o);
+			}else{
+				recycleData.result.emissionN2o=0;
+			}
+			if(recycleData.result.emissionCo!=undefined){
+				recycleData.result.emissionCo=parseFloat(recycleData.result.emissionCo);
+			}else{
+				recycleData.result.emissionCo=0;
+			}
+			if(recycleData.result.emissionSo2!=undefined){
+				recycleData.result.emissionSo2=parseFloat(recycleData.result.emissionSo2);
+			}else{
+				recycleData.result.emissionSo2=0;
+			}
+			if(recycleData.result.emissionNox!=undefined){
+				recycleData.result.emissionNox=parseFloat(recycleData.result.emissionNox);
+			}else{
+				recycleData.result.emissionNox=0;
+			}
+			if(recycleData.result.emissionPb!=undefined){
+				recycleData.result.emissionPb=parseFloat(recycleData.result.emissionPb);
+			}else{
+				recycleData.result.emissionPb=0;
+			}
+			if(recycleData.result.emissionZn!=undefined){
+				recycleData.result.emissionZn=parseFloat(recycleData.result.emissionZn);
+			}else{
+				recycleData.result.emissionZn=0;
+			}
+			influenceData.cost+=recycleData.result.cost;
+			influenceData.energyConsume+=recycleData.result.energyConsume;
+			influenceData.emissionCo2+=recycleData.result.emissionCo2;
+			influenceData.emissionCh4+=recycleData.result.emissionCh4;
+			influenceData.emissionN2o+=recycleData.result.emissionN2o;
+			influenceData.emissionCo+=recycleData.result.emissionCo;
+			influenceData.emissionSo2+=recycleData.result.emissionSo2;
+			influenceData.emissionNox+=recycleData.result.emissionNox;
+			influenceData.emissionPb+=recycleData.result.emissionPb;
+			influenceData.emissionZn+=recycleData.result.emissionZn;
 		}
 		// 能耗影响准备
 		if(energyRange){
 			$("#energyInfluence").show();
+			//能耗显示
+			$("#energyValue").text(influenceData.energyConsume);
+			$("#energyEnvCostInput").show();
+			energyRange=2;
 		}else{
 			$("#energyInfluence").hide();
+			$("#energyEnvCostInput").hide();
 		}
 		// 温室效应准备
 		if(carbonRange){
 			$("#carbonInfluence").show();
 			$("#gwpValue").empty();
+			$("#carbonEnvCostInput").show();
 		}else{
 			$("#carbonInfluence").hide();
+			$("#carbonEnvCostInput").hide();
 		}
 		if(sourRange){
 			$("#sourInfluence").show();
+			$("#sourValue").empty();
+			$("#sulfurDioxideEnvCostInput").show();
 		}else{
 			$("#sourInfluence").hide();
+			$("#sulfurDioxideEnvCostInput").hide();
 		}
 		if(eutrophicationRange){
 			$("#eutrophicationInfluence").show();
+			$("#eutrophicationValue").empty();
+			$("#nitrogenEnvCostInput").show();
 		}else{
 			$("#eutrophicationInfluence").hide();
+			$("#nitrogenEnvCostInput").hide();
 		}
-		
+		$("#envEconomicCost").empty();
 		tool.stepGo(2,3);
 		$("#step-inventory").hide();
 		$("#step-influence").show();
@@ -3024,55 +4237,424 @@ $(function(){
 			}, 1500);
 			return false;
 		}else{
-			var co2=0,ch4=0,n2o=0;
-			for (var i = 0; i < materialList.length; i++) {
-				var item = materialList[i];
-				if(item.emissionCo2!=undefined){
-					co2+=parseFloat(item.emissionCo2);
-				}
-				if(item.emissionCh4!=undefined){
-					ch4+=parseFloat(item.emissionCh4);
-				}
-				if(item.emissionN2o!=undefined){
-					n2o+=parseFloat(item.emissionN2o);
-				}
-			}
-			for (var i = 0; i < transportList.length; i++) {
-				var item = transportList[i];
-				if(item.emissionCo2!=undefined){
-					co2+=parseFloat(item.emissionCo2);
-				}
-				if(item.emissionCh4!=undefined){
-					ch4+=parseFloat(item.emissionCh4);
-				}
-				if(item.emissionN2o!=undefined){
-					n2o+=parseFloat(item.emissionN2o);
-				}
-			}
-			for (var i = 0; i < mixPaveList.length; i++) {
-				var item = mixPaveList[i];
-				if(item.emissionCo2!=undefined){
-					co2+=parseFloat(item.emissionCo2);
-				}
-				if(item.emissionCh4!=undefined){
-					ch4+=parseFloat(item.emissionCh4);
-				}
-				if(item.emissionN2o!=undefined){
-					n2o+=parseFloat(item.emissionN2o);
-				}
-			}
-			greenHouseData.gwpValue=co2*g.co2+ch4*g.ch4+n2o*g.n2o;
-			$("#gwpValue").text(greenHouseData.gwpValue);
+			influenceData.gwpValue=influenceData.emissionCo2*g.co2+influenceData.emissionCh4*g.ch4+influenceData.emissionN2o*g.n2o;
+			$("#gwpValue").text(influenceData.gwpValue);
+			carbonRange=2;
 		}
 		return false;
 	});
-	
+	// 酸化
+	$("#sourForm").submit(function(){
+		var g=$sourSelect.select2("data")[0];
+		if(g==undefined){
+			var d = dialog({
+				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您选择数据集'+'</p></div>'
+			});
+			d.show();
+			setTimeout(function() {
+				d.close().remove();
+			}, 1500);
+			return false;
+		}else{
+			influenceData.sourValue=influenceData.emissionSo2*g.so2+influenceData.emissionNox*g.nox;
+			$("#sourValue").text(influenceData.sourValue);
+			sourRange=2;
+		}
+		return false;
+	});
+	// 富营养化
+	$("#eutrophicationForm").submit(function(){
+		var g=$eutrophicationSelect.select2("data")[0];
+		if(g==undefined){
+			var d = dialog({
+				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您选择数据集'+'</p></div>'
+			});
+			d.show();
+			setTimeout(function() {
+				d.close().remove();
+			}, 1500);
+			return false;
+		}else{
+			influenceData.eutrophicationValue=influenceData.emissionNox*(g.noxds+g.noxhs+g.noxkq);
+			$("#eutrophicationValue").text(influenceData.eutrophicationValue);
+			eutrophicationRange=2;
+		}
+		return false;
+	});
+	// 环境影响等效经济成本
+	var validatorEnvEconomicCostForm = $("#envEconomicCostForm").validate({
+		errorClass: 'text-danger',
+		rules:{
+			energyEnvCost:{
+				required:true,
+				number:true,
+				min:0
+			},
+			carbonEnvCost:{
+				required:true,
+				number:true,
+				min:0
+			},
+			sulfurDioxideEnvCost:{
+				required:true,
+				number:true,
+				min:0
+			},
+			nitrogenEnvCost:{
+				required:true,
+				number:true,
+				min:0
+			}
+		},
+		errorPlacement: function(error, element) {
+			if (element.parent().hasClass("input-group")) {
+				error.appendTo(element.parent().parent());
+			} else {
+				error.appendTo(element.parent());
+			}
+		},
+		submitHandler:function(form){
+			var x=0;
+			// 能耗评价不需输入参数，直接计算得到值，因此不用判断
+			if(energyRange==2){
+				influenceData.energyConsumeCost=influenceData.energyConsume*$("#energyEnvCost").val();
+				x+=influenceData.energyConsumeCost;
+			}
+			if(carbonRange==1){
+				var d = dialog({
+					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成温室效应评价'+'</p></div>'
+				});
+				d.show();
+				setTimeout(function() {
+					d.close().remove();
+				}, 1500);
+				return false;
+			}else if(carbonRange==2){
+				influenceData.gwpCost=influenceData.gwpValue*$("#carbonEnvCost").val();
+				x+=influenceData.gwpCost;
+			}
+			if(sourRange==1){
+				var d = dialog({
+					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成酸化评价'+'</p></div>'
+				});
+				d.show();
+				setTimeout(function() {
+					d.close().remove();
+				}, 1500);
+				return false;
+			}else if(sourRange==2){
+				influenceData.sourCost=influenceData.sourValue*$("#sulfurDioxideEnvCost").val();
+				x+=influenceData.sourCost;
+			}
+			if(eutrophicationRange==1){
+				var d = dialog({
+					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成富营养化评价'+'</p></div>'
+				});
+				d.show();
+				setTimeout(function() {
+					d.close().remove();
+				}, 1500);
+				return false;
+			}else if(eutrophicationRange==2){
+				influenceData.eutrophicationCost=influenceData.eutrophicationValue*$("#nitrogenEnvCost").val();
+				x+=influenceData.eutrophicationCost;
+			}
+			influenceData.envEconomicCost=x;
+			$("#envEconomicCost").text(x);
+			influenceData.totalEconomicCost=x+influenceData.cost;
+			influenceData.envEconomicCostFlag=true;
+		},
+		onkeyup:false
+	});
 	$("#influence-prevStep").click(function(){
 		tool.stepBack(3,2);
 		$("#step-influence").hide();
 		$("#step-inventory").show();
+		$(window).scrollTop(0);
 	});
-	
+	$("#influence-nextStep").click(function(){
+		if(!influenceData.envEconomicCostFlag){
+			var d = dialog({
+				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成环境影响等效经济成本计算'+'</p></div>'
+			});
+			d.show();
+			setTimeout(function() {
+				d.close().remove();
+			}, 1500);
+			return false;
+		}
+		tool.stepGo(3,4);
+		$("#step-influence").hide();
+		$("#step-output").show();
+		$(window).scrollTop(0);
+		// 清单分析作图
+		var legend=[];
+		var chartCostInventoryData=[],chartEnergyInventoryData=[],chartCo2InventoryData=[],chartSo2InventoryData=[],chartPbInventoryData=[],chartZnInventoryData=[];
+		if(materialRange==2){
+			legend.push('原材料获取');
+			chartCostInventoryData.push(materialData.result.cost.toFixed(1));
+			chartEnergyInventoryData.push(materialData.result.energyConsume);
+			chartCo2InventoryData.push(materialData.result.emissionCo2);
+			chartSo2InventoryData.push(materialData.result.emissionSo2);
+			chartPbInventoryData.push(materialData.result.emissionPb);
+			chartZnInventoryData.push(materialData.result.emissionZn);
+		}
+		if(transConsRange==2){
+			legend.push('运输与施工');
+			chartCostInventoryData.push(transConsData.result.cost.toFixed(1));
+			chartEnergyInventoryData.push(transConsData.result.energyConsume);
+			chartCo2InventoryData.push(transConsData.result.emissionCo2);
+			chartSo2InventoryData.push(transConsData.result.emissionSo2);
+			chartPbInventoryData.push(transConsData.result.emissionPb);
+			chartZnInventoryData.push(transConsData.result.emissionZn);
+		}
+		if(use2Range==2){
+			legend.push('使用(透水)');
+			chartCostInventoryData.push(use2Data.result.cost.toFixed(1));
+			chartEnergyInventoryData.push(use2Data.result.energyConsume);
+			chartCo2InventoryData.push(use2Data.result.emissionCo2);
+			chartSo2InventoryData.push(use2Data.result.emissionSo2);
+			chartPbInventoryData.push(use2Data.result.emissionPb);
+			chartZnInventoryData.push(use2Data.result.emissionZn);
+		}
+		if(use3Range==2){
+			legend.push('使用(滚动阻力)');
+			chartCostInventoryData.push(use3Data.result.cost.toFixed(1));
+			chartEnergyInventoryData.push(use3Data.result.energyConsume);
+			chartCo2InventoryData.push(use3Data.result.emissionCo2);
+			chartSo2InventoryData.push(use3Data.result.emissionSo2);
+			chartPbInventoryData.push(use3Data.result.emissionPb);
+			chartZnInventoryData.push(use3Data.result.emissionZn);
+		}
+		if(conserveRange==2){
+			legend.push('养护');
+			chartCostInventoryData.push(conserveData.result.cost.toFixed(1));
+			chartEnergyInventoryData.push(conserveData.result.energyConsume);
+			chartCo2InventoryData.push(conserveData.result.emissionCo2);
+			chartSo2InventoryData.push(conserveData.result.emissionSo2);
+			chartPbInventoryData.push(conserveData.result.emissionPb);
+			chartZnInventoryData.push(conserveData.result.emissionZn);
+		}
+		if(recycleRange==2){
+			legend.push('回收');
+			chartCostInventoryData.push(recycleData.result.cost.toFixed(1));
+			chartEnergyInventoryData.push(recycleData.result.energyConsume);
+			chartCo2InventoryData.push(recycleData.result.emissionCo2);
+			chartSo2InventoryData.push(recycleData.result.emissionSo2);
+			chartPbInventoryData.push(recycleData.result.emissionPb);
+			chartZnInventoryData.push(recycleData.result.emissionZn);
+		}
+		chartData={};
+		chartData.chartCostInventory = echarts.init(document.getElementById('chartCostInventory')); 
+		chartData.chartCostInventory.setOption({
+			title : {text: '经济成本'},
+		    tooltip : {trigger: 'axis'},
+		    legend: {data:['经济成本']},
+		    toolbox: {
+		        show : true,
+		        feature : {
+		            dataView : {show: true, readOnly: true},
+		            magicType : {show: true, type: ['line', 'bar']},
+		            restore : {show: true},
+		            saveAsImage : {show: true}
+		        }
+		    },
+		    xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:30}}],
+		    yAxis : [{type : 'value'}],
+		    series : [{
+	            name:'经济成本',
+	            type:'bar',
+	            data:chartCostInventoryData,
+	            itemStyle : { normal: {label : {show: true}}}
+		    }]
+		}); 
+		chartData.chartEnergyInventory = echarts.init(document.getElementById('chartEnergyInventory')); 
+		chartData.chartEnergyInventory.setOption({
+			title : {text: '能耗'},
+			tooltip : {trigger: 'axis'},
+			legend: {data:['能耗']},
+			toolbox: {
+				show : true,
+				feature : {
+					dataView : {show: true, readOnly: true},
+					magicType : {show: true, type: ['line', 'bar']},
+					restore : {show: true},
+					saveAsImage : {show: true}
+				}
+			},
+			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:30}}],
+			yAxis : [{type : 'value'}],
+			series : [{
+				name:'能耗',
+				type:'bar',
+				data:chartEnergyInventoryData,
+				itemStyle : { normal: {label : {show: true}}}
+			}]
+		}); 
+		chartData.chartCo2Inventory = echarts.init(document.getElementById('chartCo2Inventory')); 
+		chartData.chartCo2Inventory.setOption({
+			title : {text: 'CO2'},
+			tooltip : {trigger: 'axis'},
+			legend: {data:['CO2']},
+			toolbox: {
+				show : true,
+				feature : {
+					dataView : {show: true, readOnly: true},
+					magicType : {show: true, type: ['line', 'bar']},
+					restore : {show: true},
+					saveAsImage : {show: true}
+				}
+			},
+			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:30}}],
+			yAxis : [{type : 'value'}],
+			series : [{
+				name:'CO2',
+				type:'bar',
+				data:chartCo2InventoryData,
+				itemStyle : { normal: {label : {show: true}}}
+			}]
+		}); 
+		chartData.chartSo2Inventory = echarts.init(document.getElementById('chartSo2Inventory')); 
+		chartData.chartSo2Inventory.setOption({
+			title : {text: 'SO2'},
+			tooltip : {trigger: 'axis'},
+			legend: {data:['SO2']},
+			toolbox: {
+				show : true,
+				feature : {
+					dataView : {show: true, readOnly: true},
+					magicType : {show: true, type: ['line', 'bar']},
+					restore : {show: true},
+					saveAsImage : {show: true}
+				}
+			},
+			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:30}}],
+			yAxis : [{type : 'value'}],
+			series : [{
+				name:'SO2',
+				type:'bar',
+				data:chartSo2InventoryData,
+				itemStyle : { normal: {label : {show: true}}}
+			}]
+		}); 
+		chartData.chartPbInventory = echarts.init(document.getElementById('chartPbInventory')); 
+		chartData.chartPbInventory.setOption({
+			title : {text: 'Pb'},
+			tooltip : {trigger: 'axis'},
+			legend: {data:['Pb']},
+			toolbox: {
+				show : true,
+				feature : {
+					dataView : {show: true, readOnly: true},
+					magicType : {show: true, type: ['line', 'bar']},
+					restore : {show: true},
+					saveAsImage : {show: true}
+				}
+			},
+			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:30}}],
+			yAxis : [{type : 'value'}],
+			series : [{
+				name:'Pb',
+				type:'bar',
+				data:chartPbInventoryData,
+				itemStyle : { normal: {label : {show: true}}}
+			}]
+		}); 
+		chartData.chartZnInventory = echarts.init(document.getElementById('chartZnInventory')); 
+		chartData.chartZnInventory.setOption({
+			title : {text: 'Zn'},
+			tooltip : {trigger: 'axis'},
+			legend: {data:['Zn']},
+			toolbox: {
+				show : true,
+				feature : {
+					dataView : {show: true, readOnly: true},
+					magicType : {show: true, type: ['line', 'bar']},
+					restore : {show: true},
+					saveAsImage : {show: true}
+				}
+			},
+			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:30}}],
+			yAxis : [{type : 'value'}],
+			series : [{
+				name:'Zn',
+				type:'bar',
+				data:chartZnInventoryData,
+				itemStyle : { normal: {label : {show: true}}}
+			}]
+		});
+		// 影响评价作图
+		var influenceType=[];
+		var chartCostInfluenceData=[];
+		influenceType.push("成本");
+		chartCostInfluenceData.push({name:"成本",value:influenceData.cost});
+		if(energyRange==2){
+			influenceType.push("能耗");
+			chartCostInfluenceData.push({name:"能耗",value:influenceData.energyConsumeCost});
+		}
+		if(carbonRange==2){
+			influenceType.push("温室效应");
+			chartCostInfluenceData.push({name:"温室效应",value:influenceData.gwpCost});
+		}
+		if(sourRange==2){
+			influenceType.push("酸化");
+			chartCostInfluenceData.push({name:"酸化",value:influenceData.sourCost});
+		}
+		if(eutrophicationRange==2){
+			influenceType.push("富营养化");
+			chartCostInfluenceData.push({name:"富营养化",value:influenceData.eutrophicationCost});
+		}
+		chartData.chartCostInfluence = echarts.init(document.getElementById('chartCostInfluence'));
+		chartData.chartCostInfluence.setOption({
+			title : {
+		        text: '各类经济成本比例',
+		        x:'center',
+		        subtext:'总经济成本：'+influenceData.totalEconomicCost.toFixed(0),
+		    },
+		    tooltip : {
+		        trigger: 'item',
+		        formatter: "{a} <br/>{b} : {c} ({d}%)"
+		    },
+		    legend: {
+		        orient : 'vertical',
+		        x : 'left',
+		        data:influenceType
+		    },
+		    toolbox: {
+		        show : true,
+		        feature : {
+		            dataView : {show: true, readOnly: true},
+		            saveAsImage : {show: true}
+		        }
+		    },
+		    series : [
+		        {
+		            name:'经济成本',
+		            type:'pie',
+		            radius : '55%',
+		            center: ['50%', '60%'],
+		            itemStyle: {
+		                normal: {
+		                    label: {
+		                       formatter : "{b} ({d}%)"
+		                    }
+		                }
+		            },
+		            data:chartCostInfluenceData
+		        }
+		    ]
+		});
+		
+	});
+	$("#output-prevStep").click(function(){
+		tool.stepBack(4,3);
+		$("#step-output").hide();
+		$("#step-influence").show();
+		$(window).scrollTop(0);
+	});
+	$("#download").click(function(){
+		
+	});
 });
 function renderTpl(str, cfg) {
     var re = /(#(.+?)#)/g;

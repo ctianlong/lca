@@ -15,9 +15,8 @@
 						<h1 class="page-header">LCA 工具</h1>
 					</div>
 				</div>
-
 				<div class="king-pearls row">
-				    <div class="col-xs-11 col-xs-offset-1">
+				    <!-- <div class="col-xs-11 col-xs-offset-1">
 						<div class="king-pearl current col-xs-2" id="step1">
 							<span class="king-pearl-number">1</span> <span
 								class="king-pearl-title">输入参数</span>
@@ -38,19 +37,33 @@
 							<span class="king-pearl-number">5</span> <span
 								class="king-pearl-title">输出</span>
 						</div>
-				    </div>
+				    </div> -->
+					<div class="king-pearl current col-xs-3" id="step1">
+						<span class="king-pearl-number">1</span> <span
+							class="king-pearl-title">输入参数</span>
+					</div>
+					<div class="king-pearl col-xs-3" id="step2">
+						<span class="king-pearl-number">2</span> <span
+							class="king-pearl-title">清单分析</span>
+					</div>
+					<div class="king-pearl col-xs-3" id="step3">
+						<span class="king-pearl-number">3</span> <span
+							class="king-pearl-title">影响评价</span>
+					</div>
+					<div class="king-pearl col-xs-3" id="step4">
+						<span class="king-pearl-number">4</span> <span
+							class="king-pearl-title">输出</span>
+					</div>
 				</div>
-				
 				<div th:replace="tool/input"></div>
 				<div th:replace="tool/inventory"></div>
 				<div th:replace="tool/influence"></div>
-				<div></div>
-				
+				<div th:replace="tool/output"></div>
 			</div>
 		</div>
 	</div>
 	<div th:replace="common/script"></div>
 	<script th:src="@{/js/tool.js}"></script>
+	<script src="http://echarts.baidu.com/build/dist/echarts-all.js"></script>
 </body>
-
 </html>

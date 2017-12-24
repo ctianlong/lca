@@ -12,6 +12,7 @@
                 </div>
               </div>
             </form>
+            <!-- 
             <form id="energyForm" class="form-horizontal" role="form">
                 <div class="form-group">
                     <label class="col-md-2 control-label">请选择数据集：</label>
@@ -25,6 +26,7 @@
                     <button class="king-btn king-radius king-success" type="submit">计算能耗影响</button>
                 </div>
             </form>
+             -->
         </div>
     </div>
 	<div class="panel king-panel1" id="carbonInfluence">
@@ -84,7 +86,6 @@
 			</form>
 		</div>
 	</div>
-	
 	<div class="panel king-panel1" id="eutrophicationInfluence">
 		<div class="panel-heading king-panel-head1 king-panel-top3">
 			<h3 class="panel-title"><b>富营养化</b></h3>
@@ -109,6 +110,79 @@
 				</div>
 				<div class="text-center">
                     <button class="king-btn king-radius king-success" type="submit">计算富营养化影响</button>
+                </div>
+			</form>
+		</div>
+	</div>
+	<div class="panel king-panel1">
+		<div class="panel-heading king-panel-head1 king-panel-top3">
+			<h3 class="panel-title"><b>环境影响等效经济成本</b></h3>
+		</div>
+		<div class="panel-body">
+		    <form class="form-horizontal" role="form">
+		      <div class="form-group">
+			    <label class="col-sm-2 control-label">环境影响等效经济成本：</label>
+			    <div class="col-sm-10">
+			      <p id="envEconomicCost" class="form-control-static"></p>
+			    </div>
+			  </div>
+		    </form>
+			<form id="envEconomicCostForm" class="form-horizontal" role="form">
+				<fieldset>
+                    <legend>请输入成本参数：</legend>
+                    <div class="row">
+                        <div class="col-md-6" id="energyEnvCostInput" style="display: none;">
+                            <div class="form-group">
+                                <label class="col-md-6 control-label">能耗环境成本：</label>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+		                            <input type="text" class="form-control" placeholder="请输入" id="energyEnvCost"
+		                                name="energyEnvCost">
+		                            <div class="input-group-addon">元/MJ</div>
+		                            </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" id="carbonEnvCostInput" style="display: none;">
+                            <div class="form-group">
+                                <label class="col-md-6 control-label">碳排放环境成本：</label>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+		                            <input type="text" class="form-control" placeholder="请输入" id="carbonEnvCost"
+		                                name="carbonEnvCost" value="30">
+		                            <div class="input-group-addon">元/t</div>
+		                            </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" id="sulfurDioxideEnvCostInput" style="display: none;">
+                            <div class="form-group">
+                                <label class="col-md-6 control-label">二氧化硫环境成本：</label>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+		                            <input type="text" class="form-control" placeholder="请输入" id="sulfurDioxideEnvCost"
+		                                name="sulfurDioxideEnvCost" value="2500">
+		                            <div class="input-group-addon">元/t</div>
+		                            </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" id="nitrogenEnvCostInput" style="display: none;">
+                            <div class="form-group">
+                                <label class="col-md-6 control-label">水中氮环境成本：</label>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+		                            <input type="text" class="form-control" placeholder="请输入" id="nitrogenEnvCost"
+		                                name="nitrogenEnvCost" value="8000">
+		                            <div class="input-group-addon">元/t</div>
+		                            </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+				<div class="text-center">
+                    <button class="king-btn king-radius king-success" type="submit">计算</button>
                 </div>
 			</form>
 		</div>
