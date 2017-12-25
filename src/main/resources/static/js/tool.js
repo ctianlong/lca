@@ -4709,10 +4709,18 @@ $(function(){
             bold:true,
         });
         doc.addParagraph("路面的总经济成本为："+influenceData.cost.toFixed(0)+" 元；");
-        doc.addParagraph("路面的总能耗为："+influenceData.energyConsume.toFixed(0)+" MJ，折算为经济成本为："+influenceData.energyConsumeCost.toFixed(0)+" 元；");
-        doc.addParagraph("路面的总温室效应为："+influenceData.gwpValue.toFixed(0)+" kg，折算为经济成本为："+influenceData.gwpCost.toFixed(0)+" 元；");
-        doc.addParagraph("路面的总酸化效应为："+influenceData.sourValue.toFixed(0)+" kg，折算为经济成本为："+influenceData.sourCost.toFixed(0)+" 元；");
-        doc.addParagraph("路面的总富营养化效应为："+influenceData.eutrophicationValue.toFixed(0)+" kg，折算为经济成本为："+influenceData.eutrophicationCost.toFixed(0)+" 元；");
+        if(energyRange==2){
+        	doc.addParagraph("路面的总能耗为："+influenceData.energyConsume.toFixed(0)+" MJ，折算为经济成本为："+influenceData.energyConsumeCost.toFixed(0)+" 元；");
+        }
+        if(carbonRange==2){
+        	doc.addParagraph("路面的总温室效应为："+influenceData.gwpValue.toFixed(0)+" kg，折算为经济成本为："+influenceData.gwpCost.toFixed(0)+" 元；");
+        }
+        if(sourRange==2){
+        	doc.addParagraph("路面的总酸化效应为："+influenceData.sourValue.toFixed(0)+" kg，折算为经济成本为："+influenceData.sourCost.toFixed(0)+" 元；");
+        }
+        if(eutrophicationRange==2){
+        	doc.addParagraph("路面的总富营养化效应为："+influenceData.eutrophicationValue.toFixed(0)+" kg，折算为经济成本为："+influenceData.eutrophicationCost.toFixed(0)+" 元；");
+        }
         doc.addParagraph("各类经济成本的比例如下图：");
         doc.addImage(chartData.chartCostInfluence.getDataURL(),$("#chartCostInfluence").width(),400,{
         	textAlign:doc.AlignType.Center
