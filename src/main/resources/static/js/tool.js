@@ -4330,7 +4330,7 @@ $(function(){
 				}, 1500);
 				return false;
 			}else if(carbonRange==2){
-				influenceData.gwpCost=influenceData.gwpValue*$("#carbonEnvCost").val();
+				influenceData.gwpCost=influenceData.gwpValue*$("#carbonEnvCost").val()/1000;
 				x+=influenceData.gwpCost;
 			}
 			if(sourRange==1){
@@ -4343,7 +4343,7 @@ $(function(){
 				}, 1500);
 				return false;
 			}else if(sourRange==2){
-				influenceData.sourCost=influenceData.sourValue*$("#sulfurDioxideEnvCost").val();
+				influenceData.sourCost=influenceData.sourValue*$("#sulfurDioxideEnvCost").val()/1000;
 				x+=influenceData.sourCost;
 			}
 			if(eutrophicationRange==1){
@@ -4356,7 +4356,7 @@ $(function(){
 				}, 1500);
 				return false;
 			}else if(eutrophicationRange==2){
-				influenceData.eutrophicationCost=influenceData.eutrophicationValue*$("#nitrogenEnvCost").val();
+				influenceData.eutrophicationCost=influenceData.eutrophicationValue*$("#nitrogenEnvCost").val()/1000;
 				x+=influenceData.eutrophicationCost;
 			}
 			influenceData.envEconomicCost=x;
@@ -4392,7 +4392,7 @@ $(function(){
 		var chartCostInventoryData=[],chartEnergyInventoryData=[],chartCo2InventoryData=[],chartSo2InventoryData=[],chartPbInventoryData=[],chartZnInventoryData=[];
 		if(materialRange==2){
 			legend.push('原材料获取');
-			chartCostInventoryData.push(materialData.result.cost.toFixed(1));
+			chartCostInventoryData.push(materialData.result.cost.toFixed(0));
 			chartEnergyInventoryData.push(materialData.result.energyConsume);
 			chartCo2InventoryData.push(materialData.result.emissionCo2);
 			chartSo2InventoryData.push(materialData.result.emissionSo2);
@@ -4401,7 +4401,7 @@ $(function(){
 		}
 		if(transConsRange==2){
 			legend.push('运输与施工');
-			chartCostInventoryData.push(transConsData.result.cost.toFixed(1));
+			chartCostInventoryData.push(transConsData.result.cost.toFixed(0));
 			chartEnergyInventoryData.push(transConsData.result.energyConsume);
 			chartCo2InventoryData.push(transConsData.result.emissionCo2);
 			chartSo2InventoryData.push(transConsData.result.emissionSo2);
@@ -4410,7 +4410,7 @@ $(function(){
 		}
 		if(use2Range==2){
 			legend.push('使用(透水)');
-			chartCostInventoryData.push(use2Data.result.cost.toFixed(1));
+			chartCostInventoryData.push(use2Data.result.cost.toFixed(0));
 			chartEnergyInventoryData.push(use2Data.result.energyConsume);
 			chartCo2InventoryData.push(use2Data.result.emissionCo2);
 			chartSo2InventoryData.push(use2Data.result.emissionSo2);
@@ -4419,7 +4419,7 @@ $(function(){
 		}
 		if(use3Range==2){
 			legend.push('使用(滚动阻力)');
-			chartCostInventoryData.push(use3Data.result.cost.toFixed(1));
+			chartCostInventoryData.push(use3Data.result.cost.toFixed(0));
 			chartEnergyInventoryData.push(use3Data.result.energyConsume);
 			chartCo2InventoryData.push(use3Data.result.emissionCo2);
 			chartSo2InventoryData.push(use3Data.result.emissionSo2);
@@ -4428,7 +4428,7 @@ $(function(){
 		}
 		if(conserveRange==2){
 			legend.push('养护');
-			chartCostInventoryData.push(conserveData.result.cost.toFixed(1));
+			chartCostInventoryData.push(conserveData.result.cost.toFixed(0));
 			chartEnergyInventoryData.push(conserveData.result.energyConsume);
 			chartCo2InventoryData.push(conserveData.result.emissionCo2);
 			chartSo2InventoryData.push(conserveData.result.emissionSo2);
@@ -4437,7 +4437,7 @@ $(function(){
 		}
 		if(recycleRange==2){
 			legend.push('回收');
-			chartCostInventoryData.push(recycleData.result.cost.toFixed(1));
+			chartCostInventoryData.push(recycleData.result.cost.toFixed(0));
 			chartEnergyInventoryData.push(recycleData.result.energyConsume);
 			chartCo2InventoryData.push(recycleData.result.emissionCo2);
 			chartSo2InventoryData.push(recycleData.result.emissionSo2);
@@ -4609,7 +4609,7 @@ $(function(){
 			title : {
 		        text: '各类经济成本比例',
 		        x:'center',
-		        subtext:'总经济成本：'+influenceData.totalEconomicCost.toFixed(0),
+		        subtext:'总经济成本(含污染经济成本)：'+influenceData.totalEconomicCost.toFixed(0)+" 元",
 		    },
 		    tooltip : {
 		        trigger: 'item',
@@ -4623,8 +4623,7 @@ $(function(){
 		    toolbox: {
 		        show : true,
 		        feature : {
-		            dataView : {show: true, readOnly: true},
-		            saveAsImage : {show: true}
+		            dataView : {show: true, readOnly: true}
 		        }
 		    },
 		    series : [
@@ -4636,7 +4635,7 @@ $(function(){
 		            itemStyle: {
 		                normal: {
 		                    label: {
-		                       formatter : "{b} ({d}%)"
+		                       formatter : "{b}({d}%)"
 		                    }
 		                }
 		            },
@@ -4644,7 +4643,6 @@ $(function(){
 		        }
 		    ]
 		});
-		
 	});
 	$("#output-prevStep").click(function(){
 		tool.stepBack(4,3);
@@ -4653,7 +4651,73 @@ $(function(){
 		$(window).scrollTop(0);
 	});
 	$("#download").click(function(){
-		
+		var doc = new DDoc();
+        doc.addParagraph("LCA评价结果报告",{
+            fontSize:"28",
+            bold:true,
+        });
+        doc.addParagraph("目标和范围",{
+            bold:true,
+        });
+        doc.addParagraph("本次评价的对象是长"+(basicData.rLength/1000)+"km,宽"+basicData.rWidth+"m的"+basicData.roadType+"路面；");
+        var x="评价的阶段范围是：";
+        if(materialRange==2) x+="原材料获取、";
+        if(transConsRange==2) x+="运输与施工、";
+        if(use1Range==2) x+="使用（反射率）、";
+        if(use2Range==2) x+="使用（透水率）、";
+        if(use3Range==2) x+="使用（滚动阻力）、";
+        if(conserveRange==2) x+="养护、";
+        if(recycleRange==2) x+="回收、";
+        x=x.substring(0,x.length-1)+"；";
+        doc.addParagraph(x);
+        x="评价的影响范围是：";
+        if(energyRange==2) x+="能耗、";
+        if(carbonRange==2) x+="温室效应、";
+        if(sourRange==2) x+="酸化、";
+        if(eutrophicationRange==2) x+="富营养化、";
+        x=x.substring(0,x.length-1)+"；";
+        doc.addParagraph(x);
+        doc.addParagraph("注：本评价只针对路面实体，并且大量在不同案例中具有一致性的因素，如填挖方、车辆正常油耗、房屋正常供暖/制冷/照明等被忽略，因此更适用于多方案的比较，尤其对使用阶段而言，单个结果不具备实践意义");
+        doc.addParagraph("清单分析结果",{
+            bold:true,
+        });
+        doc.addParagraph("路面的总经济成本为："+influenceData.cost.toFixed(0)+" 元，各阶段经济成本的比例如下图：");
+        doc.addImage(chartData.chartCostInventory.getDataURL(),$("#chartCostInventory").width(),400,{
+            textAlign:doc.AlignType.Center
+        });
+        doc.addParagraph("路面的总能耗为："+influenceData.energyConsume.toFixed(0)+" MJ，各阶段能耗的比例如下图：");
+        doc.addImage(chartData.chartEnergyInventory.getDataURL(),$("#chartEnergyInventory").width(),400,{
+        	textAlign:doc.AlignType.Center
+        });
+        doc.addParagraph("路面的总CO2为："+influenceData.emissionCo2+" kg，各阶段CO2的比例如下图：");
+        doc.addImage(chartData.chartCo2Inventory.getDataURL(),$("#chartCo2Inventory").width(),400,{
+        	textAlign:doc.AlignType.Center
+        });
+        doc.addParagraph("路面的总SO2为："+influenceData.emissionSo2+" kg，各阶段SO2的比例如下图：");
+        doc.addImage(chartData.chartSo2Inventory.getDataURL(),$("#chartSo2Inventory").width(),400,{
+        	textAlign:doc.AlignType.Center
+        });
+        doc.addParagraph("路面的总Pb为："+influenceData.emissionPb+" kg，各阶段Pb的比例如下图：");
+        doc.addImage(chartData.chartPbInventory.getDataURL(),$("#chartPbInventory").width(),400,{
+        	textAlign:doc.AlignType.Center
+        });
+        doc.addParagraph("路面的总Zn为："+influenceData.emissionZn+" kg，各阶段Zn的比例如下图：");
+        doc.addImage(chartData.chartZnInventory.getDataURL(),$("#chartZnInventory").width(),400,{
+        	textAlign:doc.AlignType.Center
+        });
+        doc.addParagraph("影响评价结果",{
+            bold:true,
+        });
+        doc.addParagraph("路面的总经济成本为："+influenceData.cost.toFixed(0)+" 元；");
+        doc.addParagraph("路面的总能耗为："+influenceData.energyConsume.toFixed(0)+" MJ，折算为经济成本为："+influenceData.energyConsumeCost.toFixed(0)+" 元；");
+        doc.addParagraph("路面的总温室效应为："+influenceData.gwpValue.toFixed(0)+" kg，折算为经济成本为："+influenceData.gwpCost.toFixed(0)+" 元；");
+        doc.addParagraph("路面的总酸化效应为："+influenceData.sourValue.toFixed(0)+" kg，折算为经济成本为："+influenceData.sourCost.toFixed(0)+" 元；");
+        doc.addParagraph("路面的总富营养化效应为："+influenceData.eutrophicationValue.toFixed(0)+" kg，折算为经济成本为："+influenceData.eutrophicationCost.toFixed(0)+" 元；");
+        doc.addParagraph("各类经济成本的比例如下图：");
+        doc.addImage(chartData.chartCostInfluence.getDataURL(),$("#chartCostInfluence").width(),400,{
+        	textAlign:doc.AlignType.Center
+        });
+        doc.generate();
 	});
 });
 function renderTpl(str, cfg) {
