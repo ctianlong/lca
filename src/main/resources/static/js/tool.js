@@ -2058,40 +2058,60 @@ $(function(){
                     return false;
 				}else{
 					var amount=item.amount;
-					if(res.cost!=null){
+					if(res.cost){
 						if(res.cost.indexOf("~")!=-1){
 					    	var nums=res.cost.split("~");
 					    	item.cost=(nums[0]*amount).toFixed(3)+"~"+(nums[1]*amount).toFixed(3);
 				    	}else{
 				    		item.cost=(res.cost*amount).toFixed(3);
 				    	}
+					}else{
+						item.cost=undefined;
 					}
 					if(res.energyConsume!=null){
 						item.energyConsume=(res.energyConsume*amount).toExponential(2);
+					}else{
+						item.energyConsume=undefined;
 					}
 					if(res.emissionCo2!=null){
 						item.emissionCo2=(res.emissionCo2*amount).toExponential(2);
+					}else{
+						item.emissionCo2=undefined;
 					}
 					if(res.emissionCh4!=null){
 						item.emissionCh4=(res.emissionCh4*amount).toExponential(2);
+					}else{
+						item.emissionCh4=undefined;
 					}
 					if(res.emissionN2o!=null){
 						item.emissionN2o=(res.emissionN2o*amount).toExponential(2);
+					}else{
+						item.emissionN2o=undefined;
 					}
 					if(res.emissionCo!=null){
 						item.emissionCo=(res.emissionCo*amount).toExponential(2);
+					}else{
+						item.emissionCo=undefined;
 					}
 					if(res.emissionSo2!=null){
 						item.emissionSo2=(res.emissionSo2*amount).toExponential(2);
+					}else{
+						item.emissionSo2=undefined;
 					}
 					if(res.emissionNox!=null){
 						item.emissionNox=(res.emissionNox*amount).toExponential(2);
+					}else{
+						item.emissionNox=undefined;
 					}
 					if(res.emissionPb!=null){
 						item.emissionPb=(res.emissionPb*amount).toExponential(2);
+					}else{
+						item.emissionPb=undefined;
 					}
 					if(res.emissionZn!=null){
 						item.emissionZn=(res.emissionZn*amount).toExponential(2);
+					}else{
+						item.emissionZn=undefined;
 					}
 				}
 			}
@@ -2157,35 +2177,55 @@ $(function(){
 						item.vehicleModel=res.vehicleType;
 						item.distance=distance;
 						var amount=item.amount;
-						if(res.cost!=null){
+						if(res.cost){
 							item.cost=(res.cost*amount*distance).toFixed(3);
+						}else{
+							item.cost=undefined;
 						}
 						if(res.energyConsume!=null){
 							item.energyConsume=(res.energyConsume*amount*distance).toExponential(2);
+						}else{
+							item.energyConsume=undefined;
 						}
 						if(res.emissionCo2!=null){
 							item.emissionCo2=(res.emissionCo2*amount*distance).toExponential(2);
+						}else{
+							item.emissionCo2=undefined;
 						}
 						if(res.emissionCh4!=null){
 							item.emissionCh4=(res.emissionCh4*amount*distance).toExponential(2);
+						}else{
+							item.emissionCh4=undefined;
 						}
 						if(res.emissionN2o!=null){
 							item.emissionN2o=(res.emissionN2o*amount*distance).toExponential(2);
+						}else{
+							item.emissionN2o=undefined;
 						}
 						if(res.emissionCo!=null){
 							item.emissionCo=(res.emissionCo*amount*distance).toExponential(2);
+						}else{
+							item.emissionCo=undefined;
 						}
 						if(res.emissionSo2!=null){
 							item.emissionSo2=(res.emissionSo2*amount*distance).toExponential(2);
+						}else{
+							item.emissionSo2=undefined;
 						}
 						if(res.emissionNox!=null){
 							item.emissionNox=(res.emissionNox*amount*distance).toExponential(2);
+						}else{
+							item.emissionNox=undefined;
 						}
 						if(res.emissionPb!=null){
 							item.emissionPb=(res.emissionPb*amount*distance).toExponential(2);
+						}else{
+							item.emissionPb=undefined;
 						}
 						if(res.emissionZn!=null){
 							item.emissionZn=(res.emissionZn*amount*distance).toExponential(2);
+						}else{
+							item.emissionZn=undefined;
 						}
 					}
 				}
@@ -3242,22 +3282,37 @@ $(function(){
 				}, 1500);
 				return false;
 			}
-			conserveData.conserveUncertainty=$("#conserveUncertainty").val();
+			var un=$("#conserveUncertainty").val();
+			conserveData.conserveUncertainty=un;
+			un=un/100;
+			// 概率相关计算，根据不确定性得到materialListUp和materialList
 			var gravel=0,ordinaryAsphalt=0,modifiedAsphalt=0,highViscosityAsphalt=0;
+			var gravelUp=0,ordinaryAsphaltUp=0,modifiedAsphaltUp=0,highViscosityAsphaltUp=0;
+			var gravelDown=0,ordinaryAsphaltDown=0,modifiedAsphaltDown=0,highViscosityAsphaltDown=0;
 			for (var i = 0; i < conserveData.itemList.length; i++) {
 				var item = conserveData.itemList[i];
 				var w=basicData.area*item.i5/100*item.i6/100*2.35;
+				var wUp=w*(1+un)*(1+un);
+				var wDown=w*(1-un)*(1-un);
 				var i8=item.i8/100;
 				gravel+=w/(1+i8);
+				gravelUp+=wUp/(1+i8);
+				gravelDown+=wDown/(1+i8);
 				switch (item.i7) {
 				case "1":
 					ordinaryAsphalt+=w*i8/(1+i8);
+					ordinaryAsphaltUp+=wUp*i8/(1+i8);
+					ordinaryAsphaltDown+=wDown*i8/(1+i8);
 					break;
 				case "2":
 					modifiedAsphalt+=w*i8/(1+i8);
+					modifiedAsphaltUp+=wUp*i8/(1+i8);
+					modifiedAsphaltDown+=wDown*i8/(1+i8);
 					break;
 				case "3":
 					highViscosityAsphalt+=w*i8/(1+i8);
+					highViscosityAsphaltUp+=wUp*i8/(1+i8);
+					highViscosityAsphaltDown+=wDown*i8/(1+i8);
 					break;
 				default:
 					break;
@@ -3268,24 +3323,36 @@ $(function(){
 			$("#modifiedAsphaltSelectConserve").hide();
 			$("#highViscosityAsphaltSelectConserve").hide();
 			conserveData.materialList=[];
+			conserveData.materialListUp=[];
+			conserveData.materialListDown=[];
 			if(gravel>0){
 				conserveData.materialList.push({materialMark:"gravelConserve",materialName:"碎石",amount:gravel.toFixed(3)});
+				conserveData.materialListUp.push({amount:gravelUp.toFixed(3)});
+				conserveData.materialListDown.push({amount:gravelDown.toFixed(3)});
 				$("#gravelSelectConserve").show();
 			}
 			if(ordinaryAsphalt>0){
 				conserveData.materialList.push({materialMark:"ordinaryAsphaltConserve",materialName:"普通沥青",amount:ordinaryAsphalt.toFixed(3)});
+				conserveData.materialListUp.push({amount:ordinaryAsphaltUp.toFixed(3)});
+				conserveData.materialListDown.push({amount:ordinaryAsphaltDown.toFixed(3)});
 				$("#ordinaryAsphaltSelectConserve").show();
 			}
 			if(modifiedAsphalt>0){
 				conserveData.materialList.push({materialMark:"modifiedAsphaltConserve",materialName:"改性沥青",amount:modifiedAsphalt.toFixed(3)});
+				conserveData.materialListUp.push({amount:modifiedAsphaltUp.toFixed(3)});
+				conserveData.materialListDown.push({amount:modifiedAsphaltDown.toFixed(3)});
 				$("#modifiedAsphaltSelectConserve").show();
 			}
 			if(highViscosityAsphalt>0){
 				conserveData.materialList.push({materialMark:"highViscosityAsphaltConserve",materialName:"高粘度沥青",amount:highViscosityAsphalt.toFixed(3)});
+				conserveData.materialListUp.push({amount:highViscosityAsphaltUp.toFixed(3)});
+				conserveData.materialListDown.push({amount:highViscosityAsphaltDown.toFixed(3)});
 				$("#highViscosityAsphaltSelectConserve").show();
 			}
 			$("#inventoryConserveMaterialForm").show();
 			conserveMaterialFlag=false;
+			conserveRange=1;
+			$('#conserveInventoryEconomicTable tbody').empty();
 			var _html='';
             var tpl=$('#tpl-conserveInventoryMaterialTable').html();
             for (var i=0,len=conserveData.materialList.length; i < len; i++){
@@ -3303,50 +3370,184 @@ $(function(){
 				var res=$("#"+item.materialMark).select2("data")[0];
 				if(res==undefined){
 					var d = dialog({
-                        content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您选择相应材料'+'</p></div>'
-                    });
-                    d.show();
-                    setTimeout(function() {
-                        d.close().remove();
-                    }, 1500);
-                    return false;
+						content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您选择相应材料'+'</p></div>'
+					});
+					d.show();
+					setTimeout(function() {
+						d.close().remove();
+					}, 1500);
+					return false;
+				}
+				var amount=item.amount;
+				if(res.cost){
+					if(res.cost.indexOf("~")!=-1){
+				    	var nums=res.cost.split("~");
+				    	item.cost=(nums[0]*amount).toFixed(3)+"~"+(nums[1]*amount).toFixed(3);
+			    	}else{
+			    		item.cost=(res.cost*amount).toFixed(3);
+			    	}
 				}else{
-					var amount=item.amount;
-					if(res.cost!=null){
-						if(res.cost.indexOf("~")!=-1){
-					    	var nums=res.cost.split("~");
-					    	item.cost=(nums[0]*amount).toFixed(3)+"~"+(nums[1]*amount).toFixed(3);
-				    	}else{
-				    		item.cost=(res.cost*amount).toFixed(3);
-				    	}
-					}
-					if(res.energyConsume!=null){
-						item.energyConsume=(res.energyConsume*amount).toExponential(2);
-					}
-					if(res.emissionCo2!=null){
-						item.emissionCo2=(res.emissionCo2*amount).toExponential(2);
-					}
-					if(res.emissionCh4!=null){
-						item.emissionCh4=(res.emissionCh4*amount).toExponential(2);
-					}
-					if(res.emissionN2o!=null){
-						item.emissionN2o=(res.emissionN2o*amount).toExponential(2);
-					}
-					if(res.emissionCo!=null){
-						item.emissionCo=(res.emissionCo*amount).toExponential(2);
-					}
-					if(res.emissionSo2!=null){
-						item.emissionSo2=(res.emissionSo2*amount).toExponential(2);
-					}
-					if(res.emissionNox!=null){
-						item.emissionNox=(res.emissionNox*amount).toExponential(2);
-					}
-					if(res.emissionPb!=null){
-						item.emissionPb=(res.emissionPb*amount).toExponential(2);
-					}
-					if(res.emissionZn!=null){
-						item.emissionZn=(res.emissionZn*amount).toExponential(2);
-					}
+					item.cost=undefined;
+				}
+				if(res.energyConsume!=null){
+					item.energyConsume=(res.energyConsume*amount).toExponential(2);
+				}else{
+					item.energyConsume=undefined;
+				}
+				if(res.emissionCo2!=null){
+					item.emissionCo2=(res.emissionCo2*amount).toExponential(2);
+				}else{
+					item.emissionCo2=undefined;
+				}
+				if(res.emissionCh4!=null){
+					item.emissionCh4=(res.emissionCh4*amount).toExponential(2);
+				}else{
+					item.emissionCh4=undefined;
+				}
+				if(res.emissionN2o!=null){
+					item.emissionN2o=(res.emissionN2o*amount).toExponential(2);
+				}else{
+					item.emissionN2o=undefined;
+				}
+				if(res.emissionCo!=null){
+					item.emissionCo=(res.emissionCo*amount).toExponential(2);
+				}else{
+					item.emissionCo=undefined;
+				}
+				if(res.emissionSo2!=null){
+					item.emissionSo2=(res.emissionSo2*amount).toExponential(2);
+				}else{
+					item.emissionSo2=undefined;
+				}
+				if(res.emissionNox!=null){
+					item.emissionNox=(res.emissionNox*amount).toExponential(2);
+				}else{
+					item.emissionNox=undefined;
+				}
+				if(res.emissionPb!=null){
+					item.emissionPb=(res.emissionPb*amount).toExponential(2);
+				}else{
+					item.emissionPb=undefined;
+				}
+				if(res.emissionZn!=null){
+					item.emissionZn=(res.emissionZn*amount).toExponential(2);
+				}else{
+					item.emissionZn=undefined;
+				}
+				// 概率性相关计算
+				item=conserveData.materialListUp[i];
+				amount=item.amount;
+				if(res.cost){
+					if(res.cost.indexOf("~")!=-1){
+				    	var nums=res.cost.split("~");
+				    	item.cost=(nums[0]*amount).toFixed(3)+"~"+(nums[1]*amount).toFixed(3);
+			    	}else{
+			    		item.cost=(res.cost*amount).toFixed(3);
+			    	}
+				}else{
+					item.cost=undefined;
+				}
+				if(res.energyConsume!=null){
+					item.energyConsume=(res.energyConsume*amount).toExponential(2);
+				}else{
+					item.energyConsume=undefined;
+				}
+				if(res.emissionCo2!=null){
+					item.emissionCo2=(res.emissionCo2*amount).toExponential(2);
+				}else{
+					item.emissionCo2=undefined;
+				}
+				if(res.emissionCh4!=null){
+					item.emissionCh4=(res.emissionCh4*amount).toExponential(2);
+				}else{
+					item.emissionCh4=undefined;
+				}
+				if(res.emissionN2o!=null){
+					item.emissionN2o=(res.emissionN2o*amount).toExponential(2);
+				}else{
+					item.emissionN2o=undefined;
+				}
+				if(res.emissionCo!=null){
+					item.emissionCo=(res.emissionCo*amount).toExponential(2);
+				}else{
+					item.emissionCo=undefined;
+				}
+				if(res.emissionSo2!=null){
+					item.emissionSo2=(res.emissionSo2*amount).toExponential(2);
+				}else{
+					item.emissionSo2=undefined;
+				}
+				if(res.emissionNox!=null){
+					item.emissionNox=(res.emissionNox*amount).toExponential(2);
+				}else{
+					item.emissionNox=undefined;
+				}
+				if(res.emissionPb!=null){
+					item.emissionPb=(res.emissionPb*amount).toExponential(2);
+				}else{
+					item.emissionPb=undefined;
+				}
+				if(res.emissionZn!=null){
+					item.emissionZn=(res.emissionZn*amount).toExponential(2);
+				}else{
+					item.emissionZn=undefined;
+				}
+				item=conserveData.materialListDown[i];
+				amount=item.amount;
+				if(res.cost){
+					if(res.cost.indexOf("~")!=-1){
+				    	var nums=res.cost.split("~");
+				    	item.cost=(nums[0]*amount).toFixed(3)+"~"+(nums[1]*amount).toFixed(3);
+			    	}else{
+			    		item.cost=(res.cost*amount).toFixed(3);
+			    	}
+				}else{
+					item.cost=undefined;
+				}
+				if(res.energyConsume!=null){
+					item.energyConsume=(res.energyConsume*amount).toExponential(2);
+				}else{
+					item.energyConsume=undefined;
+				}
+				if(res.emissionCo2!=null){
+					item.emissionCo2=(res.emissionCo2*amount).toExponential(2);
+				}else{
+					item.emissionCo2=undefined;
+				}
+				if(res.emissionCh4!=null){
+					item.emissionCh4=(res.emissionCh4*amount).toExponential(2);
+				}else{
+					item.emissionCh4=undefined;
+				}
+				if(res.emissionN2o!=null){
+					item.emissionN2o=(res.emissionN2o*amount).toExponential(2);
+				}else{
+					item.emissionN2o=undefined;
+				}
+				if(res.emissionCo!=null){
+					item.emissionCo=(res.emissionCo*amount).toExponential(2);
+				}else{
+					item.emissionCo=undefined;
+				}
+				if(res.emissionSo2!=null){
+					item.emissionSo2=(res.emissionSo2*amount).toExponential(2);
+				}else{
+					item.emissionSo2=undefined;
+				}
+				if(res.emissionNox!=null){
+					item.emissionNox=(res.emissionNox*amount).toExponential(2);
+				}else{
+					item.emissionNox=undefined;
+				}
+				if(res.emissionPb!=null){
+					item.emissionPb=(res.emissionPb*amount).toExponential(2);
+				}else{
+					item.emissionPb=undefined;
+				}
+				if(res.emissionZn!=null){
+					item.emissionZn=(res.emissionZn*amount).toExponential(2);
+				}else{
+					item.emissionZn=undefined;
 				}
 			}
 			var _html='';
@@ -3436,6 +3637,8 @@ $(function(){
                 return false;
 			}
 			conserveData.costs={};
+			conserveData.costsUp={};
+			conserveData.costsDown={};
 			var b1=$("#conserveBase1").val();
 			var b2=$("#conserveBase2").val()/100;
 			var b3=$("#conserveBase3").val()/100;
@@ -3446,7 +3649,7 @@ $(function(){
 			var b8=$("#conserveBase8").val();
 			var b9=$("#conserveBase9").val()/100;
 			var b10=$("#conserveBase10").val();
-			var timeCost=0;carOpsCost=0;safeCost=0;
+			var timeCost=0,carOpsCost=0,safeCost=0;
 			for (var i = 0; i < conserveData.itemList.length; i++) {
 				var item = conserveData.itemList[i];
 				var i2=item.i2;
@@ -3460,6 +3663,37 @@ $(function(){
 			conserveData.costs.timeCost=timeCost;
 			conserveData.costs.carOpsCost=carOpsCost;
 			conserveData.costs.safeCost=safeCost;
+			// 概率性相关计算，上升波动
+			var un=conserveData.conserveUncertainty/100;
+			timeCost=0;carOpsCost=0;safeCost=0;
+			for (var i = 0; i < conserveData.itemList.length; i++) {
+				var item = conserveData.itemList[i];
+				var i2=item.i2*(1+un);
+				var i3Nums=item.i3.split("/");
+				var i3=i3Nums[0]/i3Nums[1];
+				var i4=item.i4*(1+un);
+				timeCost+=(((i3/b7)-(i3/b6))+(b8/b10)*b9)*b1*Math.pow(1+b2,i2)*i4*b4/Math.pow(1+b3,i2);
+				carOpsCost+=b1*Math.pow(1+b2,i2)*i4*i3*b5/Math.pow(1+b3,i2);
+				safeCost+=b1*Math.pow(1+b2,i2)*i4*i3/160900000*0.45*(0.9*2275229+57.2*15151)*6.6/Math.pow(1+b3,i2);
+			}
+			conserveData.costsUp.timeCost=timeCost;
+			conserveData.costsUp.carOpsCost=carOpsCost;
+			conserveData.costsUp.safeCost=safeCost;
+			// 下降波动
+			timeCost=0;carOpsCost=0;safeCost=0;
+			for (var i = 0; i < conserveData.itemList.length; i++) {
+				var item = conserveData.itemList[i];
+				var i2=item.i2*(1-un);
+				var i3Nums=item.i3.split("/");
+				var i3=i3Nums[0]/i3Nums[1];
+				var i4=item.i4*(1-un);
+				timeCost+=(((i3/b7)-(i3/b6))+(b8/b10)*b9)*b1*Math.pow(1+b2,i2)*i4*b4/Math.pow(1+b3,i2);
+				carOpsCost+=b1*Math.pow(1+b2,i2)*i4*i3*b5/Math.pow(1+b3,i2);
+				safeCost+=b1*Math.pow(1+b2,i2)*i4*i3/160900000*0.45*(0.9*2275229+57.2*15151)*6.6/Math.pow(1+b3,i2);
+			}
+			conserveData.costsDown.timeCost=timeCost;
+			conserveData.costsDown.carOpsCost=carOpsCost;
+			conserveData.costsDown.safeCost=safeCost;
 			var tpl=$('#tpl-conserveInventoryEconomicTable').html();
 			var _html = renderTpl(tpl, conserveData.costs);
 			$('#conserveInventoryEconomicTable tbody').html(_html);
@@ -3615,7 +3849,7 @@ $(function(){
 			}else{
 				var amount=recycleData.mixtureAmount;
 				var distance=$("#recycleDistance").val();
-				if(res.cost!=null){
+				if(res.cost){
 					cost+=res.cost*amount*distance;
 				}
 				if(res.energyConsume!=null){
@@ -3897,72 +4131,6 @@ $(function(){
 				d.close().remove();
 			}, 1500);
 			return false;
-		}else if(conserveRange==2){
-			var cost=0,energyConsume=0,emissionCo2=0,emissionCh4=0,emissionN2o=0;
-			var emissionCo=0,emissionSo2=0,emissionNox=0,emissionPb=0,emissionZn=0;
-			for (var i = 0; i < conserveData.materialList.length; i++) {
-				var item = conserveData.materialList[i];
-				if(item.cost!=undefined){
-					if(item.cost.indexOf("~")!=-1){
-						var nums=item.cost.split("~");
-						cost+=(parseFloat(nums[0])+parseFloat(nums[1]))/2;
-					}else{
-						cost+=parseFloat(item.cost);
-					}
-				}
-				if(item.energyConsume!=undefined){
-					energyConsume+=parseFloat(item.energyConsume);
-				}
-				if(item.emissionCo2!=undefined){
-					emissionCo2+=parseFloat(item.emissionCo2);
-				}
-				if(item.emissionCh4!=undefined){
-					emissionCh4+=parseFloat(item.emissionCh4);
-				}
-				if(item.emissionN2o!=undefined){
-					emissionN2o+=parseFloat(item.emissionN2o);
-				}
-				if(item.emissionCo!=undefined){
-					emissionCo+=parseFloat(item.emissionCo);
-				}
-				if(item.emissionSo2!=undefined){
-					emissionSo2+=parseFloat(item.emissionSo2);
-				}
-				if(item.emissionNox!=undefined){
-					emissionNox+=parseFloat(item.emissionNox);
-				}
-				if(item.emissionPb!=undefined){
-					emissionPb+=parseFloat(item.emissionPb);
-				}
-				if(item.emissionZn!=undefined){
-					emissionZn+=parseFloat(item.emissionZn);
-				}
-			}
-			conserveData.result={};
-			conserveData.result.cost=conserveData.costs.timeCost+conserveData.costs.carOpsCost+conserveData.costs.safeCost+cost;
-			conserveData.result.energyConsume=energyConsume;
-			conserveData.result.emissionCo2=emissionCo2;
-			conserveData.result.emissionCh4=emissionCh4;
-			conserveData.result.emissionN2o=emissionN2o;
-			conserveData.result.emissionCo=emissionCo;
-			conserveData.result.emissionSo2=emissionSo2;
-			conserveData.result.emissionNox=emissionNox;
-			conserveData.result.emissionPb=emissionPb;
-			conserveData.result.emissionZn=emissionZn;
-//			conserveData.result.timeCost=conserveData.costs.timeCost;
-//			conserveData.result.carOpsCost=conserveData.costs.carOpsCost;
-//			conserveData.result.safeCost=conserveData.costs.safeCost;
-//			conserveData.result.totalCost=conserveData.costs.timeCost+conserveData.costs.carOpsCost+conserveData.costs.safeCost+cost;
-			influenceData.cost+=conserveData.result.cost;
-			influenceData.energyConsume+=energyConsume;
-			influenceData.emissionCo2+=emissionCo2;
-			influenceData.emissionCh4+=emissionCh4;
-			influenceData.emissionN2o+=emissionN2o;
-			influenceData.emissionCo+=emissionCo;
-			influenceData.emissionSo2+=emissionSo2;
-			influenceData.emissionNox+=emissionNox;
-			influenceData.emissionPb+=emissionPb;
-			influenceData.emissionZn+=emissionZn;
 		}
 		if(use1Range==1){
 			var d = dialog({
@@ -4182,6 +4350,185 @@ $(function(){
 			influenceData.emissionPb+=recycleData.result.emissionPb;
 			influenceData.emissionZn+=recycleData.result.emissionZn;
 		}
+		// 因为养护有不确定性数据，故放到最后计算
+		if(conserveRange==2){
+			// 概率性相关计算，先计算上浮
+			var cost=0,energyConsume=0,emissionCo2=0,emissionCh4=0,emissionN2o=0;
+			var emissionCo=0,emissionSo2=0,emissionNox=0,emissionPb=0,emissionZn=0;
+			for (var i = 0; i < conserveData.materialListUp.length; i++) {
+				var item = conserveData.materialListUp[i];
+				if(item.cost!=undefined){
+					if(item.cost.indexOf("~")!=-1){
+						var nums=item.cost.split("~");
+						cost+=(parseFloat(nums[0])+parseFloat(nums[1]))/2;
+					}else{
+						cost+=parseFloat(item.cost);
+					}
+				}
+				if(item.energyConsume!=undefined){
+					energyConsume+=parseFloat(item.energyConsume);
+				}
+				if(item.emissionCo2!=undefined){
+					emissionCo2+=parseFloat(item.emissionCo2);
+				}
+				if(item.emissionCh4!=undefined){
+					emissionCh4+=parseFloat(item.emissionCh4);
+				}
+				if(item.emissionN2o!=undefined){
+					emissionN2o+=parseFloat(item.emissionN2o);
+				}
+				if(item.emissionCo!=undefined){
+					emissionCo+=parseFloat(item.emissionCo);
+				}
+				if(item.emissionSo2!=undefined){
+					emissionSo2+=parseFloat(item.emissionSo2);
+				}
+				if(item.emissionNox!=undefined){
+					emissionNox+=parseFloat(item.emissionNox);
+				}
+				if(item.emissionPb!=undefined){
+					emissionPb+=parseFloat(item.emissionPb);
+				}
+				if(item.emissionZn!=undefined){
+					emissionZn+=parseFloat(item.emissionZn);
+				}
+			}
+//			conserveData.resultUp={};
+//			conserveData.resultUp.cost=conserveData.costsUp.timeCost+conserveData.costsUp.carOpsCost+conserveData.costsUp.safeCost+cost;
+//			conserveData.resultUp.energyConsume=energyConsume;
+//			conserveData.resultUp.emissionCo2=emissionCo2;
+//			conserveData.resultUp.emissionCh4=emissionCh4;
+//			conserveData.resultUp.emissionN2o=emissionN2o;
+//			conserveData.resultUp.emissionCo=emissionCo;
+//			conserveData.resultUp.emissionSo2=emissionSo2;
+//			conserveData.resultUp.emissionNox=emissionNox;
+//			conserveData.resultUp.emissionPb=emissionPb;
+//			conserveData.resultUp.emissionZn=emissionZn;
+//			influenceData.costUp=influenceData.cost+conserveData.resultUp.cost;
+			influenceData.costUp=influenceData.cost+conserveData.costsUp.timeCost+conserveData.costsUp.carOpsCost+conserveData.costsUp.safeCost+cost;
+			influenceData.energyConsumeUp=influenceData.energyConsume+energyConsume;
+			influenceData.emissionCo2Up=influenceData.emissionCo2+emissionCo2;
+			influenceData.emissionCh4Up=influenceData.emissionCh4+emissionCh4;
+			influenceData.emissionN2oUp=influenceData.emissionN2o+emissionN2o;
+			influenceData.emissionCoUp=influenceData.emissionCo+emissionCo;
+			influenceData.emissionSo2Up=influenceData.emissionSo2+emissionSo2;
+			influenceData.emissionNoxUp=influenceData.emissionNox+emissionNox;
+			influenceData.emissionPbUp=influenceData.emissionPb+emissionPb;
+			influenceData.emissionZnUp=influenceData.emissionZn+emissionZn;
+			// 概率性相关计算，后计算下降
+			cost=0;energyConsume=0;emissionCo2=0;emissionCh4=0;emissionN2o=0;
+			emissionCo=0;emissionSo2=0;emissionNox=0;emissionPb=0;emissionZn=0;
+			for (var i = 0; i < conserveData.materialListDown.length; i++) {
+				var item = conserveData.materialListDown[i];
+				if(item.cost!=undefined){
+					if(item.cost.indexOf("~")!=-1){
+						var nums=item.cost.split("~");
+						cost+=(parseFloat(nums[0])+parseFloat(nums[1]))/2;
+					}else{
+						cost+=parseFloat(item.cost);
+					}
+				}
+				if(item.energyConsume!=undefined){
+					energyConsume+=parseFloat(item.energyConsume);
+				}
+				if(item.emissionCo2!=undefined){
+					emissionCo2+=parseFloat(item.emissionCo2);
+				}
+				if(item.emissionCh4!=undefined){
+					emissionCh4+=parseFloat(item.emissionCh4);
+				}
+				if(item.emissionN2o!=undefined){
+					emissionN2o+=parseFloat(item.emissionN2o);
+				}
+				if(item.emissionCo!=undefined){
+					emissionCo+=parseFloat(item.emissionCo);
+				}
+				if(item.emissionSo2!=undefined){
+					emissionSo2+=parseFloat(item.emissionSo2);
+				}
+				if(item.emissionNox!=undefined){
+					emissionNox+=parseFloat(item.emissionNox);
+				}
+				if(item.emissionPb!=undefined){
+					emissionPb+=parseFloat(item.emissionPb);
+				}
+				if(item.emissionZn!=undefined){
+					emissionZn+=parseFloat(item.emissionZn);
+				}
+			}
+			influenceData.costDown=influenceData.cost+conserveData.costsDown.timeCost+conserveData.costsDown.carOpsCost+conserveData.costsDown.safeCost+cost;
+			influenceData.energyConsumeDown=influenceData.energyConsume+energyConsume;
+			influenceData.emissionCo2Down=influenceData.emissionCo2+emissionCo2;
+			influenceData.emissionCh4Down=influenceData.emissionCh4+emissionCh4;
+			influenceData.emissionN2oDown=influenceData.emissionN2o+emissionN2o;
+			influenceData.emissionCoDown=influenceData.emissionCo+emissionCo;
+			influenceData.emissionSo2Down=influenceData.emissionSo2+emissionSo2;
+			influenceData.emissionNoxDown=influenceData.emissionNox+emissionNox;
+			influenceData.emissionPbDown=influenceData.emissionPb+emissionPb;
+			influenceData.emissionZnDown=influenceData.emissionZn+emissionZn;
+			// 准确值的计算
+			cost=0;energyConsume=0;emissionCo2=0;emissionCh4=0;emissionN2o=0;
+			emissionCo=0;emissionSo2=0;emissionNox=0;emissionPb=0;emissionZn=0;
+			for (var i = 0; i < conserveData.materialList.length; i++) {
+				var item = conserveData.materialList[i];
+				if(item.cost!=undefined){
+					if(item.cost.indexOf("~")!=-1){
+						var nums=item.cost.split("~");
+						cost+=(parseFloat(nums[0])+parseFloat(nums[1]))/2;
+					}else{
+						cost+=parseFloat(item.cost);
+					}
+				}
+				if(item.energyConsume!=undefined){
+					energyConsume+=parseFloat(item.energyConsume);
+				}
+				if(item.emissionCo2!=undefined){
+					emissionCo2+=parseFloat(item.emissionCo2);
+				}
+				if(item.emissionCh4!=undefined){
+					emissionCh4+=parseFloat(item.emissionCh4);
+				}
+				if(item.emissionN2o!=undefined){
+					emissionN2o+=parseFloat(item.emissionN2o);
+				}
+				if(item.emissionCo!=undefined){
+					emissionCo+=parseFloat(item.emissionCo);
+				}
+				if(item.emissionSo2!=undefined){
+					emissionSo2+=parseFloat(item.emissionSo2);
+				}
+				if(item.emissionNox!=undefined){
+					emissionNox+=parseFloat(item.emissionNox);
+				}
+				if(item.emissionPb!=undefined){
+					emissionPb+=parseFloat(item.emissionPb);
+				}
+				if(item.emissionZn!=undefined){
+					emissionZn+=parseFloat(item.emissionZn);
+				}
+			}
+			conserveData.result={};
+			conserveData.result.cost=conserveData.costs.timeCost+conserveData.costs.carOpsCost+conserveData.costs.safeCost+cost;
+			conserveData.result.energyConsume=energyConsume;
+			conserveData.result.emissionCo2=emissionCo2;
+			conserveData.result.emissionCh4=emissionCh4;
+			conserveData.result.emissionN2o=emissionN2o;
+			conserveData.result.emissionCo=emissionCo;
+			conserveData.result.emissionSo2=emissionSo2;
+			conserveData.result.emissionNox=emissionNox;
+			conserveData.result.emissionPb=emissionPb;
+			conserveData.result.emissionZn=emissionZn;
+			influenceData.cost+=conserveData.result.cost;
+			influenceData.energyConsume+=energyConsume;
+			influenceData.emissionCo2+=emissionCo2;
+			influenceData.emissionCh4+=emissionCh4;
+			influenceData.emissionN2o+=emissionN2o;
+			influenceData.emissionCo+=emissionCo;
+			influenceData.emissionSo2+=emissionSo2;
+			influenceData.emissionNox+=emissionNox;
+			influenceData.emissionPb+=emissionPb;
+			influenceData.emissionZn+=emissionZn;
+		}
 		// 能耗影响准备
 		if(energyRange){
 			$("#energyInfluence").show();
@@ -4238,8 +4585,13 @@ $(function(){
 			return false;
 		}else{
 			influenceData.gwpValue=influenceData.emissionCo2*g.co2+influenceData.emissionCh4*g.ch4+influenceData.emissionN2o*g.n2o;
+			if(conserveRange==2){
+				influenceData.gwpValueUp=influenceData.emissionCo2Up*g.co2+influenceData.emissionCh4Up*g.ch4+influenceData.emissionN2oUp*g.n2o;
+				influenceData.gwpValueDown=influenceData.emissionCo2Down*g.co2+influenceData.emissionCh4Down*g.ch4+influenceData.emissionN2oDown*g.n2o;
+			}
 			$("#gwpValue").text(influenceData.gwpValue);
 			carbonRange=2;
+			influenceData.envEconomicCostFlag=false;
 		}
 		return false;
 	});
@@ -4257,8 +4609,13 @@ $(function(){
 			return false;
 		}else{
 			influenceData.sourValue=influenceData.emissionSo2*g.so2+influenceData.emissionNox*g.nox;
+			if(conserveRange==2){
+				influenceData.sourValueUp=influenceData.emissionSo2Up*g.so2+influenceData.emissionNoxUp*g.nox;
+				influenceData.sourValueDown=influenceData.emissionSo2Down*g.so2+influenceData.emissionNoxDown*g.nox;
+			}
 			$("#sourValue").text(influenceData.sourValue);
 			sourRange=2;
+			influenceData.envEconomicCostFlag=false;
 		}
 		return false;
 	});
@@ -4275,9 +4632,14 @@ $(function(){
 			}, 1500);
 			return false;
 		}else{
-			influenceData.eutrophicationValue=influenceData.emissionNox*(g.noxds+g.noxhs+g.noxkq);
+			influenceData.eutrophicationValue=influenceData.emissionNox*(g.noxds+g.noxhs);
+			if(conserveRange==2){
+				influenceData.eutrophicationValueUp=influenceData.emissionNoxUp*(g.noxds+g.noxhs);
+				influenceData.eutrophicationValueDown=influenceData.emissionNoxDown*(g.noxds+g.noxhs);
+			}
 			$("#eutrophicationValue").text(influenceData.eutrophicationValue);
 			eutrophicationRange=2;
+			influenceData.envEconomicCostFlag=false;
 		}
 		return false;
 	});
@@ -4315,9 +4677,17 @@ $(function(){
 		},
 		submitHandler:function(form){
 			var x=0;
+			var xUp=0;
+			var xDown=0;
 			// 能耗评价不需输入参数，直接计算得到值，因此不用判断
 			if(energyRange==2){
 				influenceData.energyConsumeCost=influenceData.energyConsume*$("#energyEnvCost").val();
+				if(conserveRange==2){
+					influenceData.energyConsumeCostUp=influenceData.energyConsumeUp*$("#energyEnvCost").val();
+					influenceData.energyConsumeCostDown=influenceData.energyConsumeDown*$("#energyEnvCost").val();
+					xUp+=influenceData.energyConsumeCostUp;
+					xDown+=influenceData.energyConsumeCostDown;
+				}
 				x+=influenceData.energyConsumeCost;
 			}
 			if(carbonRange==1){
@@ -4331,6 +4701,12 @@ $(function(){
 				return false;
 			}else if(carbonRange==2){
 				influenceData.gwpCost=influenceData.gwpValue*$("#carbonEnvCost").val()/1000;
+				if(conserveRange==2){
+					influenceData.gwpCostUp=influenceData.gwpValueUp*$("#carbonEnvCost").val()/1000;
+					influenceData.gwpCostDown=influenceData.gwpValueDown*$("#carbonEnvCost").val()/1000;
+					xUp+=influenceData.gwpCostUp;
+					xDown+=influenceData.gwpCostDown;
+				}
 				x+=influenceData.gwpCost;
 			}
 			if(sourRange==1){
@@ -4344,6 +4720,12 @@ $(function(){
 				return false;
 			}else if(sourRange==2){
 				influenceData.sourCost=influenceData.sourValue*$("#sulfurDioxideEnvCost").val()/1000;
+				if(conserveRange==2){
+					influenceData.sourCostUp=influenceData.sourValueUp*$("#sulfurDioxideEnvCost").val()/1000;
+					influenceData.sourCostDown=influenceData.sourValueDown*$("#sulfurDioxideEnvCost").val()/1000;
+					xUp+=influenceData.sourCostUp;
+					xDown+=influenceData.sourCostDown;
+				}
 				x+=influenceData.sourCost;
 			}
 			if(eutrophicationRange==1){
@@ -4357,11 +4739,23 @@ $(function(){
 				return false;
 			}else if(eutrophicationRange==2){
 				influenceData.eutrophicationCost=influenceData.eutrophicationValue*$("#nitrogenEnvCost").val()/1000;
+				if(conserveRange==2){
+					influenceData.eutrophicationCostUp=influenceData.eutrophicationValueUp*$("#nitrogenEnvCost").val()/1000;
+					influenceData.eutrophicationCostDown=influenceData.eutrophicationValueDown*$("#nitrogenEnvCost").val()/1000;
+					xUp+=influenceData.eutrophicationCostUp;
+					xDown+=influenceData.eutrophicationCostDown;
+				}
 				x+=influenceData.eutrophicationCost;
 			}
 			influenceData.envEconomicCost=x;
 			$("#envEconomicCost").text(x);
 			influenceData.totalEconomicCost=x+influenceData.cost;
+			if(conserveRange==2){
+				influenceData.envEconomicCostUp=xUp;
+				influenceData.envEconomicCostDown=xDown;
+				influenceData.totalEconomicCostUp=xUp+influenceData.costUp;
+				influenceData.totalEconomicCostDown=xDown+influenceData.costDown;
+			}
 			influenceData.envEconomicCostFlag=true;
 		},
 		onkeyup:false
@@ -4623,7 +5017,8 @@ $(function(){
 		    toolbox: {
 		        show : true,
 		        feature : {
-		            dataView : {show: true, readOnly: true}
+		            dataView : {show: true, readOnly: true},
+					saveAsImage : {show: true}
 		        }
 		    },
 		    series : [
@@ -4643,6 +5038,175 @@ $(function(){
 		        }
 		    ]
 		});
+		if(conserveRange==2){
+			$("#chartProbability").show();
+			var legendData=['向下波动'+conserveData.conserveUncertainty+'%','确定值','向上波动'+conserveData.conserveUncertainty+'%'];
+			chartData.chartCostProbability = echarts.init(document.getElementById('chartCostProbability')); 
+			chartData.chartCostProbability.setOption({
+				title : {text: '成本波动'},
+				tooltip : {trigger: 'axis'},
+				legend: {data:['经济成本']},
+				toolbox: {
+					show : true,
+					feature : {
+						dataView : {show: true, readOnly: true},
+						magicType : {show: true, type: ['line', 'bar']},
+						restore : {show: true},
+						saveAsImage : {show: true}
+					}
+				},
+				xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
+				yAxis : [{type : 'value'}],
+				series : [{
+					name:'经济成本',
+					type:'bar',
+					data:[influenceData.costDown,influenceData.cost,influenceData.costUp],
+					itemStyle : { normal: {label : {show: true}}}
+				}]
+			});
+			if(energyRange==2){
+				$("#chartEnergyProbability").show();
+				chartData.chartEnergyProbability = echarts.init(document.getElementById('chartEnergyProbability'));
+				chartData.chartEnergyProbability.setOption({
+					title : {text: '能耗波动(折算为经济成本)'},
+					tooltip : {trigger: 'axis'},
+					legend: {data:['经济成本']},
+					toolbox: {
+						show : true,
+						feature : {
+							dataView : {show: true, readOnly: true},
+							magicType : {show: true, type: ['line', 'bar']},
+							restore : {show: true},
+							saveAsImage : {show: true}
+						}
+					},
+					xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
+					yAxis : [{type : 'value'}],
+					series : [{
+						name:'经济成本',
+						type:'bar',
+						data:[influenceData.energyConsumeCostDown,influenceData.energyConsumeCost,influenceData.energyConsumeCostUp],
+						itemStyle : { normal: {label : {show: true}}}
+					}]
+				});
+			}else{
+				$("#chartEnergyProbability").hide();
+			}
+			if(carbonRange==2){
+				$("#chartGwpProbability").show();
+				chartData.chartGwpProbability = echarts.init(document.getElementById('chartGwpProbability'));
+				chartData.chartGwpProbability.setOption({
+					title : {text: '温室效应波动(折算为经济成本)'},
+					tooltip : {trigger: 'axis'},
+					legend: {data:['经济成本']},
+					toolbox: {
+						show : true,
+						feature : {
+							dataView : {show: true, readOnly: true},
+							magicType : {show: true, type: ['line', 'bar']},
+							restore : {show: true},
+							saveAsImage : {show: true}
+						}
+					},
+					xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
+					yAxis : [{type : 'value'}],
+					series : [{
+						name:'经济成本',
+						type:'bar',
+						data:[influenceData.gwpCostDown,influenceData.gwpCost,influenceData.gwpCostUp],
+						itemStyle : { normal: {label : {show: true}}}
+					}]
+				});
+			}else{
+				$("#chartGwpProbability").hide();
+			}
+			if(sourRange==2){
+				$("#chartSourProbability").show();
+				chartData.chartSourProbability = echarts.init(document.getElementById('chartSourProbability'));
+				chartData.chartSourProbability.setOption({
+					title : {text: '酸化效应波动(折算为经济成本)'},
+					tooltip : {trigger: 'axis'},
+					legend: {data:['经济成本']},
+					toolbox: {
+						show : true,
+						feature : {
+							dataView : {show: true, readOnly: true},
+							magicType : {show: true, type: ['line', 'bar']},
+							restore : {show: true},
+							saveAsImage : {show: true}
+						}
+					},
+					xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
+					yAxis : [{type : 'value'}],
+					series : [{
+						name:'经济成本',
+						type:'bar',
+						data:[influenceData.sourCostDown,influenceData.sourCost,influenceData.sourCostUp],
+						itemStyle : { normal: {label : {show: true}}}
+					}]
+				});
+			}else{
+				$("#chartSourProbability").hide();
+			}
+			if(eutrophicationRange==2){
+				$("#chartEutrophicationProbability").show();
+				chartData.chartEutrophicationProbability = echarts.init(document.getElementById('chartEutrophicationProbability'));
+				chartData.chartEutrophicationProbability.setOption({
+					title : {text: '富营养化波动(折算为经济成本)'},
+					tooltip : {trigger: 'axis'},
+					legend: {data:['经济成本']},
+					toolbox: {
+						show : true,
+						feature : {
+							dataView : {show: true, readOnly: true},
+							magicType : {show: true, type: ['line', 'bar']},
+							restore : {show: true},
+							saveAsImage : {show: true}
+						}
+					},
+					xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
+					yAxis : [{type : 'value'}],
+					series : [{
+						name:'经济成本',
+						type:'bar',
+						data:[influenceData.eutrophicationCostDown,influenceData.eutrophicationCost,influenceData.eutrophicationCostUp],
+						itemStyle : { normal: {label : {show: true}}}
+					}]
+				});
+			}else{
+				$("#chartEutrophicationProbability").hide();
+			}
+		}else{
+			$("#chartProbability").hide();
+		}
+		
+		
+		// echarts 自动调节宽度
+		$(window).resize(function() {
+			chartData.chartCostInventory.resize();
+			chartData.chartEnergyInventory.resize();
+			chartData.chartCo2Inventory.resize();
+			chartData.chartSo2Inventory.resize();
+			chartData.chartPbInventory.resize();
+			chartData.chartZnInventory.resize();
+			chartData.chartCostInfluence.resize();
+			if(conserveRange==2){
+				chartData.chartCostProbability.resize();
+				if(energyRange==2){
+					chartData.chartEnergyProbability.resize();
+				}
+				if(carbonRange==2){
+					chartData.chartGwpProbability.resize();
+				}
+				if(sourRange==2){
+					chartData.chartSourProbability.resize();
+				}
+				if(eutrophicationRange==2){
+					chartData.chartEutrophicationProbability.resize();
+				}
+			}
+		});
+		
 	});
 	$("#output-prevStep").click(function(){
 		tool.stepBack(4,3);
@@ -4659,7 +5223,7 @@ $(function(){
         doc.addParagraph("目标和范围",{
             bold:true,
         });
-        doc.addParagraph("本次评价的对象是长"+(basicData.rLength/1000)+"km,宽"+basicData.rWidth+"m的"+basicData.roadType+"路面；");
+        doc.addParagraph("本次评价的对象是长"+(basicData.rLength/1000)+"km,宽"+basicData.rWidth+"m的"+basicData.roadType+"；");
         var x="评价的阶段范围是：";
         if(materialRange==2) x+="原材料获取、";
         if(transConsRange==2) x+="运输与施工、";
