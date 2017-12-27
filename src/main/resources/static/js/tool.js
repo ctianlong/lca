@@ -5038,6 +5038,7 @@ $(function(){
 		        }
 		    ]
 		});
+		// 概率分析作图
 		if(conserveRange==2){
 			$("#chartProbability").show();
 			var legendData=['向下波动'+conserveData.conserveUncertainty+'%','确定值','向上波动'+conserveData.conserveUncertainty+'%'];
@@ -5056,7 +5057,7 @@ $(function(){
 					}
 				},
 				xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
-				yAxis : [{type : 'value'}],
+				yAxis : [{type : 'value',scale:true}],
 				series : [{
 					name:'经济成本',
 					type:'bar',
@@ -5081,7 +5082,7 @@ $(function(){
 						}
 					},
 					xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
-					yAxis : [{type : 'value'}],
+					yAxis : [{type : 'value',scale:true}],
 					series : [{
 						name:'经济成本',
 						type:'bar',
@@ -5109,7 +5110,7 @@ $(function(){
 						}
 					},
 					xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
-					yAxis : [{type : 'value'}],
+					yAxis : [{type : 'value',scale:true}],
 					series : [{
 						name:'经济成本',
 						type:'bar',
@@ -5137,7 +5138,7 @@ $(function(){
 						}
 					},
 					xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
-					yAxis : [{type : 'value'}],
+					yAxis : [{type : 'value',scale:true}],
 					series : [{
 						name:'经济成本',
 						type:'bar',
@@ -5165,7 +5166,7 @@ $(function(){
 						}
 					},
 					xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
-					yAxis : [{type : 'value'}],
+					yAxis : [{type : 'value',scale:true}],
 					series : [{
 						name:'经济成本',
 						type:'bar',
@@ -5179,6 +5180,13 @@ $(function(){
 		}else{
 			$("#chartProbability").hide();
 		}
+		// 作图经济成本和环境经济成本范围
+		var xx=influenceData.cost.toFixed(0);
+		var yy=influenceData.envEconomicCost.toFixed(0);
+		var xa=influenceData.costDown.toFixed(0);
+		var xb=influenceData.costUp.toFixed(0);
+		var ya=influenceData.envEconomicCostDown.toFixed(0);
+		var yb=influenceData.envEconomicCostUp.toFixed(0);
 		
 		
 		// echarts 自动调节宽度
