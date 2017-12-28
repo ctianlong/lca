@@ -66,17 +66,17 @@ $(function(){
 		{id:6,text:"减水剂"}
 	];
 	var cdGwp=[
-		{id:1,title:"2007 IPCC AR4",year:"20年GWP",co2:1,ch4:72,n2o:289,ccl2f2:11000,chclf2:5160,cf4:5210,c2f6:8630,sf6:16300,nf3:12300},
-		{id:2,title:"2007 IPCC AR4",year:"50年GWP",co2:1,ch4:25,n2o:298,ccl2f2:10900,chclf2:1810,cf4:7390,c2f6:12200,sf6:22800,nf3:17200},
-		{id:3,title:"2007 IPCC AR4",year:"100年GWP",co2:1,ch4:7.6,n2o:153,ccl2f2:5200,chclf2:549,cf4:11200,c2f6:18200,sf6:32600,nf3:20700},
-		{id:4,title:"2013 IPCC AR5",year:"20年GWP",co2:1,ch4:84,n2o:264,ccl2f2:10800,chclf2:5280,cf4:4880,c2f6:8210,sf6:17500,nf3:12800},
-		{id:5,title:"2013 IPCC AR5",year:"100年GWP",co2:1,ch4:28,n2o:265,ccl2f2:10200,chclf2:1760,cf4:6630,c2f6:11100,sf6:23500,nf3:16100}
+		{id:1,dataSource:"2007 IPCC AR4",year:"20年GWP",co2:1,ch4:72,n2o:289,ccl2f2:11000,chclf2:5160,cf4:5210,c2f6:8630,sf6:16300,nf3:12300},
+		{id:2,dataSource:"2007 IPCC AR4",year:"50年GWP",co2:1,ch4:25,n2o:298,ccl2f2:10900,chclf2:1810,cf4:7390,c2f6:12200,sf6:22800,nf3:17200},
+		{id:3,dataSource:"2007 IPCC AR4",year:"100年GWP",co2:1,ch4:7.6,n2o:153,ccl2f2:5200,chclf2:549,cf4:11200,c2f6:18200,sf6:32600,nf3:20700},
+		{id:4,dataSource:"2013 IPCC AR5",year:"20年GWP",co2:1,ch4:84,n2o:264,ccl2f2:10800,chclf2:5280,cf4:4880,c2f6:8210,sf6:17500,nf3:12800},
+		{id:5,dataSource:"2013 IPCC AR5",year:"100年GWP",co2:1,ch4:28,n2o:265,ccl2f2:10200,chclf2:1760,cf4:6630,c2f6:11100,sf6:23500,nf3:16100}
 	];
 	var cdSo2Equiv=[
-		{id:1,dataSet:"TRACI",so2:1,nox:0.7,nh3:1.88,hcl:0.88,hf:1.6,h2s:1.88,hno3:0.51,no2:0.51,no:1.07,h3po4:0.98,so3:0.8,h2so4:0.65}
+		{id:1,dataSource:"TRACI",so2:1,nox:0.7,nh3:1.88,hcl:0.88,hf:1.6,h2s:1.88,hno3:0.51,no2:0.51,no:1.07,h3po4:0.98,so3:0.8,h2so4:0.65}
 	];
 	var cdNEquiv=[
-		{id:1,dataSet:"TRACI",nh3kq:0.119,nh3s:0.779,tn:0.986,bodcod:0.05,xsykq:0.036,xsys:0.237,hno3kq:0.0345,hno3s:0.227,noxds:0.779,noxhs:0.291,noxkq:0.0443,lsykq:0.366,lsys:2.38,lskq:0.355,lss:2.31,lkq:1.12,ls:7.29}
+		{id:1,dataSource:"TRACI",nh3kq:0.119,nh3s:0.779,tn:0.986,bodcod:0.05,xsykq:0.036,xsys:0.237,hno3kq:0.0345,hno3s:0.227,noxds:0.779,noxhs:0.291,noxkq:0.0443,lsykq:0.366,lsys:2.38,lskq:0.355,lss:2.31,lkq:1.12,ls:7.29}
 	];
 	var $roadType=$("#roadType").select2({
 		data:cdRoadType,
@@ -1143,7 +1143,7 @@ $(function(){
 	  if (repo.loading) {
 		  return repo.text;
 	  }
-	  var markup="<div class='row'><div class='col-sm-9'><strong>"+repo.title+" / "+repo.year+"</strong></div>"+
+	  var markup="<div class='row'><div class='col-sm-9'><strong>"+repo.dataSource+" / "+repo.year+"</strong></div>"+
 	  	"<div class='col-sm-3'>CO<sub>2</sub>："+(repo.co2||'')+"</div></div>"+
 	  	"<div class='row'><div class='col-sm-3'>CH<sub>4</sub>："+(repo.ch4||'')+"</div>"+
 	  	"<div class='col-sm-3'>N<sub>2</sub>O："+(repo.n2o||'')+"</div>"+
@@ -1156,8 +1156,8 @@ $(function(){
 	  return markup;
 	}
 	function formatGwpSelection(repo) {
-		if(repo.title){
-			return repo.title+" / "+repo.year;
+		if(repo.dataSource){
+			return repo.dataSource+" / "+repo.year;
 		}
 		return repo.text;
 	}
@@ -1174,11 +1174,11 @@ $(function(){
 	  if (repo.loading) {
 		  return repo.text;
 	  }
-	  return repo.dataSet;
+	  return repo.dataSource;
 	}
 	function formatSourSelection(repo) {
-		if(repo.dataSet){
-			return repo.dataSet;
+		if(repo.dataSource){
+			return repo.dataSource;
 		}
 		return repo.text;
 	}
@@ -1195,11 +1195,11 @@ $(function(){
 		if (repo.loading) {
 			return repo.text;
 		}
-		return repo.dataSet;
+		return repo.dataSource;
 	}
 	function formatEutrophicationSelection(repo) {
-		if(repo.dataSet){
-			return repo.dataSet;
+		if(repo.dataSource){
+			return repo.dataSource;
 		}
 		return repo.text;
 	}
@@ -1917,10 +1917,10 @@ $(function(){
 	            basicData.lqmtztj=area*lqmtzhd/1000;
 	            basicData.tptj=area*tphd/1000;
 	            var tmpList=[];
-	            tmpList.push({fuelName:"汽油"});
-	            tmpList.push({fuelName:"柴油"});
-	            tmpList.push({fuelName:"重油"});
-	            tmpList.push({fuelName:"电"});
+	            tmpList.push({fuelName:"汽油(kg)"});
+	            tmpList.push({fuelName:"柴油(kg)"});
+	            tmpList.push({fuelName:"重油(kg)"});
+	            tmpList.push({fuelName:"电(kWh)"});
 	            var _html='';
 	            var tpl=$('#tpl-mixPaveInventoryTable').html();
 	            for (var i=0,len=tmpList.length; i < len; i++){
@@ -1944,9 +1944,9 @@ $(function(){
 				// 计算使用透水率
 				$("#use2Inventory").show();
 				var tmpList=[];
-	            tmpList.push({fuelName:"汽油"});
-	            tmpList.push({fuelName:"柴油"});
-	            tmpList.push({fuelName:"电"});
+	            tmpList.push({fuelName:"汽油(kg)"});
+	            tmpList.push({fuelName:"柴油(kg)"});
+	            tmpList.push({fuelName:"电(kWh)"});
 	            var _html='';
 	            var tpl=$('#tpl-use2InventoryTable').html();
 	            for (var i=0,len=tmpList.length; i < len; i++){
@@ -2042,6 +2042,7 @@ $(function(){
     	onkeyup:false
 	});
 	$("#inventoryMaterialForm").submit(function(){
+		materialData.resList=[];
 		if(materialData.materialList.length>0){
 			for (var i = 0; i < materialData.materialList.length; i++) {
 				var item=materialData.materialList[i];
@@ -2057,7 +2058,8 @@ $(function(){
                     }, 1500);
                     return false;
 				}else{
-					var amount=item.amount;
+					materialData.resList.push(res);
+					var amount=item.amount*1000;
 					if(res.cost){
 						if(res.cost.indexOf("~")!=-1){
 					    	var nums=res.cost.split("~");
@@ -2159,6 +2161,7 @@ $(function(){
     		}
 		},
     	submitHandler:function(form){
+    		transConsData.transResList=[];
     		if(transConsData.transportList.length>0){
 	    		for (var i = 0; i < transConsData.transportList.length; i++) {
 					var item=transConsData.transportList[i];
@@ -2174,6 +2177,7 @@ $(function(){
 	                    }, 1500);
 	                    return false;
 					}else{
+						transConsData.transResList.push(res);
 						item.vehicleModel=res.vehicleType;
 						item.distance=distance;
 						var amount=item.amount;
@@ -2249,8 +2253,10 @@ $(function(){
 		errorClass: 'text-danger',
 		rules:{},
 		submitHandler:function(form){
+			transConsData.consResList=[];
 			var gasoline=0,diesel=0,heavyOil=0,electricity=0;
 			var mixType=$mixEqupType.select2("data")[0];
+			transConsData.consResList.push({dataSource:'JTGT B06-03-2007 公路工程机械台班费用定额',createUserId:0});
 			var lqhnttj=basicData.lqhnttj,lqmtztj=basicData.lqmtztj,tptj=basicData.tptj;
 			if(lqhnttj>0){
 				var tmp=mixType.lqhnt.zl;
@@ -2270,17 +2276,19 @@ $(function(){
 				var pavingType=$pavingEqupType.select2("data")[0];
 				if(pavingType==undefined){
 					diesel+=tptj*(cfc.tp.t320.lqhnt.zl.cy);
+					transConsData.consResList.push({dataSource:'JTGT B06-03-2007 公路工程机械台班费用定额',createUserId:0});
 				}else{
 					if(pavingType.diesel!=null){
 						diesel+=tptj*pavingType.diesel;
 					}
+					transConsData.consResList.push(pavingType);
 				}
 			}
 			transConsData.mixPaveList=[];
-			transConsData.mixPaveList.push({fuelMark:"gasoline",fuelName:"汽油",amount:gasoline.toFixed(3)});
-			transConsData.mixPaveList.push({fuelMark:"diesel",fuelName:"柴油",amount:diesel.toFixed(3)});
-			transConsData.mixPaveList.push({fuelMark:"heavyOil",fuelName:"重油",amount:heavyOil.toFixed(3)});
-			transConsData.mixPaveList.push({fuelMark:"electricity",fuelName:"电",amount:electricity.toFixed(3)});
+			transConsData.mixPaveList.push({fuelMark:"gasoline",fuelName:"汽油(kg)",amount:gasoline.toFixed(3)});
+			transConsData.mixPaveList.push({fuelMark:"diesel",fuelName:"柴油(kg)",amount:diesel.toFixed(3)});
+			transConsData.mixPaveList.push({fuelMark:"heavyOil",fuelName:"重油(kg)",amount:heavyOil.toFixed(3)});
+			transConsData.mixPaveList.push({fuelMark:"electricity",fuelName:"电(kWh)",amount:electricity.toFixed(3)});
 			for (var i = 0; i < transConsData.mixPaveList.length; i++) {
 				var item=transConsData.mixPaveList[i];
 				var res=$("#"+item.fuelMark).select2("data")[0];
@@ -2294,6 +2302,7 @@ $(function(){
 					}, 1500);
 					return false;
 				}else{
+					transConsData.consResList.push(res);
 					var amount=item.amount;
 					if(res.cost!=null){
 						item.cost=(res.cost*amount).toFixed(3);
@@ -2620,9 +2629,10 @@ $(function(){
 			var y=(et0*0.8-i10*0.6)*3*basicData.area/1000;
 			var electricity=i1*i17*i18*(x>y?y:x);
 			use2Data.fuelList=[];
-			use2Data.fuelList.push({fuelMark:"gasolineUse2",fuelName:"汽油",amount:gasoline.toFixed(3)});
-			use2Data.fuelList.push({fuelMark:"dieselUse2",fuelName:"柴油",amount:diesel.toFixed(3)});
-			use2Data.fuelList.push({fuelMark:"electricityUse2",fuelName:"电",amount:electricity.toFixed(3)});
+			use2Data.fuelList.push({fuelMark:"gasolineUse2",fuelName:"汽油(kg)",amount:gasoline.toFixed(3)});
+			use2Data.fuelList.push({fuelMark:"dieselUse2",fuelName:"柴油(kg)",amount:diesel.toFixed(3)});
+			use2Data.fuelList.push({fuelMark:"electricityUse2",fuelName:"电(kWh)",amount:electricity.toFixed(3)});
+			use2Data.resList=[];
 			for (var i = 0; i < use2Data.fuelList.length; i++) {
 				var item=use2Data.fuelList[i];
 				var res=$("#"+item.fuelMark).select2("data")[0];
@@ -2636,6 +2646,7 @@ $(function(){
 					}, 1500);
 					return false;
 				}else{
+					use2Data.resList.push(res);
 					var amount=item.amount;
 					if(res.cost!=null){
 						item.cost=(res.cost*amount).toFixed(3);
@@ -2715,7 +2726,7 @@ $(function(){
 			var y=$("#nonPavementReflectance").val();
 			var z=$("#reflectCoefficient").val();
 			use1Data.electricityReduce=(x-y)*100*z*basicData.area;
-			$("#electricityReduce").text(use1Data.electricityReduce+" kWh");
+			$("#electricityReduce").text(use1Data.electricityReduce+"kWh");
 			use1Range=2;
 		},
 		onkeyup:false
@@ -2902,6 +2913,7 @@ $(function(){
 			use3Data.fuelList=[];
 			use3Data.fuelList.push({fuelMark:"gasolineUse3",fuelName:"汽油",amount:gasoline.toFixed(3)});
 			use3Data.fuelList.push({fuelMark:"dieselUse3",fuelName:"柴油",amount:diesel.toFixed(3)});
+			use3Data.resList=[];
 			for (var i = 0; i < use3Data.fuelList.length; i++) {
 				var item=use3Data.fuelList[i];
 				var res=$("#"+item.fuelMark).select2("data")[0];
@@ -2915,6 +2927,7 @@ $(function(){
 					}, 1500);
 					return false;
 				}else{
+					use3Data.resList.push(res);
 					var amount=item.amount;
 					if(res.cost!=null){
 						item.cost=(res.cost*amount).toFixed(3);
@@ -3364,6 +3377,7 @@ $(function(){
 		onkeyup:false
 	});
 	$("#inventoryConserveMaterialForm").submit(function(){
+		conserveData.resList=[];
 		if(conserveData.materialList.length>0){
 			for (var i = 0; i < conserveData.materialList.length; i++) {
 				var item=conserveData.materialList[i];
@@ -3378,7 +3392,8 @@ $(function(){
 					}, 1500);
 					return false;
 				}
-				var amount=item.amount;
+				conserveData.resList.push(res);
+				var amount=item.amount*1000;
 				if(res.cost){
 					if(res.cost.indexOf("~")!=-1){
 				    	var nums=res.cost.split("~");
@@ -3436,7 +3451,7 @@ $(function(){
 				}
 				// 概率性相关计算
 				item=conserveData.materialListUp[i];
-				amount=item.amount;
+				amount=item.amount*1000;
 				if(res.cost){
 					if(res.cost.indexOf("~")!=-1){
 				    	var nums=res.cost.split("~");
@@ -3493,7 +3508,7 @@ $(function(){
 					item.emissionZn=undefined;
 				}
 				item=conserveData.materialListDown[i];
-				amount=item.amount;
+				amount=item.amount*1000;
 				if(res.cost){
 					if(res.cost.indexOf("~")!=-1){
 				    	var nums=res.cost.split("~");
@@ -3663,6 +3678,7 @@ $(function(){
 			conserveData.costs.timeCost=timeCost;
 			conserveData.costs.carOpsCost=carOpsCost;
 			conserveData.costs.safeCost=safeCost;
+			var costsView={timeCost:timeCost.toFixed(2),carOpsCost:carOpsCost.toFixed(2),safeCost:safeCost.toFixed(2)};
 			// 概率性相关计算，上升波动
 			var un=conserveData.conserveUncertainty/100;
 			timeCost=0;carOpsCost=0;safeCost=0;
@@ -3695,7 +3711,7 @@ $(function(){
 			conserveData.costsDown.carOpsCost=carOpsCost;
 			conserveData.costsDown.safeCost=safeCost;
 			var tpl=$('#tpl-conserveInventoryEconomicTable').html();
-			var _html = renderTpl(tpl, conserveData.costs);
+			var _html = renderTpl(tpl, costsView);
 			$('#conserveInventoryEconomicTable tbody').html(_html);
 			conserveRange=2;
 		},
@@ -4533,7 +4549,7 @@ $(function(){
 		if(energyRange){
 			$("#energyInfluence").show();
 			//能耗显示
-			$("#energyValue").text(influenceData.energyConsume);
+			$("#energyValue").text(influenceData.energyConsume.toFixed(3)+'MJ');
 			$("#energyEnvCostInput").show();
 			energyRange=2;
 		}else{
@@ -4589,7 +4605,7 @@ $(function(){
 				influenceData.gwpValueUp=influenceData.emissionCo2Up*g.co2+influenceData.emissionCh4Up*g.ch4+influenceData.emissionN2oUp*g.n2o;
 				influenceData.gwpValueDown=influenceData.emissionCo2Down*g.co2+influenceData.emissionCh4Down*g.ch4+influenceData.emissionN2oDown*g.n2o;
 			}
-			$("#gwpValue").text(influenceData.gwpValue);
+			$("#gwpValue").text(influenceData.gwpValue.toFixed(3)+'kg');
 			carbonRange=2;
 			influenceData.envEconomicCostFlag=false;
 		}
@@ -4613,7 +4629,7 @@ $(function(){
 				influenceData.sourValueUp=influenceData.emissionSo2Up*g.so2+influenceData.emissionNoxUp*g.nox;
 				influenceData.sourValueDown=influenceData.emissionSo2Down*g.so2+influenceData.emissionNoxDown*g.nox;
 			}
-			$("#sourValue").text(influenceData.sourValue);
+			$("#sourValue").text(influenceData.sourValue.toFixed(3)+'kg');
 			sourRange=2;
 			influenceData.envEconomicCostFlag=false;
 		}
@@ -4637,7 +4653,7 @@ $(function(){
 				influenceData.eutrophicationValueUp=influenceData.emissionNoxUp*(g.noxds+g.noxhs);
 				influenceData.eutrophicationValueDown=influenceData.emissionNoxDown*(g.noxds+g.noxhs);
 			}
-			$("#eutrophicationValue").text(influenceData.eutrophicationValue);
+			$("#eutrophicationValue").text(influenceData.eutrophicationValue.toFixed(3)+'kg');
 			eutrophicationRange=2;
 			influenceData.envEconomicCostFlag=false;
 		}
@@ -4748,7 +4764,7 @@ $(function(){
 				x+=influenceData.eutrophicationCost;
 			}
 			influenceData.envEconomicCost=x;
-			$("#envEconomicCost").text(x);
+			$("#envEconomicCost").text(x.toFixed(2)+'元');
 			influenceData.totalEconomicCost=x+influenceData.cost;
 			if(conserveRange==2){
 				influenceData.envEconomicCostUp=xUp;
@@ -4786,7 +4802,7 @@ $(function(){
 		var chartCostInventoryData=[],chartEnergyInventoryData=[],chartCo2InventoryData=[],chartSo2InventoryData=[],chartPbInventoryData=[],chartZnInventoryData=[];
 		if(materialRange==2){
 			legend.push('原材料获取');
-			chartCostInventoryData.push(materialData.result.cost.toFixed(0));
+			chartCostInventoryData.push(materialData.result.cost.toFixed(2));
 			chartEnergyInventoryData.push(materialData.result.energyConsume);
 			chartCo2InventoryData.push(materialData.result.emissionCo2);
 			chartSo2InventoryData.push(materialData.result.emissionSo2);
@@ -4795,7 +4811,7 @@ $(function(){
 		}
 		if(transConsRange==2){
 			legend.push('运输与施工');
-			chartCostInventoryData.push(transConsData.result.cost.toFixed(0));
+			chartCostInventoryData.push(transConsData.result.cost.toFixed(2));
 			chartEnergyInventoryData.push(transConsData.result.energyConsume);
 			chartCo2InventoryData.push(transConsData.result.emissionCo2);
 			chartSo2InventoryData.push(transConsData.result.emissionSo2);
@@ -4804,7 +4820,7 @@ $(function(){
 		}
 		if(use2Range==2){
 			legend.push('使用(透水)');
-			chartCostInventoryData.push(use2Data.result.cost.toFixed(0));
+			chartCostInventoryData.push(use2Data.result.cost.toFixed(2));
 			chartEnergyInventoryData.push(use2Data.result.energyConsume);
 			chartCo2InventoryData.push(use2Data.result.emissionCo2);
 			chartSo2InventoryData.push(use2Data.result.emissionSo2);
@@ -4813,7 +4829,7 @@ $(function(){
 		}
 		if(use3Range==2){
 			legend.push('使用(滚动阻力)');
-			chartCostInventoryData.push(use3Data.result.cost.toFixed(0));
+			chartCostInventoryData.push(use3Data.result.cost.toFixed(2));
 			chartEnergyInventoryData.push(use3Data.result.energyConsume);
 			chartCo2InventoryData.push(use3Data.result.emissionCo2);
 			chartSo2InventoryData.push(use3Data.result.emissionSo2);
@@ -4822,7 +4838,7 @@ $(function(){
 		}
 		if(conserveRange==2){
 			legend.push('养护');
-			chartCostInventoryData.push(conserveData.result.cost.toFixed(0));
+			chartCostInventoryData.push(conserveData.result.cost.toFixed(2));
 			chartEnergyInventoryData.push(conserveData.result.energyConsume);
 			chartCo2InventoryData.push(conserveData.result.emissionCo2);
 			chartSo2InventoryData.push(conserveData.result.emissionSo2);
@@ -4831,7 +4847,7 @@ $(function(){
 		}
 		if(recycleRange==2){
 			legend.push('回收');
-			chartCostInventoryData.push(recycleData.result.cost.toFixed(0));
+			chartCostInventoryData.push(recycleData.result.cost.toFixed(2));
 			chartEnergyInventoryData.push(recycleData.result.energyConsume);
 			chartCo2InventoryData.push(recycleData.result.emissionCo2);
 			chartSo2InventoryData.push(recycleData.result.emissionSo2);
@@ -4843,7 +4859,6 @@ $(function(){
 		chartData.chartCostInventory.setOption({
 			title : {text: '经济成本'},
 		    tooltip : {trigger: 'axis'},
-		    legend: {data:['经济成本']},
 		    toolbox: {
 		        show : true,
 		        feature : {
@@ -4854,9 +4869,8 @@ $(function(){
 		        }
 		    },
 		    xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:30}}],
-		    yAxis : [{type : 'value'}],
+		    yAxis : [{type : 'value',name:'经济成本(元)'}],
 		    series : [{
-	            name:'经济成本',
 	            type:'bar',
 	            data:chartCostInventoryData,
 	            itemStyle : { normal: {label : {show: true}}}
@@ -4866,7 +4880,6 @@ $(function(){
 		chartData.chartEnergyInventory.setOption({
 			title : {text: '能耗'},
 			tooltip : {trigger: 'axis'},
-			legend: {data:['能耗']},
 			toolbox: {
 				show : true,
 				feature : {
@@ -4877,9 +4890,8 @@ $(function(){
 				}
 			},
 			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:30}}],
-			yAxis : [{type : 'value'}],
+			yAxis : [{type : 'value',name:'能耗(MJ)'}],
 			series : [{
-				name:'能耗',
 				type:'bar',
 				data:chartEnergyInventoryData,
 				itemStyle : { normal: {label : {show: true}}}
@@ -4889,7 +4901,6 @@ $(function(){
 		chartData.chartCo2Inventory.setOption({
 			title : {text: 'CO2'},
 			tooltip : {trigger: 'axis'},
-			legend: {data:['CO2']},
 			toolbox: {
 				show : true,
 				feature : {
@@ -4900,9 +4911,8 @@ $(function(){
 				}
 			},
 			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:30}}],
-			yAxis : [{type : 'value'}],
+			yAxis : [{type : 'value',name:'排放(kg)'}],
 			series : [{
-				name:'CO2',
 				type:'bar',
 				data:chartCo2InventoryData,
 				itemStyle : { normal: {label : {show: true}}}
@@ -4912,7 +4922,6 @@ $(function(){
 		chartData.chartSo2Inventory.setOption({
 			title : {text: 'SO2'},
 			tooltip : {trigger: 'axis'},
-			legend: {data:['SO2']},
 			toolbox: {
 				show : true,
 				feature : {
@@ -4923,9 +4932,8 @@ $(function(){
 				}
 			},
 			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:30}}],
-			yAxis : [{type : 'value'}],
+			yAxis : [{type : 'value',name:'排放(kg)'}],
 			series : [{
-				name:'SO2',
 				type:'bar',
 				data:chartSo2InventoryData,
 				itemStyle : { normal: {label : {show: true}}}
@@ -4935,7 +4943,6 @@ $(function(){
 		chartData.chartPbInventory.setOption({
 			title : {text: 'Pb'},
 			tooltip : {trigger: 'axis'},
-			legend: {data:['Pb']},
 			toolbox: {
 				show : true,
 				feature : {
@@ -4946,9 +4953,8 @@ $(function(){
 				}
 			},
 			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:30}}],
-			yAxis : [{type : 'value'}],
+			yAxis : [{type : 'value',name:'排放(kg)'}],
 			series : [{
-				name:'Pb',
 				type:'bar',
 				data:chartPbInventoryData,
 				itemStyle : { normal: {label : {show: true}}}
@@ -4958,7 +4964,6 @@ $(function(){
 		chartData.chartZnInventory.setOption({
 			title : {text: 'Zn'},
 			tooltip : {trigger: 'axis'},
-			legend: {data:['Zn']},
 			toolbox: {
 				show : true,
 				feature : {
@@ -4969,9 +4974,8 @@ $(function(){
 				}
 			},
 			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:30}}],
-			yAxis : [{type : 'value'}],
+			yAxis : [{type : 'value',name:'排放(kg)'}],
 			series : [{
-				name:'Zn',
 				type:'bar',
 				data:chartZnInventoryData,
 				itemStyle : { normal: {label : {show: true}}}
@@ -4981,33 +4985,33 @@ $(function(){
 		var influenceType=[];
 		var chartCostInfluenceData=[];
 		influenceType.push("成本");
-		chartCostInfluenceData.push({name:"成本",value:influenceData.cost});
+		chartCostInfluenceData.push({name:"成本",value:influenceData.cost.toFixed(2)});
 		if(energyRange==2){
 			influenceType.push("能耗");
-			chartCostInfluenceData.push({name:"能耗",value:influenceData.energyConsumeCost});
+			chartCostInfluenceData.push({name:"能耗",value:influenceData.energyConsumeCost.toFixed(2)});
 		}
 		if(carbonRange==2){
 			influenceType.push("温室效应");
-			chartCostInfluenceData.push({name:"温室效应",value:influenceData.gwpCost});
+			chartCostInfluenceData.push({name:"温室效应",value:influenceData.gwpCost.toFixed(2)});
 		}
 		if(sourRange==2){
 			influenceType.push("酸化");
-			chartCostInfluenceData.push({name:"酸化",value:influenceData.sourCost});
+			chartCostInfluenceData.push({name:"酸化",value:influenceData.sourCost.toFixed(2)});
 		}
 		if(eutrophicationRange==2){
 			influenceType.push("富营养化");
-			chartCostInfluenceData.push({name:"富营养化",value:influenceData.eutrophicationCost});
+			chartCostInfluenceData.push({name:"富营养化",value:influenceData.eutrophicationCost.toFixed(2)});
 		}
 		chartData.chartCostInfluence = echarts.init(document.getElementById('chartCostInfluence'));
 		chartData.chartCostInfluence.setOption({
 			title : {
 		        text: '各类经济成本比例',
 		        x:'center',
-		        subtext:'总经济成本(含污染经济成本)：'+influenceData.totalEconomicCost.toFixed(0)+" 元",
+		        subtext:'总经济成本(含污染经济成本)：'+influenceData.totalEconomicCost.toFixed(2)+"元",
 		    },
 		    tooltip : {
 		        trigger: 'item',
-		        formatter: "{a} <br/>{b} : {c} ({d}%)"
+		        formatter: "{b} : {c} ({d}%)"
 		    },
 		    legend: {
 		        orient : 'vertical',
@@ -5023,7 +5027,6 @@ $(function(){
 		    },
 		    series : [
 		        {
-		            name:'经济成本',
 		            type:'pie',
 		            radius : '55%',
 		            center: ['50%', '60%'],
@@ -5046,7 +5049,6 @@ $(function(){
 			chartData.chartCostProbability.setOption({
 				title : {text: '成本波动'},
 				tooltip : {trigger: 'axis'},
-				legend: {data:['经济成本']},
 				toolbox: {
 					show : true,
 					feature : {
@@ -5057,11 +5059,10 @@ $(function(){
 					}
 				},
 				xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
-				yAxis : [{type : 'value',scale:true}],
+				yAxis : [{type : 'value',scale:true,name:'经济成本(元)'}],
 				series : [{
-					name:'经济成本',
 					type:'bar',
-					data:[influenceData.costDown,influenceData.cost,influenceData.costUp],
+					data:[influenceData.costDown.toFixed(2),influenceData.cost.toFixed(2),influenceData.costUp.toFixed(2)],
 					itemStyle : { normal: {label : {show: true}}}
 				}]
 			});
@@ -5071,7 +5072,6 @@ $(function(){
 				chartData.chartEnergyProbability.setOption({
 					title : {text: '能耗波动(折算为经济成本)'},
 					tooltip : {trigger: 'axis'},
-					legend: {data:['经济成本']},
 					toolbox: {
 						show : true,
 						feature : {
@@ -5082,11 +5082,10 @@ $(function(){
 						}
 					},
 					xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
-					yAxis : [{type : 'value',scale:true}],
+					yAxis : [{type : 'value',scale:true,name:'经济成本(元)'}],
 					series : [{
-						name:'经济成本',
 						type:'bar',
-						data:[influenceData.energyConsumeCostDown,influenceData.energyConsumeCost,influenceData.energyConsumeCostUp],
+						data:[influenceData.energyConsumeCostDown.toFixed(2),influenceData.energyConsumeCost.toFixed(2),influenceData.energyConsumeCostUp.toFixed(2)],
 						itemStyle : { normal: {label : {show: true}}}
 					}]
 				});
@@ -5099,7 +5098,6 @@ $(function(){
 				chartData.chartGwpProbability.setOption({
 					title : {text: '温室效应波动(折算为经济成本)'},
 					tooltip : {trigger: 'axis'},
-					legend: {data:['经济成本']},
 					toolbox: {
 						show : true,
 						feature : {
@@ -5110,11 +5108,10 @@ $(function(){
 						}
 					},
 					xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
-					yAxis : [{type : 'value',scale:true}],
+					yAxis : [{type : 'value',scale:true,name:'经济成本(元)'}],
 					series : [{
-						name:'经济成本',
 						type:'bar',
-						data:[influenceData.gwpCostDown,influenceData.gwpCost,influenceData.gwpCostUp],
+						data:[influenceData.gwpCostDown.toFixed(2),influenceData.gwpCost.toFixed(2),influenceData.gwpCostUp.toFixed(2)],
 						itemStyle : { normal: {label : {show: true}}}
 					}]
 				});
@@ -5127,7 +5124,6 @@ $(function(){
 				chartData.chartSourProbability.setOption({
 					title : {text: '酸化效应波动(折算为经济成本)'},
 					tooltip : {trigger: 'axis'},
-					legend: {data:['经济成本']},
 					toolbox: {
 						show : true,
 						feature : {
@@ -5138,11 +5134,10 @@ $(function(){
 						}
 					},
 					xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
-					yAxis : [{type : 'value',scale:true}],
+					yAxis : [{type : 'value',scale:true,name:'经济成本(元)'}],
 					series : [{
-						name:'经济成本',
 						type:'bar',
-						data:[influenceData.sourCostDown,influenceData.sourCost,influenceData.sourCostUp],
+						data:[influenceData.sourCostDown.toFixed(2),influenceData.sourCost.toFixed(2),influenceData.sourCostUp.toFixed(2)],
 						itemStyle : { normal: {label : {show: true}}}
 					}]
 				});
@@ -5155,7 +5150,6 @@ $(function(){
 				chartData.chartEutrophicationProbability.setOption({
 					title : {text: '富营养化波动(折算为经济成本)'},
 					tooltip : {trigger: 'axis'},
-					legend: {data:['经济成本']},
 					toolbox: {
 						show : true,
 						feature : {
@@ -5166,27 +5160,101 @@ $(function(){
 						}
 					},
 					xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
-					yAxis : [{type : 'value',scale:true}],
+					yAxis : [{type : 'value',scale:true,name:'经济成本(元)'}],
 					series : [{
-						name:'经济成本',
 						type:'bar',
-						data:[influenceData.eutrophicationCostDown,influenceData.eutrophicationCost,influenceData.eutrophicationCostUp],
+						data:[influenceData.eutrophicationCostDown.toFixed(2),influenceData.eutrophicationCost.toFixed(2),influenceData.eutrophicationCostUp.toFixed(2)],
 						itemStyle : { normal: {label : {show: true}}}
 					}]
 				});
 			}else{
 				$("#chartEutrophicationProbability").hide();
 			}
+			// 作图经济成本和环境经济成本范围
+			var xx=influenceData.cost.toFixed(2);
+			var yy=influenceData.envEconomicCost.toFixed(2);
+			var xa=influenceData.costDown.toFixed(2);
+			var xb=influenceData.costUp.toFixed(2);
+			var ya=influenceData.envEconomicCostDown.toFixed(2);
+			var yb=influenceData.envEconomicCostUp.toFixed(2);
+			chartData.chartCostAndEnvCost = echarts.init(document.getElementById('chartCostAndEnvCost'));
+			chartData.chartCostAndEnvCost.setOption({
+				title : {
+					text: '经济成本和环境经济成本变化范围',
+					subtext: '五角星为确定值：（'+xx+'，'+yy+'）'
+				},
+				tooltip : {
+					trigger: 'axis',
+					showDelay : 0,
+					formatter : function (params) {
+						if (params.value.length > 1) {
+							return '经济成本：'+params.value[0]+' 元<br/>'
+							+'环境经济成本：'+params.value[1]+' 元';
+						}
+					},  
+					axisPointer:{
+						show: true,
+						type : 'cross',
+						lineStyle: {
+							type : 'dashed',
+							width : 1
+						}
+					}
+				},
+				toolbox: {
+					show : true,
+					feature : {
+						saveAsImage : {show: true}
+					}
+				},
+				grid : {x:90,x2:90},
+				xAxis : [
+					{
+						type : 'value',
+						name:'经济成本(元)',
+						scale:true
+					}
+				],
+				yAxis : [
+					{
+						type : 'value',
+						scale:true,
+						name:'环境经济成本(元)'
+					}
+				],
+				series : [
+					{
+						type:'scatter',
+						symbol: 'emptyCircle',
+						itemStyle: {
+							normal: {
+								color: 'blue'
+							},
+							emphasis: {
+								color: 'lightgreen',
+							}
+						},
+						data: [[xa, ya], [xb, ya], [xa, yb], [xb, yb],[xx,yy]],
+						markPoint : {
+							data : [
+							{xAxis: xx, yAxis: yy, symbol:'star',itemStyle:{normal:{color:'red'}}}
+							]
+						},
+						markLine : {
+							data : [
+							{type : 'max', name: '环境经济成本最大值',itemStyle:{normal:{lineStyle: {type : 'solid'}}}},
+							{type : 'min', name: '环境经济成本最小值',itemStyle:{normal:{lineStyle: {type : 'solid'}}}},
+							{type : 'min', name: '经济成本最小值',valueIndex : 0,itemStyle:{normal:{lineStyle: {type : 'solid'}}}},
+							{type : 'max', name: '经济成本最大值',valueIndex : 0,itemStyle:{normal:{lineStyle: {type : 'solid'}}}}
+							]
+						}
+					}     
+					]
+			});
 		}else{
 			$("#chartProbability").hide();
 		}
-		// 作图经济成本和环境经济成本范围
-		var xx=influenceData.cost.toFixed(0);
-		var yy=influenceData.envEconomicCost.toFixed(0);
-		var xa=influenceData.costDown.toFixed(0);
-		var xb=influenceData.costUp.toFixed(0);
-		var ya=influenceData.envEconomicCostDown.toFixed(0);
-		var yb=influenceData.envEconomicCostUp.toFixed(0);
+		// 数据适用性分析
 		
 		
 		// echarts 自动调节宽度
@@ -5212,9 +5280,9 @@ $(function(){
 				if(eutrophicationRange==2){
 					chartData.chartEutrophicationProbability.resize();
 				}
+				chartData.chartCostAndEnvCost.resize();
 			}
 		});
-		
 	});
 	$("#output-prevStep").click(function(){
 		tool.stepBack(4,3);
@@ -5253,7 +5321,7 @@ $(function(){
         doc.addParagraph("清单分析结果",{
             bold:true,
         });
-        doc.addParagraph("路面的总经济成本为："+influenceData.cost.toFixed(0)+" 元，各阶段经济成本的比例如下图：");
+        doc.addParagraph("路面的总经济成本为："+influenceData.cost.toFixed(2)+" 元，各阶段经济成本的比例如下图：");
         doc.addImage(chartData.chartCostInventory.getDataURL(),$("#chartCostInventory").width(),400,{
             textAlign:doc.AlignType.Center
         });
@@ -5280,23 +5348,60 @@ $(function(){
         doc.addParagraph("影响评价结果",{
             bold:true,
         });
-        doc.addParagraph("路面的总经济成本为："+influenceData.cost.toFixed(0)+" 元；");
+        doc.addParagraph("路面的总经济成本为："+influenceData.cost.toFixed(2)+" 元；");
         if(energyRange==2){
-        	doc.addParagraph("路面的总能耗为："+influenceData.energyConsume.toFixed(0)+" MJ，折算为经济成本为："+influenceData.energyConsumeCost.toFixed(0)+" 元；");
+        	doc.addParagraph("路面的总能耗为："+influenceData.energyConsume.toFixed(0)+" MJ，折算为经济成本为："+influenceData.energyConsumeCost.toFixed(2)+" 元；");
         }
         if(carbonRange==2){
-        	doc.addParagraph("路面的总温室效应为："+influenceData.gwpValue.toFixed(0)+" kg，折算为经济成本为："+influenceData.gwpCost.toFixed(0)+" 元；");
+        	doc.addParagraph("路面的总温室效应为："+influenceData.gwpValue.toFixed(0)+" kg，折算为经济成本为："+influenceData.gwpCost.toFixed(2)+" 元；");
         }
         if(sourRange==2){
-        	doc.addParagraph("路面的总酸化效应为："+influenceData.sourValue.toFixed(0)+" kg，折算为经济成本为："+influenceData.sourCost.toFixed(0)+" 元；");
+        	doc.addParagraph("路面的总酸化效应为："+influenceData.sourValue.toFixed(0)+" kg，折算为经济成本为："+influenceData.sourCost.toFixed(2)+" 元；");
         }
         if(eutrophicationRange==2){
-        	doc.addParagraph("路面的总富营养化效应为："+influenceData.eutrophicationValue.toFixed(0)+" kg，折算为经济成本为："+influenceData.eutrophicationCost.toFixed(0)+" 元；");
+        	doc.addParagraph("路面的总富营养化效应为："+influenceData.eutrophicationValue.toFixed(0)+" kg，折算为经济成本为："+influenceData.eutrophicationCost.toFixed(2)+" 元；");
         }
         doc.addParagraph("各类经济成本的比例如下图：");
         doc.addImage(chartData.chartCostInfluence.getDataURL(),$("#chartCostInfluence").width(),400,{
         	textAlign:doc.AlignType.Center
         });
+        if(conserveRange==2){
+        	doc.addParagraph("数据的概率性分析",{
+        		bold:true,
+        	});
+        	doc.addParagraph("根据不确定性："+conserveData.conserveUncertainty+"%，各类影响的取值范围如下：");
+        	doc.addImage(chartData.chartCostProbability.getDataURL(),$("#chartCostProbability").width(),400,{
+        		textAlign:doc.AlignType.Center
+        	});
+        	if(energyRange==2){
+        		doc.addImage(chartData.chartEnergyProbability.getDataURL(),$("#chartEnergyProbability").width(),400,{
+        			textAlign:doc.AlignType.Center
+        		});
+        	}
+        	if(carbonRange==2){
+        		doc.addImage(chartData.chartGwpProbability.getDataURL(),$("#chartGwpProbability").width(),400,{
+        			textAlign:doc.AlignType.Center
+        		});
+        	}
+        	if(sourRange==2){
+        		doc.addImage(chartData.chartSourProbability.getDataURL(),$("#chartSourProbability").width(),400,{
+        			textAlign:doc.AlignType.Center
+        		});
+        	}
+        	if(eutrophicationRange==2){
+        		doc.addImage(chartData.chartEutrophicationProbability.getDataURL(),$("#chartEutrophicationProbability").width(),400,{
+        			textAlign:doc.AlignType.Center
+        		});
+        	}
+        	doc.addParagraph("经济成本和环境经济成本的范围如下：");
+        	doc.addImage(chartData.chartCostAndEnvCost.getDataURL(),$("#chartCostAndEnvCost").width(),400,{
+    			textAlign:doc.AlignType.Center
+    		});
+        	doc.addParagraph("数据适用性分析",{
+        		bold:true,
+        	});
+        	doc.addParagraph("本次评价结果的数据来源可靠性：");
+        }
         doc.generate();
 	});
 });

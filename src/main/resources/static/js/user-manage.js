@@ -290,7 +290,7 @@ $(function(){
             },
             {
             	data: "superuser",
-            	width: "80px",
+            	width: "90px",
             	render : function(data, type, row, meta) {
                     return data?'<i class="fa fa-users"></i> '+iMsg.superuser:'<i class="fa fa-user"></i> '+iMsg.normal;
                 }
