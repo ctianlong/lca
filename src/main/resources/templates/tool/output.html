@@ -1,5 +1,5 @@
 <div id="step-output" style="display:none;">
-    <div class="panel king-panel1" id="">
+    <div class="panel king-panel1">
         <div class="panel-heading king-panel-head1 king-panel-top3">
             <h3 class="panel-title"><b>清单分析结果</b></h3>
         </div>
@@ -20,8 +20,7 @@
             </div>
         </div>
     </div>
-    
-	<div class="panel king-panel1" id="">
+	<div class="panel king-panel1">
 		<div class="panel-heading king-panel-head1 king-panel-top3">
 			<h3 class="panel-title"><b>影响评价结果</b></h3>
 		</div>
@@ -52,7 +51,12 @@
             </fieldset>
             <fieldset>
               <legend>数据本地适用性分析</legend>
-              
+              <div class="form-group">
+                <label class="col-sm-2 control-label">数据适用性参数β：</label>
+                <div class="col-sm-10">
+                  <p id="beta" class="form-control-static"></p>
+                </div>
+              </div>
             </fieldset>
           </form>
                   
@@ -62,10 +66,10 @@
 	<div class="panel king-panel1">
 		<div class="panel-heading king-panel-head1 king-panel-top3">
 			<div class="text-center">
-			    <button class="king-btn king-radius king-success" type="button" id="output-prevStep">
-                    <i class="fa fa-arrow-left btn-icon"></i>上一步
+			    <button class="king-btn king-radius king-info" type="button" id="output-prevStep">
+                    <i class="fa fa-arrow-left btn-icon"></i>影响评价
                 </button>
-				<button class="king-btn king-radius king-success" type="button" id="download">
+				<button class="king-btn king-radius king-info" type="button" id="download">
 					<i class="fa fa-download btn-icon"></i>下载报告
 				</button>
 			</div>

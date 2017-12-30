@@ -291,13 +291,13 @@ $(function(){
             	data : "cost",
             	className : "ellipsis", //文字过长时用省略号显示，CSS实现
                 render : CONSTANT.DATA_TABLES.RENDER.ELLIPSIS, //会显示省略号的列，需要用title属性实现划过时显示全部文本的效果
-                width : "100px"
+                width : "80px"
             },
             {
             	data : "currencyType",
             	className : "ellipsis", //文字过长时用省略号显示，CSS实现
             	render : CONSTANT.DATA_TABLES.RENDER.ELLIPSIS, //会显示省略号的列，需要用title属性实现划过时显示全部文本的效果
-            	width : "50px"
+            	width : "70px"
             },
             {
             	data: "costSource",

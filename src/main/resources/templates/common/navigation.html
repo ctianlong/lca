@@ -47,9 +47,6 @@
             <li th:class="${#strings.startsWith(relativePath,'/tool')} ? 'active'">
                 <a th:href="@{/tool}"><i class="fa fa-fw fa-wrench"></i> <span th:text="#{system.lca-tool}"></span></a>
             </li>
-            <li sec:authorize="hasRole(T(tk.mybatis.springboot.security.RoleConstants).ADMIN)" th:class="${#strings.startsWith(relativePath,'/users')} ? 'active'">
-                <a th:href="@{/users}"><i class="fa fa-fw fa-user"></i> <sapn th:text="#{system.users.manage}"></sapn></a>
-            </li>
             <li>
                 <a href="javascript:;" data-toggle="collapse" data-target="#database1"><span class="ellipsis" style="display: inline-block;max-width: 160px;"><i class="fa fa-fw fa-database"></i> <span th:title="#{system.db.inventory}" th:text="#{system.db.inventory}"></span></span><i class="fa fa-fw fa-angle-down pull-right"></i></a>
                 <ul id="database1" class="collapse" th:classappend="${#strings.startsWith(relativePath,'/db/inventory')} ? 'in'">
@@ -72,6 +69,9 @@
                 <a th:href="@{/db/influence/default}"><span class="ellipsis" style="display: inline-block;max-width: 160px;"><i class="fa fa-fw fa-database"></i> <span th:title="#{system.db.influence.default}" th:text="#{system.db.influence.default}"></span></span></a>
             </li>
              -->
+             <li sec:authorize="hasRole(T(tk.mybatis.springboot.security.RoleConstants).ADMIN)" th:class="${#strings.startsWith(relativePath,'/users')} ? 'active'">
+                <a th:href="@{/users}"><i class="fa fa-fw fa-user"></i> <sapn th:text="#{system.users.manage}"></sapn></a>
+            </li>
         </ul>
     </div>
     <!-- /.navbar-collapse -->

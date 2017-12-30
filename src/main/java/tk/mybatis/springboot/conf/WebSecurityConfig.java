@@ -87,7 +87,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     	//用于允许static目录下的静态资源访问，
     	web.ignoring()
     		.antMatchers("/swagger-ui.html", "/swagger-resources/**", "/v2/api-docs/**", "/**/favicon.ico", "/webjars/**")
-    		.antMatchers("/js/**", "/css/**", "/img/**");
+    		.antMatchers("/js/**", "/css/**", "/img/**")
+    		.antMatchers("/druid/**");
     }
 
     @Override

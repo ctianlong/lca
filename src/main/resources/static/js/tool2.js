@@ -2043,7 +2043,6 @@ $(function(){
     		tool.stepGo(1,2);
     		$("#step-input").hide();
     		$("#step-inventory").show();
-    		$("#inventoryTabList > li:visible:first > a").tab('show');
     		$(window).scrollTop(0);
     	},
     	onkeyup:false
