@@ -705,6 +705,7 @@
 	                    </div>
 	                </fieldset>
 	                <div class="text-center">
+	                    <button class="king-btn king-radius king-danger" type="button" id="conserveBaseDefaultValue">默认参数</button>
 	                    <button class="king-btn king-radius king-success" type="submit">计算养护（额外经济成本）清单</button>
 	                </div>
 	            </form>
@@ -748,8 +749,8 @@
 	                    </div>
 	                </fieldset>
 	                <div class="text-center">
-	                    <button class="king-btn king-radius king-success" type="submit">
-	                                   计算使用（反射率）清单</button>
+	                    <button class="king-btn king-radius king-danger" type="button" id="use1DefaultValue">默认参数</button>
+	                    <button class="king-btn king-radius king-success" type="submit">计算使用（反射率）清单</button>
 	                </div>
 	            </form>
             
@@ -782,7 +783,7 @@
                     <thead>
                         <tr>
                             <th rowspan="2" class="text-center">燃料名称</th>
-                            <th rowspan="2" class="text-center">用量(kg)</th>
+                            <th rowspan="2" class="text-center">用量</th>
                             <th rowspan="2" class="text-center">成本(元)</th>
                             <th rowspan="2" class="text-center">能耗(MJ)</th>
                             <th colspan="8" class="text-center">排放(kg)</th>
@@ -1037,8 +1038,8 @@
                     </div>
                 </fieldset>
                 <div class="text-center">
-                    <button class="king-btn king-radius king-success" type="submit">
-                                   计算使用（透水率）清单</button>
+                    <button class="king-btn king-radius king-danger" type="button" id="use2DefaultValue">默认参数</button>
+                    <button class="king-btn king-radius king-success" type="submit">计算使用（透水率）清单</button>
                 </div>
             </form>
             </div>
@@ -1182,8 +1183,8 @@
                     </div>
                 </fieldset>
                 <div class="text-center">
-                    <button class="king-btn king-radius king-success" type="submit">
-                                   计算使用（滚动阻力）清单</button>
+                    <button class="king-btn king-radius king-danger" type="button" id="use3DefaultValue">默认参数</button>
+                    <button class="king-btn king-radius king-success" type="submit">计算使用（滚动阻力）清单</button>
                 </div>
             </form>
             </div>
@@ -1293,7 +1294,7 @@
 			<div class="text-center">
 				<button class="king-btn king-radius king-info" type="button"
 					id="inventory-prevStep">
-					<i class="fa fa-arrow-left btn-icon"></i>输入参数
+					<i class="fa fa-arrow-left btn-icon"></i>基本信息
 				</button>
 				<button class="king-btn king-radius king-info" type="button"
 					id="inventory-nextStep">
@@ -1409,6 +1410,7 @@
         </div>
       </div>
       <div class="modal-footer">
+        <button type="button" class="king-btn king-radius king-danger" id="conserveItemDefaultValue"><span>默认参数</span></button>
         <button type="submit" class="king-btn king-radius king-info"><span th:text="#{system.save}"></span></button>
         <button type="button" class="king-btn king-radius king-default" data-dismiss="modal"><span th:text="#{system.cancel}"></span></button>
       </div>

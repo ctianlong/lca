@@ -1693,7 +1693,8 @@ $(function(){
 					}
 				}
     		}else if($roadType.val()==3){
-    			brick+=area/($("#brickLength").val()*$("#brickWidth").val()); // 铺砖块数
+    			// 铺砖块数
+    			brick+=area/($("#brickLength").val()*$("#brickWidth").val());
     		}
     		tphd+=parseFloat($("#baseLayerThickness").val())+parseFloat($("#bottomBaseLayerThickness").val())+parseFloat($("#cushionLayerThickness").val());
     		basicData.totalThickness=tphd;
@@ -1702,7 +1703,6 @@ $(function(){
 			case "1":case "2":
 				// 拌和摊铺相关
 				lqhnthd+=parseFloat($("#baseLayerThickness").val());
-				
 				gravel+=baseWeight/(1+$("#baseLayerWhetstoneRatio").val()/100);
 				switch ($baseLayerAsphaltType.select2("data")[0].id) {
 				case "1":
@@ -1737,7 +1737,6 @@ $(function(){
 			case "1":case "2":
 				// 拌和摊铺相关
 				lqhnthd+=parseFloat($("#bottomBaseLayerThickness").val());
-				
 				gravel+=bottomBaseWeight/(1+$("#bottomBaseLayerWhetstoneRatio").val()/100);
 				switch ($bottomBaseLayerAsphaltType.select2("data")[0].id) {
 				case "1":
@@ -1941,8 +1940,6 @@ $(function(){
 				// 计算使用反射率
 				$("#use1Inventory").show();
 				$("#electricityReduce").empty();
-				$("#nonPavementReflectance").val(0.1);
-				$("#reflectCoefficient").val(2.5);
 			}else{
 				$("#use1Inventory").hide();
 			}
@@ -1963,43 +1960,19 @@ $(function(){
 	            $('#use2InventoryTable2 tbody').empty();
 				if($roadType.val()==1 && $asphaltTopLayerMaterial.val()==1 && $asphaltMiddleLayerMaterial.val()==1 && $asphaltBelowLayerMaterial.val()==1){
 					$("#roadTypeUse2").text("透水路面");
-					$("#use2Item11").val(0.4);
-					$("#use2Item12").val(4);
-					$("#use2Item13").val(2);
 				}else{
 					$("#roadTypeUse2").text("不透水路面");
-					$("#use2Item11").val(0.2);
-					$("#use2Item12").val(2);
-					$("#use2Item13").val(1);
 				}
-				$("#use2Item2").val(60);
-				$("#use2Item3").val(5000);
-				$("#use2Item4").val(10);
-				$("#use2Item5").val(0.0824);
-				$("#use2Item6").val(0.204);
-				$("#use2Item8").val(50);
-				$("#use2Item14").val(20);
-				$("#use2Item16").val(0.3);
-				$("#use2Item17").val(30);
-				$("#use2Item18").val(0.05);
-				$("#use2Item21").val(0.1);
-				$("#use2Item22").val(1);
 			}else{
 				$("#use2Inventory").hide();
 			}
 			if(use3Range){
 				// 计算使用滚动阻力
 				$("#use3Inventory").show();
-				$("#heavyAxleloadTimes").val(3);
-				$("#smallAxleloadTimes").val(0.01);
 				if(use2Range){
 					$("#use2ItemInUse3").hide();
 				}else{
 					$("#use2ItemInUse3").show();
-					$("#use2Item3InUse3").val(5000);
-					$("#use2Item4InUse3").val(10);
-					$("#use2Item5InUse3").val(0.0824);
-					$("#use2Item6InUse3").val(0.204);
 				}
 				var tmpList=[];
 	            tmpList.push({fuelName:"汽油"});
@@ -2019,11 +1992,6 @@ $(function(){
 				$("#conserveInventory").show();
 				conserveData.itemList=[];
 				conserveData.itemId=1;
-				$("#conserveBase2").val(5);
-				$("#conserveBase3").val(8);
-				$("#conserveBase4").val(100);
-				$("#conserveBase5").val(1);
-				$("#conserveUncertainty").val(30);
 				$("#inventoryConserveMaterialForm").hide();
 				$('#conserveInventoryMaterialTable tbody').empty();
 				$("#conserveInventoryItemTable tbody").empty();
@@ -2048,6 +2016,63 @@ $(function(){
     	},
     	onkeyup:false
 	});
+	// 默认参数值按钮
+	$("#conserveItemDefaultValue").click(function(){
+		$("#conserveItem1").val("薄层罩面");
+		$("#conserveItem2").val(5);
+		$("#conserveItem3").val("1/2");
+		$("#conserveItem4").val(50);
+		$("#conserveItem5").val(20);
+		$("#conserveItem6").val(2);
+	});
+	$("#conserveBaseDefaultValue").click(function(){
+		$("#conserveBase2").val(5);
+		$("#conserveBase3").val(8);
+		$("#conserveBase4").val(100);
+		$("#conserveBase5").val(1);
+	});
+	$("#use1DefaultValue").click(function(){
+		$("#nonPavementReflectance").val(0.1);
+		$("#reflectCoefficient").val(2.5);
+	});
+	$("#use2DefaultValue").click(function(){
+		if($roadType.val()==1 && $asphaltTopLayerMaterial.val()==1 && $asphaltMiddleLayerMaterial.val()==1 && $asphaltBelowLayerMaterial.val()==1){
+			$("#use2Item11").val(0.4);
+			$("#use2Item12").val(4);
+			$("#use2Item13").val(2);
+		}else{
+			$("#use2Item11").val(0.2);
+			$("#use2Item12").val(2);
+			$("#use2Item13").val(1);
+		}
+		$("#use2Item2").val(60);
+		$("#use2Item3").val(5000);
+		$("#use2Item4").val(10);
+		$("#use2Item5").val(0.0824);
+		$("#use2Item6").val(0.204);
+		$("#use2Item8").val(50);
+		$("#use2Item14").val(20);
+		$("#use2Item16").val(0.3);
+		$("#use2Item17").val(30);
+		$("#use2Item18").val(0.05);
+		$("#use2Item21").val(0.1);
+		$("#use2Item22").val(1);
+	});
+	$("#use3DefaultValue").click(function(){
+		$("#heavyAxleloadTimes").val(3);
+		$("#smallAxleloadTimes").val(0.01);
+		if(!use2Range){
+			$("#use2Item3InUse3").val(5000);
+			$("#use2Item4InUse3").val(10);
+			$("#use2Item5InUse3").val(0.0824);
+			$("#use2Item6InUse3").val(0.204);
+		}
+	});
+	$("#envEconomicCostDefaultValue").click(function(){
+		$("#carbonEnvCost").val(30);
+		$("#sulfurDioxideEnvCost").val(2500);
+		$("#nitrogenEnvCost").val(8000);
+	});
 	$("#inventoryMaterialForm").submit(function(){
 		materialData.resList=[];
 		if(materialData.materialList.length>0){
@@ -2070,9 +2095,9 @@ $(function(){
 					if(res.cost){
 						if(res.cost.indexOf("~")!=-1){
 					    	var nums=res.cost.split("~");
-					    	item.cost=(nums[0]*amount).toFixed(3)+"~"+(nums[1]*amount).toFixed(3);
+					    	item.cost=(nums[0]*amount).toFixed(2)+"~"+(nums[1]*amount).toFixed(2);
 				    	}else{
-				    		item.cost=(res.cost*amount).toFixed(3);
+				    		item.cost=(res.cost*amount).toFixed(2);
 				    	}
 					}else{
 						item.cost=undefined;
@@ -2135,7 +2160,6 @@ $(function(){
 		materialRange=2;
 		return false;
 	});
-	
 	var validatorInventoryTransportForm = $("#inventoryTransportForm").validate({
 		errorClass: 'text-danger',
     	rules:{
@@ -2189,7 +2213,7 @@ $(function(){
 						item.distance=distance;
 						var amount=item.amount;
 						if(res.cost){
-							item.cost=(res.cost*amount*distance).toFixed(3);
+							item.cost=(res.cost*amount*distance).toFixed(2);
 						}else{
 							item.cost=undefined;
 						}
@@ -2255,7 +2279,6 @@ $(function(){
     	},
     	onkeyup:false
 	});
-	
 	var validatorInventoryMixPaveForm = $("#inventoryMixPaveForm").validate({
 		errorClass: 'text-danger',
 		rules:{
@@ -2318,7 +2341,7 @@ $(function(){
 					transConsData.consResList.push(res);
 					var amount=item.amount;
 					if(res.cost!=null){
-						item.cost=(res.cost*amount).toFixed(3);
+						item.cost=(res.cost*amount).toFixed(2);
 					}
 					if(res.energyConsume!=null){
 						item.energyConsume=(res.energyConsume*amount).toExponential(2);
@@ -2662,7 +2685,7 @@ $(function(){
 					use2Data.resList.push(res);
 					var amount=item.amount;
 					if(res.cost!=null){
-						item.cost=(res.cost*amount).toFixed(3);
+						item.cost=(res.cost*amount).toFixed(2);
 					}
 					if(res.energyConsume!=null){
 						item.energyConsume=(res.energyConsume*amount).toExponential(2);
@@ -2946,7 +2969,7 @@ $(function(){
 					use3Data.resList.push(res);
 					var amount=item.amount;
 					if(res.cost!=null){
-						item.cost=(res.cost*amount).toFixed(3);
+						item.cost=(res.cost*amount).toFixed(2);
 					}
 					if(res.energyConsume!=null){
 						item.energyConsume=(res.energyConsume*amount).toExponential(2);
@@ -3154,12 +3177,6 @@ $(function(){
 		validatorConserveItemInputForm.resetForm();
         $("#conserveItemInputForm")[0].reset();
         $("#itemId").val('');
-		$("#conserveItem1").val("薄层罩面");
-		$("#conserveItem2").val(5);
-		$("#conserveItem3").val("1/2");
-		$("#conserveItem4").val(50);
-		$("#conserveItem5").val(20);
-		$("#conserveItem6").val(2);
 		$("#conserveItem7").val(cdAsphaltType[0].id).trigger("change");
  		$("#modal-default").modal("show");
 	});
@@ -3413,9 +3430,9 @@ $(function(){
 				if(res.cost){
 					if(res.cost.indexOf("~")!=-1){
 				    	var nums=res.cost.split("~");
-				    	item.cost=(nums[0]*amount).toFixed(3)+"~"+(nums[1]*amount).toFixed(3);
+				    	item.cost=(nums[0]*amount).toFixed(2)+"~"+(nums[1]*amount).toFixed(2);
 			    	}else{
-			    		item.cost=(res.cost*amount).toFixed(3);
+			    		item.cost=(res.cost*amount).toFixed(2);
 			    	}
 				}else{
 					item.cost=undefined;
@@ -3471,9 +3488,9 @@ $(function(){
 				if(res.cost){
 					if(res.cost.indexOf("~")!=-1){
 				    	var nums=res.cost.split("~");
-				    	item.cost=(nums[0]*amount).toFixed(3)+"~"+(nums[1]*amount).toFixed(3);
+				    	item.cost=(nums[0]*amount).toFixed(2)+"~"+(nums[1]*amount).toFixed(2);
 			    	}else{
-			    		item.cost=(res.cost*amount).toFixed(3);
+			    		item.cost=(res.cost*amount).toFixed(2);
 			    	}
 				}else{
 					item.cost=undefined;
@@ -3528,9 +3545,9 @@ $(function(){
 				if(res.cost){
 					if(res.cost.indexOf("~")!=-1){
 				    	var nums=res.cost.split("~");
-				    	item.cost=(nums[0]*amount).toFixed(3)+"~"+(nums[1]*amount).toFixed(3);
+				    	item.cost=(nums[0]*amount).toFixed(2)+"~"+(nums[1]*amount).toFixed(2);
 			    	}else{
-			    		item.cost=(res.cost*amount).toFixed(3);
+			    		item.cost=(res.cost*amount).toFixed(2);
 			    	}
 				}else{
 					item.cost=undefined;
@@ -3916,7 +3933,7 @@ $(function(){
 				}
 			}
 			if(cost>0){
-				recycleData.result.cost=cost.toFixed(3);
+				recycleData.result.cost=cost.toFixed(2);
 			}
 			if(energyConsume>0){
 				recycleData.result.energyConsume=energyConsume.toExponential(2);
