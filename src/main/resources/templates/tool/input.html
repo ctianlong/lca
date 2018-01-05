@@ -135,7 +135,7 @@
 	                       <div class="input-group">
 	                        <input type="text" class="form-control" placeholder="" id="roadLength"
 	                            name="roadLength">
-	                       <div class="input-group-addon">km</div>
+	                       <div class="input-group-addon">m</div>
 	                       </div>
 	                    </div>
 	                    <label class="col-md-2 control-label"><span
@@ -162,13 +162,15 @@
 	                        <div class="input-group-addon">m</div>
 	                       </div>
 							</div>
+							<div id="asphaltTopLayerMaterialSelect">
 							<label class="col-md-2 control-label">面层材料：</label>
 		                    <div class="col-md-3">
 		                        <select id="asphaltTopLayerMaterial" name="asphaltTopLayerMaterial" class="form-control" style="width: 100%">
 		                        </select>
 		                    </div>
+		                    </div>
 						</div>
-						<div class="form-group">
+						<div class="form-group" id="topLayerAsphaltTypeSelect">
 							<label class="col-md-2 control-label">沥青类别：</label>
 		                    <div class="col-md-3">
 		                        <select id="topLayerAsphaltType" name="topLayerAsphaltType" class="form-control" style="width: 100%">
@@ -196,13 +198,15 @@
 	                        <div class="input-group-addon">m</div>
 	                        </div>
 							</div>
+							<div id="asphaltMiddleLayerMaterialSelect">
 							<label class="col-md-2 control-label">面层材料：</label>
 		                    <div class="col-md-3">
 		                        <select id="asphaltMiddleLayerMaterial" name="asphaltMiddleLayerMaterial" class="form-control" style="width: 100%">
 		                        </select>
 		                    </div>
+		                    </div>
 						</div>
-						<div class="form-group">
+						<div class="form-group" id="middleLayerAsphaltTypeSelect">
 							<label class="col-md-2 control-label">沥青类别：</label>
 		                    <div class="col-md-3">
 		                        <select id="middleLayerAsphaltType" name="middleLayerAsphaltType" class="form-control" style="width: 100%">
@@ -228,15 +232,17 @@
 								<input type="text" class="form-control" placeholder="请输入下面层厚度" id="asphaltBelowLayerThickness"
 									name="asphaltBelowLayerThickness">
 	                        <div class="input-group-addon">m</div>
-	                       </div>
+	                        </div>
 							</div>
+							<div id="asphaltBelowLayerMaterialSelect">
 							<label class="col-md-2 control-label">面层材料：</label>
 		                    <div class="col-md-3">
 		                        <select id="asphaltBelowLayerMaterial" name="asphaltBelowLayerMaterial" class="form-control" style="width: 100%">
 		                        </select>
 		                    </div>
+		                    </div>
 						</div>
-						<div class="form-group">
+						<div class="form-group" id="belowLayerAsphaltTypeSelect">
 							<label class="col-md-2 control-label">沥青类别：</label>
 		                    <div class="col-md-3">
 		                        <select id="belowLayerAsphaltType" name="belowLayerAsphaltType" class="form-control" style="width: 100%">
@@ -266,10 +272,12 @@
 	                        <div class="input-group-addon">m</div>
 	                       </div>
 	                        </div>
+	                        <div id="concreteTopLayerMaterialSelect">
 	                        <label class="col-md-2 control-label">面层材料：</label>
 	                        <div class="col-md-2">
 	                            <select id="concreteTopLayerMaterial" name="concreteTopLayerMaterial" class="form-control" style="width: 100%">
 	                            </select>
+	                        </div>
 	                        </div>
 	                        <div id="topReinforcementRateDiv" style="display: none;">
 		                        <label class="col-md-2 control-label">配筋率：</label>
@@ -279,7 +287,7 @@
 	                            </div>
 	                        </div>
 	                    </div>
-	                    <div class="form-group">
+	                    <div class="form-group" id="topMixProportion">
 	                       <label class="col-md-2 control-label">配合比x：</label>
 	                        <div class="col-md-2">
 	                            <input type="text" class="form-control" placeholder="比值" id="topMixProportionX"
@@ -296,14 +304,14 @@
 	                                name="topMixProportionZ">
 	                        </div>
 	                    </div>
-	                    <div class="form-group">
+	                    <div class="form-group" id="topCementAdmixtureSelect">
 	                       <label class="col-md-2 control-label">外加剂种类：</label>
 	                       <div class="col-md-3">
                                 <select id="topCementAdmixture" name="topCementAdmixture" class="form-control" style="width: 100%">
                                 </select>
                             </div>
 	                    </div>
-	                    <div class="row">
+	                    <div class="row" id="topCementAdmixtureVolume">
 	                       <div id="snjDiv" class="col-md-4" style="display: none;">
 	                           <div class="form-group">
 	                               <label class="col-md-6 control-label">速凝剂掺量：</label>
@@ -372,10 +380,12 @@
 	                        <div class="input-group-addon">m</div>
 	                       </div>
 	                        </div>
+	                        <div id="concreteBelowLayerMaterialSelect">
 	                        <label class="col-md-2 control-label">面层材料：</label>
 	                        <div class="col-md-2">
 	                            <select id="concreteBelowLayerMaterial" name="concreteBelowLayerMaterial" class="form-control" style="width: 100%">
 	                            </select>
+	                        </div>
 	                        </div>
 	                        <div id="belowReinforcementRateDiv" style="display: none;">
                                 <label class="col-md-2 control-label">配筋率：</label>
@@ -385,7 +395,7 @@
                                 </div>
                             </div>
 	                    </div>
-	                    <div class="form-group">
+	                    <div class="form-group" id="belowMixProportion">
                            <label class="col-md-2 control-label">配合比x：</label>
                             <div class="col-md-2">
                                 <input type="text" class="form-control" placeholder="比值" id="belowMixProportionX"
@@ -402,14 +412,14 @@
                                     name="belowMixProportionZ">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="belowCementAdmixtureSelect">
                            <label class="col-md-2 control-label">外加剂种类：</label>
                            <div class="col-md-3">
                                 <select id="belowCementAdmixture" name="belowCementAdmixture" class="form-control" style="width: 100%">
                                 </select>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" id="belowCmentAdmixtureVolume">
                            <div id="snjDiv2" class="col-md-4" style="display: none;">
                                <div class="form-group">
                                    <label class="col-md-6 control-label">速凝剂掺量：</label>
@@ -521,10 +531,12 @@
                         <div class="input-group-addon">m</div>
                        </div>
 						</div>
+						<div id="baseLayerMaterialSelect">
 						<label class="col-md-2 control-label">基层材料：</label>
 	                    <div class="col-md-3">
 	                        <select id="baseLayerMaterial" name="baseLayerMaterial" class="form-control" style="width: 100%">
 	                        </select>
+	                    </div>
 	                    </div>
 					</div>
 					<div class="form-group" id="baseLayerMaterial-asphalt">
@@ -573,10 +585,12 @@
                         <div class="input-group-addon">m</div>
                        </div>
 						</div>
+						<div id="bottomBaseLayerMaterialSelect">
 						<label class="col-md-2 control-label">底基层材料：</label>
 	                    <div class="col-md-3">
 	                        <select id="bottomBaseLayerMaterial" name="bottomBaseLayerMaterial" class="form-control" style="width: 100%">
 	                        </select>
+	                    </div>
 	                    </div>
 					</div>
 					<div class="form-group" id="bottomBaseLayerMaterial-asphalt">
@@ -625,10 +639,12 @@
                         <div class="input-group-addon">m</div>
                        </div>
                         </div>
+                        <div id="cushionLayerMaterialSelect">
                         <label class="col-md-2 control-label">垫层材料：</label>
                         <div class="col-md-3">
                             <select id="cushionLayerMaterial" name="cushionLayerMaterial" class="form-control" style="width: 100%">
                             </select>
+                        </div>
                         </div>
                     </div>
                     <div class="form-group" id="cushionLayerMaterial-asphalt">
@@ -672,6 +688,7 @@
 	<div class="panel king-panel1">
 		 <div class="panel-heading king-panel-head1 king-panel-top3">
             <div class="text-center">
+                <button class="king-btn king-radius king-danger" type="button" id="baseInfoDefaultValue">默认参数</button>
                 <button class="king-btn king-radius king-info" type="submit">
                     <i class="fa fa-arrow-right btn-icon"></i>清单分析
                 </button>

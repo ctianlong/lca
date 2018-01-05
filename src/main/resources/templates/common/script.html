@@ -103,6 +103,11 @@
         var reg = /^[1-9]\d*\/[1-9]\d*$/;
         return this.optional(element) || (reg.test(value));
     }, iMsg.formatSizeErr);
+	// 数字大于0
+	jQuery.validator.addMethod("greaterThanZero", function(value, element, param) {
+        var v=Number(value);
+        return this.optional(element) || (!isNaN(v) && v>0);
+    }, iMsg.formatSizeErr);
 	NProgress.configure({
 		minimum: 0.2,
 		showSpinner: false
