@@ -2190,6 +2190,11 @@ $(function(){
 			if(use2Range){
 				// 计算使用透水率
 				$("#use2Inventory").show();
+				if(conserveRange){
+					$("#conserveBaseInfoInUse2").hide();
+				}else{
+					$("#conserveBaseInfoInUse2").show();
+				}
 				var tmpList=[];
 	            tmpList.push({fuelName:"汽油(kg)"});
 	            tmpList.push({fuelName:"柴油(kg)"});
@@ -2215,8 +2220,12 @@ $(function(){
 				$("#use3Inventory").show();
 				if(use2Range){
 					$("#use2ItemInUse3").hide();
+				}else if(conserveRange){
+					$("#use2ItemInUse3").show();
+					$("#use2Item3And7InUse3").hide();
 				}else{
 					$("#use2ItemInUse3").show();
+					$("#use2Item3And7InUse3").show();
 				}
 				var tmpList=[];
 	            tmpList.push({fuelName:"汽油"});
@@ -2240,6 +2249,13 @@ $(function(){
 				$('#conserveInventoryMaterialTable tbody').empty();
 				$("#conserveInventoryItemTable tbody").empty();
 				$("#conserveInventoryEconomicTable tbody").empty();
+				if($roadType.val()==1){
+					$("#conserveItemI7Text").show();
+					$("#conserveItemI8").show();
+				}else{
+					$("#conserveItemI7Text").hide();
+					$("#conserveItemI8").hide();
+				}
 			}else{
 				$("#conserveInventory").hide();
 			}
@@ -2261,6 +2277,12 @@ $(function(){
     	onkeyup:false
 	});
 	// 默认参数值按钮
+	$("#transportDefaultValue").click(function(){
+		$("#aggregateDistance").val(50);
+		$("#asphaltDistance").val(20);
+		$("#cementDistance").val(50);
+		$("#mixtureDistance").val(50);
+	});
 	$("#conserveItemDefaultValue").click(function(){
 		$("#conserveItem1").val("薄层罩面");
 		$("#conserveItem2").val(5);
@@ -2270,12 +2292,19 @@ $(function(){
 		$("#conserveItem6").val(2);
 	});
 	$("#conserveBaseDefaultValue").click(function(){
+		$("#conserveBase1").val(2000);
 		$("#conserveBase2").val(5);
 		$("#conserveBase3").val(8);
 		$("#conserveBase4").val(100);
 		$("#conserveBase5").val(1);
+		$("#conserveBase6").val(60);
+		$("#conserveBase7").val(50);
+		$("#conserveBase8").val(1);
+		$("#conserveBase9").val(50);
+		$("#conserveBase10").val(30);
 	});
 	$("#use1DefaultValue").click(function(){
+		$("#pavementReflectance").val(0.3);
 		$("#nonPavementReflectance").val(0.1);
 		$("#reflectCoefficient").val(2.5);
 	});
@@ -2289,30 +2318,58 @@ $(function(){
 			$("#use2Item12").val(2);
 			$("#use2Item13").val(1);
 		}
+		$("#use2Item1").val(12);
 		$("#use2Item2").val(60);
 		$("#use2Item3").val(5000);
 		$("#use2Item4").val(10);
 		$("#use2Item5").val(0.0824);
 		$("#use2Item6").val(0.204);
+		$("#use2Item7").val(5);
 		$("#use2Item8").val(50);
+		$("#use2Item9").val(50);
+		$("#use2Item10").val(1000);
 		$("#use2Item14").val(20);
+		$("#use2Item15").val(2);
 		$("#use2Item16").val(0.3);
 		$("#use2Item17").val(30);
 		$("#use2Item18").val(0.05);
+		$("#use2Item19").val(30);
+		$("#use2Item20").val(55);
 		$("#use2Item21").val(0.1);
 		$("#use2Item22").val(1);
 	});
 	$("#use3DefaultValue").click(function(){
+		$("#initialIRI").val(2);
 		$("#heavyAxleloadTimes").val(3);
 		$("#smallAxleloadTimes").val(0.01);
-		if(!use2Range){
-			$("#use2Item3InUse3").val(5000);
-			$("#use2Item4InUse3").val(10);
-			$("#use2Item5InUse3").val(0.0824);
-			$("#use2Item6InUse3").val(0.204);
-		}
+		$("#use2Item1InUse3").val(12);
+		$("#use2Item3InUse3").val(5000);
+		$("#use2Item4InUse3").val(10);
+		$("#use2Item5InUse3").val(0.0824);
+		$("#use2Item6InUse3").val(0.204);
+		$("#use2Item7InUse3").val(5);
+	});
+	$("#recycleDefaultValue").click(function(){
+		$("#brokenEfficiencyRecycle").val(1000);
+		$("#brokenFuelConsumption").val(500);
+		$("#recycleDistance").val(50);
+		// 远程数据默认选择，无法获取自定义的属性数据，select2本身没有解决这个问题，或许只能在option中添加 data-*属性来获取，每个select2获取数据时都要额外添加代码
+		/*$.ajax({
+		    type: 'GET',
+		    url: ctxPath+"/api/db/inventory/transport",
+		    dataType:'json',
+		    data:{vehicleType:'46t'}
+		}).then(function (data) {
+			if(data.list.length>0){
+				var repo=data.list[0];
+				var text=repo.vehicleType+' （来源：'+(repo.dataSource||'（空）')+'）';
+				var option = new Option(text, repo.id, true, true);
+				$("#recycleVehicleModel").append(option).trigger('change');
+			}
+		});*/
 	});
 	$("#envEconomicCostDefaultValue").click(function(){
+		$("#energyEnvCost").val(1);
 		$("#carbonEnvCost").val(30);
 		$("#sulfurDioxideEnvCost").val(2500);
 		$("#nitrogenEnvCost").val(8000);
@@ -2848,15 +2905,31 @@ $(function(){
     		}
 		},
 		submitHandler:function(form){
+			var i2,i3,i7;
+			if(conserveRange==1){
+				var d = dialog({
+					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成养护清单'+'</p></div>'
+				});
+				d.show();
+				setTimeout(function() {
+					d.close().remove();
+				}, 1500);
+				return false;
+			}else if(conserveRange==2){
+				i2=conserveData.use2Para.i2;
+				i3=conserveData.use2Para.i3;
+				i7=conserveData.use2Para.i7;
+			}else{
+				i2=$("#use2Item2").val();
+				i3=$("#use2Item3").val();
+				i7=$("#use2Item7").val()/100;
+			}
 			var i1=$("#use2Item1").val();
-			var i2=$("#use2Item2").val();
-			var i3=$("#use2Item3").val();
-			var i4=$("#use2Item4").val()/100.0;
+			var i4=$("#use2Item4").val()/100;
 			var i5=$("#use2Item5").val();
 			var i6=$("#use2Item6").val();
-			var i7=$("#use2Item7").val()/100.0;
-			var i8=$("#use2Item8").val()/100.0;
-			var i9=$("#use2Item9").val()/100.0;
+			var i8=$("#use2Item8").val()/100;
+			var i9=$("#use2Item9").val()/100;
 			var i10=$("#use2Item10").val();
 			var i11=$("#use2Item11").val();
 			var i12=$("#use2Item12").val();
@@ -2971,7 +3044,8 @@ $(function(){
 			}
 			$('#use2InventoryTable tbody').html(_html);
 			tpl=$('#tpl-use2InventoryTable2').html();
-			_html = renderTpl(tpl, use2Data);
+			var c={bypassRatio:use2Data.bypassRatio,totalTraffic:use2Data.totalTraffic.toFixed(0)};
+			_html = renderTpl(tpl, c);
 			$('#use2InventoryTable2 tbody').html(_html);
 			use2Range=2;
 		},
@@ -3162,12 +3236,17 @@ $(function(){
 				i6=use2Data.use3Para.i6;
 				i7=use2Data.use3Para.i7;
 			}else{
+				if(conserveRange==2){
+					i3=conserveData.use2Para.i3;
+					i7=conserveData.use2Para.i7;
+				}else{
+					i3=$("#use2Item3InUse3").val();
+					i7=$("#use2Item7InUse3").val()/100;
+				}
 				i1=$("#use2Item1InUse3").val();
-				i3=$("#use2Item3InUse3").val();
 				i4=$("#use2Item4InUse3").val()/100;
 				i5=$("#use2Item5InUse3").val();
 				i6=$("#use2Item6InUse3").val();
-				i7=$("#use2Item7InUse3").val()/100;
 			}
 			var x=$("#initialIRI").val();
 			var y=$("#heavyAxleloadTimes").val();
@@ -3941,6 +4020,10 @@ $(function(){
 			var b8=$("#conserveBase8").val();
 			var b9=$("#conserveBase9").val()/100;
 			var b10=$("#conserveBase10").val();
+			conserveData.use2Para={};
+			conserveData.use2Para.i2=b6;
+			conserveData.use2Para.i3=b1;
+			conserveData.use2Para.i7=b2;
 			var timeCost=0,carOpsCost=0,safeCost=0;
 			for (var i = 0; i < conserveData.itemList.length; i++) {
 				var item = conserveData.itemList[i];

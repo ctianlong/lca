@@ -322,6 +322,7 @@
                     </div>
                 </fieldset>
                 <div class="text-center">
+                    <button class="king-btn king-radius king-danger" type="button" id="transportDefaultValue">默认参数</button>
                     <button class="king-btn king-radius king-success" type="submit">计算运输清单</button>
                 </div>
             </form>
@@ -497,13 +498,13 @@
 	                    <thead>
 	                        <tr>
 	                            <th class="text-center">养护措施</th>
-	                            <th class="text-center">养护时间（年）</th>
+	                            <th class="text-center">养护时间</th>
 	                            <th class="text-center">养护区封闭车道数/总车道数</th>
 	                            <th class="text-center">养护时长(天)</th>
 	                            <th class="text-center">养护区面积（%）</th>
 	                            <th class="text-center">平均深度（cm）</th>
-	                            <th class="text-center">沥青种类</th>
-	                            <th class="text-center">油石比（%）</th>
+	                            <th class="text-center" id="conserveItemI7Text">沥青种类</th>
+	                            <th class="text-center" id="conserveItemI8">油石比（%）</th>
 	                            <th class="text-center">操作</th>
 	                        </tr>
 	                    </thead>
@@ -641,14 +642,14 @@
 	                            <div class="input-group-addon">%</div>
 	                            </div>
 	                        </div>
-	                        <label class="col-md-2 control-label">折现率：</label>
-	                        <div class="col-md-2">
-	                            <div class="input-group">
-	                            <input type="text" class="form-control" placeholder="百分比" id="conserveBase3"
-	                                name="conserveBase3">
-	                            <div class="input-group-addon">%</div>
-	                            </div>
-	                        </div>
+	                        <label class="col-md-2 control-label">正常行车速度：</label>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                <input type="text" class="form-control" placeholder="请输入" id="conserveBase6"
+                                    name="conserveBase6">
+                                <div class="input-group-addon">km/h</div>
+                                </div> 
+                            </div>
 	                    </div>
 	                    <div class="form-group">
 	                        <label class="col-md-2 control-label">时间成本：</label>
@@ -667,17 +668,23 @@
 	                            <div class="input-group-addon">¥/车·千米</div>
 	                            </div>
 	                        </div>
-	                        <label class="col-md-2 control-label">正常行车速度：</label>
-	                        <div class="col-md-2">
-	                            <input type="text" class="form-control" placeholder="请输入" id="conserveBase6"
-	                                name="conserveBase6">
-	                        </div>
+	                        <label class="col-md-2 control-label">折现率：</label>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                <input type="text" class="form-control" placeholder="百分比" id="conserveBase3"
+                                    name="conserveBase3">
+                                <div class="input-group-addon">%</div>
+                                </div>
+                            </div>
 	                    </div>
 	                    <div class="form-group">
 	                        <label class="col-md-2 control-label">施工区域行车速度：</label>
 	                        <div class="col-md-2">
+	                            <div class="input-group">
 	                            <input type="text" class="form-control" placeholder="请输入" id="conserveBase7"
 	                                name="conserveBase7">
+	                            <div class="input-group-addon">km/h</div>
+                                </div> 
 	                        </div>
 	                        <label class="col-md-2 control-label">施工区域堵塞长度：</label>
 	                        <div class="col-md-2">
@@ -699,8 +706,11 @@
 	                    <div class="form-group">
 	                        <label class="col-md-2 control-label">堵塞运行速度：</label>
 	                        <div class="col-md-2">
+	                            <div class="input-group">
 	                            <input type="text" class="form-control" placeholder="请输入" id="conserveBase10"
 	                                name="conserveBase10">
+	                            <div class="input-group-addon">km/h</div>
+                                </div> 
 	                        </div>
 	                    </div>
 	                </fieldset>
@@ -824,7 +834,7 @@
               </form>
             <form id="inventoryUse2Form" class="form-horizontal" role="form">
                 <fieldset>
-                    <legend>请输入参数：</legend>
+                    <legend>路面与交通：</legend>
                     <div class="form-group">
                         <label class="col-md-2 control-label">路面类型：</label>
                         <div class="col-md-2">
@@ -838,17 +848,46 @@
                             <div class="input-group-addon">年</div>
                             </div>
                         </div>
-                        <label class="col-md-2 control-label">正常行车速度：</label>
+                        <label class="col-md-2 control-label">透水率：</label>
                         <div class="col-md-2">
-                            <input type="text" class="form-control" placeholder="请输入" id="use2Item2"
-                                name="use2Item2">
+                            <div class="input-group">
+                            <input type="text" class="form-control" placeholder="百分比" id="use2Item9"
+                                name="use2Item9">
+                            <div class="input-group-addon">%</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="conserveBaseInfoInUse2" style="display: none;">
                         <label class="col-md-2 control-label">初始年平均日交通量：</label>
                         <div class="col-md-2">
                             <input type="text" class="form-control" placeholder="请输入" id="use2Item3"
                                 name="use2Item3">
+                        </div>
+                        <label class="col-md-2 control-label">交通增长率：</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                            <input type="text" class="form-control" placeholder="百分比" id="use2Item7"
+                                name="use2Item7">
+                            <div class="input-group-addon">%</div>
+                            </div>
+                        </div>
+                        <label class="col-md-2 control-label">正常行车速度：</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                            <input type="text" class="form-control" placeholder="请输入" id="use2Item2"
+                                name="use2Item2">
+                            <div class="input-group-addon">km/h</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">重型车平均油耗：</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                            <input type="text" class="form-control" placeholder="请输入" id="use2Item6"
+                                name="use2Item6">
+                            <div class="input-group-addon">L/km</div>
+                            </div>
                         </div>
                         <label class="col-md-2 control-label">重型车比例：</label>
                         <div class="col-md-2">
@@ -867,41 +906,10 @@
                             </div>
                         </div>
                     </div>
+                </fieldset>
+                <fieldset>
+                    <legend>气候：</legend>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">重型车平均油耗：</label>
-                        <div class="col-md-2">
-                            <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="use2Item6"
-                                name="use2Item6">
-                            <div class="input-group-addon">L/km</div>
-                            </div>
-                        </div>
-                        <label class="col-md-2 control-label">交通增长率：</label>
-                        <div class="col-md-2">
-                            <div class="input-group">
-                            <input type="text" class="form-control" placeholder="百分比" id="use2Item7"
-                                name="use2Item7">
-                            <div class="input-group-addon">%</div>
-                            </div>
-                        </div>
-                        <label class="col-md-2 control-label">涉水额外油耗比例：</label>
-                        <div class="col-md-2">
-                            <div class="input-group">
-                            <input type="text" class="form-control" placeholder="百分比" id="use2Item8"
-                                name="use2Item8">
-                            <div class="input-group-addon">%</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">透水率：</label>
-                        <div class="col-md-2">
-                            <div class="input-group">
-                            <input type="text" class="form-control" placeholder="百分比" id="use2Item9"
-                                name="use2Item9">
-                            <div class="input-group-addon">%</div>
-                            </div>
-                        </div>
                         <label class="col-md-2 control-label">当地年降雨量：</label>
                         <div class="col-md-2">
                             <div class="input-group">
@@ -910,9 +918,36 @@
                             <div class="input-group-addon">mm</div>
                             </div>
                         </div>
+                        <label class="col-md-2 control-label">夏季正午气温：</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                            <input type="text" class="form-control" placeholder="请输入" id="use2Item19"
+                                name="use2Item19">
+                            <div class="input-group-addon">°C</div>
+                            </div>
+                        </div>
+                        <label class="col-md-2 control-label">夏季正午相对湿度：</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                            <input type="text" class="form-control" placeholder="百分比" id="use2Item20"
+                                name="use2Item20">
+                            <div class="input-group-addon">%</div>
+                            </div>
+                        </div>
                     </div>
+                </fieldset>
+                <fieldset>
+                    <legend>内涝：</legend>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">内涝平均深度：</label>
+                        <label class="col-md-2 control-label">涉水额外油耗比例：</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                            <input type="text" class="form-control" placeholder="百分比" id="use2Item8"
+                                name="use2Item8">
+                            <div class="input-group-addon">%</div>
+                            </div>
+                        </div>
+                        <label class="col-md-2 control-label">平均深度：</label>
                         <div class="col-md-2">
                             <div class="input-group">
                             <input type="text" class="form-control" placeholder="请输入" id="use2Item11"
@@ -920,15 +955,17 @@
                             <div class="input-group-addon">m</div>
                             </div>
                         </div>
-                        <label class="col-md-2 control-label">内涝平均持续时间：</label>
+                        <label class="col-md-2 control-label">平均持续时间：</label>
                         <div class="col-md-2">
                             <div class="input-group">
                             <input type="text" class="form-control" placeholder="请输入" id="use2Item12"
                                 name="use2Item12">
-                            <div class="input-group-addon">天</div>
+                            <div class="input-group-addon">d</div>
                             </div>
                         </div>
-                        <label class="col-md-2 control-label">内涝频率：</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">频率：</label>
                         <div class="col-md-2">
                             <div class="input-group">
                             <input type="text" class="form-control" placeholder="请输入" id="use2Item13"
@@ -936,9 +973,7 @@
                             <div class="input-group-addon">次/年</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">内涝绕行距离：</label>
+                        <label class="col-md-2 control-label">绕行距离：</label>
                         <div class="col-md-2">
                             <div class="input-group">
                             <input type="text" class="form-control" placeholder="请输入" id="use2Item14"
@@ -946,7 +981,7 @@
                             <div class="input-group-addon">km</div>
                             </div>
                         </div>
-                        <label class="col-md-2 control-label">内涝淹没路段长度：</label>
+                        <label class="col-md-2 control-label">淹没路段长度：</label>
                         <div class="col-md-2">
                             <div class="input-group">
                             <input type="text" class="form-control" placeholder="请输入" id="use2Item15"
@@ -955,6 +990,9 @@
                             </div>
                         </div>
                     </div>
+                </fieldset>
+                <fieldset>
+                    <legend>水循环：</legend>
                     <div class="form-group">
                         <label class="col-md-2 control-label">径流系数：</label>
                         <div class="col-md-2">
@@ -978,26 +1016,11 @@
                             </div>
                         </div>
                     </div>
+                </fieldset>
+                <fieldset>
+                    <legend>污染物基础浓度：</legend>    
                     <div class="form-group">
-                        <label class="col-md-2 control-label">夏季正午气温：</label>
-                        <div class="col-md-2">
-                            <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="use2Item19"
-                                name="use2Item19">
-                            <div class="input-group-addon">°C</div>
-                            </div>
-                        </div>
-                        <label class="col-md-2 control-label">夏季正午相对湿度：</label>
-                        <div class="col-md-2">
-                            <div class="input-group">
-                            <input type="text" class="form-control" placeholder="百分比" id="use2Item20"
-                                name="use2Item20">
-                            <div class="input-group-addon">%</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">污染物Pb基础浓度：</label>
+                        <label class="col-md-2 control-label">Pb基础浓度：</label>
                         <div class="col-md-2">
                             <div class="input-group">
                             <input type="text" class="form-control" placeholder="请输入" id="use2Item21"
@@ -1005,7 +1028,7 @@
                             <div class="input-group-addon">mg/L</div>
                             </div>
                         </div>
-                        <label class="col-md-2 control-label">污染物Zn基础浓度：</label>
+                        <label class="col-md-2 control-label">Zn基础浓度：</label>
                         <div class="col-md-2">
                             <div class="input-group">
                             <input type="text" class="form-control" placeholder="请输入" id="use2Item22"
@@ -1117,18 +1140,13 @@
                     </div>
                     <div id="use2ItemInUse3" style="display:none;">
                         <div class="form-group">
-                            <label class="col-md-2 control-label">路面寿命：</label>
+                            <label class="col-md-2 control-label">重型车平均油耗：</label>
                             <div class="col-md-2">
                                 <div class="input-group">
-                                <input type="text" class="form-control" placeholder="请输入" id="use2Item1InUse3"
-                                    name="use2Item1InUse3">
-                                <div class="input-group-addon">年</div>
+                                <input type="text" class="form-control" placeholder="请输入" id="use2Item6InUse3"
+                                    name="use2Item6InUse3">
+                                <div class="input-group-addon">L/km</div>
                                 </div>
-                            </div>
-                            <label class="col-md-2 control-label">初始年平均日交通量：</label>
-                            <div class="col-md-2">
-                                <input type="text" class="form-control" placeholder="请输入" id="use2Item3InUse3"
-                                    name="use2Item3InUse3">
                             </div>
                             <label class="col-md-2 control-label">重型车比例：</label>
                             <div class="col-md-2">
@@ -1138,8 +1156,6 @@
                                 <div class="input-group-addon">%</div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
                             <label class="col-md-2 control-label">汽油车平均油耗：</label>
                             <div class="col-md-2">
                                 <div class="input-group">
@@ -1148,21 +1164,30 @@
                                 <div class="input-group-addon">L/km</div>
                                 </div>
                             </div>
-                            <label class="col-md-2 control-label">重型车平均油耗：</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">路面寿命：</label>
                             <div class="col-md-2">
                                 <div class="input-group">
-                                <input type="text" class="form-control" placeholder="请输入" id="use2Item6InUse3"
-                                    name="use2Item6InUse3">
-                                <div class="input-group-addon">L/km</div>
+                                <input type="text" class="form-control" placeholder="请输入" id="use2Item1InUse3"
+                                    name="use2Item1InUse3">
+                                <div class="input-group-addon">年</div>
                                 </div>
                             </div>
-                            <label class="col-md-2 control-label">交通增长率：</label>
-                            <div class="col-md-2">
-                                <div class="input-group">
-                                <input type="text" class="form-control" placeholder="百分比" id="use2Item7InUse3"
-                                    name="use2Item7InUse3">
-                                <div class="input-group-addon">%</div>
-                                </div>
+                            <div id="use2Item3And7InUse3">
+	                            <label class="col-md-2 control-label">初始年平均日交通量：</label>
+	                            <div class="col-md-2">
+	                                <input type="text" class="form-control" placeholder="请输入" id="use2Item3InUse3"
+	                                    name="use2Item3InUse3">
+	                            </div>
+	                            <label class="col-md-2 control-label">交通增长率：</label>
+	                            <div class="col-md-2">
+	                                <div class="input-group">
+	                                <input type="text" class="form-control" placeholder="百分比" id="use2Item7InUse3"
+	                                    name="use2Item7InUse3">
+	                                <div class="input-group-addon">%</div>
+	                                </div>
+	                            </div>
                             </div>
                         </div>
                     </div>
@@ -1281,8 +1306,8 @@
                     </div>
                 </fieldset>
                 <div class="text-center">
-                    <button class="king-btn king-radius king-success" type="submit">
-                                   计算回收清单</button>
+                    <button class="king-btn king-radius king-danger" type="button" id="recycleDefaultValue">默认参数</button>
+                    <button class="king-btn king-radius king-success" type="submit">计算回收清单</button>
                 </div>
             </form>
             </div>
@@ -1330,7 +1355,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label">养护时间：</label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" placeholder="道路运营年数" id="conserveItem2"
+                        <input type="text" class="form-control" placeholder="道路运营多少年后进行维护" id="conserveItem2"
                                 name="conserveItem2">
                     </div>
                 </div>
