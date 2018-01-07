@@ -2252,9 +2252,11 @@ $(function(){
 				if($roadType.val()==1){
 					$("#conserveItemI7Text").show();
 					$("#conserveItemI8").show();
+					$("#conserveItem7And8Input").show();
 				}else{
 					$("#conserveItemI7Text").hide();
 					$("#conserveItemI8").hide();
+					$("#conserveItem7And8Input").hide();
 				}
 			}else{
 				$("#conserveInventory").hide();
@@ -2290,6 +2292,93 @@ $(function(){
 		$("#conserveItem4").val(50);
 		$("#conserveItem5").val(20);
 		$("#conserveItem6").val(2);
+		if($roadType.val()==1){
+			$("#conserveItem7").val(2).trigger("change");
+			$("#conserveItem8").val(5);
+		}
+	});
+	$("#conserveMaterialDefaultValue").click(function(){
+		conserveData.itemList=[];
+		$("#conserveInventoryItemTable tbody").empty();
+		var defaultItems=[
+			{i1:"薄层罩面",i2:"5",i3:"1/2",i4:"50",i5:"20",i6:"2",i7:"2",i7Text:'改性沥青',i8:"5"},
+			{i1:"铣刨重铺",i2:"8",i3:"1/2",i4:"80",i5:"50",i6:"5",i7:"2",i7Text:'改性沥青',i8:"5"}
+		];
+		for (var i = 0; i < 2; i++) {
+			var d=defaultItems[i];
+			var x={};
+			var id=conserveData.itemId;
+			x.id=id;
+			x.i1=d.i1;
+			x.i2=d.i2;
+			x.i2Text="道路运营"+x.i2+"年后";
+			x.i3=d.i3;
+			x.i4=d.i4;
+			x.i5=d.i5;
+			x.i6=d.i6;
+			var tpl;
+			if($roadType.val()==1){
+				x.i7=d.i7;
+				x.i7Text=d.i7Text;
+				x.i8=d.i8;
+				tpl=$('#tpl-conserveInventoryItemTable').html();
+			}else{
+				tpl=$('#tpl-conserveInventoryItemTable2').html();
+			}
+			conserveData.itemList.push(x);
+			var _html = renderTpl(tpl, x);
+			$('#conserveInventoryItemTable tbody').append($(_html));
+			$("#delete"+id).data("itemId",id).click(function(){
+				for (var i = 0; i < conserveData.itemList.length; i++) {
+					if(conserveData.itemList[i].id==$(this).data("itemId")){
+						conserveData.itemList.splice(i,1);
+						break;
+					}
+				}
+				var $tr = $(this).parent().parent();
+				$tr.remove();
+				conserveMaterialFlag=false;
+				conserveRange=1;
+				conserveData.materialList=[];
+				$("#inventoryConserveMaterialForm").hide();
+				$('#conserveInventoryMaterialTable tbody').empty();
+				$('#conserveInventoryEconomicTable tbody').empty();
+			});
+			$("#edit"+id).data("itemId",id).click(function(){
+				var data;
+				for (var i = 0; i < conserveData.itemList.length; i++) {
+					if(conserveData.itemList[i].id==$(this).data("itemId")){
+						data=conserveData.itemList[i];
+						break;
+					}
+				}
+				if(data){
+					$("#myModalLabel").text("编辑");
+					validatorConserveItemInputForm.resetForm();
+			        $("#conserveItemInputForm")[0].reset();
+			        $("#itemId").val(data.id);
+					$("#conserveItem1").val(data.i1);
+					$("#conserveItem2").val(data.i2);
+					$("#conserveItem3").val(data.i3);
+					$("#conserveItem4").val(data.i4);
+					$("#conserveItem5").val(data.i5);
+					$("#conserveItem6").val(data.i6);
+					if($roadType.val()==1){
+						$("#conserveItem7").val(data.i7).trigger("change");
+						$("#conserveItem8").val(data.i8);
+					}
+					$("#modal-default").modal("show");
+				}
+			});
+			conserveData.itemId=conserveData.itemId+1;
+		}
+		conserveMaterialFlag=false;
+		conserveRange=1;
+		conserveData.materialList=[];
+		$("#inventoryConserveMaterialForm").hide();
+		$('#conserveInventoryMaterialTable tbody').empty();
+		$('#conserveInventoryEconomicTable tbody').empty();
+		$("#conserveUncertainty").val(30);
 	});
 	$("#conserveBaseDefaultValue").click(function(){
 		$("#conserveBase1").val(2000);
@@ -3403,10 +3492,6 @@ $(function(){
 	    			x.i4=$("#conserveItem4").val();
 	    			x.i5=$("#conserveItem5").val();
 	    			x.i6=$("#conserveItem6").val();
-	    			var t=$("#conserveItem7").select2("data")[0];
-	    			x.i7=t.id;
-	    			x.i7Text=t.text;
-	    			x.i8=$("#conserveItem8").val();
 	    			var tds=$("#edit"+itemId).parent().parent().children("td");
 	    			tds.eq(0).text(x.i1);
 	    			tds.eq(1).text(x.i2Text);
@@ -3414,8 +3499,14 @@ $(function(){
 	    			tds.eq(3).text(x.i4);
 	    			tds.eq(4).text(x.i5);
 	    			tds.eq(5).text(x.i6);
-	    			tds.eq(6).text(x.i7Text);
-	    			tds.eq(7).text(x.i8);
+	    			if($roadType.val()==1){
+	    				var t=$("#conserveItem7").select2("data")[0];
+	    				x.i7=t.id;
+	    				x.i7Text=t.text;
+	    				x.i8=$("#conserveItem8").val();
+	    				tds.eq(6).text(x.i7Text);
+	    				tds.eq(7).text(x.i8);
+	    			}
 	    			$("#modal-default").modal("hide");
 	    			conserveMaterialFlag=false;
 	    			conserveRange=1;
@@ -3435,17 +3526,22 @@ $(function(){
     			x.i4=$("#conserveItem4").val();
     			x.i5=$("#conserveItem5").val();
     			x.i6=$("#conserveItem6").val();
-    			var t=$("#conserveItem7").select2("data")[0];
-    			x.i7=t.id;
-    			x.i7Text=t.text;
-    			x.i8=$("#conserveItem8").val();
+    			var tpl;
+    			if($roadType.val()==1){
+    				var t=$("#conserveItem7").select2("data")[0];
+    				x.i7=t.id;
+    				x.i7Text=t.text;
+    				x.i8=$("#conserveItem8").val();
+    				tpl=$('#tpl-conserveInventoryItemTable').html();
+    			}else{
+    				tpl=$('#tpl-conserveInventoryItemTable2').html();
+    			}
     			conserveData.itemList.push(x);
-    			var tpl=$('#tpl-conserveInventoryItemTable').html();
     			var _html = renderTpl(tpl, x);
     			$('#conserveInventoryItemTable tbody').append($(_html));
-    			$("#delete"+id).click(function(){
+    			$("#delete"+id).data("itemId",id).click(function(){
     				for (var i = 0; i < conserveData.itemList.length; i++) {
-						if(conserveData.itemList[i].id==id){
+						if(conserveData.itemList[i].id==$(this).data("itemId")){
 							conserveData.itemList.splice(i,1);
 							break;
 						}
@@ -3459,10 +3555,10 @@ $(function(){
         			$('#conserveInventoryMaterialTable tbody').empty();
         			$('#conserveInventoryEconomicTable tbody').empty();
     			});
-    			$("#edit"+id).click(function(){
+    			$("#edit"+id).data("itemId",id).click(function(){
     				var data;
     				for (var i = 0; i < conserveData.itemList.length; i++) {
-						if(conserveData.itemList[i].id==id){
+						if(conserveData.itemList[i].id==$(this).data("itemId")){
 							data=conserveData.itemList[i];
 							break;
 						}
@@ -3478,8 +3574,10 @@ $(function(){
     					$("#conserveItem4").val(data.i4);
     					$("#conserveItem5").val(data.i5);
     					$("#conserveItem6").val(data.i6);
-    					$("#conserveItem7").val(data.i7).trigger("change");
-    					$("#conserveItem8").val(data.i8);
+    					if($roadType.val()==1){
+    						$("#conserveItem7").val(data.i7).trigger("change");
+    						$("#conserveItem8").val(data.i8);
+    					}
     					$("#modal-default").modal("show");
     				}
     			});
@@ -3500,7 +3598,9 @@ $(function(){
 		validatorConserveItemInputForm.resetForm();
         $("#conserveItemInputForm")[0].reset();
         $("#itemId").val('');
-		$("#conserveItem7").val(cdAsphaltType[0].id).trigger("change");
+		if($roadType.val()==1){
+			$("#conserveItem7").val(1).trigger("change");
+		}
  		$("#modal-default").modal("show");
 	});
 	$("#gravelConserve").select2({
@@ -3654,39 +3754,7 @@ $(function(){
 			var un=$("#conserveUncertainty").val();
 			conserveData.conserveUncertainty=un;
 			un=un/100;
-			// 概率相关计算，根据不确定性得到materialListUp和materialList
-			var gravel=0,ordinaryAsphalt=0,modifiedAsphalt=0,highViscosityAsphalt=0;
-			var gravelUp=0,ordinaryAsphaltUp=0,modifiedAsphaltUp=0,highViscosityAsphaltUp=0;
-			var gravelDown=0,ordinaryAsphaltDown=0,modifiedAsphaltDown=0,highViscosityAsphaltDown=0;
-			for (var i = 0; i < conserveData.itemList.length; i++) {
-				var item = conserveData.itemList[i];
-				var w=basicData.area*item.i5/100*item.i6/100*2.35;
-				var wUp=w*(1+un)*(1+un);
-				var wDown=w*(1-un)*(1-un);
-				var i8=item.i8/100;
-				gravel+=w/(1+i8);
-				gravelUp+=wUp/(1+i8);
-				gravelDown+=wDown/(1+i8);
-				switch (item.i7) {
-				case "1":
-					ordinaryAsphalt+=w*i8/(1+i8);
-					ordinaryAsphaltUp+=wUp*i8/(1+i8);
-					ordinaryAsphaltDown+=wDown*i8/(1+i8);
-					break;
-				case "2":
-					modifiedAsphalt+=w*i8/(1+i8);
-					modifiedAsphaltUp+=wUp*i8/(1+i8);
-					modifiedAsphaltDown+=wDown*i8/(1+i8);
-					break;
-				case "3":
-					highViscosityAsphalt+=w*i8/(1+i8);
-					highViscosityAsphaltUp+=wUp*i8/(1+i8);
-					highViscosityAsphaltDown+=wDown*i8/(1+i8);
-					break;
-				default:
-					break;
-				}
-			}
+			var gravel=0,gravelUp=0,gravelDown=0;
 			$("#gravelSelectConserve").hide();
 			$("#ordinaryAsphaltSelectConserve").hide();
 			$("#modifiedAsphaltSelectConserve").hide();
@@ -3694,29 +3762,74 @@ $(function(){
 			conserveData.materialList=[];
 			conserveData.materialListUp=[];
 			conserveData.materialListDown=[];
+			if($roadType.val()==1){
+				// 概率相关计算，根据不确定性得到materialListUp和materialList
+				var ordinaryAsphalt=0,modifiedAsphalt=0,highViscosityAsphalt=0;
+				var ordinaryAsphaltUp=0,modifiedAsphaltUp=0,highViscosityAsphaltUp=0;
+				var ordinaryAsphaltDown=0,modifiedAsphaltDown=0,highViscosityAsphaltDown=0;
+				for (var i = 0; i < conserveData.itemList.length; i++) {
+					var item = conserveData.itemList[i];
+					var w=basicData.area*item.i5/100*item.i6/100*2.35;
+					var wUp=w*(1+un)*(1+un);
+					var wDown=w*(1-un)*(1-un);
+					var i8=item.i8/100;
+					gravel+=w/(1+i8);
+					gravelUp+=wUp/(1+i8);
+					gravelDown+=wDown/(1+i8);
+					switch (item.i7) {
+					case "1":
+						ordinaryAsphalt+=w*i8/(1+i8);
+						ordinaryAsphaltUp+=wUp*i8/(1+i8);
+						ordinaryAsphaltDown+=wDown*i8/(1+i8);
+						break;
+					case "2":
+						modifiedAsphalt+=w*i8/(1+i8);
+						modifiedAsphaltUp+=wUp*i8/(1+i8);
+						modifiedAsphaltDown+=wDown*i8/(1+i8);
+						break;
+					case "3":
+						highViscosityAsphalt+=w*i8/(1+i8);
+						highViscosityAsphaltUp+=wUp*i8/(1+i8);
+						highViscosityAsphaltDown+=wDown*i8/(1+i8);
+						break;
+					default:
+						break;
+					}
+				}
+				if(ordinaryAsphalt>0){
+					conserveData.materialList.push({materialMark:"ordinaryAsphaltConserve",materialName:"普通沥青",amount:ordinaryAsphalt.toFixed(3)});
+					conserveData.materialListUp.push({amount:ordinaryAsphaltUp.toFixed(3)});
+					conserveData.materialListDown.push({amount:ordinaryAsphaltDown.toFixed(3)});
+					$("#ordinaryAsphaltSelectConserve").show();
+				}
+				if(modifiedAsphalt>0){
+					conserveData.materialList.push({materialMark:"modifiedAsphaltConserve",materialName:"改性沥青",amount:modifiedAsphalt.toFixed(3)});
+					conserveData.materialListUp.push({amount:modifiedAsphaltUp.toFixed(3)});
+					conserveData.materialListDown.push({amount:modifiedAsphaltDown.toFixed(3)});
+					$("#modifiedAsphaltSelectConserve").show();
+				}
+				if(highViscosityAsphalt>0){
+					conserveData.materialList.push({materialMark:"highViscosityAsphaltConserve",materialName:"高粘度沥青",amount:highViscosityAsphalt.toFixed(3)});
+					conserveData.materialListUp.push({amount:highViscosityAsphaltUp.toFixed(3)});
+					conserveData.materialListDown.push({amount:highViscosityAsphaltDown.toFixed(3)});
+					$("#highViscosityAsphaltSelectConserve").show();
+				}
+			}else{
+				for (var i = 0; i < conserveData.itemList.length; i++) {
+					var item = conserveData.itemList[i];
+					var w=basicData.area*item.i5/100*item.i6/100*2.35;
+					var wUp=w*(1+un)*(1+un);
+					var wDown=w*(1-un)*(1-un);
+					gravel+=w;
+					gravelUp+=wUp;
+					gravelDown+=wDown;
+				}
+			}
 			if(gravel>0){
 				conserveData.materialList.push({materialMark:"gravelConserve",materialName:"碎石",amount:gravel.toFixed(3)});
 				conserveData.materialListUp.push({amount:gravelUp.toFixed(3)});
 				conserveData.materialListDown.push({amount:gravelDown.toFixed(3)});
 				$("#gravelSelectConserve").show();
-			}
-			if(ordinaryAsphalt>0){
-				conserveData.materialList.push({materialMark:"ordinaryAsphaltConserve",materialName:"普通沥青",amount:ordinaryAsphalt.toFixed(3)});
-				conserveData.materialListUp.push({amount:ordinaryAsphaltUp.toFixed(3)});
-				conserveData.materialListDown.push({amount:ordinaryAsphaltDown.toFixed(3)});
-				$("#ordinaryAsphaltSelectConserve").show();
-			}
-			if(modifiedAsphalt>0){
-				conserveData.materialList.push({materialMark:"modifiedAsphaltConserve",materialName:"改性沥青",amount:modifiedAsphalt.toFixed(3)});
-				conserveData.materialListUp.push({amount:modifiedAsphaltUp.toFixed(3)});
-				conserveData.materialListDown.push({amount:modifiedAsphaltDown.toFixed(3)});
-				$("#modifiedAsphaltSelectConserve").show();
-			}
-			if(highViscosityAsphalt>0){
-				conserveData.materialList.push({materialMark:"highViscosityAsphaltConserve",materialName:"高粘度沥青",amount:highViscosityAsphalt.toFixed(3)});
-				conserveData.materialListUp.push({amount:highViscosityAsphaltUp.toFixed(3)});
-				conserveData.materialListDown.push({amount:highViscosityAsphaltDown.toFixed(3)});
-				$("#highViscosityAsphaltSelectConserve").show();
 			}
 			$("#inventoryConserveMaterialForm").show();
 			conserveMaterialFlag=false;
@@ -5600,7 +5713,7 @@ $(function(){
 								color: 'lightgreen',
 							}
 						},
-						data: [[xa, ya], [xb, ya], [xa, yb], [xb, yb],[xx,yy]],
+						data: [[xa, ya], [xb, ya], [xa, yb], [xb, yb]],
 						markPoint : {
 							data : [
 							{xAxis: xx, yAxis: yy, symbol:'star',itemStyle:{normal:{color:'red'}}}
@@ -5683,28 +5796,30 @@ $(function(){
 		}
 		// echarts 自动调节宽度
 		$(window).resize(function() {
-			chartData.chartCostInventory.resize();
-			chartData.chartEnergyInventory.resize();
-			chartData.chartCo2Inventory.resize();
-			chartData.chartSo2Inventory.resize();
-			chartData.chartPbInventory.resize();
-			chartData.chartZnInventory.resize();
-			chartData.chartCostInfluence.resize();
-			if(conserveRange==2){
-				chartData.chartCostProbability.resize();
-				if(energyRange==2){
-					chartData.chartEnergyProbability.resize();
+			if(chartData.chartCostInfluence!=undefined){
+				chartData.chartCostInventory.resize();
+				chartData.chartEnergyInventory.resize();
+				chartData.chartCo2Inventory.resize();
+				chartData.chartSo2Inventory.resize();
+				chartData.chartPbInventory.resize();
+				chartData.chartZnInventory.resize();
+				chartData.chartCostInfluence.resize();
+				if(conserveRange==2){
+					chartData.chartCostProbability.resize();
+					if(energyRange==2){
+						chartData.chartEnergyProbability.resize();
+					}
+					if(carbonRange==2){
+						chartData.chartGwpProbability.resize();
+					}
+					if(sourRange==2){
+						chartData.chartSourProbability.resize();
+					}
+					if(eutrophicationRange==2){
+						chartData.chartEutrophicationProbability.resize();
+					}
+					chartData.chartCostAndEnvCost.resize();
 				}
-				if(carbonRange==2){
-					chartData.chartGwpProbability.resize();
-				}
-				if(sourRange==2){
-					chartData.chartSourProbability.resize();
-				}
-				if(eutrophicationRange==2){
-					chartData.chartEutrophicationProbability.resize();
-				}
-				chartData.chartCostAndEnvCost.resize();
 			}
 		});
 	});
