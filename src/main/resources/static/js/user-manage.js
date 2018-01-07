@@ -266,7 +266,7 @@ $(function(){
                 data: "chname",
                 className : "ellipsis",
                 render: CONSTANT.DATA_TABLES.RENDER.ELLIPSIS,
-                width: "80px"
+                width: "100px"
             },
             {
                 data : "phone",
@@ -278,7 +278,7 @@ $(function(){
             	data : "company",
             	className : "ellipsis", //文字过长时用省略号显示，CSS实现
                 render : CONSTANT.DATA_TABLES.RENDER.ELLIPSIS, //会显示省略号的列，需要用title属性实现划过时显示全部文本的效果
-                width : "180px"
+                width : "200px"
             },
             {
             	data: "address",
@@ -286,11 +286,11 @@ $(function(){
             	render : CONSTANT.DATA_TABLES.RENDER.ELLIPSIS,
             	//固定列宽，但至少留下一个活动列不要固定宽度，让表格自行调整。不要将所有列都指定列宽，否则页面伸缩时所有列都会随之按比例伸缩。
                 //切记设置table样式为table-layout:fixed; 否则列宽不会强制为指定宽度，也不会出现省略号。
-                width : "180px"
+                width : "200px"
             },
             {
             	data: "superuser",
-            	width: "90px",
+            	width: "100px",
             	render : function(data, type, row, meta) {
                     return data?'<i class="fa fa-users"></i> '+iMsg.superuser:'<i class="fa fa-user"></i> '+iMsg.normal;
                 }
@@ -305,7 +305,7 @@ $(function(){
                 data: null,
                 defaultContent:"",
                 orderable : false,
-                width : "160px"
+                width : "150px"
             }
         ],
         "createdRow": function (row, data, index ) {
