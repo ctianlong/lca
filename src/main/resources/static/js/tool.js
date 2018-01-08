@@ -2279,11 +2279,391 @@ $(function(){
     	onkeyup:false
 	});
 	// 默认参数值按钮
+	$("#materialDefaultValue").click(function(){
+		var conditions={
+			gravel:{materialCategoryCd:1},
+			ordinaryAsphalt:{materialCategoryCd:2},
+			modifiedAsphalt:{materialCategoryCd:2,materialName:'改性沥青'},
+			highViscosityAsphalt:{materialCategoryCd:2},
+			cement:{materialCategoryCd:8},
+			lime:{materialCategoryCd:5},
+			rebar:{materialCategoryCd:3},
+			snjType:{materialCategoryCd:9,materialName:'速凝'},
+			jqjType:{materialCategoryCd:9,materialName:'加气'},
+			zsjType:{materialCategoryCd:9,materialName:'增塑'},
+			qlzsjType:{materialCategoryCd:9,materialName:'强力增塑'},
+			hnjType:{materialCategoryCd:9,materialName:'缓凝'},
+			jsjType:{materialCategoryCd:9,materialName:'减水'}
+		};
+		for (var i = 0; i < materialData.materialList.length; i++) {
+			var item = materialData.materialList[i];
+			switch (item.materialMark) {
+			case "gravel":
+				$.ajax({
+					type: 'GET',
+					url: ctxPath+"/api/db/inventory/materials",
+					dataType:'json',
+					data:conditions.gravel
+				}).then(function (data) {
+					if(data.list.length>0){
+						var repo=data.list[0];
+						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var option = new Option(text, '-1', true, true);
+						$(option).data('defaultRes',repo);
+						$("#gravel").html(option).trigger('change');
+					}
+				});
+				break;
+			case "ordinaryAsphalt":
+				$.ajax({
+					type: 'GET',
+					url: ctxPath+"/api/db/inventory/materials",
+					dataType:'json',
+					data:conditions.ordinaryAsphalt
+				}).then(function (data) {
+					if(data.list.length>0){
+						var repo=data.list[0];
+						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var option = new Option(text, '-1', true, true);
+						$(option).data('defaultRes',repo);
+						$("#ordinaryAsphalt").html(option).trigger('change');
+					}
+				});
+				break;
+			case "modifiedAsphalt":
+				$.ajax({
+					type: 'GET',
+					url: ctxPath+"/api/db/inventory/materials",
+					dataType:'json',
+					data:conditions.modifiedAsphalt
+				}).then(function (data) {
+					if(data.list.length>0){
+						var repo=data.list[0];
+						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var option = new Option(text, '-1', true, true);
+						$(option).data('defaultRes',repo);
+						$("#modifiedAsphalt").html(option).trigger('change');
+					}
+				});
+				break;
+			case "highViscosityAsphalt":
+				$.ajax({
+					type: 'GET',
+					url: ctxPath+"/api/db/inventory/materials",
+					dataType:'json',
+					data:conditions.highViscosityAsphalt
+				}).then(function (data) {
+					if(data.list.length>0){
+						var repo=data.list[0];
+						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var option = new Option(text, '-1', true, true);
+						$(option).data('defaultRes',repo);
+						$("#highViscosityAsphalt").html(option).trigger('change');
+					}
+				});
+				break;
+			case "cement":
+				$.ajax({
+					type: 'GET',
+					url: ctxPath+"/api/db/inventory/materials",
+					dataType:'json',
+					data:conditions.cement
+				}).then(function (data) {
+					if(data.list.length>0){
+						var repo=data.list[0];
+						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var option = new Option(text, '-1', true, true);
+						$(option).data('defaultRes',repo);
+						$("#cement").html(option).trigger('change');
+					}
+				});
+				break;
+			case "lime":
+				$.ajax({
+					type: 'GET',
+					url: ctxPath+"/api/db/inventory/materials",
+					dataType:'json',
+					data:conditions.lime
+				}).then(function (data) {
+					if(data.list.length>0){
+						var repo=data.list[0];
+						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var option = new Option(text, '-1', true, true);
+						$(option).data('defaultRes',repo);
+						$("#lime").html(option).trigger('change');
+					}
+				});
+				break;
+			case "rebar":
+				$.ajax({
+					type: 'GET',
+					url: ctxPath+"/api/db/inventory/materials",
+					dataType:'json',
+					data:conditions.rebar
+				}).then(function (data) {
+					if(data.list.length>0){
+						var repo=data.list[0];
+						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var option = new Option(text, '-1', true, true);
+						$(option).data('defaultRes',repo);
+						$("#rebar").html(option).trigger('change');
+					}
+				});
+				break;
+			case "snjType":
+				$.ajax({
+					type: 'GET',
+					url: ctxPath+"/api/db/inventory/materials",
+					dataType:'json',
+					data:conditions.snjType
+				}).then(function (data) {
+					if(data.list.length>0){
+						var repo=data.list[0];
+						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var option = new Option(text, '-1', true, true);
+						$(option).data('defaultRes',repo);
+						$("#snjType").html(option).trigger('change');
+					}
+				});
+				break;
+			case "jqjType":
+				$.ajax({
+					type: 'GET',
+					url: ctxPath+"/api/db/inventory/materials",
+					dataType:'json',
+					data:conditions.jqjType
+				}).then(function (data) {
+					if(data.list.length>0){
+						var repo=data.list[0];
+						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var option = new Option(text, '-1', true, true);
+						$(option).data('defaultRes',repo);
+						$("#jqjType").html(option).trigger('change');
+					}
+				});
+				break;
+			case "zsjType":
+				$.ajax({
+					type: 'GET',
+					url: ctxPath+"/api/db/inventory/materials",
+					dataType:'json',
+					data:conditions.zsjType
+				}).then(function (data) {
+					if(data.list.length>0){
+						var repo=data.list[0];
+						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var option = new Option(text, '-1', true, true);
+						$(option).data('defaultRes',repo);
+						$("#zsjType").html(option).trigger('change');
+					}
+				});
+				break;
+			case "qlzsjType":
+				$.ajax({
+					type: 'GET',
+					url: ctxPath+"/api/db/inventory/materials",
+					dataType:'json',
+					data:conditions.qlzsjType
+				}).then(function (data) {
+					if(data.list.length>0){
+						var repo=data.list[0];
+						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var option = new Option(text, '-1', true, true);
+						$(option).data('defaultRes',repo);
+						$("#qlzsjType").html(option).trigger('change');
+					}
+				});
+				break;
+			case "lime":
+				$.ajax({
+					type: 'GET',
+					url: ctxPath+"/api/db/inventory/materials",
+					dataType:'json',
+					data:conditions.lime
+				}).then(function (data) {
+					if(data.list.length>0){
+						var repo=data.list[0];
+						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var option = new Option(text, '-1', true, true);
+						$(option).data('defaultRes',repo);
+						$("#lime").html(option).trigger('change');
+					}
+				});
+				break;
+			case "hnjType":
+				$.ajax({
+					type: 'GET',
+					url: ctxPath+"/api/db/inventory/materials",
+					dataType:'json',
+					data:conditions.hnjType
+				}).then(function (data) {
+					if(data.list.length>0){
+						var repo=data.list[0];
+						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var option = new Option(text, '-1', true, true);
+						$(option).data('defaultRes',repo);
+						$("#hnjType").html(option).trigger('change');
+					}
+				});
+				break;
+			case "jsjType":
+				$.ajax({
+					type: 'GET',
+					url: ctxPath+"/api/db/inventory/materials",
+					dataType:'json',
+					data:conditions.jsjType
+				}).then(function (data) {
+					if(data.list.length>0){
+						var repo=data.list[0];
+						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var option = new Option(text, '-1', true, true);
+						$(option).data('defaultRes',repo);
+						$("#jsjType").html(option).trigger('change');
+					}
+				});
+				break;
+			default:
+				break;
+			}
+		}
+	});
 	$("#transportDefaultValue").click(function(){
-		$("#aggregateDistance").val(50);
-		$("#asphaltDistance").val(20);
-		$("#cementDistance").val(50);
-		$("#mixtureDistance").val(50);
+		for (var i = 0; i < transConsData.transportList.length; i++) {
+			var item = transConsData.transportList[i];
+			switch (item.materialMark) {
+			case "aggregate":
+				$.ajax({
+				    type: 'GET',
+				    url: ctxPath+"/api/db/inventory/transport",
+				    dataType:'json',
+				    data:{vehicleType:'18t'}
+				}).then(function (data) {
+					if(data.list.length>0){
+						var repo=data.list[0];
+						var text=repo.vehicleType+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var option = new Option(text, '-1', true, true);
+						$(option).data('defaultRes',repo);
+						$("#aggregateVehicleModel").html(option).trigger('change');
+					}
+				});
+				$("#aggregateDistance").val(50);
+				break;
+			case "asphalt":
+				$.ajax({
+					type: 'GET',
+					url: ctxPath+"/api/db/inventory/transport",
+					dataType:'json',
+					data:{vehicleType:'18t'}
+				}).then(function (data) {
+					if(data.list.length>0){
+						var repo=data.list[0];
+						var text=repo.vehicleType+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var option = new Option(text, '-1', true, true);
+						$(option).data('defaultRes',repo);
+						$("#asphaltVehicleModel").html(option).trigger('change');
+					}
+				});
+				$("#asphaltDistance").val(20);
+				break;
+			case "cement":
+				$.ajax({
+					type: 'GET',
+					url: ctxPath+"/api/db/inventory/transport",
+					dataType:'json',
+					data:{vehicleType:'18t'}
+				}).then(function (data) {
+					if(data.list.length>0){
+						var repo=data.list[0];
+						var text=repo.vehicleType+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var option = new Option(text, '-1', true, true);
+						$(option).data('defaultRes',repo);
+						$("#cementVehicleModel").html(option).trigger('change');
+					}
+				});
+				$("#cementDistance").val(50);
+				break;
+			case "mixture":
+				$.ajax({
+					type: 'GET',
+					url: ctxPath+"/api/db/inventory/transport",
+					dataType:'json',
+					data:{vehicleType:'46t'}
+				}).then(function (data) {
+					if(data.list.length>0){
+						var repo=data.list[0];
+						var text=repo.vehicleType+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var option = new Option(text, '-1', true, true);
+						$(option).data('defaultRes',repo);
+						$("#mixtureVehicleModel").html(option).trigger('change');
+					}
+				});
+				$("#mixtureDistance").val(50);
+				break;
+			default:
+				break;
+			}
+		}
+	});
+	$("#mixPaveDefaultValue").click(function(){
+		$mixEqupType.val(1).trigger("change");
+		$pavingEqupType.val(null).trigger("change");
+		$("#pavingClassQuotaInput").hide();
+		$.ajax({
+		    type: 'GET',
+		    url: ctxPath+"/api/db/inventory/fuel",
+		    dataType:'json',
+		    data:{fuelType:'汽油'}
+		}).then(function (data) {
+			if(data.list.length>0){
+				var repo=data.list[0];
+				var text=repo.fuelType+' （来源：'+(repo.dataSource||'（空）')+'）';
+				var option = new Option(text, '-1', true, true);
+				$(option).data('defaultRes',repo);
+				$("#gasoline").html(option).trigger('change');
+			}
+		});
+		$.ajax({
+			type: 'GET',
+			url: ctxPath+"/api/db/inventory/fuel",
+			dataType:'json',
+			data:{fuelType:'柴油'}
+		}).then(function (data) {
+			if(data.list.length>0){
+				var repo=data.list[0];
+				var text=repo.fuelType+' （来源：'+(repo.dataSource||'（空）')+'）';
+				var option = new Option(text, '-1', true, true);
+				$(option).data('defaultRes',repo);
+				$("#diesel").html(option).trigger('change');
+			}
+		});
+		$.ajax({
+			type: 'GET',
+			url: ctxPath+"/api/db/inventory/fuel",
+			dataType:'json',
+			data:{fuelType:'重油'}
+		}).then(function (data) {
+			if(data.list.length>0){
+				var repo=data.list[0];
+				var text=repo.fuelType+' （来源：'+(repo.dataSource||'（空）')+'）';
+				var option = new Option(text, '-1', true, true);
+				$(option).data('defaultRes',repo);
+				$("#heavyOil").html(option).trigger('change');
+			}
+		});
+		$.ajax({
+			type: 'GET',
+			url: ctxPath+"/api/db/inventory/fuel",
+			dataType:'json',
+			data:{fuelType:'电'}
+		}).then(function (data) {
+			if(data.list.length>0){
+				var repo=data.list[0];
+				var text=repo.fuelType+' （来源：'+(repo.dataSource||'（空）')+'）';
+				var option = new Option(text, '-1', true, true);
+				$(option).data('defaultRes',repo);
+				$("#electricity").html(option).trigger('change');
+			}
+		});
 	});
 	$("#conserveItemDefaultValue").click(function(){
 		$("#conserveItem1").val("薄层罩面");
@@ -2380,6 +2760,79 @@ $(function(){
 		$('#conserveInventoryEconomicTable tbody').empty();
 		$("#conserveUncertainty").val(30);
 	});
+	$("#conserveMaterialTypeDefaultValue").click(function(){
+		for (var i = 0; i < conserveData.materialList.length; i++) {
+			var item = conserveData.materialList[i];
+			switch (item.materialMark) {
+			case "gravelConserve":
+				$.ajax({
+				    type: 'GET',
+				    url: ctxPath+"/api/db/inventory/materials",
+				    dataType:'json',
+				    data:{materialCategoryCd:1}
+				}).then(function (data) {
+					if(data.list.length>0){
+						var repo=data.list[0];
+						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var option = new Option(text, '-1', true, true);
+						$(option).data('defaultRes',repo);
+						$("#gravelConserve").html(option).trigger('change');
+					}
+				});
+				break;
+			case "ordinaryAsphaltConserve":
+				$.ajax({
+					type: 'GET',
+					url: ctxPath+"/api/db/inventory/materials",
+					dataType:'json',
+					data:{materialCategoryCd:2}
+				}).then(function (data) {
+					if(data.list.length>0){
+						var repo=data.list[0];
+						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var option = new Option(text, '-1', true, true);
+						$(option).data('defaultRes',repo);
+						$("#ordinaryAsphaltConserve").html(option).trigger('change');
+					}
+				});
+				break;
+			case "modifiedAsphaltConserve":
+				$.ajax({
+					type: 'GET',
+					url: ctxPath+"/api/db/inventory/materials",
+					dataType:'json',
+					data:{materialCategoryCd:2,materialName:'改性沥青'}
+				}).then(function (data) {
+					if(data.list.length>0){
+						var repo=data.list[0];
+						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var option = new Option(text, '-1', true, true);
+						$(option).data('defaultRes',repo);
+						$("#modifiedAsphaltConserve").html(option).trigger('change');
+					}
+				});
+				break;
+			case "highViscosityAsphaltConserve":
+				$.ajax({
+					type: 'GET',
+					url: ctxPath+"/api/db/inventory/materials",
+					dataType:'json',
+					data:{materialCategoryCd:2}
+				}).then(function (data) {
+					if(data.list.length>0){
+						var repo=data.list[0];
+						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var option = new Option(text, '-1', true, true);
+						$(option).data('defaultRes',repo);
+						$("#highViscosityAsphaltConserve").html(option).trigger('change');
+					}
+				});
+				break;
+			default:
+				break;
+			}
+		}
+	});
 	$("#conserveBaseDefaultValue").click(function(){
 		$("#conserveBase1").val(2000);
 		$("#conserveBase2").val(5);
@@ -2426,6 +2879,48 @@ $(function(){
 		$("#use2Item20").val(55);
 		$("#use2Item21").val(0.1);
 		$("#use2Item22").val(1);
+		$.ajax({
+		    type: 'GET',
+		    url: ctxPath+"/api/db/inventory/fuel",
+		    dataType:'json',
+		    data:{fuelType:'汽油'}
+		}).then(function (data) {
+			if(data.list.length>0){
+				var repo=data.list[0];
+				var text=repo.fuelType+' （来源：'+(repo.dataSource||'（空）')+'）';
+				var option = new Option(text, '-1', true, true);
+				$(option).data('defaultRes',repo);
+				$("#gasolineUse2").html(option).trigger('change');
+			}
+		});
+		$.ajax({
+			type: 'GET',
+			url: ctxPath+"/api/db/inventory/fuel",
+			dataType:'json',
+			data:{fuelType:'柴油'}
+		}).then(function (data) {
+			if(data.list.length>0){
+				var repo=data.list[0];
+				var text=repo.fuelType+' （来源：'+(repo.dataSource||'（空）')+'）';
+				var option = new Option(text, '-1', true, true);
+				$(option).data('defaultRes',repo);
+				$("#dieselUse2").html(option).trigger('change');
+			}
+		});
+		$.ajax({
+			type: 'GET',
+			url: ctxPath+"/api/db/inventory/fuel",
+			dataType:'json',
+			data:{fuelType:'电'}
+		}).then(function (data) {
+			if(data.list.length>0){
+				var repo=data.list[0];
+				var text=repo.fuelType+' （来源：'+(repo.dataSource||'（空）')+'）';
+				var option = new Option(text, '-1', true, true);
+				$(option).data('defaultRes',repo);
+				$("#electricityUse2").html(option).trigger('change');
+			}
+		});
 	});
 	$("#use3DefaultValue").click(function(){
 		$("#initialIRI").val(2);
@@ -2437,13 +2932,56 @@ $(function(){
 		$("#use2Item5InUse3").val(0.0824);
 		$("#use2Item6InUse3").val(0.204);
 		$("#use2Item7InUse3").val(5);
+		$.ajax({
+		    type: 'GET',
+		    url: ctxPath+"/api/db/inventory/fuel",
+		    dataType:'json',
+		    data:{fuelType:'汽油'}
+		}).then(function (data) {
+			if(data.list.length>0){
+				var repo=data.list[0];
+				var text=repo.fuelType+' （来源：'+(repo.dataSource||'（空）')+'）';
+				var option = new Option(text, '-1', true, true);
+				$(option).data('defaultRes',repo);
+				$("#gasolineUse3").html(option).trigger('change');
+			}
+		});
+		$.ajax({
+			type: 'GET',
+			url: ctxPath+"/api/db/inventory/fuel",
+			dataType:'json',
+			data:{fuelType:'柴油'}
+		}).then(function (data) {
+			if(data.list.length>0){
+				var repo=data.list[0];
+				var text=repo.fuelType+' （来源：'+(repo.dataSource||'（空）')+'）';
+				var option = new Option(text, '-1', true, true);
+				$(option).data('defaultRes',repo);
+				$("#dieselUse3").html(option).trigger('change');
+			}
+		});
 	});
 	$("#recycleDefaultValue").click(function(){
 		$("#brokenEfficiencyRecycle").val(1000);
 		$("#brokenFuelConsumption").val(500);
 		$("#recycleDistance").val(50);
-		// 远程数据默认选择，无法获取自定义的属性数据，select2本身没有解决这个问题，或许只能在option中添加 data-*属性来获取，每个select2获取数据时都要额外添加代码
-		/*$.ajax({
+		// 远程数据默认选择，无法获取自定义的属性数据，select2本身没有解决这个问题，
+		// 暂时通过option元素存储自定义属性：1、添加 data-*属性；2、使用jQuery的data方法
+		$.ajax({
+		    type: 'GET',
+		    url: ctxPath+"/api/db/inventory/fuel",
+		    dataType:'json',
+		    data:{fuelType:'油'}
+		}).then(function (data) {
+			if(data.list.length>0){
+				var repo=data.list[0];
+				var text=repo.fuelType+' （来源：'+(repo.dataSource||'（空）')+'）';
+				var option = new Option(text, '-1', true, true);
+				$(option).data('defaultRes',repo);
+				$("#fuelTypeRecycle").html(option).trigger('change');
+			}
+		});
+		$.ajax({
 		    type: 'GET',
 		    url: ctxPath+"/api/db/inventory/transport",
 		    dataType:'json',
@@ -2452,10 +2990,11 @@ $(function(){
 			if(data.list.length>0){
 				var repo=data.list[0];
 				var text=repo.vehicleType+' （来源：'+(repo.dataSource||'（空）')+'）';
-				var option = new Option(text, repo.id, true, true);
-				$("#recycleVehicleModel").append(option).trigger('change');
+				var option = new Option(text, '-1', true, true);
+				$(option).data('defaultRes',repo);
+				$("#recycleVehicleModel").html(option).trigger('change');
 			}
-		});*/
+		});
 	});
 	$("#envEconomicCostDefaultValue").click(function(){
 		$("#energyEnvCost").val(1);
@@ -2480,6 +3019,9 @@ $(function(){
                     }, 1500);
                     return false;
 				}else{
+					if(res.id==='-1'){
+						res=$(res.element).data("defaultRes");
+					}
 					materialData.resList.push(res);
 					var amount=item.amount*1000;
 					if(res.cost){
@@ -2598,6 +3140,9 @@ $(function(){
 	                    }, 1500);
 	                    return false;
 					}else{
+						if(res.id==='-1'){
+							res=$(res.element).data("defaultRes");
+						}
 						transConsData.transResList.push(res);
 						item.vehicleModel=res.vehicleType;
 						item.distance=distance;
@@ -2728,6 +3273,9 @@ $(function(){
 					}, 1500);
 					return false;
 				}else{
+					if(res.id==='-1'){
+						res=$(res.element).data("defaultRes");
+					}
 					transConsData.consResList.push(res);
 					var amount=item.amount;
 					if(res.cost!=null){
@@ -3068,7 +3616,7 @@ $(function(){
 					et0=5.715;
 				}
 			}
-			var y=(et0*0.8-i10*0.6)*3*basicData.area/1000;
+			var y=(et0*365*0.8-i10*0.6)*3*basicData.area/1000;
 			var electricity=i1*i17*i18*(x>y?y:x);
 			use2Data.fuelList=[];
 			use2Data.fuelList.push({fuelMark:"gasolineUse2",fuelName:"汽油(kg)",amount:gasoline.toFixed(3)});
@@ -3088,6 +3636,9 @@ $(function(){
 					}, 1500);
 					return false;
 				}else{
+					if(res.id==='-1'){
+						res=$(res.element).data("defaultRes");
+					}
 					use2Data.resList.push(res);
 					var amount=item.amount;
 					if(res.cost!=null){
@@ -3378,6 +3929,9 @@ $(function(){
 					}, 1500);
 					return false;
 				}else{
+					if(res.id==='-1'){
+						res=$(res.element).data("defaultRes");
+					}
 					use3Data.resList.push(res);
 					var amount=item.amount;
 					if(res.cost!=null){
@@ -3861,6 +4415,9 @@ $(function(){
 					}, 1500);
 					return false;
 				}
+				if(res.id==='-1'){
+					res=$(res.element).data("defaultRes");
+				}
 				conserveData.resList.push(res);
 				var amount=item.amount*1000;
 				if(res.cost){
@@ -4292,6 +4849,9 @@ $(function(){
 				}, 1500);
 				return false;
 			}else{
+				if(res.id==='-1'){
+					res=$(res.element).data("defaultRes");
+				}
 				recycleData.resList.push(res);
 				var x=$("#brokenEfficiencyRecycle").val();
 				var y=$("#brokenFuelConsumption").val();
@@ -4338,6 +4898,9 @@ $(function(){
 				}, 1500);
 				return false;
 			}else{
+				if(res.id==='-1'){
+					res=$(res.element).data("defaultRes");
+				}
 				recycleData.resList.push(res);
 				var amount=recycleData.mixtureAmount;
 				var distance=$("#recycleDistance").val();
