@@ -2,17 +2,17 @@
 <form class="form-horizontal" role="form" id="form-input">
 	<div class="panel king-panel1">
 		<div class="panel-heading king-panel-head1 king-panel-top3">
-			<h3 class="panel-title"><b>目标和范围选择</b></h3>
+			<h3 class="panel-title"><b th:text="#{tool.target-choose}"></b></h3>
 		</div>
 			<div class="panel-body">
 				<div class="row">
 				    <div class="col-md-6">
 					    <fieldset>
-					        <legend>阶段范围</legend>
+					        <legend th:text="#{tool.stage-range}"></legend>
 					        <div class="form-group">
 			                    <div class="col-md-6">
 			                        <div class="checkbox">
-								        <label><input type="checkbox" id="materialRange"> 原材料获取</label>
+								        <label><input type="checkbox" id="materialRange"><span th:text="#{tool.material}"></span></label>
 								    </div>
 			                    </div>
 			                    <div class="col-md-6">
