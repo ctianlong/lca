@@ -1,12 +1,12 @@
 <div id="step-influence" style="display:none;">
     <div class="panel king-panel1" id="energyInfluence">
         <div class="panel-heading king-panel-head1 king-panel-top3">
-            <h3 class="panel-title"><b>能耗</b></h3>
+            <h3 class="panel-title"><b th:text="#{tool.energy}"></b></h3>
         </div>
         <div class="panel-body">
             <form class="form-horizontal" role="form">
               <div class="form-group">
-                <label class="col-sm-2 control-label">能耗：</label>
+                <label class="col-sm-2 control-label" th:text="#{tool.energy}"></label>
                 <div class="col-sm-10">
                   <p id="energyValue" class="form-control-static"></p>
                 </div>
@@ -31,12 +31,12 @@
     </div>
 	<div class="panel king-panel1" id="carbonInfluence">
 		<div class="panel-heading king-panel-head1 king-panel-top3">
-			<h3 class="panel-title"><b>温室效应</b></h3>
+			<h3 class="panel-title"><b th:text="#{tool.greenhouse}"></b></h3>
 		</div>
 		<div class="panel-body">
 		    <form class="form-horizontal" role="form">
 		      <div class="form-group">
-			    <label class="col-sm-2 control-label">温室效应(CO2-Equiv)：</label>
+			    <label class="col-sm-2 control-label" th:text="#{tool.greenhouse}+'(CO2-Equiv)'"></label>
 			    <div class="col-sm-10">
 			      <p id="gwpValue" class="form-control-static"></p>
 			    </div>
@@ -44,7 +44,7 @@
 		    </form>
 			<form id="gwpForm" class="form-horizontal" role="form">
 				<div class="form-group">
-					<label class="col-md-2 control-label">请选择数据集/年份：</label>
+					<label class="col-md-2 control-label" th:text="#{tool.dataset-year}"></label>
 					<div class="col-md-6">
 						<select id="gwpSelect" name="gwpSelect" class="form-control"
 							style="width: 100%">
@@ -52,7 +52,7 @@
 					</div>
 				</div>
 				<div class="text-center">
-                    <button class="king-btn king-radius king-success" type="submit">计算温室效应影响</button>
+                    <button class="king-btn king-radius king-success" type="submit"><span th:text="#{tool.calc}"></span></button>
                 </div>
 			</form>
 		</div>
@@ -60,12 +60,12 @@
 	
 	<div class="panel king-panel1" id="sourInfluence">
 		<div class="panel-heading king-panel-head1 king-panel-top3">
-			<h3 class="panel-title"><b>酸化</b></h3>
+			<h3 class="panel-title"><b th:text="#{tool.sour}"></b></h3>
 		</div>
 		<div class="panel-body">
 		    <form class="form-horizontal" role="form">
 		      <div class="form-group">
-			    <label class="col-sm-2 control-label">酸化(SO2-Equiv)：</label>
+			    <label class="col-sm-2 control-label" th:text="#{tool.sour}+'(SO2-Equiv)'"></label>
 			    <div class="col-sm-10">
 			      <p id="sourValue" class="form-control-static"></p>
 			    </div>
@@ -73,7 +73,7 @@
 		    </form>
 			<form id="sourForm" class="form-horizontal" role="form">
 				<div class="form-group">
-					<label class="col-md-2 control-label">请选择数据集：</label>
+					<label class="col-md-2 control-label" th:text="#{tool.dataset}"></label>
 					<div class="col-md-6">
 						<select id="sourSelect" name="sourSelect" class="form-control"
 							style="width: 100%">
@@ -81,19 +81,19 @@
 					</div>
 				</div>
 				<div class="text-center">
-                    <button class="king-btn king-radius king-success" type="submit">计算酸化影响</button>
+                    <button class="king-btn king-radius king-success" type="submit"><span th:text="#{tool.calc}"></span></button>
                 </div>
 			</form>
 		</div>
 	</div>
 	<div class="panel king-panel1" id="eutrophicationInfluence">
 		<div class="panel-heading king-panel-head1 king-panel-top3">
-			<h3 class="panel-title"><b>富营养化</b></h3>
+			<h3 class="panel-title"><b th:text="#{tool.eutrophication}"></b></h3>
 		</div>
 		<div class="panel-body">
 		    <form class="form-horizontal" role="form">
 		      <div class="form-group">
-			    <label class="col-sm-2 control-label">富营养化(N-Equiv)：</label>
+			    <label class="col-sm-2 control-label" th:text="#{tool.eutrophication}+'(N-Equiv)'"></label>
 			    <div class="col-sm-10">
 			      <p id="eutrophicationValue" class="form-control-static"></p>
 			    </div>
@@ -101,7 +101,7 @@
 		    </form>
 			<form id="eutrophicationForm" class="form-horizontal" role="form">
 				<div class="form-group">
-					<label class="col-md-2 control-label">请选择数据集：</label>
+					<label class="col-md-2 control-label" th:text="#{tool.dataset}"></label>
 					<div class="col-md-6">
 						<select id="eutrophicationSelect" name="eutrophicationSelect" class="form-control"
 							style="width: 100%">
@@ -109,19 +109,19 @@
 					</div>
 				</div>
 				<div class="text-center">
-                    <button class="king-btn king-radius king-success" type="submit">计算富营养化影响</button>
+                    <button class="king-btn king-radius king-success" type="submit"><span th:text="#{tool.calc}"></span></button>
                 </div>
 			</form>
 		</div>
 	</div>
 	<div class="panel king-panel1">
 		<div class="panel-heading king-panel-head1 king-panel-top3">
-			<h3 class="panel-title"><b>环境经济成本</b></h3>
+			<h3 class="panel-title"><b th:text="#{tool.env-econ-cost}"></b></h3>
 		</div>
 		<div class="panel-body">
 		    <form class="form-horizontal" role="form">
 		      <div class="form-group">
-			    <label class="col-sm-2 control-label">环境经济成本：</label>
+			    <label class="col-sm-2 control-label" th:text="#{tool.env-econ-cost}"></label>
 			    <div class="col-sm-10">
 			      <p id="envEconomicCost" class="form-control-static"></p>
 			    </div>
@@ -129,52 +129,52 @@
 		    </form>
 			<form id="envEconomicCostForm" class="form-horizontal" role="form">
 				<fieldset>
-                    <legend>请输入成本参数：</legend>
+                    <legend th:text="#{tool.cost-para}"></legend>
                     <div class="row">
                         <div class="col-md-6" id="energyEnvCostInput" style="display: none;">
                             <div class="form-group">
-                                <label class="col-md-6 control-label">能耗环境成本：</label>
+                                <label class="col-md-6 control-label" th:text="#{tool.ener-env-cost}"></label>
                                 <div class="col-md-6">
                                     <div class="input-group">
-		                            <input type="text" class="form-control" placeholder="请输入" id="energyEnvCost"
+		                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="energyEnvCost"
 		                                name="energyEnvCost">
-		                            <div class="input-group-addon">元/MJ</div>
+		                            <div class="input-group-addon" th:text="#{tool.rmb}+'/MJ'"></div>
 		                            </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6" id="carbonEnvCostInput" style="display: none;">
                             <div class="form-group">
-                                <label class="col-md-6 control-label">碳排放环境成本：</label>
+                                <label class="col-md-6 control-label" th:text="#{tool.c-env-cost}"></label>
                                 <div class="col-md-6">
                                     <div class="input-group">
-		                            <input type="text" class="form-control" placeholder="请输入" id="carbonEnvCost"
+		                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="carbonEnvCost"
 		                                name="carbonEnvCost">
-		                            <div class="input-group-addon">元/t</div>
+		                            <div class="input-group-addon" th:text="#{tool.rmb}+'/t'"></div>
 		                            </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6" id="sulfurDioxideEnvCostInput" style="display: none;">
                             <div class="form-group">
-                                <label class="col-md-6 control-label">二氧化硫环境成本：</label>
+                                <label class="col-md-6 control-label" th:text="#{tool.so2-env-cost}"></label>
                                 <div class="col-md-6">
                                     <div class="input-group">
-		                            <input type="text" class="form-control" placeholder="请输入" id="sulfurDioxideEnvCost"
+		                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="sulfurDioxideEnvCost"
 		                                name="sulfurDioxideEnvCost">
-		                            <div class="input-group-addon">元/t</div>
+		                            <div class="input-group-addon" th:text="#{tool.rmb}+'/t'"></div>
 		                            </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6" id="nitrogenEnvCostInput" style="display: none;">
                             <div class="form-group">
-                                <label class="col-md-6 control-label">水中氮环境成本：</label>
+                                <label class="col-md-6 control-label" th:text="#{tool.n-env-cost}"></label>
                                 <div class="col-md-6">
                                     <div class="input-group">
-		                            <input type="text" class="form-control" placeholder="请输入" id="nitrogenEnvCost"
+		                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="nitrogenEnvCost"
 		                                name="nitrogenEnvCost">
-		                            <div class="input-group-addon">元/t</div>
+		                            <div class="input-group-addon" th:text="#{tool.rmb}+'/t'"></div>
 		                            </div>
                                 </div>
                             </div>
@@ -182,21 +182,20 @@
                     </div>
                 </fieldset>
 				<div class="text-center">
-                    <button class="king-btn king-radius king-danger" type="button" id="envEconomicCostDefaultValue">默认参数</button>
-                    <button class="king-btn king-radius king-success" type="submit">计算环境经济成本</button>
+                    <button class="king-btn king-radius king-danger" type="button" id="envEconomicCostDefaultValue"><span th:text="#{tool.default-val}"></span></button>
+                    <button class="king-btn king-radius king-success" type="submit"><span th:text="#{tool.calc}"></span></button>
                 </div>
 			</form>
 		</div>
 	</div>
-				
 	<div class="panel king-panel1">
 		<div class="panel-heading king-panel-head1 king-panel-top3">
 			<div class="text-center">
 				<button class="king-btn king-radius king-info" type="button" id="influence-prevStep">
-					<i class="fa fa-arrow-left btn-icon"></i>清单分析
+					<i class="fa fa-arrow-left btn-icon"></i> <span th:text="#{tool.inve-anal}"></span>
 				</button>
 				<button class="king-btn king-radius king-info" type="button" id="influence-nextStep">
-					<i class="fa fa-arrow-right btn-icon"></i>分析输出
+					<i class="fa fa-arrow-right btn-icon"></i> <span th:text="#{tool.anal-output}"></span>
 				</button>
 			</div>
 		</div>

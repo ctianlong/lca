@@ -1,7 +1,7 @@
 <div id="step-output" style="display:none;">
     <div class="panel king-panel1">
         <div class="panel-heading king-panel-head1 king-panel-top3">
-            <h3 class="panel-title"><b>清单分析结果</b></h3>
+            <h3 class="panel-title"><b th:text="#{tool.inve-anal}"></b></h3>
         </div>
         <div class="panel-body">
             <div class="row">
@@ -22,7 +22,7 @@
     </div>
 	<div class="panel king-panel1">
 		<div class="panel-heading king-panel-head1 king-panel-top3">
-			<h3 class="panel-title"><b>影响评价结果</b></h3>
+			<h3 class="panel-title"><b th:text="#{tool.infl-eval}"></b></h3>
 		</div>
 		<div class="panel-body">
 		    <div class="row">
@@ -32,12 +32,12 @@
 	</div>
 	<div class="panel king-panel1">
 		<div class="panel-heading king-panel-head1 king-panel-top3">
-			<h3 class="panel-title"><b>数据分析结果</b></h3>
+			<h3 class="panel-title"><b th:text="#{tool.data-anal}"></b></h3>
 		</div>
 		<div class="panel-body">
 		  <form class="form-horizontal" role="form">
             <fieldset id="chartProbability" style="display: none;">
-              <legend>数据概率性分析</legend>
+              <legend th:text="#{tool.prob-anal}"></legend>
               <div class="row">
 	              <div id="chartCostProbability" class="col-md-6" style="height: 400px;"></div>
 	              <div id="chartEnergyProbability" class="col-md-6" style="height: 400px;display: none;"></div>
@@ -50,27 +50,25 @@
             </div>
             </fieldset>
             <fieldset>
-              <legend>数据本地适用性分析</legend>
+              <legend th:text="#{tool.local-appl-anal}"></legend>
               <div class="form-group">
-                <label class="col-sm-2 control-label">数据适用性参数β：</label>
+                <label class="col-sm-2 control-label" th:text="#{tool.local-appl-para}"></label>
                 <div class="col-sm-10">
                   <p id="beta" class="form-control-static"></p>
                 </div>
               </div>
             </fieldset>
           </form>
-                  
-		    
 		</div>
 	</div>
 	<div class="panel king-panel1">
 		<div class="panel-heading king-panel-head1 king-panel-top3">
 			<div class="text-center">
 			    <button class="king-btn king-radius king-info" type="button" id="output-prevStep">
-                    <i class="fa fa-arrow-left btn-icon"></i>影响评价
+                    <i class="fa fa-arrow-left btn-icon"></i> <span th:text="#{tool.infl-eval}"></span>
                 </button>
 				<button class="king-btn king-radius king-info" type="button" id="download">
-					<i class="fa fa-download btn-icon"></i>下载报告
+					<i class="fa fa-download btn-icon"></i> <span th:text="#{tool.down-repo}"></span>
 				</button>
 			</div>
 		</div>

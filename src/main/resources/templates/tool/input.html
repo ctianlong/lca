@@ -12,36 +12,36 @@
 					        <div class="form-group">
 			                    <div class="col-md-6">
 			                        <div class="checkbox">
-								        <label><input type="checkbox" id="materialRange"><span th:text="#{tool.material}"></span></label>
+								        <label><input type="checkbox" id="materialRange"> <span th:text="#{tool.material}"></span></label>
 								    </div>
 			                    </div>
 			                    <div class="col-md-6">
                                     <div class="checkbox">
-                                        <label><input type="checkbox" id="transConsRange"> 运输与施工</label>
+                                        <label><input type="checkbox" id="transConsRange"> <span th:text="#{tool.transCons}"></span></label>
                                     </div>
                                 </div>
 		                    </div>
 					        <div class="form-group">
 					           <div class="col-md-6">
                                     <div class="checkbox">
-                                        <label><input type="checkbox" id="conserveRange"> 养护</label>
+                                        <label><input type="checkbox" id="conserveRange"> <span th:text="#{tool.conserve}"></span></label>
                                     </div>
                                 </div>
 			                    <div class="col-md-6">
 			                        <div class="checkbox">
-								        <label><input type="checkbox" id="use1Range"> 使用（反射率）</label>
+								        <label><input type="checkbox" id="use1Range"> <span th:text="#{tool.use1}"></span></label>
 								    </div>
 			                    </div>
 		                    </div>
 					        <div class="form-group">
 					           <div class="col-md-6">
                                     <div class="checkbox">
-                                        <label><input type="checkbox" id="use2Range"> 使用（透水率）</label>
+                                        <label><input type="checkbox" id="use2Range"> <span th:text="#{tool.use2}"></span></label>
                                     </div>
                                 </div>
 			                    <div class="col-md-6">
 			                        <div class="checkbox">
-								        <label><input type="checkbox" id="use3Range"> 使用（滚动阻力）</label>
+								        <label><input type="checkbox" id="use3Range"> <span th:text="#{tool.use3}"></span></label>
 								    </div>
 			                    </div>
 			                    
@@ -49,7 +49,7 @@
 					        <div class="form-group">
 			                    <div class="col-md-6">
 			                        <div class="checkbox">
-								        <label><input type="checkbox" id="recycleRange"> 回收</label>
+								        <label><input type="checkbox" id="recycleRange"> <span th:text="#{tool.recycle}"></span></label>
 								    </div>
 			                    </div>
 		                    </div>
@@ -58,28 +58,28 @@
 				    </div>
 				    <div class="col-md-6">
 					    <fieldset>
-					        <legend>评价范围</legend>
+					        <legend th:text="#{tool.eval-range}"></legend>
 					        <div class="form-group">
                                 <div class="col-md-6">
                                     <div class="checkbox">
-                                        <label><input type="checkbox" id="energyRange"> 能耗</label>
+                                        <label><input type="checkbox" id="energyRange"> <span th:text="#{tool.energy}"></span></label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkbox">
-                                        <label><input type="checkbox" id="carbonRange"> 温室效应</label>
+                                        <label><input type="checkbox" id="carbonRange"> <span th:text="#{tool.carbon}"></span></label>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6">
                                     <div class="checkbox">
-                                        <label><input type="checkbox" id="sourRange"> 酸化</label>
+                                        <label><input type="checkbox" id="sourRange"> <span th:text="#{tool.sour}"></span></label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkbox">
-                                        <label><input type="checkbox" id="eutrophicationRange"> 富营养化</label>
+                                        <label><input type="checkbox" id="eutrophicationRange"> <span th:text="#{tool.eutrophication}"></span></label>
                                     </div>
                                 </div>
                             </div>
@@ -100,32 +100,32 @@
 	</div>
 	<div class="panel king-panel1">
 		<div class="panel-heading king-panel-head1 king-panel-top3">
-			<h3 class="panel-title"><b>结构层信息</b></h3>
+			<h3 class="panel-title"><b th:text="#{tool.stru-layer-info}"></b></h3>
 		</div>
 			<div class="panel-body">
 			    <fieldset>
-	                <legend>基本信息</legend>
+	                <legend th:text="#{tool.fund-info}"></legend>
 				    <div class="form-group">
 	                    <label class="col-md-2 control-label"><span
-	                        class="king-required-tip text-danger mr5">*</span>路面类型：</label>
+	                        class="king-required-tip text-danger mr5" th:title="#{system.required}">*</span><span th:text="#{tool.pavement-type}"></span></label>
 	                    <div class="col-md-2">
 	                        <select id="roadType" name="roadType" class="form-control" style="width: 100%">
 	                        </select>
 	                    </div>
 	                    <label class="col-md-2 control-label"><span
-	                        class="king-required-tip text-danger mr5">*</span>路面长度：</label>
+	                        class="king-required-tip text-danger mr5" th:title="#{system.required}">*</span><span th:text="#{tool.pavement-length}"></span></label>
 	                    <div class="col-md-2">
 	                       <div class="input-group">
-	                        <input type="text" class="form-control" placeholder="" id="roadLength"
+	                        <input type="text" class="form-control" placeholder="" id="roadLength" th:placeholder="#{system.input}"
 	                            name="roadLength">
 	                       <div class="input-group-addon">m</div>
 	                       </div>
 	                    </div>
 	                    <label class="col-md-2 control-label"><span
-	                        class="king-required-tip text-danger mr5">*</span>路面宽度：</label>
+	                        class="king-required-tip text-danger mr5" th:title="#{system.required}">*</span><span th:text="#{tool.pavement-width}"></span></label>
 	                    <div class="col-md-2">
 	                       <div class="input-group">
-	                        <input type="text" class="form-control" placeholder="" id="roadWidth"
+	                        <input type="text" class="form-control" placeholder="" id="roadWidth" th:placeholder="#{system.input}"
 	                            name="roadWidth">
 	                        <div class="input-group-addon">m</div>
 	                       </div>
@@ -134,19 +134,19 @@
                 </fieldset>
 			    <div id="asphaltSurface">
 					<fieldset>
-						<legend>上面层</legend>
+						<legend th:text="#{tool.upper-layer}"></legend>
 						<div class="form-group">
 							<label class="col-md-2 control-label"><span
-								class="king-required-tip text-danger mr5">*</span>上面层厚度：</label>
+								class="king-required-tip text-danger mr5" th:title="#{system.required}">*</span><span th:text="#{tool.upper-layer-thick}"></span></label>
 							<div class="col-md-3">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="请输入上面层厚度" id="asphaltTopLayerThickness"
+								<input type="text" class="form-control" th:placeholder="#{system.input}" id="asphaltTopLayerThickness"
 									name="asphaltTopLayerThickness">
 	                        <div class="input-group-addon">m</div>
 	                       </div>
 							</div>
 							<div id="asphaltTopLayerMaterialSelect">
-							<label class="col-md-2 control-label">面层材料：</label>
+							<label class="col-md-2 control-label" th:text="#{tool.layer-material}"></label>
 		                    <div class="col-md-3">
 		                        <select id="asphaltTopLayerMaterial" name="asphaltTopLayerMaterial" class="form-control" style="width: 100%">
 		                        </select>
@@ -154,15 +154,15 @@
 		                    </div>
 						</div>
 						<div class="form-group" id="topLayerAsphaltTypeSelect">
-							<label class="col-md-2 control-label">沥青类别：</label>
+							<label class="col-md-2 control-label" th:text="#{tool.asph-type}"></label>
 		                    <div class="col-md-3">
 		                        <select id="topLayerAsphaltType" name="topLayerAsphaltType" class="form-control" style="width: 100%">
 		                        </select>
 		                    </div>
-						   <label class="col-md-2 control-label">油石比：</label>
+						   <label class="col-md-2 control-label" th:text="#{tool.whetstone}"></label>
 	                        <div class="col-md-3">
 	                            <div class="input-group">
-	                            <input type="text" class="form-control" placeholder="请输入油石比，百分比" id="asphaltTopLayerWhetstoneRatio"
+	                            <input type="text" class="form-control" th:placeholder="#{tool.percent}" id="asphaltTopLayerWhetstoneRatio"
 	                                name="asphaltTopLayerWhetstoneRatio">
 	                            <div class="input-group-addon">%</div>
 	                            </div>
@@ -170,19 +170,19 @@
 						</div>
 					</fieldset>
 					<fieldset>
-						<legend>中面层</legend>
+						<legend th:text="#{tool.midd-layer}"></legend>
 						<div class="form-group">
 							<label class="col-md-2 control-label"><span
-								class="king-required-tip text-danger mr5">*</span>中面层厚度：</label>
+								class="king-required-tip text-danger mr5" th:title="#{system.required}">*</span><span th:text="#{tool.midd-layer-thick}"></span></label>
 							<div class="col-md-3">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="请输入中面层厚度" id="asphaltMiddleLayerThickness"
+								<input type="text" class="form-control" th:placeholder="#{system.input}" id="asphaltMiddleLayerThickness"
 									name="asphaltMiddleLayerThickness">
 	                        <div class="input-group-addon">m</div>
 	                        </div>
 							</div>
 							<div id="asphaltMiddleLayerMaterialSelect">
-							<label class="col-md-2 control-label">面层材料：</label>
+							<label class="col-md-2 control-label" th:text="#{tool.layer-material}"></label>
 		                    <div class="col-md-3">
 		                        <select id="asphaltMiddleLayerMaterial" name="asphaltMiddleLayerMaterial" class="form-control" style="width: 100%">
 		                        </select>
@@ -190,15 +190,15 @@
 		                    </div>
 						</div>
 						<div class="form-group" id="middleLayerAsphaltTypeSelect">
-							<label class="col-md-2 control-label">沥青类别：</label>
+							<label class="col-md-2 control-label" th:text="#{tool.asph-type}"></label>
 		                    <div class="col-md-3">
 		                        <select id="middleLayerAsphaltType" name="middleLayerAsphaltType" class="form-control" style="width: 100%">
 		                        </select>
 		                    </div>
-						   <label class="col-md-2 control-label">油石比：</label>
+						   <label class="col-md-2 control-label" th:text="#{tool.whetstone}"></label>
 	                        <div class="col-md-3">
 	                            <div class="input-group">
-	                            <input type="text" class="form-control" placeholder="请输入油石比，百分比" id="asphaltMiddleLayerWhetstoneRatio"
+	                            <input type="text" class="form-control" th:placeholder="#{tool.percent}" id="asphaltMiddleLayerWhetstoneRatio"
 	                                name="asphaltMiddleLayerWhetstoneRatio">
 	                            <div class="input-group-addon">%</div>
 	                            </div>
@@ -206,19 +206,19 @@
 						</div>
 					</fieldset>
 					<fieldset>
-						<legend>下面层</legend>
+						<legend th:text="#{tool.below-layer}"></legend>
 						<div class="form-group">
 							<label class="col-md-2 control-label"><span
-								class="king-required-tip text-danger mr5">*</span>下面层厚度：</label>
+								class="king-required-tip text-danger mr5" th:title="#{system.required}">*</span><span th:text="#{tool.below-layer-thick}"></span></label>
 							<div class="col-md-3">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="请输入下面层厚度" id="asphaltBelowLayerThickness"
+								<input type="text" class="form-control" th:placeholder="#{system.input}" id="asphaltBelowLayerThickness"
 									name="asphaltBelowLayerThickness">
 	                        <div class="input-group-addon">m</div>
 	                        </div>
 							</div>
 							<div id="asphaltBelowLayerMaterialSelect">
-							<label class="col-md-2 control-label">面层材料：</label>
+							<label class="col-md-2 control-label" th:text="#{tool.layer-material}"></label>
 		                    <div class="col-md-3">
 		                        <select id="asphaltBelowLayerMaterial" name="asphaltBelowLayerMaterial" class="form-control" style="width: 100%">
 		                        </select>
@@ -226,15 +226,15 @@
 		                    </div>
 						</div>
 						<div class="form-group" id="belowLayerAsphaltTypeSelect">
-							<label class="col-md-2 control-label">沥青类别：</label>
+							<label class="col-md-2 control-label" th:text="#{tool.asph-type}"></label>
 		                    <div class="col-md-3">
 		                        <select id="belowLayerAsphaltType" name="belowLayerAsphaltType" class="form-control" style="width: 100%">
 		                        </select>
 		                    </div>
-						   <label class="col-md-2 control-label">油石比：</label>
+						   <label class="col-md-2 control-label" th:text="#{tool.whetstone}"></label>
 	                        <div class="col-md-3">
 	                            <div class="input-group">
-	                            <input type="text" class="form-control" placeholder="请输入油石比，百分比" id="asphaltBelowLayerWhetstoneRatio"
+	                            <input type="text" class="form-control" th:placeholder="#{tool.percent}" id="asphaltBelowLayerWhetstoneRatio"
 	                                name="asphaltBelowLayerWhetstoneRatio">
 	                            <div class="input-group-addon">%</div>
 	                            </div>
@@ -244,51 +244,51 @@
 				</div>
 				<div id="concreteSurface" style="display: none;">
 					<fieldset>
-	                    <legend>上面层</legend>
+	                    <legend th:text="#{tool.upper-layer}"></legend>
 	                    <div class="form-group">
 	                        <label class="col-md-2 control-label"><span
-	                            class="king-required-tip text-danger mr5">*</span>上面层厚度：</label>
+	                            class="king-required-tip text-danger mr5" th:title="#{system.required}">*</span><span th:text="#{tool.upper-layer-thick}"></span></label>
 	                        <div class="col-md-2">
 	                        <div class="input-group">
-	                            <input type="text" class="form-control" placeholder="请输入上面层厚度" id="concreteTopLayerThickness"
+	                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="concreteTopLayerThickness"
 	                                name="concreteTopLayerThickness">
 	                        <div class="input-group-addon">m</div>
 	                       </div>
 	                        </div>
 	                        <div id="concreteTopLayerMaterialSelect">
-	                        <label class="col-md-2 control-label">面层材料：</label>
+	                        <label class="col-md-2 control-label" th:text="#{tool.layer-material}"></label>
 	                        <div class="col-md-2">
 	                            <select id="concreteTopLayerMaterial" name="concreteTopLayerMaterial" class="form-control" style="width: 100%">
 	                            </select>
 	                        </div>
 	                        </div>
 	                        <div id="topReinforcementRateDiv" style="display: none;">
-		                        <label class="col-md-2 control-label">配筋率：</label>
+		                        <label class="col-md-2 control-label" th:text="#{tool.reinforce}"></label>
 	                            <div class="col-md-2">
-	                                <input type="text" class="form-control" placeholder="请输入配筋率" id="topReinforcementRate"
+	                                <input type="text" class="form-control" th:placeholder="#{system.input}" id="topReinforcementRate"
 	                                    name="topReinforcementRate">
 	                            </div>
 	                        </div>
 	                    </div>
 	                    <div class="form-group" id="topMixProportion">
-	                       <label class="col-md-2 control-label">配合比x：</label>
+	                       <label class="col-md-2 control-label" th:text="#{tool.with-ratio}+'x'"></label>
 	                        <div class="col-md-2">
-	                            <input type="text" class="form-control" placeholder="比值" id="topMixProportionX"
+	                            <input type="text" class="form-control" th:placeholder="#{tool.ratio}" id="topMixProportionX"
 	                                name="topMixProportionX">
 	                        </div>
-	                       <label class="col-md-2 control-label">配合比y：</label>
+	                       <label class="col-md-2 control-label" th:text="#{tool.with-ratio}+'y'"></label>
 	                        <div class="col-md-2">
-	                            <input type="text" class="form-control" placeholder="比值" id="topMixProportionY"
+	                            <input type="text" class="form-control" th:placeholder="#{tool.ratio}" id="topMixProportionY"
 	                                name="topMixProportionY">
 	                        </div>
-	                       <label class="col-md-2 control-label">配合比z：</label>
+	                       <label class="col-md-2 control-label" th:text="#{tool.with-ratio}+'z'"></label>
 	                        <div class="col-md-2">
-	                            <input type="text" class="form-control" placeholder="比值" id="topMixProportionZ"
+	                            <input type="text" class="form-control" th:placeholder="#{tool.ratio}" id="topMixProportionZ"
 	                                name="topMixProportionZ">
 	                        </div>
 	                    </div>
 	                    <div class="form-group" id="topCementAdmixtureSelect">
-	                       <label class="col-md-2 control-label">外加剂种类：</label>
+	                       <label class="col-md-2 control-label" th:text="#{tool.admix-type}"></label>
 	                       <div class="col-md-3">
                                 <select id="topCementAdmixture" name="topCementAdmixture" class="form-control" style="width: 100%">
                                 </select>
@@ -297,54 +297,54 @@
 	                    <div class="row" id="topCementAdmixtureVolume">
 	                       <div id="snjDiv" class="col-md-4" style="display: none;">
 	                           <div class="form-group">
-	                               <label class="col-md-6 control-label">速凝剂掺量：</label>
+	                               <label class="col-md-6 control-label" th:text="#{tool.snj}+#{tool.volume}"></label>
 		                            <div class="col-md-6">
-		                                <input type="text" class="form-control" placeholder="请输入" id="snj"
+		                                <input type="text" class="form-control" th:placeholder="#{system.input}" id="snj"
 		                                    name="snj">
 		                            </div>
 	                           </div>
 	                       </div>
 	                       <div id="jqjDiv" class="col-md-4" style="display: none;">
 	                           <div class="form-group">
-	                               <label class="col-md-6 control-label">加气剂掺量：</label>
+	                               <label class="col-md-6 control-label" th:text="#{tool.jqj}+#{tool.volume}"></label>
 		                            <div class="col-md-6">
-		                                <input type="text" class="form-control" placeholder="请输入" id="jqj"
+		                                <input type="text" class="form-control" th:placeholder="#{system.input}" id="jqj"
 		                                    name="jqj">
 		                            </div>
 	                           </div>
 	                       </div>
 	                       <div id="zsjDiv" class="col-md-4" style="display: none;">
 	                           <div class="form-group">
-	                               <label class="col-md-6 control-label">增塑剂掺量：</label>
+	                               <label class="col-md-6 control-label" th:text="#{tool.zsj}+#{tool.volume}"></label>
 		                            <div class="col-md-6">
-		                                <input type="text" class="form-control" placeholder="请输入" id="zsj"
+		                                <input type="text" class="form-control" th:placeholder="#{system.input}" id="zsj"
 		                                    name="zsj">
 		                            </div>
 	                           </div>
 	                       </div>
 	                       <div id="qlzsjDiv" class="col-md-4" style="display: none;">
 	                           <div class="form-group">
-	                               <label class="col-md-6 control-label">强力增塑剂掺量：</label>
+	                               <label class="col-md-6 control-label" th:text="#{tool.qlzsj}+#{tool.volume}"></label>
 		                            <div class="col-md-6">
-		                                <input type="text" class="form-control" placeholder="请输入" id="qlzsj"
+		                                <input type="text" class="form-control" th:placeholder="#{system.input}" id="qlzsj"
 		                                    name="qlzsj">
 		                            </div>
 	                           </div>
 	                       </div>
 	                       <div id="hnjDiv" class="col-md-4" style="display: none;">
 	                           <div class="form-group">
-	                               <label class="col-md-6 control-label">缓凝剂掺量：</label>
+	                               <label class="col-md-6 control-label" th:text="#{tool.hnj}+#{tool.volume}"></label>
 		                            <div class="col-md-6">
-		                                <input type="text" class="form-control" placeholder="请输入" id="hnj"
+		                                <input type="text" class="form-control" th:placeholder="#{system.input}" id="hnj"
 		                                    name="hnj">
 		                            </div>
 	                           </div>
 	                       </div>
 	                       <div id="jsjDiv" class="col-md-4" style="display: none;">
 	                           <div class="form-group">
-	                               <label class="col-md-6 control-label">减水剂掺量：</label>
+	                               <label class="col-md-6 control-label" th:text="#{tool.jsj}+#{tool.volume}"></label>
 		                            <div class="col-md-6">
-		                                <input type="text" class="form-control" placeholder="请输入" id="jsj"
+		                                <input type="text" class="form-control" th:placeholder="#{system.input}" id="jsj"
 		                                    name="jsj">
 		                            </div>
 	                           </div>
@@ -352,51 +352,51 @@
 	                    </div>
 	                </fieldset>
 	                <fieldset>
-	                    <legend>下面层</legend>
+	                    <legend th:text="#{tool.below-layer}"></legend>
 	                    <div class="form-group">
 	                        <label class="col-md-2 control-label"><span
-	                            class="king-required-tip text-danger mr5">*</span>下面层厚度：</label>
+	                            class="king-required-tip text-danger mr5" th:title="#{system.required}">*</span><span th:text="#{tool.below-layer-thick}"></span></label>
 	                        <div class="col-md-2">
 	                        <div class="input-group">
-	                            <input type="text" class="form-control" placeholder="请输入下面层厚度" id="concreteBelowLayerThickness"
+	                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="concreteBelowLayerThickness"
 	                                name="concreteBelowLayerThickness">
 	                        <div class="input-group-addon">m</div>
 	                       </div>
 	                        </div>
 	                        <div id="concreteBelowLayerMaterialSelect">
-	                        <label class="col-md-2 control-label">面层材料：</label>
+	                        <label class="col-md-2 control-label" th:text="#{tool.layer-material}"></label>
 	                        <div class="col-md-2">
 	                            <select id="concreteBelowLayerMaterial" name="concreteBelowLayerMaterial" class="form-control" style="width: 100%">
 	                            </select>
 	                        </div>
 	                        </div>
 	                        <div id="belowReinforcementRateDiv" style="display: none;">
-                                <label class="col-md-2 control-label">配筋率：</label>
+                                <label class="col-md-2 control-label" th:text="#{tool.reinforce}"></label>
                                 <div class="col-md-2">
-                                    <input type="text" class="form-control" placeholder="请输入配筋率" id="belowReinforcementRate"
+                                    <input type="text" class="form-control" th:placeholder="#{system.input}" id="belowReinforcementRate"
                                         name="belowReinforcementRate">
                                 </div>
                             </div>
 	                    </div>
 	                    <div class="form-group" id="belowMixProportion">
-                           <label class="col-md-2 control-label">配合比x：</label>
+                           <label class="col-md-2 control-label" th:text="#{tool.with-ratio}+'x'"></label>
                             <div class="col-md-2">
-                                <input type="text" class="form-control" placeholder="比值" id="belowMixProportionX"
+                                <input type="text" class="form-control" th:placeholder="#{tool.ratio}" id="belowMixProportionX"
                                     name="belowMixProportionX">
                             </div>
-                           <label class="col-md-2 control-label">配合比y：</label>
+                           <label class="col-md-2 control-label" th:text="#{tool.with-ratio}+'y'"></label>
                             <div class="col-md-2">
-                                <input type="text" class="form-control" placeholder="比值" id="belowMixProportionY"
+                                <input type="text" class="form-control" th:placeholder="#{tool.ratio}" id="belowMixProportionY"
                                     name="belowMixProportionY">
                             </div>
-                           <label class="col-md-2 control-label">配合比z：</label>
+                           <label class="col-md-2 control-label" th:text="#{tool.with-ratio}+'z'"></label>
                             <div class="col-md-2">
-                                <input type="text" class="form-control" placeholder="比值" id="belowMixProportionZ"
+                                <input type="text" class="form-control" th:placeholder="#{tool.ratio}" id="belowMixProportionZ"
                                     name="belowMixProportionZ">
                             </div>
                         </div>
                         <div class="form-group" id="belowCementAdmixtureSelect">
-                           <label class="col-md-2 control-label">外加剂种类：</label>
+                           <label class="col-md-2 control-label" th:text="#{tool.admix-type}"></label>
                            <div class="col-md-3">
                                 <select id="belowCementAdmixture" name="belowCementAdmixture" class="form-control" style="width: 100%">
                                 </select>
@@ -405,54 +405,54 @@
                         <div class="row" id="belowCmentAdmixtureVolume">
                            <div id="snjDiv2" class="col-md-4" style="display: none;">
                                <div class="form-group">
-                                   <label class="col-md-6 control-label">速凝剂掺量：</label>
+                                   <label class="col-md-6 control-label" th:text="#{tool.snj}+#{tool.volume}"></label>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control" placeholder="请输入" id="snj2"
+                                        <input type="text" class="form-control" th:placeholder="#{system.input}" id="snj2"
                                             name="snj2">
                                     </div>
                                </div>
                            </div>
                            <div id="jqjDiv2" class="col-md-4" style="display: none;">
                                <div class="form-group">
-                                   <label class="col-md-6 control-label">加气剂掺量：</label>
+                                   <label class="col-md-6 control-label" th:text="#{tool.jqj}+#{tool.volume}"></label>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control" placeholder="请输入" id="jqj2"
+                                        <input type="text" class="form-control" th:placeholder="#{system.input}" id="jqj2"
                                             name="jqj2">
                                     </div>
                                </div>
                            </div>
                            <div id="zsjDiv2" class="col-md-4" style="display: none;">
                                <div class="form-group">
-                                   <label class="col-md-6 control-label">增塑剂掺量：</label>
+                                   <label class="col-md-6 control-label" th:text="#{tool.zsj}+#{tool.volume}"></label>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control" placeholder="请输入" id="zsj2"
+                                        <input type="text" class="form-control" th:placeholder="#{system.input}" id="zsj2"
                                             name="zsj2">
                                     </div>
                                </div>
                            </div>
                            <div id="qlzsjDiv2" class="col-md-4" style="display: none;">
                                <div class="form-group">
-                                   <label class="col-md-6 control-label">强力增塑剂掺量：</label>
+                                   <label class="col-md-6 control-label" th:text="#{tool.qlzsj}+#{tool.volume}"></label>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control" placeholder="请输入" id="qlzsj2"
+                                        <input type="text" class="form-control" th:placeholder="#{system.input}" id="qlzsj2"
                                             name="qlzsj2">
                                     </div>
                                </div>
                            </div>
                            <div id="hnjDiv2" class="col-md-4" style="display: none;">
                                <div class="form-group">
-                                   <label class="col-md-6 control-label">缓凝剂掺量：</label>
+                                   <label class="col-md-6 control-label" th:text="#{tool.hnj}+#{tool.volume}"></label>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control" placeholder="请输入" id="hnj2"
+                                        <input type="text" class="form-control" th:placeholder="#{system.input}" id="hnj2"
                                             name="hnj2">
                                     </div>
                                </div>
                            </div>
                            <div id="jsjDiv2" class="col-md-4" style="display: none;">
                                <div class="form-group">
-                                   <label class="col-md-6 control-label">减水剂掺量：</label>
+                                   <label class="col-md-6 control-label" th:text="#{tool.jsj}+#{tool.volume}"></label>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control" placeholder="请输入" id="jsj2"
+                                        <input type="text" class="form-control" th:placeholder="#{system.input}" id="jsj2"
                                             name="jsj2">
                                     </div>
                                </div>
@@ -462,31 +462,31 @@
 				</div>
 				<div id="shopBrickSurface" style="display: none;">
 					<fieldset>
-	                    <legend>铺砖尺寸</legend>
+	                    <legend th:text="#{tool.brick-size}"></legend>
 	                    <div class="form-group">
 	                        <label class="col-md-2 control-label"><span
-	                            class="king-required-tip text-danger mr5">*</span>路面砖长：</label>
+	                            class="king-required-tip text-danger mr5" th:title="#{system.required}">*</span><span th:text="#{tool.brick-length}"></span></label>
 	                        <div class="col-md-2">
 	                        <div class="input-group">
-	                            <input type="text" class="form-control" placeholder="请输入路面砖长" id="brickLength"
+	                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="brickLength"
 	                                name="brickLength">
 	                        <div class="input-group-addon">m</div>
 	                       </div>
 	                        </div>
 	                        <label class="col-md-2 control-label"><span
-	                            class="king-required-tip text-danger mr5">*</span>路面砖宽：</label>
+	                            class="king-required-tip text-danger mr5" th:title="#{system.required}">*</span><span th:text="#{tool.brick-width}"></span></label>
 	                        <div class="col-md-2">
 	                        <div class="input-group">
-	                            <input type="text" class="form-control" placeholder="请输入路面砖宽" id="brickWidth"
+	                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="brickWidth"
 	                                name="brickWidth">
 	                        <div class="input-group-addon">m</div>
 	                       </div>
 	                        </div>
 	                        <label class="col-md-2 control-label"><span
-	                            class="king-required-tip text-danger mr5">*</span>路面砖高：</label>
+	                            class="king-required-tip text-danger mr5" th:title="#{system.required}">*</span><span th:text="#{tool.brick-height}"></span></label>
 	                        <div class="col-md-2">
 	                        <div class="input-group">
-	                            <input type="text" class="form-control" placeholder="请输入路面砖高" id="brickHeight"
+	                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="brickHeight"
 	                                name="brickHeight">
 	                        <div class="input-group-addon">m</div>
 	                       </div>
@@ -494,7 +494,7 @@
 	                    </div>
 	                    <div class="form-group">
 	                       <label class="col-md-2 control-label"><span
-                                class="king-required-tip text-danger mr5">*</span>铺砖种类：</label>
+                                class="king-required-tip text-danger mr5" th:title="#{system.required}">*</span><span th:text="#{tool.brick-type}"></span></label>
                             <div class="col-md-3">
                                 <input type="text" class="form-control" placeholder="" id="brickType"
                                     name="brickType">
@@ -503,19 +503,19 @@
 	                </fieldset>
 				</div>
 				<fieldset>
-					<legend>基层</legend>
+					<legend th:text="#{tool.base-layer}"></legend>
 					<div class="form-group">
 						<label class="col-md-2 control-label"><span
-							class="king-required-tip text-danger mr5">*</span>基层厚度：</label>
+							class="king-required-tip text-danger mr5" th:title="#{system.required}">*</span><span th:text="#{tool.base-layer-thick}"></span></label>
 						<div class="col-md-3">
 						<div class="input-group">
-							<input type="text" class="form-control" placeholder="请输入基层厚度" id="baseLayerThickness"
+							<input type="text" class="form-control" th:placeholder="#{system.input}" id="baseLayerThickness"
 								name="baseLayerThickness">
                         <div class="input-group-addon">m</div>
                        </div>
 						</div>
 						<div id="baseLayerMaterialSelect">
-						<label class="col-md-2 control-label">基层材料：</label>
+						<label class="col-md-2 control-label" th:text="#{tool.base-layer-mater}"></label>
 	                    <div class="col-md-3">
 	                        <select id="baseLayerMaterial" name="baseLayerMaterial" class="form-control" style="width: 100%">
 	                        </select>
@@ -523,33 +523,33 @@
 	                    </div>
 					</div>
 					<div class="form-group" id="baseLayerMaterial-asphalt">
-						<label class="col-md-2 control-label">沥青类别：</label>
+						<label class="col-md-2 control-label" th:text="#{tool.asph-type}"></label>
 	                    <div class="col-md-3">
 	                        <select id="baseLayerAsphaltType" name="baseLayerAsphaltType" class="form-control" style="width: 100%">
 	                        </select>
 	                    </div>
-					   <label class="col-md-2 control-label">油石比：</label>
+					   <label class="col-md-2 control-label" th:text="#{tool.whetstone}"></label>
                         <div class="col-md-3">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入油石比，百分比" id="baseLayerWhetstoneRatio"
+                            <input type="text" class="form-control" th:placeholder="#{tool.percent}" id="baseLayerWhetstoneRatio"
                                 name="baseLayerWhetstoneRatio">
                             <div class="input-group-addon">%</div>
                             </div>
                         </div>
 					</div>
 					<div class="form-group" id="baseLayerMaterial-CementLime" style="display: none;">
-					   <label class="col-md-2 control-label">水泥用量：</label>
+					   <label class="col-md-2 control-label" th:text="#{tool.cement-use}"></label>
                         <div class="col-md-3">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入水泥用量，百分比" id="baseLayerCement"
+                            <input type="text" class="form-control" th:placeholder="#{tool.percent}" id="baseLayerCement"
                                 name="baseLayerCement">
                             <div class="input-group-addon">%</div>
                             </div>
                         </div>
-					   <label class="col-md-2 control-label">石灰用量：</label>
+					   <label class="col-md-2 control-label" th:text="#{tool.lime-use}"></label>
                         <div class="col-md-3">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入石灰用量，百分比" id="baseLayerLime"
+                            <input type="text" class="form-control" th:placeholder="#{tool.percent}" id="baseLayerLime"
                                 name="baseLayerLime">
                             <div class="input-group-addon">%</div>
                             </div>
@@ -557,19 +557,19 @@
 					</div>
 				</fieldset>
 				<fieldset>
-					<legend>底基层</legend>
+					<legend th:text="#{tool.butt-layer}"></legend>
 					<div class="form-group">
 						<label class="col-md-2 control-label"><span
-							class="king-required-tip text-danger mr5">*</span>底基层厚度：</label>
+							class="king-required-tip text-danger mr5" th:title="#{system.required}">*</span><span th:text="#{tool.butt-layer-thick}"></span></label>
 						<div class="col-md-3">
 						<div class="input-group">
-							<input type="text" class="form-control" placeholder="请输入底基层厚度" id="bottomBaseLayerThickness"
+							<input type="text" class="form-control" th:placeholder="#{system.input}" id="bottomBaseLayerThickness"
 								name="bottomBaseLayerThickness">
                         <div class="input-group-addon">m</div>
                        </div>
 						</div>
 						<div id="bottomBaseLayerMaterialSelect">
-						<label class="col-md-2 control-label">底基层材料：</label>
+						<label class="col-md-2 control-label" th:text="#{tool.butt-layer-mater}"></label>
 	                    <div class="col-md-3">
 	                        <select id="bottomBaseLayerMaterial" name="bottomBaseLayerMaterial" class="form-control" style="width: 100%">
 	                        </select>
@@ -577,33 +577,33 @@
 	                    </div>
 					</div>
 					<div class="form-group" id="bottomBaseLayerMaterial-asphalt">
-						<label class="col-md-2 control-label">沥青类别：</label>
+						<label class="col-md-2 control-label" th:text="#{tool.asph-type}"></label>
 	                    <div class="col-md-3">
 	                        <select id="bottomBaseLayerAsphaltType" name="bottomBaseLayerAsphaltType" class="form-control" style="width: 100%">
 	                        </select>
 	                    </div>
-					   <label class="col-md-2 control-label">油石比：</label>
+					   <label class="col-md-2 control-label" th:text="#{tool.whetstone}"></label>
                         <div class="col-md-3">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入油石比，百分比" id="bottomBaseLayerWhetstoneRatio"
+                            <input type="text" class="form-control" th:placeholder="#{tool.percent}" id="bottomBaseLayerWhetstoneRatio"
                                 name="bottomBaseLayerWhetstoneRatio">
                             <div class="input-group-addon">%</div>
                             </div>
                         </div>
 					</div>
 					<div class="form-group" id="bottomBaseLayerMaterial-CementLime" style="display: none;">
-					   <label class="col-md-2 control-label">水泥用量：</label>
+					   <label class="col-md-2 control-label" th:text="#{tool.cement-use}"></label>
                         <div class="col-md-3">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入水泥用量，百分比" id="bottomBaseLayerCement"
+                            <input type="text" class="form-control" th:placeholder="#{tool.percent}" id="bottomBaseLayerCement"
                                 name="bottomBaseLayerCement">
                             <div class="input-group-addon">%</div>
                             </div>
                         </div>
-					   <label class="col-md-2 control-label">石灰用量：</label>
+					   <label class="col-md-2 control-label" th:text="#{tool.lime-use}"></label>
                         <div class="col-md-3">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入石灰用量，百分比" id="bottomBaseLayerLime"
+                            <input type="text" class="form-control" th:placeholder="#{tool.percent}" id="bottomBaseLayerLime"
                                 name="bottomBaseLayerLime">
                             <div class="input-group-addon">%</div>
                             </div>
@@ -611,19 +611,19 @@
 					</div>
 				</fieldset>
 				<fieldset>
-                    <legend>垫层</legend>
+                    <legend th:text="#{tool.cush-layer}"></legend>
                     <div class="form-group">
                         <label class="col-md-2 control-label"><span
-                            class="king-required-tip text-danger mr5">*</span>垫层厚度：</label>
+                            class="king-required-tip text-danger mr5" th:title="#{system.required}">*</span><span th:text="#{tool.cush-layer-thick}"></span></label>
                         <div class="col-md-3">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入垫层厚度" id="cushionLayerThickness"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="cushionLayerThickness"
                                 name="cushionLayerThickness">
                         <div class="input-group-addon">m</div>
                        </div>
                         </div>
                         <div id="cushionLayerMaterialSelect">
-                        <label class="col-md-2 control-label">垫层材料：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.cush-layer-mater}"></label>
                         <div class="col-md-3">
                             <select id="cushionLayerMaterial" name="cushionLayerMaterial" class="form-control" style="width: 100%">
                             </select>
@@ -631,33 +631,33 @@
                         </div>
                     </div>
                     <div class="form-group" id="cushionLayerMaterial-asphalt">
-                        <label class="col-md-2 control-label">沥青类别：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.asph-type}"></label>
                         <div class="col-md-3">
                             <select id="cushionLayerAsphaltType" name="cushionLayerAsphaltType" class="form-control" style="width: 100%">
                             </select>
                         </div>
-                       <label class="col-md-2 control-label">油石比：</label>
+                       <label class="col-md-2 control-label" th:text="#{tool.whetstone}"></label>
                         <div class="col-md-3">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入油石比，百分比" id="cushionLayerWhetstoneRatio"
+                            <input type="text" class="form-control" th:placeholder="#{tool.percent}" id="cushionLayerWhetstoneRatio"
                                 name="cushionLayerWhetstoneRatio">
                             <div class="input-group-addon">%</div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group" id="cushionLayerMaterial-CementLime" style="display: none;">
-                       <label class="col-md-2 control-label">水泥用量：</label>
+                       <label class="col-md-2 control-label" th:text="#{tool.cement-use}"></label>
                         <div class="col-md-3">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入水泥用量，百分比" id="cushionLayerCement"
+                            <input type="text" class="form-control" th:placeholder="#{tool.percent}" id="cushionLayerCement"
                                 name="cushionLayerCement">
                             <div class="input-group-addon">%</div>
                             </div>
                         </div>
-                       <label class="col-md-2 control-label">石灰用量：</label>
+                       <label class="col-md-2 control-label" th:text="#{tool.lime-use}"></label>
                         <div class="col-md-3">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入石灰用量，百分比" id="cushionLayerLime"
+                            <input type="text" class="form-control" th:placeholder="#{tool.percent}" id="cushionLayerLime"
                                 name="cushionLayerLime">
                             <div class="input-group-addon">%</div>
                             </div>
@@ -670,9 +670,9 @@
 	<div class="panel king-panel1">
 		 <div class="panel-heading king-panel-head1 king-panel-top3">
             <div class="text-center">
-                <button class="king-btn king-radius king-danger" type="button" id="baseInfoDefaultValue">默认参数</button>
+                <button class="king-btn king-radius king-danger" type="button" id="baseInfoDefaultValue"><span th:text="#{tool.default-val}"></span></button>
                 <button class="king-btn king-radius king-info" type="submit">
-                    <i class="fa fa-arrow-right btn-icon"></i>清单分析
+                    <i class="fa fa-arrow-right btn-icon"></i> <span th:text="#{tool.inve-anal}"></span>
                 </button>
             </div>
 	    </div>

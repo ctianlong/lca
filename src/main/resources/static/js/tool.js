@@ -258,8 +258,8 @@ $(function(){
 	});
 	// 拌和设备类型
 	var cdMixEquipmentType=[
-		{id:1,text:"320t/h 以内",lqhnt:{zl:{qy:60.36,cy:291.33,zy:12829.70,d:7929.60}},lqmtz:{qy:61.61,cy:339.69,zy:15031.81,d:9290.65}},
-		{id:2,text:"240t/h 以内",lqhnt:{zl:{qy:68.69,cy:461.51,zy:12638.21,d:7875.35}},lqmtz:{qy:89.50,cy:540.45,zy:14864.26,d:9262.48}}
+		{id:1,text:"320t/h",lqhnt:{zl:{qy:60.36,cy:291.33,zy:12829.70,d:7929.60}},lqmtz:{qy:61.61,cy:339.69,zy:15031.81,d:9290.65}},
+		{id:2,text:"240t/h",lqhnt:{zl:{qy:68.69,cy:461.51,zy:12638.21,d:7875.35}},lqmtz:{qy:89.50,cy:540.45,zy:14864.26,d:9262.48}}
 	];
 	var $mixEqupType=$("#mixEqupType").select2({
 		data:cdMixEquipmentType,
@@ -272,13 +272,13 @@ $(function(){
 		  return repo.text;
 	  }
 	  var markup="<div class='row'><div class='col-sm-12'><strong>"+repo.name+"</strong></div></div>"+
-	  	"<div class='row'><div class='col-sm-12'>来源："+(repo.dataSource||'（空）')+"</div></div>"+
-	  	"<div class='row'><div class='col-sm-12'>柴油用量（kg)："+(repo.diesel||'（空）')+"</div></div>";
+	  	"<div class='row'><div class='col-sm-12'>来源："+(repo.dataSource||'')+"</div></div>"+
+	  	"<div class='row'><div class='col-sm-12'>柴油用量（kg)："+(repo.diesel||'')+"</div></div>";
 	  return markup;
 	}
 	function formatPavingEqupSelection(repo) {
 		if(repo.name){
-			return repo.name+' （来源：'+(repo.dataSource||'（空）')+'）';
+			return repo.name+' ['+(repo.dataSource||'')+']';
 		}
 		return repo.text;
 	}
@@ -305,7 +305,7 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'不选即为默认值：320t/h 以内',
+		placeholder:'不选即为默认值：320t/h',
 		allowClear:true,
 		minimumResultsForSearch:-1, //如要搜索可去掉该选项
 		language:iMsg.select2LangCode,
@@ -325,22 +325,22 @@ $(function(){
 		  return repo.text;
 	  }
 	  var markup="<div class='row'><div class='col-sm-6'><strong>"+repo.fuelType+"</strong></div>"+
-	  	"<div class='col-sm-6'>来源："+(repo.dataSource||'（空）')+"</div></div>"+
-	  	"<div class='row'><div class='col-sm-6'>价格："+(repo.cost||'（空）')+"</div>"+
-	  	"<div class='col-sm-6'>净热值："+(repo.energyConsume!=null?repo.energyConsume.toExponential(1):'（空）')+"</div></div>"+
-	  	"<div class='row'><div class='col-sm-3'>CO<sub>2</sub>："+(repo.emissionCo2!=null?repo.emissionCo2.toExponential(1):'（空）')+"</div>"+
-	  	"<div class='col-sm-3'>CH<sub>4</sub>："+(repo.emissionCh4!=null?repo.emissionCh4.toExponential(1):'（空）')+"</div>"+
-	  	"<div class='col-sm-3'>N<sub>2</sub>O："+(repo.emissionN2o!=null?repo.emissionN2o.toExponential(1):'（空）')+"</div>"+
-	  	"<div class='col-sm-3'>CO："+(repo.emissionCo!=null?repo.emissionCo.toExponential(1):'（空）')+"</div></div>"+
-	  	"<div class='row'><div class='col-sm-3'>SO<sub>2</sub>："+(repo.emissionSo2!=null?repo.emissionSo2.toExponential(1):'（空）')+"</div>"+
-	  	"<div class='col-sm-3'>NO<sub>x</sub>："+(repo.emissionNox!=null?repo.emissionNox.toExponential(1):'（空）')+"</div>"+
-	  	"<div class='col-sm-3'>Pb："+(repo.emissionPb!=null?repo.emissionPb.toExponential(1):'（空）')+"</div>"+
-	  	"<div class='col-sm-3'>Zn："+(repo.emissionZn!=null?repo.emissionZn.toExponential(1):'（空）')+"</div></div>";
+	  	"<div class='col-sm-6'>来源："+(repo.dataSource||'')+"</div></div>"+
+	  	"<div class='row'><div class='col-sm-6'>价格："+(repo.cost||'')+"</div>"+
+	  	"<div class='col-sm-6'>净热值："+(repo.energyConsume!=null?repo.energyConsume.toExponential(1):'')+"</div></div>"+
+	  	"<div class='row'><div class='col-sm-3'>CO<sub>2</sub>："+(repo.emissionCo2!=null?repo.emissionCo2.toExponential(1):'')+"</div>"+
+	  	"<div class='col-sm-3'>CH<sub>4</sub>："+(repo.emissionCh4!=null?repo.emissionCh4.toExponential(1):'')+"</div>"+
+	  	"<div class='col-sm-3'>N<sub>2</sub>O："+(repo.emissionN2o!=null?repo.emissionN2o.toExponential(1):'')+"</div>"+
+	  	"<div class='col-sm-3'>CO："+(repo.emissionCo!=null?repo.emissionCo.toExponential(1):'')+"</div></div>"+
+	  	"<div class='row'><div class='col-sm-3'>SO<sub>2</sub>："+(repo.emissionSo2!=null?repo.emissionSo2.toExponential(1):'')+"</div>"+
+	  	"<div class='col-sm-3'>NO<sub>x</sub>："+(repo.emissionNox!=null?repo.emissionNox.toExponential(1):'')+"</div>"+
+	  	"<div class='col-sm-3'>Pb："+(repo.emissionPb!=null?repo.emissionPb.toExponential(1):'')+"</div>"+
+	  	"<div class='col-sm-3'>Zn："+(repo.emissionZn!=null?repo.emissionZn.toExponential(1):'')+"</div></div>";
 	  return markup;
 	}
 	function formatFuelSelection(repo) {
 		if(repo.fuelType){
-			return repo.fuelType+' （来源：'+(repo.dataSource||'（空）')+'）';
+			return repo.fuelType+' ['+(repo.dataSource||'')+']';
 		}
 		return repo.text;
 	}
@@ -504,22 +504,22 @@ $(function(){
 		  return repo.text;
 	  }
 	  var markup="<div class='row'><div class='col-sm-6'><strong>"+repo.materialName+"</strong></div>"+
-	  	"<div class='col-sm-6'>来源："+(repo.dataSource||'（空）')+"</div></div>"+
-	  	"<div class='row'><div class='col-sm-6'>成本："+(repo.cost||'（空）')+"</div>"+
-	  	"<div class='col-sm-6'>能耗："+(repo.energyConsume!=null?repo.energyConsume.toExponential(1):'（空）')+"</div></div>"+
-	  	"<div class='row'><div class='col-sm-3'>CO<sub>2</sub>："+(repo.emissionCo2!=null?repo.emissionCo2.toExponential(1):'（空）')+"</div>"+
-	  	"<div class='col-sm-3'>CH<sub>4</sub>："+(repo.emissionCh4!=null?repo.emissionCh4.toExponential(1):'（空）')+"</div>"+
-	  	"<div class='col-sm-3'>N<sub>2</sub>O："+(repo.emissionN2o!=null?repo.emissionN2o.toExponential(1):'（空）')+"</div>"+
-	  	"<div class='col-sm-3'>CO："+(repo.emissionCo!=null?repo.emissionCo.toExponential(1):'（空）')+"</div></div>"+
-	  	"<div class='row'><div class='col-sm-3'>SO<sub>2</sub>："+(repo.emissionSo2!=null?repo.emissionSo2.toExponential(1):'（空）')+"</div>"+
-	  	"<div class='col-sm-3'>NO<sub>x</sub>："+(repo.emissionNox!=null?repo.emissionNox.toExponential(1):'（空）')+"</div>"+
-	  	"<div class='col-sm-3'>Pb："+(repo.emissionPb!=null?repo.emissionPb.toExponential(1):'（空）')+"</div>"+
-	  	"<div class='col-sm-3'>Zn："+(repo.emissionZn!=null?repo.emissionZn.toExponential(1):'（空）')+"</div></div>";
+	  	"<div class='col-sm-6'>来源："+(repo.dataSource||'')+"</div></div>"+
+	  	"<div class='row'><div class='col-sm-6'>成本："+(repo.cost||'')+"</div>"+
+	  	"<div class='col-sm-6'>能耗："+(repo.energyConsume!=null?repo.energyConsume.toExponential(1):'')+"</div></div>"+
+	  	"<div class='row'><div class='col-sm-3'>CO<sub>2</sub>："+(repo.emissionCo2!=null?repo.emissionCo2.toExponential(1):'')+"</div>"+
+	  	"<div class='col-sm-3'>CH<sub>4</sub>："+(repo.emissionCh4!=null?repo.emissionCh4.toExponential(1):'')+"</div>"+
+	  	"<div class='col-sm-3'>N<sub>2</sub>O："+(repo.emissionN2o!=null?repo.emissionN2o.toExponential(1):'')+"</div>"+
+	  	"<div class='col-sm-3'>CO："+(repo.emissionCo!=null?repo.emissionCo.toExponential(1):'')+"</div></div>"+
+	  	"<div class='row'><div class='col-sm-3'>SO<sub>2</sub>："+(repo.emissionSo2!=null?repo.emissionSo2.toExponential(1):'')+"</div>"+
+	  	"<div class='col-sm-3'>NO<sub>x</sub>："+(repo.emissionNox!=null?repo.emissionNox.toExponential(1):'')+"</div>"+
+	  	"<div class='col-sm-3'>Pb："+(repo.emissionPb!=null?repo.emissionPb.toExponential(1):'')+"</div>"+
+	  	"<div class='col-sm-3'>Zn："+(repo.emissionZn!=null?repo.emissionZn.toExponential(1):'')+"</div></div>";
 	  return markup;
 	}
 	function formatRepoSelection(repo) {
 		if(repo.materialName){
-			return repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+			return repo.materialName+' ['+(repo.dataSource||'')+']';
 		}
 		return repo.text;
 	}
@@ -932,22 +932,22 @@ $(function(){
 		  return repo.text;
 	  }
 	  var markup="<div class='row'><div class='col-sm-6'><strong>"+repo.vehicleType+"</strong></div>"+
-	  	"<div class='col-sm-6'>来源："+(repo.dataSource||'（空）')+"</div></div>"+
-	  	"<div class='row'><div class='col-sm-6'>成本："+(repo.cost||'（空）')+"</div>"+
-	  	"<div class='col-sm-6'>能耗："+(repo.energyConsume!=null?repo.energyConsume.toExponential(1):'（空）')+"</div></div>"+
-	  	"<div class='row'><div class='col-sm-3'>CO<sub>2</sub>："+(repo.emissionCo2!=null?repo.emissionCo2.toExponential(1):'（空）')+"</div>"+
-	  	"<div class='col-sm-3'>CH<sub>4</sub>："+(repo.emissionCh4!=null?repo.emissionCh4.toExponential(1):'（空）')+"</div>"+
-	  	"<div class='col-sm-3'>N<sub>2</sub>O："+(repo.emissionN2o!=null?repo.emissionN2o.toExponential(1):'（空）')+"</div>"+
-	  	"<div class='col-sm-3'>CO："+(repo.emissionCo!=null?repo.emissionCo.toExponential(1):'（空）')+"</div></div>"+
-	  	"<div class='row'><div class='col-sm-3'>SO<sub>2</sub>："+(repo.emissionSo2!=null?repo.emissionSo2.toExponential(1):'（空）')+"</div>"+
-	  	"<div class='col-sm-3'>NO<sub>x</sub>："+(repo.emissionNox!=null?repo.emissionNox.toExponential(1):'（空）')+"</div>"+
-	  	"<div class='col-sm-3'>Pb："+(repo.emissionPb!=null?repo.emissionPb.toExponential(1):'（空）')+"</div>"+
-	  	"<div class='col-sm-3'>Zn："+(repo.emissionZn!=null?repo.emissionZn.toExponential(1):'（空）')+"</div></div>";
+	  	"<div class='col-sm-6'>来源："+(repo.dataSource||'')+"</div></div>"+
+	  	"<div class='row'><div class='col-sm-6'>成本："+(repo.cost||'')+"</div>"+
+	  	"<div class='col-sm-6'>能耗："+(repo.energyConsume!=null?repo.energyConsume.toExponential(1):'')+"</div></div>"+
+	  	"<div class='row'><div class='col-sm-3'>CO<sub>2</sub>："+(repo.emissionCo2!=null?repo.emissionCo2.toExponential(1):'')+"</div>"+
+	  	"<div class='col-sm-3'>CH<sub>4</sub>："+(repo.emissionCh4!=null?repo.emissionCh4.toExponential(1):'')+"</div>"+
+	  	"<div class='col-sm-3'>N<sub>2</sub>O："+(repo.emissionN2o!=null?repo.emissionN2o.toExponential(1):'')+"</div>"+
+	  	"<div class='col-sm-3'>CO："+(repo.emissionCo!=null?repo.emissionCo.toExponential(1):'')+"</div></div>"+
+	  	"<div class='row'><div class='col-sm-3'>SO<sub>2</sub>："+(repo.emissionSo2!=null?repo.emissionSo2.toExponential(1):'')+"</div>"+
+	  	"<div class='col-sm-3'>NO<sub>x</sub>："+(repo.emissionNox!=null?repo.emissionNox.toExponential(1):'')+"</div>"+
+	  	"<div class='col-sm-3'>Pb："+(repo.emissionPb!=null?repo.emissionPb.toExponential(1):'')+"</div>"+
+	  	"<div class='col-sm-3'>Zn："+(repo.emissionZn!=null?repo.emissionZn.toExponential(1):'')+"</div></div>";
 	  return markup;
 	}
 	function formatTransportSelection(repo) {
 		if(repo.vehicleType){
-			return repo.vehicleType+' （来源：'+(repo.dataSource||'（空）')+'）';
+			return repo.vehicleType+' ['+(repo.dataSource||'')+']';
 		}
 		return repo.text;
 	}
@@ -1260,6 +1260,17 @@ $(function(){
 	}
 	// 首页输入默认参数
 	$("#baseInfoDefaultValue").click(function(){
+		$("#materialRange").iCheck('check');
+		$("#transConsRange").iCheck('check');
+		$("#conserveRange").iCheck('check');
+		$("#use1Range").iCheck('check');
+		$("#use2Range").iCheck('check');
+		$("#use3Range").iCheck('check');
+		$("#recycleRange").iCheck('check');
+		$("#energyRange").iCheck('check');
+		$("#carbonRange").iCheck('check');
+		$("#sourRange").iCheck('check');
+		$("#eutrophicationRange").iCheck('check');
 		validatorFormInput.resetForm();
 		$roadType.val(1).trigger("change").trigger({
 		    type: 'select2:select',
@@ -2307,7 +2318,7 @@ $(function(){
 				}).then(function (data) {
 					if(data.list.length>0){
 						var repo=data.list[0];
-						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var text=repo.materialName+' ['+(repo.dataSource||'')+']';
 						var option = new Option(text, '-1', true, true);
 						$(option).data('defaultRes',repo);
 						$("#gravel").html(option).trigger('change');
@@ -2323,7 +2334,7 @@ $(function(){
 				}).then(function (data) {
 					if(data.list.length>0){
 						var repo=data.list[0];
-						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var text=repo.materialName+' ['+(repo.dataSource||'')+']';
 						var option = new Option(text, '-1', true, true);
 						$(option).data('defaultRes',repo);
 						$("#ordinaryAsphalt").html(option).trigger('change');
@@ -2339,7 +2350,7 @@ $(function(){
 				}).then(function (data) {
 					if(data.list.length>0){
 						var repo=data.list[0];
-						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var text=repo.materialName+' ['+(repo.dataSource||'')+']';
 						var option = new Option(text, '-1', true, true);
 						$(option).data('defaultRes',repo);
 						$("#modifiedAsphalt").html(option).trigger('change');
@@ -2355,7 +2366,7 @@ $(function(){
 				}).then(function (data) {
 					if(data.list.length>0){
 						var repo=data.list[0];
-						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var text=repo.materialName+' ['+(repo.dataSource||'')+']';
 						var option = new Option(text, '-1', true, true);
 						$(option).data('defaultRes',repo);
 						$("#highViscosityAsphalt").html(option).trigger('change');
@@ -2371,7 +2382,7 @@ $(function(){
 				}).then(function (data) {
 					if(data.list.length>0){
 						var repo=data.list[0];
-						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var text=repo.materialName+' ['+(repo.dataSource||'')+']';
 						var option = new Option(text, '-1', true, true);
 						$(option).data('defaultRes',repo);
 						$("#cement").html(option).trigger('change');
@@ -2387,7 +2398,7 @@ $(function(){
 				}).then(function (data) {
 					if(data.list.length>0){
 						var repo=data.list[0];
-						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var text=repo.materialName+' ['+(repo.dataSource||'')+']';
 						var option = new Option(text, '-1', true, true);
 						$(option).data('defaultRes',repo);
 						$("#lime").html(option).trigger('change');
@@ -2403,7 +2414,7 @@ $(function(){
 				}).then(function (data) {
 					if(data.list.length>0){
 						var repo=data.list[0];
-						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var text=repo.materialName+' ['+(repo.dataSource||'')+']';
 						var option = new Option(text, '-1', true, true);
 						$(option).data('defaultRes',repo);
 						$("#rebar").html(option).trigger('change');
@@ -2419,7 +2430,7 @@ $(function(){
 				}).then(function (data) {
 					if(data.list.length>0){
 						var repo=data.list[0];
-						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var text=repo.materialName+' ['+(repo.dataSource||'')+']';
 						var option = new Option(text, '-1', true, true);
 						$(option).data('defaultRes',repo);
 						$("#snjType").html(option).trigger('change');
@@ -2435,7 +2446,7 @@ $(function(){
 				}).then(function (data) {
 					if(data.list.length>0){
 						var repo=data.list[0];
-						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var text=repo.materialName+' ['+(repo.dataSource||'')+']';
 						var option = new Option(text, '-1', true, true);
 						$(option).data('defaultRes',repo);
 						$("#jqjType").html(option).trigger('change');
@@ -2451,7 +2462,7 @@ $(function(){
 				}).then(function (data) {
 					if(data.list.length>0){
 						var repo=data.list[0];
-						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var text=repo.materialName+' ['+(repo.dataSource||'')+']';
 						var option = new Option(text, '-1', true, true);
 						$(option).data('defaultRes',repo);
 						$("#zsjType").html(option).trigger('change');
@@ -2467,7 +2478,7 @@ $(function(){
 				}).then(function (data) {
 					if(data.list.length>0){
 						var repo=data.list[0];
-						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var text=repo.materialName+' ['+(repo.dataSource||'')+']';
 						var option = new Option(text, '-1', true, true);
 						$(option).data('defaultRes',repo);
 						$("#qlzsjType").html(option).trigger('change');
@@ -2483,7 +2494,7 @@ $(function(){
 				}).then(function (data) {
 					if(data.list.length>0){
 						var repo=data.list[0];
-						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var text=repo.materialName+' ['+(repo.dataSource||'')+']';
 						var option = new Option(text, '-1', true, true);
 						$(option).data('defaultRes',repo);
 						$("#lime").html(option).trigger('change');
@@ -2499,7 +2510,7 @@ $(function(){
 				}).then(function (data) {
 					if(data.list.length>0){
 						var repo=data.list[0];
-						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var text=repo.materialName+' ['+(repo.dataSource||'')+']';
 						var option = new Option(text, '-1', true, true);
 						$(option).data('defaultRes',repo);
 						$("#hnjType").html(option).trigger('change');
@@ -2515,7 +2526,7 @@ $(function(){
 				}).then(function (data) {
 					if(data.list.length>0){
 						var repo=data.list[0];
-						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var text=repo.materialName+' ['+(repo.dataSource||'')+']';
 						var option = new Option(text, '-1', true, true);
 						$(option).data('defaultRes',repo);
 						$("#jsjType").html(option).trigger('change');
@@ -2540,7 +2551,7 @@ $(function(){
 				}).then(function (data) {
 					if(data.list.length>0){
 						var repo=data.list[0];
-						var text=repo.vehicleType+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var text=repo.vehicleType+' ['+(repo.dataSource||'')+']';
 						var option = new Option(text, '-1', true, true);
 						$(option).data('defaultRes',repo);
 						$("#aggregateVehicleModel").html(option).trigger('change');
@@ -2557,7 +2568,7 @@ $(function(){
 				}).then(function (data) {
 					if(data.list.length>0){
 						var repo=data.list[0];
-						var text=repo.vehicleType+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var text=repo.vehicleType+' ['+(repo.dataSource||'')+']';
 						var option = new Option(text, '-1', true, true);
 						$(option).data('defaultRes',repo);
 						$("#asphaltVehicleModel").html(option).trigger('change');
@@ -2574,7 +2585,7 @@ $(function(){
 				}).then(function (data) {
 					if(data.list.length>0){
 						var repo=data.list[0];
-						var text=repo.vehicleType+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var text=repo.vehicleType+' ['+(repo.dataSource||'')+']';
 						var option = new Option(text, '-1', true, true);
 						$(option).data('defaultRes',repo);
 						$("#cementVehicleModel").html(option).trigger('change');
@@ -2591,7 +2602,7 @@ $(function(){
 				}).then(function (data) {
 					if(data.list.length>0){
 						var repo=data.list[0];
-						var text=repo.vehicleType+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var text=repo.vehicleType+' ['+(repo.dataSource||'')+']';
 						var option = new Option(text, '-1', true, true);
 						$(option).data('defaultRes',repo);
 						$("#mixtureVehicleModel").html(option).trigger('change');
@@ -2616,7 +2627,7 @@ $(function(){
 		}).then(function (data) {
 			if(data.list.length>0){
 				var repo=data.list[0];
-				var text=repo.fuelType+' （来源：'+(repo.dataSource||'（空）')+'）';
+				var text=repo.fuelType+' ['+(repo.dataSource||'')+']';
 				var option = new Option(text, '-1', true, true);
 				$(option).data('defaultRes',repo);
 				$("#gasoline").html(option).trigger('change');
@@ -2630,7 +2641,7 @@ $(function(){
 		}).then(function (data) {
 			if(data.list.length>0){
 				var repo=data.list[0];
-				var text=repo.fuelType+' （来源：'+(repo.dataSource||'（空）')+'）';
+				var text=repo.fuelType+' ['+(repo.dataSource||'')+']';
 				var option = new Option(text, '-1', true, true);
 				$(option).data('defaultRes',repo);
 				$("#diesel").html(option).trigger('change');
@@ -2644,7 +2655,7 @@ $(function(){
 		}).then(function (data) {
 			if(data.list.length>0){
 				var repo=data.list[0];
-				var text=repo.fuelType+' （来源：'+(repo.dataSource||'（空）')+'）';
+				var text=repo.fuelType+' ['+(repo.dataSource||'')+']';
 				var option = new Option(text, '-1', true, true);
 				$(option).data('defaultRes',repo);
 				$("#heavyOil").html(option).trigger('change');
@@ -2658,7 +2669,7 @@ $(function(){
 		}).then(function (data) {
 			if(data.list.length>0){
 				var repo=data.list[0];
-				var text=repo.fuelType+' （来源：'+(repo.dataSource||'（空）')+'）';
+				var text=repo.fuelType+' ['+(repo.dataSource||'')+']';
 				var option = new Option(text, '-1', true, true);
 				$(option).data('defaultRes',repo);
 				$("#electricity").html(option).trigger('change');
@@ -2773,7 +2784,7 @@ $(function(){
 				}).then(function (data) {
 					if(data.list.length>0){
 						var repo=data.list[0];
-						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var text=repo.materialName+' ['+(repo.dataSource||'')+']';
 						var option = new Option(text, '-1', true, true);
 						$(option).data('defaultRes',repo);
 						$("#gravelConserve").html(option).trigger('change');
@@ -2789,7 +2800,7 @@ $(function(){
 				}).then(function (data) {
 					if(data.list.length>0){
 						var repo=data.list[0];
-						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var text=repo.materialName+' ['+(repo.dataSource||'')+']';
 						var option = new Option(text, '-1', true, true);
 						$(option).data('defaultRes',repo);
 						$("#ordinaryAsphaltConserve").html(option).trigger('change');
@@ -2805,7 +2816,7 @@ $(function(){
 				}).then(function (data) {
 					if(data.list.length>0){
 						var repo=data.list[0];
-						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var text=repo.materialName+' ['+(repo.dataSource||'')+']';
 						var option = new Option(text, '-1', true, true);
 						$(option).data('defaultRes',repo);
 						$("#modifiedAsphaltConserve").html(option).trigger('change');
@@ -2821,7 +2832,7 @@ $(function(){
 				}).then(function (data) {
 					if(data.list.length>0){
 						var repo=data.list[0];
-						var text=repo.materialName+' （来源：'+(repo.dataSource||'（空）')+'）';
+						var text=repo.materialName+' ['+(repo.dataSource||'')+']';
 						var option = new Option(text, '-1', true, true);
 						$(option).data('defaultRes',repo);
 						$("#highViscosityAsphaltConserve").html(option).trigger('change');
@@ -2887,7 +2898,7 @@ $(function(){
 		}).then(function (data) {
 			if(data.list.length>0){
 				var repo=data.list[0];
-				var text=repo.fuelType+' （来源：'+(repo.dataSource||'（空）')+'）';
+				var text=repo.fuelType+' ['+(repo.dataSource||'')+']';
 				var option = new Option(text, '-1', true, true);
 				$(option).data('defaultRes',repo);
 				$("#gasolineUse2").html(option).trigger('change');
@@ -2901,7 +2912,7 @@ $(function(){
 		}).then(function (data) {
 			if(data.list.length>0){
 				var repo=data.list[0];
-				var text=repo.fuelType+' （来源：'+(repo.dataSource||'（空）')+'）';
+				var text=repo.fuelType+' ['+(repo.dataSource||'')+']';
 				var option = new Option(text, '-1', true, true);
 				$(option).data('defaultRes',repo);
 				$("#dieselUse2").html(option).trigger('change');
@@ -2915,7 +2926,7 @@ $(function(){
 		}).then(function (data) {
 			if(data.list.length>0){
 				var repo=data.list[0];
-				var text=repo.fuelType+' （来源：'+(repo.dataSource||'（空）')+'）';
+				var text=repo.fuelType+' ['+(repo.dataSource||'')+']';
 				var option = new Option(text, '-1', true, true);
 				$(option).data('defaultRes',repo);
 				$("#electricityUse2").html(option).trigger('change');
@@ -2940,7 +2951,7 @@ $(function(){
 		}).then(function (data) {
 			if(data.list.length>0){
 				var repo=data.list[0];
-				var text=repo.fuelType+' （来源：'+(repo.dataSource||'（空）')+'）';
+				var text=repo.fuelType+' ['+(repo.dataSource||'')+']';
 				var option = new Option(text, '-1', true, true);
 				$(option).data('defaultRes',repo);
 				$("#gasolineUse3").html(option).trigger('change');
@@ -2954,7 +2965,7 @@ $(function(){
 		}).then(function (data) {
 			if(data.list.length>0){
 				var repo=data.list[0];
-				var text=repo.fuelType+' （来源：'+(repo.dataSource||'（空）')+'）';
+				var text=repo.fuelType+' ['+(repo.dataSource||'')+']';
 				var option = new Option(text, '-1', true, true);
 				$(option).data('defaultRes',repo);
 				$("#dieselUse3").html(option).trigger('change');
@@ -2975,7 +2986,7 @@ $(function(){
 		}).then(function (data) {
 			if(data.list.length>0){
 				var repo=data.list[0];
-				var text=repo.fuelType+' （来源：'+(repo.dataSource||'（空）')+'）';
+				var text=repo.fuelType+' ['+(repo.dataSource||'')+']';
 				var option = new Option(text, '-1', true, true);
 				$(option).data('defaultRes',repo);
 				$("#fuelTypeRecycle").html(option).trigger('change');
@@ -2989,7 +3000,7 @@ $(function(){
 		}).then(function (data) {
 			if(data.list.length>0){
 				var repo=data.list[0];
-				var text=repo.vehicleType+' （来源：'+(repo.dataSource||'（空）')+'）';
+				var text=repo.vehicleType+' ['+(repo.dataSource||'')+']';
 				var option = new Option(text, '-1', true, true);
 				$(option).data('defaultRes',repo);
 				$("#recycleVehicleModel").html(option).trigger('change');
@@ -6223,7 +6234,7 @@ $(function(){
 			chartData.chartCostAndEnvCost.setOption({
 				title : {
 					text: '经济成本和环境经济成本变化范围',
-					subtext: '五角星为确定值：（'+xx+'，'+yy+'）'
+					subtext: '五角星为确定值:('+xx+'，'+yy+')'
 				},
 				tooltip : {
 					trigger: 'axis',

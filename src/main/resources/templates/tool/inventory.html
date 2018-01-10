@@ -1,30 +1,29 @@
 <div id="step-inventory" style="display: none;">
-
     <div class="tab-box">
         <ul class="nav nav-tabs king-nav-tabs2 king-tab-primary" id="inventoryTabList">
-            <li id="materialInventory"><a href="#materialInventoryTab" data-toggle="tab"><span><b>原材料获取</b></span></a></li>
-            <li id="transportInventory"><a href="#transportInventoryTab" data-toggle="tab"><span><b>运输和施工</b></span></a></li>
-            <li id="conserveInventory"><a href="#conserveInventoryTab" data-toggle="tab"><span><b>养护</b></span></a></li>
-            <li id="use1Inventory"><a href="#use1InventoryTab" data-toggle="tab"><span><b>使用(反射率)</b></span></a></li>
-            <li id="use2Inventory"><a href="#use2InventoryTab" data-toggle="tab"><span><b>使用(透水率)</b></span></a></li>
-            <li id="use3Inventory"><a href="#use3InventoryTab" data-toggle="tab"><span><b>使用(滚动阻力)</b></span></a></li>
-            <li id="recycleInventory"><a href="#recycleInventoryTab" data-toggle="tab"><span><b>回收</b></span></a></li>
+            <li id="materialInventory"><a href="#materialInventoryTab" data-toggle="tab"><span><b th:text="#{tool.material}"></b></span></a></li>
+            <li id="transportInventory"><a href="#transportInventoryTab" data-toggle="tab"><span><b th:text="#{tool.transCons}"></b></span></a></li>
+            <li id="conserveInventory"><a href="#conserveInventoryTab" data-toggle="tab"><span><b th:text="#{tool.conserve}"></b></span></a></li>
+            <li id="use1Inventory"><a href="#use1InventoryTab" data-toggle="tab"><span><b th:text="#{tool.use1}"></b></span></a></li>
+            <li id="use2Inventory"><a href="#use2InventoryTab" data-toggle="tab"><span><b th:text="#{tool.use2}"></b></span></a></li>
+            <li id="use3Inventory"><a href="#use3InventoryTab" data-toggle="tab"><span><b th:text="#{tool.use3}"></b></span></a></li>
+            <li id="recycleInventory"><a href="#recycleInventoryTab" data-toggle="tab"><span><b th:text="#{tool.recycle}"></b></span></a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade" id="materialInventoryTab" style="padding:15px;">
                 <form class="form-horizontal" role="form">
                 <fieldset>
-                  <legend><b>结果显示</b></legend>
+                  <legend><b th:text="#{tool.res}"></b></legend>
             <div class="table-responsive">
                 <table id="materialInventoryTable"
                     class="table table-bordered table-hover table-striped table-condensed">
                     <thead>
                         <tr>
-                            <th rowspan="2" class="text-center">材料名称</th>
-                            <th rowspan="2" class="text-center">用量(t)</th>
-                            <th rowspan="2" class="text-center">成本(元)</th>
-                            <th rowspan="2" class="text-center">能耗(MJ)</th>
-                            <th colspan="8" class="text-center">排放(kg)</th>
+                            <th rowspan="2" class="text-center" th:text="#{tool.mater-name}"></th>
+                            <th rowspan="2" class="text-center" th:text="#{tool.amount}+'(t)'"></th>
+                            <th rowspan="2" class="text-center" th:text="#{tool.cost}"></th>
+                            <th rowspan="2" class="text-center" th:text="#{tool.energy}+'(MJ)'"></th>
+                            <th colspan="8" class="text-center" th:text="#{tool.emission}+'(kg)'"></th>
                         </tr>
                         <tr>
                             <th class="text-center">CO<sub>2</sub></th>
@@ -62,11 +61,11 @@
             </form>
             <form id="inventoryMaterialForm" class="form-horizontal" role="form">
                 <fieldset>
-                    <legend>请选择具体材料：</legend>
+                    <legend th:text="#{tool.choose-mater}"></legend>
                     <div class="row">
                         <div class="col-md-6" id="gravelSelect" style="display: none;">
                             <div class="form-group">
-                                <label class="col-md-3 control-label">碎石集料：</label>
+                                <label class="col-md-3 control-label" th:text="#{tool.gravel}"></label>
                                 <div class="col-md-9">
                                     <select id="gravel" name="gravel" class="form-control"
                                         style="width: 100%">
@@ -77,7 +76,7 @@
                         <div class="col-md-6" id="ordinaryAsphaltSelect"
                             style="display: none;">
                             <div class="form-group">
-                                <label class="col-md-3 control-label">普通沥青：</label>
+                                <label class="col-md-3 control-label" th:text="#{tool.ordi-asph}"></label>
                                 <div class="col-md-9">
                                     <select id="ordinaryAsphalt" name="ordinaryAsphalt"
                                         class="form-control" style="width: 100%">
@@ -88,7 +87,7 @@
                         <div class="col-md-6" id="modifiedAsphaltSelect"
                             style="display: none;">
                             <div class="form-group">
-                                <label class="col-md-3 control-label">改性沥青：</label>
+                                <label class="col-md-3 control-label" th:text="#{tool.modi-asph}"></label>
                                 <div class="col-md-9">
                                     <select id="modifiedAsphalt" name="modifiedAsphalt"
                                         class="form-control" style="width: 100%">
@@ -99,7 +98,7 @@
                         <div class="col-md-6" id="highViscosityAsphaltSelect"
                             style="display: none;">
                             <div class="form-group">
-                                <label class="col-md-3 control-label">高粘度沥青：</label>
+                                <label class="col-md-3 control-label" th:text="#{tool.high-asph}"></label>
                                 <div class="col-md-9">
                                     <select id="highViscosityAsphalt" name="highViscosityAsphalt"
                                         class="form-control" style="width: 100%">
@@ -109,7 +108,7 @@
                         </div>
                         <div class="col-md-6" id="cementSelect" style="display: none;">
                             <div class="form-group">
-                                <label class="col-md-3 control-label">水泥：</label>
+                                <label class="col-md-3 control-label" th:text="#{tool.cement}"></label>
                                 <div class="col-md-9">
                                     <select id="cement" name="cement" class="form-control"
                                         style="width: 100%">
@@ -119,7 +118,7 @@
                         </div>
                         <div class="col-md-6" id="limeSelect" style="display: none;">
                             <div class="form-group">
-                                <label class="col-md-3 control-label">石灰：</label>
+                                <label class="col-md-3 control-label" th:text="#{tool.lime}"></label>
                                 <div class="col-md-9">
                                     <select id="lime" name="lime" class="form-control"
                                         style="width: 100%">
@@ -129,7 +128,7 @@
                         </div>
                         <div class="col-md-6" id="rebarSelect" style="display: none;">
                             <div class="form-group">
-                                <label class="col-md-3 control-label">钢筋：</label>
+                                <label class="col-md-3 control-label" th:text="#{tool.rein}"></label>
                                 <div class="col-md-9">
                                     <select id="rebar" name="rebar" class="form-control"
                                         style="width: 100%">
@@ -139,7 +138,7 @@
                         </div>
                         <div class="col-md-6" id="snjSelect" style="display: none;">
                             <div class="form-group">
-                                <label class="col-md-3 control-label">速凝剂：</label>
+                                <label class="col-md-3 control-label" th:text="#{tool.snj}"></label>
                                 <div class="col-md-9">
                                     <select id="snjType" name="snjType" class="form-control"
                                         style="width: 100%">
@@ -149,7 +148,7 @@
                         </div>
                         <div class="col-md-6" id="jqjSelect" style="display: none;">
                             <div class="form-group">
-                                <label class="col-md-3 control-label">加气剂：</label>
+                                <label class="col-md-3 control-label" th:text="#{tool.jqj}"></label>
                                 <div class="col-md-9">
                                     <select id="jqjType" name="jqjType" class="form-control"
                                         style="width: 100%">
@@ -159,7 +158,7 @@
                         </div>
                         <div class="col-md-6" id="zsjSelect" style="display: none;">
                             <div class="form-group">
-                                <label class="col-md-3 control-label">增塑剂：</label>
+                                <label class="col-md-3 control-label" th:text="#{tool.zsj}"></label>
                                 <div class="col-md-9">
                                     <select id="zsjType" name="zsjType" class="form-control"
                                         style="width: 100%">
@@ -169,7 +168,7 @@
                         </div>
                         <div class="col-md-6" id="qlzsjSelect" style="display: none;">
                             <div class="form-group">
-                                <label class="col-md-3 control-label">强力增塑剂：</label>
+                                <label class="col-md-3 control-label" th:text="#{tool.qlzsj}"></label>
                                 <div class="col-md-9">
                                     <select id="qlzsjType" name="qlzsjType" class="form-control"
                                         style="width: 100%">
@@ -179,7 +178,7 @@
                         </div>
                         <div class="col-md-6" id="hnjSelect" style="display: none;">
                             <div class="form-group">
-                                <label class="col-md-3 control-label">缓凝剂：</label>
+                                <label class="col-md-3 control-label" th:text="#{tool.hnj}"></label>
                                 <div class="col-md-9">
                                     <select id="hnjType" name="hnjType" class="form-control"
                                         style="width: 100%">
@@ -189,7 +188,7 @@
                         </div>
                         <div class="col-md-6" id="jsjSelect" style="display: none;">
                             <div class="form-group">
-                                <label class="col-md-3 control-label">减水剂：</label>
+                                <label class="col-md-3 control-label" th:text="#{tool.jsj}"></label>
                                 <div class="col-md-9">
                                     <select id="jsjType" name="jsjType" class="form-control"
                                         style="width: 100%">
@@ -200,27 +199,27 @@
                     </div>
                 </fieldset>
                 <div class="text-center">
-                    <button class="king-btn king-radius king-danger" id="materialDefaultValue" type="button">默认参数</button>
-                    <button class="king-btn king-radius king-success" type="submit">计算原材料获取清单</button>
+                    <button class="king-btn king-radius king-danger" id="materialDefaultValue" type="button"><span th:text="#{tool.default-val}"></span></button>
+                    <button class="king-btn king-radius king-success" type="submit"><span th:text="#{tool.calc}"></span></button>
                 </div>
             </form>
             </div>
             <div class="tab-pane fade" id="transportInventoryTab" style="padding:15px;">
                 <form class="form-horizontal" role="form">
                 <fieldset>
-                  <legend><b>结果显示（运输）</b></legend>
+                  <legend><b th:text="#{tool.res-trans}"></b></legend>
           <div class="table-responsive">
                 <table id="transportInventoryTable"
                     class="table table-bordered table-hover table-striped table-condensed">
                     <thead>
                         <tr>
-                            <th rowspan="2" class="text-center">材料名称</th>
-                            <th rowspan="2" class="text-center">运输量(t)</th>
-                            <th rowspan="2" class="text-center">车辆型号</th>
-                            <th rowspan="2" class="text-center">运输距离(km)</th>
-                            <th rowspan="2" class="text-center">成本(元)</th>
-                            <th rowspan="2" class="text-center">能耗(MJ)</th>
-                            <th colspan="8" class="text-center">排放(kg)</th>
+                            <th rowspan="2" class="text-center" th:text="#{tool.mater-name}"></th>
+                            <th rowspan="2" class="text-center" th:text="#{tool.trans-volu}+'(t)'"></th>
+                            <th rowspan="2" class="text-center" th:text="#{tool.vehi-model}"></th>
+                            <th rowspan="2" class="text-center" th:text="#{tool.distance}+'(km)'"></th>
+                            <th rowspan="2" class="text-center" th:text="#{tool.cost}"></th>
+                            <th rowspan="2" class="text-center" th:text="#{tool.energy}+'(MJ)'"></th>
+                            <th colspan="8" class="text-center" th:text="#{tool.emission}+'(kg)'"></th>
                         </tr>
                         <tr>
                             <th class="text-center">CO<sub>2</sub></th>
@@ -260,62 +259,62 @@
             </form>
             <form id="inventoryTransportForm" class="form-horizontal" role="form">
                 <fieldset>
-                    <legend>请输入运输条件：</legend>
+                    <legend th:text="#{tool.input-trans}"></legend>
                     <div class="form-group" id="aggregateVehicleSelect" style="display: none;">
-                        <label class="col-md-2 control-label">车辆型号/载重（集料）：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.vehi-load}+' - '+#{tool.aggre}"></label>
                         <div class="col-md-4">
                             <select id="aggregateVehicleModel" name="aggregateVehicleModel" class="form-control" style="width: 100%">
                             </select>
                         </div>
-                        <label class="col-md-2 control-label">运距（集料）：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.distance}+' - '+#{tool.aggre}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="aggregateDistance"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="aggregateDistance"
                                 name="aggregateDistance">
                             <div class="input-group-addon">km</div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group" id="asphaltVehicleSelect" style="display: none;">
-                        <label class="col-md-2 control-label">车辆型号/载重（沥青）：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.vehi-load}+' - '+#{tool.asph}"></label>
                         <div class="col-md-4">
                             <select id="asphaltVehicleModel" name="asphaltVehicleModel" class="form-control" style="width: 100%">
                             </select>
                         </div>
-                        <label class="col-md-2 control-label">运距（沥青）：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.distance}+' - '+#{tool.asph}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="asphaltDistance"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="asphaltDistance"
                                 name="asphaltDistance">
                             <div class="input-group-addon">km</div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group" id="cementVehicleSelect" style="display: none;">
-                        <label class="col-md-2 control-label">车辆型号/载重（水泥）：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.vehi-load}+' - '+#{tool.cement}"></label>
                         <div class="col-md-4">
                             <select id="cementVehicleModel" name="cementVehicleModel" class="form-control" style="width: 100%">
                             </select>
                         </div>
-                        <label class="col-md-2 control-label">运距（水泥）：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.distance}+' - '+#{tool.cement}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="cementDistance"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="cementDistance"
                                 name="cementDistance">
                             <div class="input-group-addon">km</div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group" id="mixtureVehicleSelect" style="display: none;">
-                        <label class="col-md-2 control-label">车辆型号/载重（混合料）：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.vehi-load}+' - '+#{tool.mixture}"></label>
                         <div class="col-md-4">
                             <select id="mixtureVehicleModel" name="mixtureVehicleModel" class="form-control" style="width: 100%">
                             </select>
                         </div>
-                        <label class="col-md-2 control-label">运距（混合料）：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.distance}+' - '+#{tool.mixture}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="mixtureDistance"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="mixtureDistance"
                                 name="mixtureDistance">
                             <div class="input-group-addon">km</div>
                             </div>
@@ -323,23 +322,23 @@
                     </div>
                 </fieldset>
                 <div class="text-center">
-                    <button class="king-btn king-radius king-danger" type="button" id="transportDefaultValue">默认参数</button>
-                    <button class="king-btn king-radius king-success" type="submit">计算运输清单</button>
+                    <button class="king-btn king-radius king-danger" type="button" id="transportDefaultValue"><span th:text="#{tool.default-val}"></span></button>
+                    <button class="king-btn king-radius king-success" type="submit"><span th:text="#{tool.calc-trans}"></span></button>
                 </div>
             </form>
             <form class="form-horizontal mt20" role="form">
                 <fieldset>
-                  <legend><b>结果显示（施工）</b></legend>
+                  <legend><b th:text="#{tool.res-cons}"></b></legend>
           <div class="table-responsive">
                 <table id="mixPaveInventoryTable"
                     class="table table-bordered table-hover table-striped table-condensed">
                     <thead>
                         <tr>
-                            <th rowspan="2" class="text-center">燃料名称</th>
-                            <th rowspan="2" class="text-center">用量</th>
-                            <th rowspan="2" class="text-center">成本(元)</th>
-                            <th rowspan="2" class="text-center">能耗(MJ)</th>
-                            <th colspan="8" class="text-center">排放(kg)</th>
+                            <th rowspan="2" class="text-center" th:text="#{tool.fuel-name}"></th>
+                            <th rowspan="2" class="text-center" th:text="#{tool.amount}"></th>
+                            <th rowspan="2" class="text-center" th:text="#{tool.cost}"></th>
+                            <th rowspan="2" class="text-center" th:text="#{tool.energy}+'(MJ)'"></th>
+                            <th colspan="8" class="text-center" th:text="#{tool.emission}+'(kg)'"></th>
                         </tr>
                         <tr>
                             <th class="text-center">CO<sub>2</sub></th>
@@ -377,9 +376,9 @@
             </form>
             <form id="inventoryMixPaveForm" class="form-horizontal" role="form">
                 <fieldset>
-                    <legend>请选择施工设备：</legend>
+                    <legend th:text="#{tool.choose-cons}"></legend>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">拌合楼型号：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.mix-model}"></label>
                         <div class="col-md-6">
                             <select id="mixEqupType" name="mixEqupType" class="form-control" style="width: 100%">
                             </select>
@@ -393,41 +392,41 @@
                          -->
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">摊铺车型号：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.pave-model}"></label>
                         <div class="col-md-6">
                             <select id="pavingEqupType" name="pavingEqupType" class="form-control" style="width: 100%">
                             </select>
                         </div>
                         <div id="pavingClassQuotaInput" style="display: none;">
-                        <label class="col-md-2 control-label">单位施工量台班定额：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.one-shift-quota}"></label>
                         <div class="col-md-2">
-                            <input type="text" class="form-control" placeholder="请输入" id="pavingClassQuota"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="pavingClassQuota"
                                 name="pavingClassQuota">
                         </div>
                         </div>
                     </div>
                 </fieldset>
                 <fieldset>
-                    <legend>请选择具体燃料：</legend>
+                    <legend th:text="#{tool.choose-fuel}"></legend>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">汽油：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.gasoline}"></label>
                         <div class="col-md-4">
                             <select id="gasoline" name="gasoline" class="form-control" style="width: 100%">
                             </select>
                         </div>
-                        <label class="col-md-2 control-label">柴油：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.diesel}"></label>
                         <div class="col-md-4">
                             <select id="diesel" name="diesel" class="form-control" style="width: 100%">
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">重油：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.heavyoil}"></label>
                         <div class="col-md-4">
                             <select id="heavyOil" name="heavyOil" class="form-control" style="width: 100%">
                             </select>
                         </div>
-                        <label class="col-md-2 control-label">电：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.elec}"></label>
                         <div class="col-md-4">
                             <select id="electricity" name="electricity" class="form-control" style="width: 100%">
                             </select>
@@ -435,26 +434,25 @@
                     </div>
                 </fieldset>
                 <div class="text-center">
-                    <button class="king-btn king-radius king-danger" id="mixPaveDefaultValue" type="button">默认参数</button>
-                    <button class="king-btn king-radius king-success" type="submit">计算施工清单</button>
+                    <button class="king-btn king-radius king-danger" id="mixPaveDefaultValue" type="button"><span th:text="#{tool.default-val}"></span></button>
+                    <button class="king-btn king-radius king-success" type="submit"><span th:text="#{tool.calc-cons}"></span></button>
                 </div>
             </form>
             </div>
-            
             <div class="tab-pane fade" id="conserveInventoryTab" style="padding:15px;">
 	            <form class="form-horizontal" role="form">
 	                <fieldset>
-	                  <legend><b>结果显示（原材料）</b></legend>
+	                  <legend><b th:text="#{tool.res-cons-mater}"></b></legend>
 	            <div class="table-responsive">
 	                  <table id="conserveInventoryMaterialTable"
 	                    class="table table-bordered table-hover table-striped table-condensed">
 	                    <thead>
 	                        <tr>
-	                            <th rowspan="2" class="text-center">材料名称</th>
-	                            <th rowspan="2" class="text-center">用量(t)</th>
-	                            <th rowspan="2" class="text-center">成本(元)</th>
-	                            <th rowspan="2" class="text-center">能耗(MJ)</th>
-	                            <th colspan="8" class="text-center">排放(kg)</th>
+	                            <th rowspan="2" class="text-center" th:text="#{tool.mater-name}"></th>
+	                            <th rowspan="2" class="text-center" th:text="#{tool.amount}+'(t)'"></th>
+	                            <th rowspan="2" class="text-center" th:text="#{tool.cost}"></th>
+	                            <th rowspan="2" class="text-center" th:text="#{tool.energy}+'(MJ)'"></th>
+	                            <th colspan="8" class="text-center" th:text="#{tool.emission}+'(kg)'"></th>
 	                        </tr>
 	                        <tr>
 	                            <th class="text-center">CO<sub>2</sub></th>
@@ -492,21 +490,21 @@
 	            </form>
 	            <form id="inventoryConserveItemForm" class="form-horizontal" role="form">
 	                <fieldset>
-	                    <legend>请输入养护时间表：</legend>
+	                    <legend th:text="#{tool.in-cons-table}"></legend>
 	                    <div class="table-responsive">
 	                  <table id="conserveInventoryItemTable"
 	                    class="table table-bordered table-hover table-striped table-condensed">
 	                    <thead>
 	                        <tr>
-	                            <th class="text-center">养护措施</th>
-	                            <th class="text-center">养护时间</th>
-	                            <th class="text-center">养护区封闭车道数/总车道数</th>
-	                            <th class="text-center">养护时长(天)</th>
-	                            <th class="text-center">养护区面积（%）</th>
-	                            <th class="text-center">平均深度（cm）</th>
-	                            <th class="text-center" id="conserveItemI7Text">沥青种类</th>
-	                            <th class="text-center" id="conserveItemI8">油石比（%）</th>
-	                            <th class="text-center">操作</th>
+	                            <th class="text-center" th:text="#{tool.cons-meas}"></th>
+	                            <th class="text-center" th:text="#{tool.cons-time}"></th>
+	                            <th class="text-center" th:text="#{tool.cons-lane}"></th>
+	                            <th class="text-center" th:text="#{tool.cons-days}+'('+#{tool.day}+')'"></th>
+	                            <th class="text-center" th:text="#{tool.cons-area}+'(%)'"></th>
+	                            <th class="text-center" th:text="#{tool.aver-dept}+'(cm)'"></th>
+	                            <th class="text-center" id="conserveItemI7Text" th:text="#{tool.asph-type}"></th>
+	                            <th class="text-center" id="conserveItemI8" th:text="#{tool.whetstone}+'(%)'"></th>
+	                            <th class="text-center" th:text="#{system.operation}"></th>
 	                        </tr>
 	                    </thead>
 	                    <tbody class="text-center">
@@ -545,12 +543,12 @@
 	            </div>
 	                    <div class="form-group">
 	                        <div class="col-md-2 pull-left">
-	                        <button class="king-btn king-radius king-warning" type="button" id="addConserveItem">添加养护条目</button>
+	                        <button class="king-btn king-radius king-warning" type="button" id="addConserveItem"><span th:text="#{tool.add-cons-item}"></span></button>
 	                        </div>
-	                        <label class="col-md-2 control-label">养护时间表不确定性：</label>
+	                        <label class="col-md-2 control-label" th:text="#{tool.cons-sche-un}"></label>
 	                        <div class="col-md-2">
 	                            <div class="input-group">
-	                            <input type="text" class="form-control" placeholder="百分比，5~30之间" id="conserveUncertainty"
+	                            <input type="text" class="form-control" placeholder="5 ~ 30" id="conserveUncertainty"
 	                                name="conserveUncertainty">
 	                            <div class="input-group-addon">%</div>
 	                            </div>
@@ -558,17 +556,17 @@
 	                    </div>
 	                </fieldset>
 	                <div class="text-center">
-	                    <button class="king-btn king-radius king-danger" type="button" id="conserveMaterialDefaultValue">默认参数</button>
-	                    <button class="king-btn king-radius king-success" type="submit">计算原材料用量</button>
+	                    <button class="king-btn king-radius king-danger" type="button" id="conserveMaterialDefaultValue"><span th:text="#{tool.default-val}"></span></button>
+	                    <button class="king-btn king-radius king-success" type="submit"><span th:text="#{tool.calc-cons-mat-amo}"></span></button>
 	                </div>
 	            </form>
 	            <form id="inventoryConserveMaterialForm" class="form-horizontal mt20" role="form" style="display: none;">
 	                <fieldset>
-	                    <legend>请选择具体材料：</legend>
+	                    <legend th:text="#{tool.choose-mater}"></legend>
 	                    <div class="row">
 	                        <div class="col-md-6" id="gravelSelectConserve" style="display: none;">
 	                            <div class="form-group">
-	                                <label class="col-md-3 control-label">碎石集料：</label>
+	                                <label class="col-md-3 control-label" th:text="#{tool.gravel}"></label>
 	                                <div class="col-md-9">
 	                                    <select id="gravelConserve" name="gravelConserve" class="form-control"
 	                                        style="width: 100%">
@@ -579,7 +577,7 @@
 	                        <div class="col-md-6" id="ordinaryAsphaltSelectConserve"
 	                            style="display: none;">
 	                            <div class="form-group">
-	                                <label class="col-md-3 control-label">普通沥青：</label>
+	                                <label class="col-md-3 control-label" th:text="#{tool.ordi-asph}"></label>
 	                                <div class="col-md-9">
 	                                    <select id="ordinaryAsphaltConserve" name="ordinaryAsphaltConserve"
 	                                        class="form-control" style="width: 100%">
@@ -590,7 +588,7 @@
 	                        <div class="col-md-6" id="modifiedAsphaltSelectConserve"
 	                            style="display: none;">
 	                            <div class="form-group">
-	                                <label class="col-md-3 control-label">改性沥青：</label>
+	                                <label class="col-md-3 control-label" th:text="#{tool.modi-asph}"></label>
 	                                <div class="col-md-9">
 	                                    <select id="modifiedAsphaltConserve" name="modifiedAsphaltConserve"
 	                                        class="form-control" style="width: 100%">
@@ -601,7 +599,7 @@
 	                        <div class="col-md-6" id="highViscosityAsphaltSelectConserve"
 	                            style="display: none;">
 	                            <div class="form-group">
-	                                <label class="col-md-3 control-label">高粘度沥青：</label>
+	                                <label class="col-md-3 control-label" th:text="#{tool.high-asph}"></label>
 	                                <div class="col-md-9">
 	                                    <select id="highViscosityAsphaltConserve" name="highViscosityAsphaltConserve"
 	                                        class="form-control" style="width: 100%">
@@ -612,21 +610,21 @@
 	                    </div>
 	                </fieldset>
 	                <div class="text-center">
-	                    <button class="king-btn king-radius king-danger" type="button" id="conserveMaterialTypeDefaultValue">默认参数</button>
-	                    <button class="king-btn king-radius king-success" type="submit">计算养护（原材料）清单</button>
+	                    <button class="king-btn king-radius king-danger" type="button" id="conserveMaterialTypeDefaultValue"><span th:text="#{tool.default-val}"></span></button>
+	                    <button class="king-btn king-radius king-success" type="submit"><span th:text="#{tool.calc-cons-mat}"></span></button>
 	                </div>
 	            </form>
 	            <form class="form-horizontal mt20" role="form">
 	                <fieldset>
-	                  <legend><b>结果显示（养护施工区域的额外经济成本）</b></legend>
+	                  <legend><b th:text="#{tool.res-cons-extra}"></b></legend>
 	            <div class="table-responsive">
 	                  <table id="conserveInventoryEconomicTable"
 	                    class="table table-bordered table-hover table-striped table-condensed">
 	                    <thead>
 	                        <tr>
-	                            <th class="text-center">时间成本（元）</th>
-	                            <th class="text-center">车辆运行成本（元）</th>
-	                            <th class="text-center">安全成本（元）</th>
+	                            <th class="text-center" th:text="#{tool.time-cost}+'('+#{tool.rmb}+')'"></th>
+	                            <th class="text-center" th:text="#{tool.vehi-oper-cost}+'('+#{tool.rmb}+')'"></th>
+	                            <th class="text-center" th:text="#{tool.safe-cost}"></th>
 	                        </tr>
 	                    </thead>
 	                    <tbody class="text-center">
@@ -644,87 +642,87 @@
 	            </form>
 	            <form id="inventoryConserveBaseForm" class="form-horizontal" role="form">
 	                <fieldset>
-	                    <legend>请输入养护经济环境成本计算基本信息：</legend>
+	                    <legend th:text="#{tool.in-cons-base}"></legend>
 	                    <div class="form-group">
-	                        <label class="col-md-2 control-label">初始年平均日交通量：</label>
+	                        <label class="col-md-2 control-label" th:text="#{tool.init-traffic}"></label>
 	                        <div class="col-md-2">
-	                            <input type="text" class="form-control" placeholder="请输入" id="conserveBase1"
+	                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="conserveBase1"
 	                                name="conserveBase1">
 	                        </div>
-	                        <label class="col-md-2 control-label">交通增长率：</label>
+	                        <label class="col-md-2 control-label" th:text="#{tool.traffic-grow}"></label>
 	                        <div class="col-md-2">
 	                            <div class="input-group">
-	                            <input type="text" class="form-control" placeholder="百分比" id="conserveBase2"
+	                            <input type="text" class="form-control" th:placeholder="#{tool.percent}" id="conserveBase2"
 	                                name="conserveBase2">
 	                            <div class="input-group-addon">%</div>
 	                            </div>
 	                        </div>
-	                        <label class="col-md-2 control-label">正常行车速度：</label>
+	                        <label class="col-md-2 control-label" th:text="#{tool.nor-speed}"></label>
                             <div class="col-md-2">
                                 <div class="input-group">
-                                <input type="text" class="form-control" placeholder="请输入" id="conserveBase6"
+                                <input type="text" class="form-control" th:placeholder="#{system.input}" id="conserveBase6"
                                     name="conserveBase6">
                                 <div class="input-group-addon">km/h</div>
                                 </div> 
                             </div>
 	                    </div>
 	                    <div class="form-group">
-	                        <label class="col-md-2 control-label">时间成本：</label>
+	                        <label class="col-md-2 control-label" th:text="#{tool.time-cost}"></label>
 	                        <div class="col-md-2">
 	                            <div class="input-group">
-	                            <input type="text" class="form-control" placeholder="请输入" id="conserveBase4"
+	                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="conserveBase4"
 	                                name="conserveBase4">
-	                            <div class="input-group-addon">¥/车·小时</div>
+	                            <div class="input-group-addon" th:text="#{tool.rmb-car-hour}"></div>
 	                            </div>
 	                        </div>
-	                        <label class="col-md-2 control-label">车辆运行成本：</label>
+	                        <label class="col-md-2 control-label" th:text="#{tool.vehi-oper-cost}"></label>
 	                        <div class="col-md-2">
 	                            <div class="input-group">
-	                            <input type="text" class="form-control" placeholder="请输入" id="conserveBase5"
+	                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="conserveBase5"
 	                                name="conserveBase5">
-	                            <div class="input-group-addon">¥/车·千米</div>
+	                            <div class="input-group-addon" th:text="#{tool.rmb-car-km}"></div>
 	                            </div>
 	                        </div>
-	                        <label class="col-md-2 control-label">折现率：</label>
+	                        <label class="col-md-2 control-label" th:text="#{tool.discount-rate}"></label>
                             <div class="col-md-2">
                                 <div class="input-group">
-                                <input type="text" class="form-control" placeholder="百分比" id="conserveBase3"
+                                <input type="text" class="form-control" th:placeholder="#{tool.percent}" id="conserveBase3"
                                     name="conserveBase3">
                                 <div class="input-group-addon">%</div>
                                 </div>
                             </div>
 	                    </div>
 	                    <div class="form-group">
-	                        <label class="col-md-2 control-label">施工区域行车速度：</label>
+	                        <label class="col-md-2 control-label" th:text="#{tool.cons-car-speed}"></label>
 	                        <div class="col-md-2">
 	                            <div class="input-group">
-	                            <input type="text" class="form-control" placeholder="请输入" id="conserveBase7"
+	                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="conserveBase7"
 	                                name="conserveBase7">
 	                            <div class="input-group-addon">km/h</div>
                                 </div> 
 	                        </div>
-	                        <label class="col-md-2 control-label">施工区域堵塞长度：</label>
+	                        <label class="col-md-2 control-label" th:text="#{tool.cons-block-len}"></label>
 	                        <div class="col-md-2">
 	                            <div class="input-group">
-	                            <input type="text" class="form-control" placeholder="请输入" id="conserveBase8"
+	                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="conserveBase8"
 	                                name="conserveBase8">
 	                            <div class="input-group-addon">km</div>
 	                            </div>
 	                        </div>
-	                        <label class="col-md-2 control-label">堵塞车辆百分比：</label>
+	                        <label class="col-md-2 control-label" th:text="#{tool.block-car-prec}"></label>
 	                        <div class="col-md-2">
 	                            <div class="input-group">
-	                            <input type="text" class="form-control" placeholder="百分比" id="conserveBase9"
+	                            <input type="text" class="form-control" th:placeholder="#{tool.percent}" id="conserveBase9"
 	                                name="conserveBase9">
 	                            <div class="input-group-addon">%</div>
 	                            </div>
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
-	                        <label class="col-md-2 control-label">堵塞运行速度：</label>
+	                        <label class="col-md-2 control-label" th:text="#{tool.block-oper-speed}"></label>
 	                        <div class="col-md-2">
 	                            <div class="input-group">
-	                            <input type="text" class="form-control" placeholder="请输入" id="conserveBase10"
+	                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="conserveBase10"
 	                                name="conserveBase10">
 	                            <div class="input-group-addon">km/h</div>
                                 </div> 
@@ -732,19 +730,17 @@
 	                    </div>
 	                </fieldset>
 	                <div class="text-center">
-	                    <button class="king-btn king-radius king-danger" type="button" id="conserveBaseDefaultValue">默认参数</button>
-	                    <button class="king-btn king-radius king-success" type="submit">计算养护（额外经济成本）清单</button>
+	                    <button class="king-btn king-radius king-danger" type="button" id="conserveBaseDefaultValue"><span th:text="#{tool.default-val}"></span></button>
+	                    <button class="king-btn king-radius king-success" type="submit"><span th:text="#{tool.calc-cons-extra}"></span></button>
 	                </div>
 	            </form>
             </div>
-            
-            
             <div class="tab-pane fade" id="use1InventoryTab" style="padding:15px;">
                 <form class="form-horizontal" role="form">
 	                <fieldset>
-	                  <legend><b>结果显示</b></legend>
+	                  <legend><b th:text="#{tool.res}"></b></legend>
 	                  <div class="form-group">
-	                    <label class="col-sm-2 control-label">电耗减少：</label>
+	                    <label class="col-sm-2 control-label" th:text="#{tool.ele-desc}"></label>
 	                    <div class="col-sm-10">
 	                      <p id="electricityReduce" class="form-control-static"></p>
 	                    </div>
@@ -753,22 +749,22 @@
 	            </form>
 	            <form id="inventoryUse1Form" class="form-horizontal" role="form">
 	                <fieldset>
-	                    <legend>请输入参数：</legend>
+	                    <legend th:text="#{system.input}"></legend>
 	                    <div class="form-group">
-	                        <label class="col-md-2 control-label">路面反射率：</label>
+	                        <label class="col-md-2 control-label" th:text="#{tool.road-refl}"></label>
 	                        <div class="col-md-2">
-	                            <input type="text" class="form-control" placeholder="请输入" id="pavementReflectance"
+	                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="pavementReflectance"
 	                                name="pavementReflectance">
 	                        </div>
-	                        <label class="col-md-2 control-label">非路面反射率：</label>
+	                        <label class="col-md-2 control-label" th:text="#{tool.non-road-refl}"></label>
 	                        <div class="col-md-2">
-	                            <input type="text" class="form-control" placeholder="请输入" id="nonPavementReflectance"
+	                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="nonPavementReflectance"
 	                                name="nonPavementReflectance">
 	                        </div>
-	                        <label class="col-md-2 control-label">反射率影响系数：</label>
+	                        <label class="col-md-2 control-label" th:text="#{tool.refl-infl-coef}"></label>
 	                        <div class="col-md-2">
 	                            <div class="input-group">
-	                            <input type="text" class="form-control" placeholder="请输入" id="reflectCoefficient"
+	                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="reflectCoefficient"
 	                                name="reflectCoefficient">
 	                            <div class="input-group-addon">kWh/m<sup>2</sup></div>
 	                            </div>
@@ -776,8 +772,8 @@
 	                    </div>
 	                </fieldset>
 	                <div class="text-center">
-	                    <button class="king-btn king-radius king-danger" type="button" id="use1DefaultValue">默认参数</button>
-	                    <button class="king-btn king-radius king-success" type="submit">计算使用（反射率）清单</button>
+	                    <button class="king-btn king-radius king-danger" type="button" id="use1DefaultValue"><span th:text="#{tool.default-val}"></span></button>
+	                    <button class="king-btn king-radius king-success" type="submit"><span th:text="#{tool.calc}"></span></button>
 	                </div>
 	            </form>
             
@@ -785,13 +781,13 @@
             <div class="tab-pane fade" id="use2InventoryTab" style="padding:15px;">
             <form class="form-horizontal" role="form">
                 <fieldset>
-                  <legend><b>结果显示</b></legend>
+                  <legend><b th:text="#{tool.res}"></b></legend>
             <div class="table-responsive">
                 <table id="use2InventoryTable2" class="table table-bordered table-hover table-striped table-condensed">
                     <thead>
                         <tr>
-                            <th class="text-center">绕行比例</th>
-                            <th class="text-center">交通总量</th>
+                            <th class="text-center" th:text="#{tool.bypass-ratio}"></th>
+                            <th class="text-center" th:text="#{tool.total-traffic}"></th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
@@ -809,11 +805,11 @@
                     class="table table-bordered table-hover table-striped table-condensed">
                     <thead>
                         <tr>
-                            <th rowspan="2" class="text-center">燃料名称</th>
-                            <th rowspan="2" class="text-center">用量</th>
-                            <th rowspan="2" class="text-center">成本(元)</th>
-                            <th rowspan="2" class="text-center">能耗(MJ)</th>
-                            <th colspan="8" class="text-center">排放(kg)</th>
+                            <th rowspan="2" class="text-center" th:text="#{tool.fuel-name}"></th>
+                            <th rowspan="2" class="text-center" th:text="#{tool.amount}"></th>
+                            <th rowspan="2" class="text-center" th:text="#{tool.cost}"></th>
+                            <th rowspan="2" class="text-center" th:text="#{tool.energy}+'(MJ)'"></th>
+                            <th colspan="8" class="text-center" th:text="#{tool.emission}+'(kg)'"></th>
                         </tr>
                         <tr>
                             <th class="text-center">CO<sub>2</sub></th>
@@ -851,73 +847,73 @@
               </form>
             <form id="inventoryUse2Form" class="form-horizontal" role="form">
                 <fieldset>
-                    <legend>路面与交通：</legend>
+                    <legend th:text="#{tool.road-traffic}"></legend>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">路面类型：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.pavement-type}"></label>
                         <div class="col-md-2">
                             <p id="roadTypeUse2" class="form-control-static"></p>
                         </div>
-                        <label class="col-md-2 control-label">路面寿命：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.road-life}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="use2Item1"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="use2Item1"
                                 name="use2Item1">
-                            <div class="input-group-addon">年</div>
+                            <div class="input-group-addon" th:text="#{tool.year}"></div>
                             </div>
                         </div>
-                        <label class="col-md-2 control-label">透水率：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.permeability}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="百分比" id="use2Item9"
+                            <input type="text" class="form-control" th:placeholder="#{tool.percent}" id="use2Item9"
                                 name="use2Item9">
                             <div class="input-group-addon">%</div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group" id="conserveBaseInfoInUse2" style="display: none;">
-                        <label class="col-md-2 control-label">初始年平均日交通量：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.init-traffic}"></label>
                         <div class="col-md-2">
-                            <input type="text" class="form-control" placeholder="请输入" id="use2Item3"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="use2Item3"
                                 name="use2Item3">
                         </div>
-                        <label class="col-md-2 control-label">交通增长率：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.traffic-grow}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="百分比" id="use2Item7"
+                            <input type="text" class="form-control" th:placeholder="#{tool.percent}" id="use2Item7"
                                 name="use2Item7">
                             <div class="input-group-addon">%</div>
                             </div>
                         </div>
-                        <label class="col-md-2 control-label">正常行车速度：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.nor-speed}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="use2Item2"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="use2Item2"
                                 name="use2Item2">
                             <div class="input-group-addon">km/h</div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">重型车平均油耗：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.heavy-car-c}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="use2Item6"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="use2Item6"
                                 name="use2Item6">
                             <div class="input-group-addon">L/km</div>
                             </div>
                         </div>
-                        <label class="col-md-2 control-label">重型车比例：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.heavy-car-prop}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="百分比" id="use2Item4"
+                            <input type="text" class="form-control" th:placeholder="#{tool.percent}" id="use2Item4"
                                 name="use2Item4">
                             <div class="input-group-addon">%</div>
                             </div>
                         </div>
-                        <label class="col-md-2 control-label">汽油车平均油耗：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.gasoline-car-c}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="use2Item5"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="use2Item5"
                                 name="use2Item5">
                             <div class="input-group-addon">L/km</div>
                             </div>
@@ -925,28 +921,28 @@
                     </div>
                 </fieldset>
                 <fieldset>
-                    <legend>气候：</legend>
+                    <legend th:text="#{tool.climate}"></legend>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">当地年降雨量：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.annual-rain}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="use2Item10"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="use2Item10"
                                 name="use2Item10">
                             <div class="input-group-addon">mm</div>
                             </div>
                         </div>
-                        <label class="col-md-2 control-label">夏季正午气温：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.noon-temp}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="use2Item19"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="use2Item19"
                                 name="use2Item19">
                             <div class="input-group-addon">°C</div>
                             </div>
                         </div>
-                        <label class="col-md-2 control-label">夏季正午相对湿度：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.noon-humidity}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="百分比" id="use2Item20"
+                            <input type="text" class="form-control" th:placeholder="#{tool.percent}" id="use2Item20"
                                 name="use2Item20">
                             <div class="input-group-addon">%</div>
                             </div>
@@ -954,54 +950,54 @@
                     </div>
                 </fieldset>
                 <fieldset>
-                    <legend>内涝：</legend>
+                    <legend th:text="#{tool.waterlog}"></legend>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">涉水额外油耗比例：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.water-fuel-extra}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="百分比" id="use2Item8"
+                            <input type="text" class="form-control" th:placeholder="#{tool.percent}" id="use2Item8"
                                 name="use2Item8">
                             <div class="input-group-addon">%</div>
                             </div>
                         </div>
-                        <label class="col-md-2 control-label">平均深度：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.aver-dept}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="use2Item11"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="use2Item11"
                                 name="use2Item11">
                             <div class="input-group-addon">m</div>
                             </div>
                         </div>
-                        <label class="col-md-2 control-label">平均持续时间：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.aver-conti-time}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="use2Item12"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="use2Item12"
                                 name="use2Item12">
-                            <div class="input-group-addon">d</div>
+                            <div class="input-group-addon" th:text="#{tool.day}"></div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">频率：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.freq}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="use2Item13"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="use2Item13"
                                 name="use2Item13">
-                            <div class="input-group-addon">次/年</div>
+                            <div class="input-group-addon" th:text="#{tool.time-per-year}"></div>
                             </div>
                         </div>
-                        <label class="col-md-2 control-label">绕行距离：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.circ-distance}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="use2Item14"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="use2Item14"
                                 name="use2Item14">
                             <div class="input-group-addon">km</div>
                             </div>
                         </div>
-                        <label class="col-md-2 control-label">淹没路段长度：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.subm-road-len}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="use2Item15"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="use2Item15"
                                 name="use2Item15">
                             <div class="input-group-addon">km</div>
                             </div>
@@ -1009,25 +1005,25 @@
                     </div>
                 </fieldset>
                 <fieldset>
-                    <legend>水循环：</legend>
+                    <legend th:text="#{tool.water-cycle}"></legend>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">径流系数：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.runoff-coef}"></label>
                         <div class="col-md-2">
-                            <input type="text" class="form-control" placeholder="请输入" id="use2Item16"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="use2Item16"
                                 name="use2Item16">
                         </div>
-                        <label class="col-md-2 control-label">水运距：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.water-distance}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="use2Item17"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="use2Item17"
                                 name="use2Item17">
                             <div class="input-group-addon">km</div>
                             </div>
                         </div>
-                        <label class="col-md-2 control-label">水运输耗电效率：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.water-trans-pow}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="use2Item18"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="use2Item18"
                                 name="use2Item18">
                             <div class="input-group-addon">kWh/t•km</div>
                             </div>
@@ -1035,20 +1031,20 @@
                     </div>
                 </fieldset>
                 <fieldset>
-                    <legend>污染物基础浓度：</legend>    
+                    <legend th:text="#{tool.poll-base-conc}"></legend>    
                     <div class="form-group">
-                        <label class="col-md-2 control-label">Pb基础浓度：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.pb-conc}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="use2Item21"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="use2Item21"
                                 name="use2Item21">
                             <div class="input-group-addon">mg/L</div>
                             </div>
                         </div>
-                        <label class="col-md-2 control-label">Zn基础浓度：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.zn-conc}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="use2Item22"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="use2Item22"
                                 name="use2Item22">
                             <div class="input-group-addon">mg/L</div>
                             </div>
@@ -1056,21 +1052,21 @@
                     </div>
                 </fieldset>
                 <fieldset>
-                    <legend>请选择具体燃料：</legend>
+                    <legend th:text="#{tool.choose-fuel}"></legend>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">汽油：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.gasoline}"></label>
                         <div class="col-md-4">
                             <select id="gasolineUse2" name="gasolineUse2" class="form-control" style="width: 100%">
                             </select>
                         </div>
-                        <label class="col-md-2 control-label">柴油：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.diesel}"></label>
                         <div class="col-md-4">
                             <select id="dieselUse2" name="dieselUse2" class="form-control" style="width: 100%">
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">电：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.elec}"></label>
                         <div class="col-md-4">
                             <select id="electricityUse2" name="electricityUse2" class="form-control" style="width: 100%">
                             </select>
@@ -1078,25 +1074,25 @@
                     </div>
                 </fieldset>
                 <div class="text-center">
-                    <button class="king-btn king-radius king-danger" type="button" id="use2DefaultValue">默认参数</button>
-                    <button class="king-btn king-radius king-success" type="submit">计算使用（透水率）清单</button>
+                    <button class="king-btn king-radius king-danger" type="button" id="use2DefaultValue"><span th:text="#{tool.default-val}"></span></button>
+                    <button class="king-btn king-radius king-success" type="submit"><span th:text="#{tool.calc}"></span></button>
                 </div>
             </form>
             </div>
             <div class="tab-pane fade" id="use3InventoryTab" style="padding:15px;">
             <form class="form-horizontal" role="form">
                 <fieldset>
-                  <legend><b>结果显示</b></legend>
+                  <legend><b th:text="#{tool.res}"></b></legend>
             <div class="table-responsive">
                 <table id="use3InventoryTable"
                     class="table table-bordered table-hover table-striped table-condensed">
                     <thead>
                         <tr>
-                            <th rowspan="2" class="text-center">燃料名称</th>
-                            <th rowspan="2" class="text-center">用量(kg)</th>
-                            <th rowspan="2" class="text-center">成本(元)</th>
-                            <th rowspan="2" class="text-center">能耗(MJ)</th>
-                            <th colspan="8" class="text-center">排放(kg)</th>
+                            <th rowspan="2" class="text-center" th:text="#{tool.fuel-name}"></th>
+                            <th rowspan="2" class="text-center" th:text="#{tool.amount}+'(kg)'"></th>
+                            <th rowspan="2" class="text-center" th:text="#{tool.cost}"></th>
+                            <th rowspan="2" class="text-center" th:text="#{tool.energy}+'(MJ)'"></th>
+                            <th colspan="8" class="text-center" th:text="#{tool.emission}+'(kg)'"></th>
                         </tr>
                         <tr>
                             <th class="text-center">CO<sub>2</sub></th>
@@ -1134,73 +1130,73 @@
               </form>
             <form id="inventoryUse3Form" class="form-horizontal" role="form">
                 <fieldset>
-                    <legend>请输入参数：</legend>
+                    <legend th:text="#{system.input}"></legend>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">初始平整度指数IRI：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.init-iri}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="initialIRI"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="initialIRI"
                                 name="initialIRI">
                             <div class="input-group-addon">m/km</div>
                             </div>
                         </div>
-                        <label class="col-md-2 control-label">重型车平均等效轴载作用次数：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.heavy-car-times}"></label>
                         <div class="col-md-2">
-                            <input type="text" class="form-control" placeholder="请输入" id="heavyAxleloadTimes"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="heavyAxleloadTimes"
                                 name="heavyAxleloadTimes">
                         </div>
-                        <label class="col-md-2 control-label">小汽车平均等效轴载作用次数：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.small-car-times}"></label>
                         <div class="col-md-2">
-                            <input type="text" class="form-control" placeholder="请输入" id="smallAxleloadTimes"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="smallAxleloadTimes"
                                 name="smallAxleloadTimes">
                         </div>
                     </div>
                     <div id="use2ItemInUse3" style="display:none;">
                         <div class="form-group">
-                            <label class="col-md-2 control-label">重型车平均油耗：</label>
+                            <label class="col-md-2 control-label" th:text="#{tool.heavy-car-c}"></label>
                             <div class="col-md-2">
                                 <div class="input-group">
-                                <input type="text" class="form-control" placeholder="请输入" id="use2Item6InUse3"
+                                <input type="text" class="form-control" th:placeholder="#{system.input}" id="use2Item6InUse3"
                                     name="use2Item6InUse3">
                                 <div class="input-group-addon">L/km</div>
                                 </div>
                             </div>
-                            <label class="col-md-2 control-label">重型车比例：</label>
+                            <label class="col-md-2 control-label" th:text="#{tool.heavy-car-prop}"></label>
                             <div class="col-md-2">
                                 <div class="input-group">
-                                <input type="text" class="form-control" placeholder="百分比" id="use2Item4InUse3"
+                                <input type="text" class="form-control" th:placeholder="#{tool.percent}" id="use2Item4InUse3"
                                     name="use2Item4InUse3">
                                 <div class="input-group-addon">%</div>
                                 </div>
                             </div>
-                            <label class="col-md-2 control-label">汽油车平均油耗：</label>
+                            <label class="col-md-2 control-label" th:text="#{tool.gasoline-car-c}"></label>
                             <div class="col-md-2">
                                 <div class="input-group">
-                                <input type="text" class="form-control" placeholder="请输入" id="use2Item5InUse3"
+                                <input type="text" class="form-control" th:placeholder="#{system.input}" id="use2Item5InUse3"
                                     name="use2Item5InUse3">
                                 <div class="input-group-addon">L/km</div>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 control-label">路面寿命：</label>
+                            <label class="col-md-2 control-label" th:text="#{tool.road-life}"></label>
                             <div class="col-md-2">
                                 <div class="input-group">
-                                <input type="text" class="form-control" placeholder="请输入" id="use2Item1InUse3"
+                                <input type="text" class="form-control" th:placeholder="#{system.input}" id="use2Item1InUse3"
                                     name="use2Item1InUse3">
-                                <div class="input-group-addon">年</div>
+                                <div class="input-group-addon" th:text="#{tool.year}"></div>
                                 </div>
                             </div>
                             <div id="use2Item3And7InUse3">
-	                            <label class="col-md-2 control-label">初始年平均日交通量：</label>
+	                            <label class="col-md-2 control-label" th:text="#{tool.init-traffic}"></label>
 	                            <div class="col-md-2">
-	                                <input type="text" class="form-control" placeholder="请输入" id="use2Item3InUse3"
+	                                <input type="text" class="form-control" th:placeholder="#{system.input}" id="use2Item3InUse3"
 	                                    name="use2Item3InUse3">
 	                            </div>
-	                            <label class="col-md-2 control-label">交通增长率：</label>
+	                            <label class="col-md-2 control-label" th:text="#{tool.traffic-grow}"></label>
 	                            <div class="col-md-2">
 	                                <div class="input-group">
-	                                <input type="text" class="form-control" placeholder="百分比" id="use2Item7InUse3"
+	                                <input type="text" class="form-control" th:placeholder="#{tool.percent}" id="use2Item7InUse3"
 	                                    name="use2Item7InUse3">
 	                                <div class="input-group-addon">%</div>
 	                                </div>
@@ -1210,14 +1206,14 @@
                     </div>
                 </fieldset>
                 <fieldset>
-                    <legend>请选择具体燃料：</legend>
+                    <legend th:text="#{tool.choose-fuel}"></legend>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">汽油：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.gasoline}"></label>
                         <div class="col-md-4">
                             <select id="gasolineUse3" name="gasolineUse3" class="form-control" style="width: 100%">
                             </select>
                         </div>
-                        <label class="col-md-2 control-label">柴油：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.diesel}"></label>
                         <div class="col-md-4">
                             <select id="dieselUse3" name="dieselUse3" class="form-control" style="width: 100%">
                             </select>
@@ -1225,23 +1221,23 @@
                     </div>
                 </fieldset>
                 <div class="text-center">
-                    <button class="king-btn king-radius king-danger" type="button" id="use3DefaultValue">默认参数</button>
-                    <button class="king-btn king-radius king-success" type="submit">计算使用（滚动阻力）清单</button>
+                    <button class="king-btn king-radius king-danger" type="button" id="use3DefaultValue"><span th:text="#{tool.default-val}"></span></button>
+                    <button class="king-btn king-radius king-success" type="submit"><span th:text="#{tool.calc}"></span></button>
                 </div>
             </form>
             </div>
             <div class="tab-pane fade" id="recycleInventoryTab" style="padding:15px;">
             <form class="form-horizontal" role="form">
                 <fieldset>
-                  <legend><b>结果显示</b></legend>
+                  <legend><b th:text="#{tool.res}"></b></legend>
                   <div class="table-responsive">
                 <table id="recycleInventoryTable"
                     class="table table-bordered table-hover table-striped table-condensed">
                     <thead>
                         <tr>
-                            <th rowspan="2" class="text-center">成本(元)</th>
-                            <th rowspan="2" class="text-center">能耗(MJ)</th>
-                            <th colspan="8" class="text-center">排放(kg)</th>
+                            <th rowspan="2" class="text-center" th:text="#{tool.cost}"></th>
+                            <th rowspan="2" class="text-center" th:text="#{tool.energy}+'(MJ)'"></th>
+                            <th colspan="8" class="text-center" th:text="#{tool.emission}+'(kg)'"></th>
                         </tr>
                         <tr>
                             <th class="text-center">CO<sub>2</sub></th>
@@ -1277,27 +1273,27 @@
             </form>
             <form id="inventoryRecycleForm" class="form-horizontal" role="form">
                 <fieldset>
-                    <legend>请输入路面破碎参数：</legend>
+                    <legend th:text="#{tool.pave-brok-para}"></legend>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">车辆工作效率：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.vehi-work-effi}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="brokenEfficiencyRecycle"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="brokenEfficiencyRecycle"
                                 name="brokenEfficiencyRecycle">
-                            <div class="input-group-addon">m3/台班</div>
+                            <div class="input-group-addon" th:text="'m3/'+#{tool.one-shift}"></div>
                             </div>
                         </div>
-                        <label class="col-md-2 control-label">车辆油耗效率（L/台班）：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.vehi-fuel-effi}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="brokenFuelConsumption"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="brokenFuelConsumption"
                                 name="brokenFuelConsumption">
-                            <div class="input-group-addon">L/台班</div>
+                            <div class="input-group-addon" th:text="'L/'+#{tool.one-shift}"></div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">燃油种类：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.fuel-type}"></label>
                         <div class="col-md-4">
                             <select id="fuelTypeRecycle" name="fuelTypeRecycle" class="form-control" style="width: 100%">
                             </select>
@@ -1305,17 +1301,17 @@
                     </div>
                 </fieldset>
                 <fieldset>
-                    <legend>请输入回收料运输参数：</legend>
+                    <legend th:text="#{tool.recy-tran-para}"></legend>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">车辆型号：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.vehi-model}"></label>
                         <div class="col-md-4">
                             <select id="recycleVehicleModel" name="recycleVehicleModel" class="form-control" style="width: 100%">
                             </select>
                         </div>
-                        <label class="col-md-2 control-label">运距：</label>
+                        <label class="col-md-2 control-label" th:text="#{tool.distance}"></label>
                         <div class="col-md-2">
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入" id="recycleDistance"
+                            <input type="text" class="form-control" th:placeholder="#{system.input}" id="recycleDistance"
                                 name="recycleDistance">
                             <div class="input-group-addon">km</div>
                             </div>
@@ -1323,8 +1319,8 @@
                     </div>
                 </fieldset>
                 <div class="text-center">
-                    <button class="king-btn king-radius king-danger" type="button" id="recycleDefaultValue">默认参数</button>
-                    <button class="king-btn king-radius king-success" type="submit">计算回收清单</button>
+                    <button class="king-btn king-radius king-danger" type="button" id="recycleDefaultValue"><span th:text="#{tool.default-val}"></span></button>
+                    <button class="king-btn king-radius king-success" type="submit"><span th:text="#{tool.calc}"></span></button>
                 </div>
             </form>
             </div>
@@ -1336,11 +1332,11 @@
 			<div class="text-center">
 				<button class="king-btn king-radius king-info" type="button"
 					id="inventory-prevStep">
-					<i class="fa fa-arrow-left btn-icon"></i>基本信息
+					<i class="fa fa-arrow-left btn-icon"></i> <span th:text="#{tool.fund-info}"></span>
 				</button>
 				<button class="king-btn king-radius king-info" type="button"
 					id="inventory-nextStep">
-					<i class="fa fa-arrow-right btn-icon"></i>影响评价
+					<i class="fa fa-arrow-right btn-icon"></i> <span th:text="#{tool.infl-eval}"></span>
 				</button>
 			</div>
 		</div>
@@ -1361,18 +1357,18 @@
             <div class="col-md-6">
                 <input type="hidden" name="itemId" id="itemId"/>
                 <div class="form-group">
-                    <label class="col-md-4 control-label">养护措施：</label>
+                    <label class="col-md-4 control-label" th:text="#{tool.cons-meas}"></label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" placeholder="请输入" id="conserveItem1"
+                        <input type="text" class="form-control" th:placeholder="#{system.input}" id="conserveItem1"
                                 name="conserveItem1">
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="col-md-4 control-label">养护时间：</label>
+                    <label class="col-md-4 control-label" th:text="#{tool.cons-time}"></label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" placeholder="道路运营多少年后进行维护" id="conserveItem2"
+                        <input type="text" class="form-control" th:placeholder="#{tool.cons-time-place}" id="conserveItem2"
                                 name="conserveItem2">
                     </div>
                 </div>
@@ -1381,21 +1377,21 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="col-md-4 control-label">养护区封闭车道数/总车道数：</label>
+                    <label class="col-md-4 control-label" th:text="#{tool.cons-lane}"></label>
                     <div class="col-md-8">
-                    <input type="text" class="form-control" placeholder="分数，如 1/2" id="conserveItem3"
+                    <input type="text" class="form-control" th:placeholder="#{tool.fraction}" id="conserveItem3"
                                 name="conserveItem3">
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="col-md-4 control-label">养护时长：</label>
+                    <label class="col-md-4 control-label" th:text="#{tool.cons-days}"></label>
                     <div class="col-md-8">
                     <div class="input-group">
-                    <input type="text" class="form-control" placeholder="请输入" id="conserveItem4"
+                    <input type="text" class="form-control" th:placeholder="#{system.input}" id="conserveItem4"
                                 name="conserveItem4">
-                    <div class="input-group-addon">天</div>
+                    <div class="input-group-addon" th:text="#{tool.day}"></div>
                     </div>
                     </div>
                 </div>
@@ -1404,10 +1400,10 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="col-md-4 control-label">养护区面积：</label>
+                    <label class="col-md-4 control-label" th:text="#{tool.cons-area}"></label>
                     <div class="col-md-8">
                     <div class="input-group">
-                    <input type="text" class="form-control" placeholder="百分比" id="conserveItem5"
+                    <input type="text" class="form-control" th:placeholder="#{tool.percent}" id="conserveItem5"
                         name="conserveItem5">
                     <div class="input-group-addon">%</div>
                     </div>
@@ -1416,10 +1412,10 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="col-md-4 control-label">平均深度：</label>
+                    <label class="col-md-4 control-label" th:text="#{tool.aver-dept}"></label>
                     <div class="col-md-8">
                     <div class="input-group">
-                    <input type="text" class="form-control" placeholder="请输入" id="conserveItem6"
+                    <input type="text" class="form-control" th:placeholder="#{system.input}" id="conserveItem6"
                                 name="conserveItem6">
                     <div class="input-group-addon">cm</div>
                     </div>
@@ -1430,7 +1426,7 @@
         <div class="row" id="conserveItem7And8Input">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="col-md-4 control-label">沥青种类：</label>
+                    <label class="col-md-4 control-label" th:text="#{tool.asph-type}"></label>
                     <div class="col-md-8">
                     <select id="conserveItem7" name="conserveItem7" class="form-control" style="width: 100%">
                             </select>
@@ -1439,10 +1435,10 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="col-md-4 control-label">油石比：</label>
+                    <label class="col-md-4 control-label" th:text="#{tool.whetstone}"></label>
                     <div class="col-md-8">
                     <div class="input-group">
-                            <input type="text" class="form-control" placeholder="百分比" id="conserveItem8"
+                            <input type="text" class="form-control" th:placeholder="#{tool.percent}" id="conserveItem8"
                                 name="conserveItem8">
                             <div class="input-group-addon">%</div>
                             </div>
@@ -1452,7 +1448,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="king-btn king-radius king-danger" id="conserveItemDefaultValue"><span>默认参数</span></button>
+        <button type="button" class="king-btn king-radius king-danger" id="conserveItemDefaultValue"><span th:text="#{tool.default-val}"></span></button>
         <button type="submit" class="king-btn king-radius king-info"><span th:text="#{system.save}"></span></button>
         <button type="button" class="king-btn king-radius king-default" data-dismiss="modal"><span th:text="#{system.cancel}"></span></button>
       </div>
