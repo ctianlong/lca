@@ -30,47 +30,46 @@ $(function(){
 		}
 	};
 	var cdRoadType=[
-		{id:1,text:"沥青路面"},
-		{id:2,text:"混凝土路面"},
-		{id:3,text:"铺砖路面"}
+		{id:1,text:iMsg.asphRoad},
+		{id:2,text:iMsg.concRoad},
+		{id:3,text:iMsg.brickRoad}
 	];
 	var cdAsphaltType=[
-		{id:1,text:"普通沥青"},
-		{id:2,text:"改性沥青"},
-		{id:3,text:"高粘度沥青"}
+		{id:1,text:iMsg.ordAsph},
+		{id:2,text:iMsg.modAsph},
+		{id:3,text:iMsg.highAsph}
 	];
 	var cdAsphaltSurfaceMaterial=[
-		{id:1,text:"开级配沥青磨耗层(OGFC)",density:2.1},
-		{id:2,text:"沥青玛蹄脂面层(SMA)",density:2.45},
-		{id:3,text:"密级配沥青混合料(AC)",density:2.35}
-		//{id:4,text:"其它",density:0}
+		{id:1,text:iMsg.ogfc,density:2.1},
+		{id:2,text:iMsg.sma,density:2.45},
+		{id:3,text:iMsg.ac,density:2.35}
 	];
 	var cdLayerMaterial=[
-		{id:1,text:"密级配沥青稳定碎石",density:2.3},
-		{id:2,text:"开级配沥青稳定碎石",density:2.1},
-		{id:3,text:"密级配水泥、石灰稳定碎石",density:2.3},
-		{id:4,text:"开级配水泥、石灰稳定碎石",density:2.1},
-		{id:5,text:"水泥、石灰稳定土",density:1.8},
-		{id:6,text:"级配碎石",density:2.1}
+		{id:1,text:iMsg.dgasg,density:2.3},
+		{id:2,text:iMsg.ogasg,density:2.1},
+		{id:3,text:iMsg.dgclsg,density:2.3},
+		{id:4,text:iMsg.ogclsg,density:2.1},
+		{id:5,text:iMsg.clss,density:1.8},
+		{id:6,text:iMsg.gg,density:2.1}
 	];
 	var cdConcreteSurfaceMaterial=[
-		{id:1,text:"苏混凝土路面",density:2.4},
-		{id:2,text:"配筋式混凝土路面",density:2.4}
+		{id:1,text:iMsg.sConcRoad,density:2.4},
+		{id:2,text:iMsg.rConcRoad,density:2.4}
 	];
 	var cdCementAdmixture=[
-		{id:1,text:"速凝剂"},
-		{id:2,text:"加气剂"},
-		{id:3,text:"增塑剂"},
-		{id:4,text:"强力增塑剂"},
-		{id:5,text:"缓凝剂"},
-		{id:6,text:"减水剂"}
+		{id:1,text:iMsg.snj},
+		{id:2,text:iMsg.jqj},
+		{id:3,text:iMsg.zsj},
+		{id:4,text:iMsg.qlzsj},
+		{id:5,text:iMsg.hnj},
+		{id:6,text:iMsg.jsj}
 	];
 	var cdGwp=[
-		{id:1,createUserId:0,dataSource:"2007 IPCC AR4",year:"20年GWP",co2:1,ch4:72,n2o:289,ccl2f2:11000,chclf2:5160,cf4:5210,c2f6:8630,sf6:16300,nf3:12300},
-		{id:2,createUserId:0,dataSource:"2007 IPCC AR4",year:"50年GWP",co2:1,ch4:25,n2o:298,ccl2f2:10900,chclf2:1810,cf4:7390,c2f6:12200,sf6:22800,nf3:17200},
-		{id:3,createUserId:0,dataSource:"2007 IPCC AR4",year:"100年GWP",co2:1,ch4:7.6,n2o:153,ccl2f2:5200,chclf2:549,cf4:11200,c2f6:18200,sf6:32600,nf3:20700},
-		{id:4,createUserId:0,dataSource:"2013 IPCC AR5",year:"20年GWP",co2:1,ch4:84,n2o:264,ccl2f2:10800,chclf2:5280,cf4:4880,c2f6:8210,sf6:17500,nf3:12800},
-		{id:5,createUserId:0,dataSource:"2013 IPCC AR5",year:"100年GWP",co2:1,ch4:28,n2o:265,ccl2f2:10200,chclf2:1760,cf4:6630,c2f6:11100,sf6:23500,nf3:16100}
+		{id:1,createUserId:0,dataSource:"2007 IPCC AR4",year:"20 years GWP",co2:1,ch4:72,n2o:289,ccl2f2:11000,chclf2:5160,cf4:5210,c2f6:8630,sf6:16300,nf3:12300},
+		{id:2,createUserId:0,dataSource:"2007 IPCC AR4",year:"50 years GWP",co2:1,ch4:25,n2o:298,ccl2f2:10900,chclf2:1810,cf4:7390,c2f6:12200,sf6:22800,nf3:17200},
+		{id:3,createUserId:0,dataSource:"2007 IPCC AR4",year:"100 years GWP",co2:1,ch4:7.6,n2o:153,ccl2f2:5200,chclf2:549,cf4:11200,c2f6:18200,sf6:32600,nf3:20700},
+		{id:4,createUserId:0,dataSource:"2013 IPCC AR5",year:"20 years GWP",co2:1,ch4:84,n2o:264,ccl2f2:10800,chclf2:5280,cf4:4880,c2f6:8210,sf6:17500,nf3:12800},
+		{id:5,createUserId:0,dataSource:"2013 IPCC AR5",year:"100 years GWP",co2:1,ch4:28,n2o:265,ccl2f2:10200,chclf2:1760,cf4:6630,c2f6:11100,sf6:23500,nf3:16100}
 	];
 	var cdSo2Equiv=[
 		{id:1,createUserId:0,dataSource:"TRACI",so2:1,nox:0.7,nh3:1.88,hcl:0.88,hf:1.6,h2s:1.88,hno3:0.51,no2:0.51,no:1.07,h3po4:0.98,so3:0.8,h2so4:0.65}
@@ -122,7 +121,7 @@ $(function(){
 	var $topCementAdmixture=$("#topCementAdmixture").select2({
 		data:cdCementAdmixture,
 		language:iMsg.select2LangCode,
-		placeholder:"可多选",
+		placeholder:iMsg.mulsel,
 		multiple: true
 	});
 	var $concreteBelowLayerMaterial=$("#concreteBelowLayerMaterial").select2({
@@ -133,7 +132,7 @@ $(function(){
 	var $belowCementAdmixture=$("#belowCementAdmixture").select2({
 		data:cdCementAdmixture,
 		language:iMsg.select2LangCode,
-		placeholder:"可多选",
+		placeholder:iMsg.mulsel,
 		multiple: true
 	});
 	$concreteTopLayerMaterial.on("select2:select",function(e){
@@ -272,8 +271,8 @@ $(function(){
 		  return repo.text;
 	  }
 	  var markup="<div class='row'><div class='col-sm-12'><strong>"+repo.name+"</strong></div></div>"+
-	  	"<div class='row'><div class='col-sm-12'>来源："+(repo.dataSource||'')+"</div></div>"+
-	  	"<div class='row'><div class='col-sm-12'>柴油用量（kg)："+(repo.diesel||'')+"</div></div>";
+	  	"<div class='row'><div class='col-sm-12'>["+(repo.dataSource||'')+"]</div></div>"+
+	  	"<div class='row'><div class='col-sm-12'>"+iMsg.diesel+": "+(repo.diesel||'')+" kg</div></div>";
 	  return markup;
 	}
 	function formatPavingEqupSelection(repo) {
@@ -305,7 +304,7 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'不选即为默认值：320t/h',
+		placeholder:iMsg.noChooDefa+': 320t/h',
 		allowClear:true,
 		minimumResultsForSearch:-1, //如要搜索可去掉该选项
 		language:iMsg.select2LangCode,
@@ -325,9 +324,9 @@ $(function(){
 		  return repo.text;
 	  }
 	  var markup="<div class='row'><div class='col-sm-6'><strong>"+repo.fuelType+"</strong></div>"+
-	  	"<div class='col-sm-6'>来源："+(repo.dataSource||'')+"</div></div>"+
-	  	"<div class='row'><div class='col-sm-6'>价格："+(repo.cost||'')+"</div>"+
-	  	"<div class='col-sm-6'>净热值："+(repo.energyConsume!=null?repo.energyConsume.toExponential(1):'')+"</div></div>"+
+	  	"<div class='col-sm-6'>["+(repo.dataSource||'')+"]</div></div>"+
+	  	"<div class='row'><div class='col-sm-6'>"+iMsg.price+": "+(repo.cost||'')+"</div>"+
+	  	"<div class='col-sm-6'>"+iMsg.ncv+": "+(repo.energyConsume!=null?repo.energyConsume.toExponential(1):'')+"</div></div>"+
 	  	"<div class='row'><div class='col-sm-3'>CO<sub>2</sub>："+(repo.emissionCo2!=null?repo.emissionCo2.toExponential(1):'')+"</div>"+
 	  	"<div class='col-sm-3'>CH<sub>4</sub>："+(repo.emissionCh4!=null?repo.emissionCh4.toExponential(1):'')+"</div>"+
 	  	"<div class='col-sm-3'>N<sub>2</sub>O："+(repo.emissionN2o!=null?repo.emissionN2o.toExponential(1):'')+"</div>"+
@@ -366,9 +365,9 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种具体燃料',
+		placeholder:iMsg.chooFuel,
 		allowClear:true,
-		minimumResultsForSearch:-1, //如要搜索可去掉该选项
+		minimumResultsForSearch:-1,
 		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatFuel,
@@ -396,9 +395,9 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种具体燃料',
+		placeholder:iMsg.chooFuel,
 		allowClear:true,
-		minimumResultsForSearch:-1, //如要搜索可去掉该选项
+		minimumResultsForSearch:-1,
 		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatFuel,
@@ -428,7 +427,7 @@ $(function(){
 		},
 		placeholder:'请选择一种具体燃料',
 		allowClear:true,
-		minimumResultsForSearch:-1, //如要搜索可去掉该选项
+		minimumResultsForSearch:-1,
 		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatFuel,
@@ -456,20 +455,19 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种具体燃料',
+		placeholder:iMsg.chooFuel,
 		allowClear:true,
-		minimumResultsForSearch:-1, //如要搜索可去掉该选项
+		minimumResultsForSearch:-1,
 		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatFuel,
 		templateSelection: formatFuelSelection
 	});
-	
 	// 基层
 	var $baseLayerMaterial=$("#baseLayerMaterial").select2({
 		data:cdLayerMaterial,
 		minimumResultsForSearch:-1,
-		language:"zh-CN"
+		language:iMsg.select2LangCode
 	});
 	var $baseLayerAsphaltType=$("#baseLayerAsphaltType").select2({
 		data:cdAsphaltType,
@@ -504,9 +502,9 @@ $(function(){
 		  return repo.text;
 	  }
 	  var markup="<div class='row'><div class='col-sm-6'><strong>"+repo.materialName+"</strong></div>"+
-	  	"<div class='col-sm-6'>来源："+(repo.dataSource||'')+"</div></div>"+
-	  	"<div class='row'><div class='col-sm-6'>成本："+(repo.cost||'')+"</div>"+
-	  	"<div class='col-sm-6'>能耗："+(repo.energyConsume!=null?repo.energyConsume.toExponential(1):'')+"</div></div>"+
+	  	"<div class='col-sm-6'>["+(repo.dataSource||'')+"]</div></div>"+
+	  	"<div class='row'><div class='col-sm-6'>"+iMsg.cost+": "+(repo.cost||'')+"</div>"+
+	  	"<div class='col-sm-6'>"+iMsg.energy+": "+(repo.energyConsume!=null?repo.energyConsume.toExponential(1):'')+"</div></div>"+
 	  	"<div class='row'><div class='col-sm-3'>CO<sub>2</sub>："+(repo.emissionCo2!=null?repo.emissionCo2.toExponential(1):'')+"</div>"+
 	  	"<div class='col-sm-3'>CH<sub>4</sub>："+(repo.emissionCh4!=null?repo.emissionCh4.toExponential(1):'')+"</div>"+
 	  	"<div class='col-sm-3'>N<sub>2</sub>O："+(repo.emissionN2o!=null?repo.emissionN2o.toExponential(1):'')+"</div>"+
@@ -545,10 +543,10 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种材料',
+		placeholder:iMsg.chooMate,
 		allowClear:true,
 		minimumResultsForSearch:-1,
-		language:"zh-CN",
+		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatRepo,
 		templateSelection: formatRepoSelection
@@ -575,10 +573,10 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种材料',
+		placeholder:iMsg.chooMate,
 		allowClear:true,
 		minimumResultsForSearch:-1,
-		language:"zh-CN",
+		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatRepo,
 		templateSelection: formatRepoSelection
@@ -605,10 +603,10 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种材料',
+		placeholder:iMsg.chooMate,
 		allowClear:true,
 		minimumResultsForSearch:-1,
-		language:"zh-CN",
+		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatRepo,
 		templateSelection: formatRepoSelection
@@ -635,10 +633,10 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种材料',
+		placeholder:iMsg.chooMate,
 		allowClear:true,
 		minimumResultsForSearch:-1,
-		language:"zh-CN",
+		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatRepo,
 		templateSelection: formatRepoSelection
@@ -665,10 +663,10 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种材料',
+		placeholder:iMsg.chooMate,
 		allowClear:true,
 		minimumResultsForSearch:-1,
-		language:"zh-CN",
+		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatRepo,
 		templateSelection: formatRepoSelection
@@ -695,10 +693,10 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种材料',
+		placeholder:iMsg.chooMate,
 		allowClear:true,
 		minimumResultsForSearch:-1,
-		language:"zh-CN",
+		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatRepo,
 		templateSelection: formatRepoSelection
@@ -725,10 +723,10 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种材料',
+		placeholder:iMsg.chooMate,
 		allowClear:true,
 		minimumResultsForSearch:-1,
-		language:"zh-CN",
+		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatRepo,
 		templateSelection: formatRepoSelection
@@ -756,10 +754,10 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种材料',
+		placeholder:iMsg.chooMate,
 		allowClear:true,
 		minimumResultsForSearch:-1,
-		language:"zh-CN",
+		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatRepo,
 		templateSelection: formatRepoSelection
@@ -787,10 +785,10 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种材料',
+		placeholder:iMsg.chooMate,
 		allowClear:true,
 		minimumResultsForSearch:-1,
-		language:"zh-CN",
+		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatRepo,
 		templateSelection: formatRepoSelection
@@ -824,10 +822,10 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种材料',
+		placeholder:iMsg.chooMate,
 		allowClear:true,
 		minimumResultsForSearch:-1,
-		language:"zh-CN",
+		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatRepo,
 		templateSelection: formatRepoSelection
@@ -855,10 +853,10 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种材料',
+		placeholder:iMsg.chooMate,
 		allowClear:true,
 		minimumResultsForSearch:-1,
-		language:"zh-CN",
+		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatRepo,
 		templateSelection: formatRepoSelection
@@ -886,10 +884,10 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种材料',
+		placeholder:iMsg.chooMate,
 		allowClear:true,
 		minimumResultsForSearch:-1,
-		language:"zh-CN",
+		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatRepo,
 		templateSelection: formatRepoSelection
@@ -917,24 +915,23 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种材料',
+		placeholder:iMsg.chooMate,
 		allowClear:true,
 		minimumResultsForSearch:-1,
-		language:"zh-CN",
+		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatRepo,
 		templateSelection: formatRepoSelection
 	});
-	
 	// 运输条件车辆型号选择
 	function formatTransport(repo) {
 	  if (repo.loading) {
 		  return repo.text;
 	  }
 	  var markup="<div class='row'><div class='col-sm-6'><strong>"+repo.vehicleType+"</strong></div>"+
-	  	"<div class='col-sm-6'>来源："+(repo.dataSource||'')+"</div></div>"+
-	  	"<div class='row'><div class='col-sm-6'>成本："+(repo.cost||'')+"</div>"+
-	  	"<div class='col-sm-6'>能耗："+(repo.energyConsume!=null?repo.energyConsume.toExponential(1):'')+"</div></div>"+
+	  	"<div class='col-sm-6'>["+(repo.dataSource||'')+"]</div></div>"+
+	  	"<div class='row'><div class='col-sm-6'>"+iMsg.cost+": "+(repo.cost||'')+"</div>"+
+	  	"<div class='col-sm-6'>"+iMsg.energy+": "+(repo.energyConsume!=null?repo.energyConsume.toExponential(1):'')+"</div></div>"+
 	  	"<div class='row'><div class='col-sm-3'>CO<sub>2</sub>："+(repo.emissionCo2!=null?repo.emissionCo2.toExponential(1):'')+"</div>"+
 	  	"<div class='col-sm-3'>CH<sub>4</sub>："+(repo.emissionCh4!=null?repo.emissionCh4.toExponential(1):'')+"</div>"+
 	  	"<div class='col-sm-3'>N<sub>2</sub>O："+(repo.emissionN2o!=null?repo.emissionN2o.toExponential(1):'')+"</div>"+
@@ -973,9 +970,9 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种车辆，可根据名称搜索',
+		placeholder:iMsg.chooVehi,
 		allowClear:true,
-		language:"zh-CN",
+		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatTransport,
 		templateSelection: formatTransportSelection
@@ -1002,9 +999,9 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种车辆，可根据名称搜索',
+		placeholder:iMsg.chooVehi,
 		allowClear:true,
-		language:"zh-CN",
+		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatTransport,
 		templateSelection: formatTransportSelection
@@ -1031,9 +1028,9 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种车辆，可根据名称搜索',
+		placeholder:iMsg.chooVehi,
 		allowClear:true,
-		language:"zh-CN",
+		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatTransport,
 		templateSelection: formatTransportSelection
@@ -1060,9 +1057,9 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种车辆，可根据名称搜索',
+		placeholder:iMsg.chooVehi,
 		allowClear:true,
-		language:"zh-CN",
+		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatTransport,
 		templateSelection: formatTransportSelection
@@ -1734,7 +1731,7 @@ $(function(){
     		//ozoneRange=$("#ozoneRange").is(":checked")?1:0;
     		if(!(materialRange||transConsRange||use1Range||use2Range||use3Range||conserveRange||recycleRange)){
     			var d = dialog({
-                    content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请至少选择一个阶段范围'+'</p></div>'
+                    content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.chooPhase+'</p></div>'
                 });
                 d.show();
                 setTimeout(function() {
@@ -1744,7 +1741,7 @@ $(function(){
     		}
     		if(!(energyRange||carbonRange||sourRange||eutrophicationRange||ozoneRange)){
     			var d = dialog({
-                    content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请至少选择一个评价范围'+'</p></div>'
+                    content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.chooEval+'</p></div>'
                 });
                 d.show();
                 setTimeout(function() {
@@ -1763,7 +1760,6 @@ $(function(){
     		var gravel=0,ordinaryAsphalt=0,modifiedAsphalt=0,highViscosityAsphalt=0,cement=0,lime=0,rebar=0,snj=0,jqj=0,zsj=0,qlzsj=0,hnj=0,jsj=0,brick=0;
     		// 拌和摊铺相关
     		var lqhnthd=0,lqmtzhd=0;tphd=0;
-    		
     		var baseWeight=area*$("#baseLayerThickness").val()*$baseLayerMaterial.select2("data")[0].density;
 			var bottomBaseWeight=area*$("#bottomBaseLayerThickness").val()*$bottomBaseLayerMaterial.select2("data")[0].density;
 			var cushionWeight=area*$("#cushionLayerThickness").val()*$cushionLayerMaterial.select2("data")[0].density;
@@ -2074,59 +2070,59 @@ $(function(){
 				$("#jsjSelect").hide();
 				materialData.materialList=[];
 				if(gravel>0){
-					materialData.materialList.push({materialMark:"gravel",materialName:"碎石集料",amount:gravel.toFixed(3)});
+					materialData.materialList.push({materialMark:"gravel",materialName:iMsg.gravAgre,amount:gravel.toFixed(3)});
 					$("#gravelSelect").show();
 				}
 				if(ordinaryAsphalt>0){
-					materialData.materialList.push({materialMark:"ordinaryAsphalt",materialName:"普通沥青",amount:ordinaryAsphalt.toFixed(3)});
+					materialData.materialList.push({materialMark:"ordinaryAsphalt",materialName:iMsg.ordAsph,amount:ordinaryAsphalt.toFixed(3)});
 					$("#ordinaryAsphaltSelect").show();
 				}
 				if(modifiedAsphalt>0){
-					materialData.materialList.push({materialMark:"modifiedAsphalt",materialName:"改性沥青",amount:modifiedAsphalt.toFixed(3)});
+					materialData.materialList.push({materialMark:"modifiedAsphalt",materialName:iMsg.modAsph,amount:modifiedAsphalt.toFixed(3)});
 					$("#modifiedAsphaltSelect").show();
 				}
 				if(highViscosityAsphalt>0){
-					materialData.materialList.push({materialMark:"highViscosityAsphalt",materialName:"高粘度沥青",amount:highViscosityAsphalt.toFixed(3)});
+					materialData.materialList.push({materialMark:"highViscosityAsphalt",materialName:iMsg.highAsph,amount:highViscosityAsphalt.toFixed(3)});
 					$("#highViscosityAsphaltSelect").show();
 				}
 				if(cement>0){
-					materialData.materialList.push({materialMark:"cement",materialName:"水泥",amount:cement.toFixed(3)});
+					materialData.materialList.push({materialMark:"cement",materialName:iMsg.cement,amount:cement.toFixed(3)});
 					$("#cementSelect").show();
 				}
 				if(lime>0){
-					materialData.materialList.push({materialMark:"lime",materialName:"石灰",amount:lime.toFixed(3)});
+					materialData.materialList.push({materialMark:"lime",materialName:iMsg.lime,amount:lime.toFixed(3)});
 					$("#limeSelect").show();
 				}
 				if(rebar>0){
-					materialData.materialList.push({materialMark:"rebar",materialName:"钢筋",amount:rebar.toFixed(3)});
+					materialData.materialList.push({materialMark:"rebar",materialName:iMsg.reinforced,amount:rebar.toFixed(3)});
 					$("#rebarSelect").show();
 				}
 				if(snj>0){
-					materialData.materialList.push({materialMark:"snjType",materialName:"速凝剂",amount:snj.toFixed(3)});
+					materialData.materialList.push({materialMark:"snjType",materialName:iMsg.snj,amount:snj.toFixed(3)});
 					$("#snjSelect").show();
 				}
 				if(jqj>0){
-					materialData.materialList.push({materialMark:"jqjType",materialName:"加气剂",amount:jqj.toFixed(3)});
+					materialData.materialList.push({materialMark:"jqjType",materialName:iMsg.jqj,amount:jqj.toFixed(3)});
 					$("#jqjSelect").show();
 				}
 				if(zsj>0){
-					materialData.materialList.push({materialMark:"zsjType",materialName:"增塑剂",amount:zsj.toFixed(3)});
+					materialData.materialList.push({materialMark:"zsjType",materialName:iMsg.zsj,amount:zsj.toFixed(3)});
 					$("#zsjSelect").show();
 				}
 				if(qlzsj>0){
-					materialData.materialList.push({materialMark:"qlzsjType",materialName:"强力增塑剂",amount:qlzsj.toFixed(3)});
+					materialData.materialList.push({materialMark:"qlzsjType",materialName:iMsg.qlzsj,amount:qlzsj.toFixed(3)});
 					$("#qlzsjSelect").show();
 				}
 				if(hnj>0){
-					materialData.materialList.push({materialMark:"hnjType",materialName:"缓凝剂",amount:hnj.toFixed(3)});
+					materialData.materialList.push({materialMark:"hnjType",materialName:iMsg.hnj,amount:hnj.toFixed(3)});
 					$("#hnjSelect").show();
 				}
 				if(jsj>0){
-					materialData.materialList.push({materialMark:"jsjType",materialName:"减水剂",amount:jsj.toFixed(3)});
+					materialData.materialList.push({materialMark:"jsjType",materialName:iMsg.jsj,amount:jsj.toFixed(3)});
 					$("#jsjSelect").show();
 				}
 				if(brick>0){
-					materialData.materialList.push({materialMark:"brick",materialName:"混凝土砖",amount:Math.ceil(brick)}); // 铺砖
+					materialData.materialList.push({materialMark:"brick",materialName:iMsg.concBrick,amount:Math.ceil(brick)}); // 铺砖
 				}
 				var _html='';
 	            var tpl=$('#tpl-materialInventoryTable').html();
@@ -2149,19 +2145,19 @@ $(function(){
 	            $("#mixtureVehicleSelect").hide();
 	            transConsData.transportList=[];
 	            if(gravel>0){
-	            	transConsData.transportList.push({materialMark:"aggregate",materialName:"集料",amount:gravel.toFixed(3)});
+	            	transConsData.transportList.push({materialMark:"aggregate",materialName:iMsg.aggre,amount:gravel.toFixed(3)});
 	            	$("#aggregateVehicleSelect").show();
 	            }
 	            if(allAsphalt>0){
-	            	transConsData.transportList.push({materialMark:"asphalt",materialName:"沥青",amount:allAsphalt.toFixed(3)});
+	            	transConsData.transportList.push({materialMark:"asphalt",materialName:iMsg.asphalt,amount:allAsphalt.toFixed(3)});
 	            	$("#asphaltVehicleSelect").show();
 	            }
 	            if(cement>0){
-	            	transConsData.transportList.push({materialMark:"cement",materialName:"水泥",amount:cement.toFixed(3)});
+	            	transConsData.transportList.push({materialMark:"cement",materialName:iMsg.cement,amount:cement.toFixed(3)});
 	            	$("#cementVehicleSelect").show();
 	            }
 	            if(mixtureAmount>0){
-	            	transConsData.transportList.push({materialMark:"mixture",materialName:"混合料",amount:mixtureAmount.toFixed(3)});
+	            	transConsData.transportList.push({materialMark:"mixture",materialName:iMsg.mixture,amount:mixtureAmount.toFixed(3)});
 	            	$("#mixtureVehicleSelect").show();
 	            }
 	            _html='';
@@ -2171,16 +2167,15 @@ $(function(){
 	                _html += renderTpl(tpl, item);
 	            }
 	            $('#transportInventoryTable tbody').html(_html);
-            
 	            // 计算拌和与摊铺
 	            basicData.lqhnttj=area*lqhnthd/1000;
 	            basicData.lqmtztj=area*lqmtzhd/1000;
 	            basicData.tptj=area*tphd/1000;
 	            var tmpList=[];
-	            tmpList.push({fuelName:"汽油(kg)"});
-	            tmpList.push({fuelName:"柴油(kg)"});
-	            tmpList.push({fuelName:"重油(kg)"});
-	            tmpList.push({fuelName:"电(kWh)"});
+	            tmpList.push({fuelName:iMsg.gasoline+"(kg)"});
+	            tmpList.push({fuelName:iMsg.diesel+"(kg)"});
+	            tmpList.push({fuelName:iMsg.heavyOil+"(kg)"});
+	            tmpList.push({fuelName:iMsg.elec+"(kWh)"});
 	            var _html='';
 	            var tpl=$('#tpl-mixPaveInventoryTable').html();
 	            for (var i=0,len=tmpList.length; i < len; i++){
@@ -2207,9 +2202,9 @@ $(function(){
 					$("#conserveBaseInfoInUse2").show();
 				}
 				var tmpList=[];
-	            tmpList.push({fuelName:"汽油(kg)"});
-	            tmpList.push({fuelName:"柴油(kg)"});
-	            tmpList.push({fuelName:"电(kWh)"});
+	            tmpList.push({fuelName:iMsg.gasoline+"(kg)"});
+	            tmpList.push({fuelName:iMsg.diesel+"(kg)"});
+	            tmpList.push({fuelName:iMsg.elec+"(kWh)"});
 	            var _html='';
 	            var tpl=$('#tpl-use2InventoryTable').html();
 	            for (var i=0,len=tmpList.length; i < len; i++){
@@ -2219,9 +2214,9 @@ $(function(){
 	            $('#use2InventoryTable tbody').html(_html);
 	            $('#use2InventoryTable2 tbody').empty();
 				if($roadType.val()==1 && $asphaltTopLayerMaterial.val()==1 && $asphaltMiddleLayerMaterial.val()==1 && $asphaltBelowLayerMaterial.val()==1){
-					$("#roadTypeUse2").text("透水路面");
+					$("#roadTypeUse2").text(iMsg.permePave);
 				}else{
-					$("#roadTypeUse2").text("不透水路面");
+					$("#roadTypeUse2").text(iMsg.imperviousPave);
 				}
 			}else{
 				$("#use2Inventory").hide();
@@ -2239,8 +2234,8 @@ $(function(){
 					$("#use2Item3And7InUse3").show();
 				}
 				var tmpList=[];
-	            tmpList.push({fuelName:"汽油"});
-	            tmpList.push({fuelName:"柴油"});
+	            tmpList.push({fuelName:iMsg.gasoline});
+	            tmpList.push({fuelName:iMsg.diesel});
 	            var _html='';
 	            var tpl=$('#tpl-use3InventoryTable').html();
 	            for (var i=0,len=tmpList.length; i < len; i++){
@@ -2677,7 +2672,7 @@ $(function(){
 		});
 	});
 	$("#conserveItemDefaultValue").click(function(){
-		$("#conserveItem1").val("薄层罩面");
+		$("#conserveItem1").val(iMsg.thinOverlay);
 		$("#conserveItem2").val(5);
 		$("#conserveItem3").val("1/2");
 		$("#conserveItem4").val(50);
@@ -2692,8 +2687,8 @@ $(function(){
 		conserveData.itemList=[];
 		$("#conserveInventoryItemTable tbody").empty();
 		var defaultItems=[
-			{i1:"薄层罩面",i2:"5",i3:"1/2",i4:"50",i5:"20",i6:"2",i7:"2",i7Text:'改性沥青',i8:"5"},
-			{i1:"铣刨重铺",i2:"8",i3:"1/2",i4:"80",i5:"50",i6:"5",i7:"2",i7Text:'改性沥青',i8:"5"}
+			{i1:iMsg.thinOverlay,i2:"5",i3:"1/2",i4:"50",i5:"20",i6:"2",i7:"2",i7Text:iMsg.modAsph,i8:"5"},
+			{i1:iMsg.millingResurfacing,i2:"8",i3:"1/2",i4:"80",i5:"50",i6:"5",i7:"2",i7Text:iMsg.modAsph,i8:"5"}
 		];
 		for (var i = 0; i < 2; i++) {
 			var d=defaultItems[i];
@@ -2702,7 +2697,7 @@ $(function(){
 			x.id=id;
 			x.i1=d.i1;
 			x.i2=d.i2;
-			x.i2Text="道路运营"+x.i2+"年后";
+			x.i2Text=iMsg.RoadAfterYear.fillArgs(x.i2);
 			x.i3=d.i3;
 			x.i4=d.i4;
 			x.i5=d.i5;
@@ -2744,7 +2739,7 @@ $(function(){
 					}
 				}
 				if(data){
-					$("#myModalLabel").text("编辑");
+					$("#myModalLabel").text(iMsg.edit);
 					validatorConserveItemInputForm.resetForm();
 			        $("#conserveItemInputForm")[0].reset();
 			        $("#itemId").val(data.id);
@@ -3022,7 +3017,7 @@ $(function(){
 				var res=$("#"+item.materialMark).select2("data")[0];
 				if(res==undefined){
 					var d = dialog({
-                        content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您选择相应材料'+'</p></div>'
+                        content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.chooMate+'</p></div>'
                     });
                     d.show();
                     setTimeout(function() {
@@ -3143,7 +3138,7 @@ $(function(){
 					var distance=$("#"+item.materialMark+"Distance").val();
 					if(res==undefined){
 						var d = dialog({
-	                        content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您选择相应车辆型号'+'</p></div>'
+	                        content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.chooVehi+'</p></div>'
 	                    });
 	                    d.show();
 	                    setTimeout(function() {
@@ -3267,16 +3262,16 @@ $(function(){
 				}
 			}
 			transConsData.mixPaveList=[];
-			transConsData.mixPaveList.push({fuelMark:"gasoline",fuelName:"汽油(kg)",amount:gasoline.toFixed(3)});
-			transConsData.mixPaveList.push({fuelMark:"diesel",fuelName:"柴油(kg)",amount:diesel.toFixed(3)});
-			transConsData.mixPaveList.push({fuelMark:"heavyOil",fuelName:"重油(kg)",amount:heavyOil.toFixed(3)});
-			transConsData.mixPaveList.push({fuelMark:"electricity",fuelName:"电(kWh)",amount:electricity.toFixed(3)});
+			transConsData.mixPaveList.push({fuelMark:"gasoline",fuelName:iMsg.gasoline+"(kg)",amount:gasoline.toFixed(3)});
+			transConsData.mixPaveList.push({fuelMark:"diesel",fuelName:iMsg.diesel+"(kg)",amount:diesel.toFixed(3)});
+			transConsData.mixPaveList.push({fuelMark:"heavyOil",fuelName:iMsg.heavyOil+"(kg)",amount:heavyOil.toFixed(3)});
+			transConsData.mixPaveList.push({fuelMark:"electricity",fuelName:iMsg.elec+"(kWh)",amount:electricity.toFixed(3)});
 			for (var i = 0; i < transConsData.mixPaveList.length; i++) {
 				var item=transConsData.mixPaveList[i];
 				var res=$("#"+item.fuelMark).select2("data")[0];
 				if(res==undefined){
 					var d = dialog({
-						content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您选择相应燃料类型'+'</p></div>'
+						content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.chooFuel+'</p></div>'
 					});
 					d.show();
 					setTimeout(function() {
@@ -3358,9 +3353,9 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种具体燃料',
+		placeholder:iMsg.chooFuel,
 		allowClear:true,
-		minimumResultsForSearch:-1, //如要搜索可去掉该选项
+		minimumResultsForSearch:-1,
 		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatFuel,
@@ -3388,9 +3383,9 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种具体燃料',
+		placeholder:iMsg.chooFuel,
 		allowClear:true,
-		minimumResultsForSearch:-1, //如要搜索可去掉该选项
+		minimumResultsForSearch:-1,
 		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatFuel,
@@ -3418,9 +3413,9 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种具体燃料',
+		placeholder:iMsg.chooFuel,
 		allowClear:true,
-		minimumResultsForSearch:-1, //如要搜索可去掉该选项
+		minimumResultsForSearch:-1,
 		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatFuel,
@@ -3556,7 +3551,7 @@ $(function(){
 			var i2,i3,i7;
 			if(conserveRange==1){
 				var d = dialog({
-					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成养护清单'+'</p></div>'
+					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.endCons+'</p></div>'
 				});
 				d.show();
 				setTimeout(function() {
@@ -3630,16 +3625,16 @@ $(function(){
 			var y=(et0*365*0.8-i10*0.6)*3*basicData.area/1000;
 			var electricity=i1*i17*i18*(x>y?y:x);
 			use2Data.fuelList=[];
-			use2Data.fuelList.push({fuelMark:"gasolineUse2",fuelName:"汽油(kg)",amount:gasoline.toFixed(3)});
-			use2Data.fuelList.push({fuelMark:"dieselUse2",fuelName:"柴油(kg)",amount:diesel.toFixed(3)});
-			use2Data.fuelList.push({fuelMark:"electricityUse2",fuelName:"电(kWh)",amount:electricity.toFixed(3)});
+			use2Data.fuelList.push({fuelMark:"gasolineUse2",fuelName:iMsg.gasoline+"(kg)",amount:gasoline.toFixed(3)});
+			use2Data.fuelList.push({fuelMark:"dieselUse2",fuelName:iMsg.diesel+"(kg)",amount:diesel.toFixed(3)});
+			use2Data.fuelList.push({fuelMark:"electricityUse2",fuelName:iMsg.elec+"(kWh)",amount:electricity.toFixed(3)});
 			use2Data.resList=[];
 			for (var i = 0; i < use2Data.fuelList.length; i++) {
 				var item=use2Data.fuelList[i];
 				var res=$("#"+item.fuelMark).select2("data")[0];
 				if(res==undefined){
 					var d = dialog({
-						content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您选择相应燃料类型'+'</p></div>'
+						content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.chooFuel+'</p></div>'
 					});
 					d.show();
 					setTimeout(function() {
@@ -3734,7 +3729,7 @@ $(function(){
 			var y=$("#nonPavementReflectance").val();
 			var z=$("#reflectCoefficient").val();
 			use1Data.electricityReduce=(x-y)*100*z*basicData.area;
-			$("#electricityReduce").text(use1Data.electricityReduce+"kWh");
+			$("#electricityReduce").text(use1Data.electricityReduce+" kWh");
 			use1Range=2;
 		},
 		onkeyup:false
@@ -3762,9 +3757,9 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种具体燃料',
+		placeholder:iMsg.chooFuel,
 		allowClear:true,
-		minimumResultsForSearch:-1, //如要搜索可去掉该选项
+		minimumResultsForSearch:-1,
 		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatFuel,
@@ -3792,9 +3787,9 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种具体燃料',
+		placeholder:iMsg.chooFuel,
 		allowClear:true,
-		minimumResultsForSearch:-1, //如要搜索可去掉该选项
+		minimumResultsForSearch:-1,
 		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatFuel,
@@ -3861,7 +3856,7 @@ $(function(){
 		submitHandler:function(form){
 			if(conserveRange==1){
 				var d = dialog({
-					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成养护清单'+'</p></div>'
+					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.endCons+'</p></div>'
 				});
 				d.show();
 				setTimeout(function() {
@@ -3872,7 +3867,7 @@ $(function(){
 			var i1,i3,i4,i5,i6,i7;
 			if(use2Range==1){
 				var d = dialog({
-					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成使用（透水率）清单'+'</p></div>'
+					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.endUse2+'</p></div>'
 				});
 				d.show();
 				setTimeout(function() {
@@ -3924,15 +3919,15 @@ $(function(){
 				}
 			}
 			use3Data.fuelList=[];
-			use3Data.fuelList.push({fuelMark:"gasolineUse3",fuelName:"汽油",amount:gasoline.toFixed(3)});
-			use3Data.fuelList.push({fuelMark:"dieselUse3",fuelName:"柴油",amount:diesel.toFixed(3)});
+			use3Data.fuelList.push({fuelMark:"gasolineUse3",fuelName:iMsg.gasoline,amount:gasoline.toFixed(3)});
+			use3Data.fuelList.push({fuelMark:"dieselUse3",fuelName:iMsg.diesel,amount:diesel.toFixed(3)});
 			use3Data.resList=[];
 			for (var i = 0; i < use3Data.fuelList.length; i++) {
 				var item=use3Data.fuelList[i];
 				var res=$("#"+item.fuelMark).select2("data")[0];
 				if(res==undefined){
 					var d = dialog({
-						content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您选择相应燃料类型'+'</p></div>'
+						content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.chooFuel+'</p></div>'
 					});
 					d.show();
 					setTimeout(function() {
@@ -4052,7 +4047,7 @@ $(function(){
 				if(x){
 					x.i1=$("#conserveItem1").val();
 	    			x.i2=$("#conserveItem2").val();
-	    			x.i2Text="道路运营"+x.i2+"年后";
+	    			x.i2Text=iMsg.RoadAfterYear.fillArgs(x.i2);
 	    			x.i3=$("#conserveItem3").val();
 	    			x.i4=$("#conserveItem4").val();
 	    			x.i5=$("#conserveItem5").val();
@@ -4086,7 +4081,7 @@ $(function(){
     			x.id=id;
     			x.i1=$("#conserveItem1").val();
     			x.i2=$("#conserveItem2").val();
-    			x.i2Text="道路运营"+x.i2+"年后";
+    			x.i2Text=iMsg.RoadAfterYear.fillArgs(x.i2);
     			x.i3=$("#conserveItem3").val();
     			x.i4=$("#conserveItem4").val();
     			x.i5=$("#conserveItem5").val();
@@ -4129,7 +4124,7 @@ $(function(){
 						}
 					}
     				if(data){
-    					$("#myModalLabel").text("编辑");
+    					$("#myModalLabel").text(iMsg.edit);
     					validatorConserveItemInputForm.resetForm();
     			        $("#conserveItemInputForm")[0].reset();
     			        $("#itemId").val(data.id);
@@ -4159,7 +4154,7 @@ $(function(){
 		onkeyup:false
 	});
 	$("#addConserveItem").click(function(){
-		$("#myModalLabel").text("添加");
+		$("#myModalLabel").text(iMsg.add);
 		validatorConserveItemInputForm.resetForm();
         $("#conserveItemInputForm")[0].reset();
         $("#itemId").val('');
@@ -4190,10 +4185,10 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种材料',
+		placeholder:iMsg.chooMate,
 		allowClear:true,
 		minimumResultsForSearch:-1,
-		language:"zh-CN",
+		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatRepo,
 		templateSelection: formatRepoSelection
@@ -4220,10 +4215,10 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种材料',
+		placeholder:iMsg.chooMate,
 		allowClear:true,
 		minimumResultsForSearch:-1,
-		language:"zh-CN",
+		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatRepo,
 		templateSelection: formatRepoSelection
@@ -4250,10 +4245,10 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种材料',
+		placeholder:iMsg.chooMate,
 		allowClear:true,
 		minimumResultsForSearch:-1,
-		language:"zh-CN",
+		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatRepo,
 		templateSelection: formatRepoSelection
@@ -4280,10 +4275,10 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种材料',
+		placeholder:iMsg.chooMate,
 		allowClear:true,
 		minimumResultsForSearch:-1,
-		language:"zh-CN",
+		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatRepo,
 		templateSelection: formatRepoSelection
@@ -4308,7 +4303,7 @@ $(function(){
 		submitHandler:function(form){
 			if(conserveData.itemList.length==0){
 				var d = dialog({
-					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您至少添加一个养护条目'+'</p></div>'
+					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.leastOneItem+'</p></div>'
 				});
 				d.show();
 				setTimeout(function() {
@@ -4362,19 +4357,19 @@ $(function(){
 					}
 				}
 				if(ordinaryAsphalt>0){
-					conserveData.materialList.push({materialMark:"ordinaryAsphaltConserve",materialName:"普通沥青",amount:ordinaryAsphalt.toFixed(3)});
+					conserveData.materialList.push({materialMark:"ordinaryAsphaltConserve",materialName:iMsg.ordAsph,amount:ordinaryAsphalt.toFixed(3)});
 					conserveData.materialListUp.push({amount:ordinaryAsphaltUp.toFixed(3)});
 					conserveData.materialListDown.push({amount:ordinaryAsphaltDown.toFixed(3)});
 					$("#ordinaryAsphaltSelectConserve").show();
 				}
 				if(modifiedAsphalt>0){
-					conserveData.materialList.push({materialMark:"modifiedAsphaltConserve",materialName:"改性沥青",amount:modifiedAsphalt.toFixed(3)});
+					conserveData.materialList.push({materialMark:"modifiedAsphaltConserve",materialName:iMsg.modAsph,amount:modifiedAsphalt.toFixed(3)});
 					conserveData.materialListUp.push({amount:modifiedAsphaltUp.toFixed(3)});
 					conserveData.materialListDown.push({amount:modifiedAsphaltDown.toFixed(3)});
 					$("#modifiedAsphaltSelectConserve").show();
 				}
 				if(highViscosityAsphalt>0){
-					conserveData.materialList.push({materialMark:"highViscosityAsphaltConserve",materialName:"高粘度沥青",amount:highViscosityAsphalt.toFixed(3)});
+					conserveData.materialList.push({materialMark:"highViscosityAsphaltConserve",materialName:iMsg.highAsph,amount:highViscosityAsphalt.toFixed(3)});
 					conserveData.materialListUp.push({amount:highViscosityAsphaltUp.toFixed(3)});
 					conserveData.materialListDown.push({amount:highViscosityAsphaltDown.toFixed(3)});
 					$("#highViscosityAsphaltSelectConserve").show();
@@ -4391,7 +4386,7 @@ $(function(){
 				}
 			}
 			if(gravel>0){
-				conserveData.materialList.push({materialMark:"gravelConserve",materialName:"碎石",amount:gravel.toFixed(3)});
+				conserveData.materialList.push({materialMark:"gravelConserve",materialName:iMsg.gravel,amount:gravel.toFixed(3)});
 				conserveData.materialListUp.push({amount:gravelUp.toFixed(3)});
 				conserveData.materialListDown.push({amount:gravelDown.toFixed(3)});
 				$("#gravelSelectConserve").show();
@@ -4418,7 +4413,7 @@ $(function(){
 				var res=$("#"+item.materialMark).select2("data")[0];
 				if(res==undefined){
 					var d = dialog({
-						content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您选择相应材料'+'</p></div>'
+						content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.chooMate+'</p></div>'
 					});
 					d.show();
 					setTimeout(function() {
@@ -4680,7 +4675,7 @@ $(function(){
 		submitHandler:function(form){
 			if(!conserveMaterialFlag){
 				var d = dialog({
-                    content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请先完成养护（原材料）清单'+'</p></div>'
+                    content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.endConsMate+'</p></div>'
                 });
                 d.show();
                 setTimeout(function() {
@@ -4781,9 +4776,9 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种具体燃料',
+		placeholder:iMsg.chooFuel,
 		allowClear:true,
-		minimumResultsForSearch:-1, //如要搜索可去掉该选项
+		minimumResultsForSearch:-1,
 		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatFuel,
@@ -4811,9 +4806,9 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种车辆，可根据名称搜索',
+		placeholder:iMsg.chooVehi,
 		allowClear:true,
-		language:"zh-CN",
+		language:iMsg.select2LangCode,
 		escapeMarkup: function (markup) { return markup; },
 		templateResult: formatTransport,
 		templateSelection: formatTransportSelection
@@ -4852,7 +4847,7 @@ $(function(){
 			var res=$("#fuelTypeRecycle").select2("data")[0];
 			if(res==undefined){
 				var d = dialog({
-					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您选择相应燃料类型'+'</p></div>'
+					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.chooFuel+'</p></div>'
 				});
 				d.show();
 				setTimeout(function() {
@@ -4901,7 +4896,7 @@ $(function(){
 			res=$("#recycleVehicleModel").select2("data")[0];
 			if(res==undefined){
 				var d = dialog({
-					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您选择相应车辆型号'+'</p></div>'
+					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.chooVehi+'</p></div>'
 				});
 				d.show();
 				setTimeout(function() {
@@ -5018,7 +5013,7 @@ $(function(){
 		// 判断选择的清单阶段是否都已完成，计算每个清单阶段各自的汇总，所有阶段的汇总
 		if(materialRange==1){
 			var d = dialog({
-				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成原材料获取清单'+'</p></div>'
+				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.endMaterial+'</p></div>'
 			});
 			d.show();
 			setTimeout(function() {
@@ -5090,7 +5085,7 @@ $(function(){
 		}
 		if(transConsRange==1){
 			var d = dialog({
-				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成运输与施工清单'+'</p></div>'
+				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.endTranCons+'</p></div>'
 			});
 			d.show();
 			setTimeout(function() {
@@ -5190,7 +5185,7 @@ $(function(){
 		}
 		if(conserveRange==1){
 			var d = dialog({
-				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成养护清单'+'</p></div>'
+				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.endCons+'</p></div>'
 			});
 			d.show();
 			setTimeout(function() {
@@ -5200,7 +5195,7 @@ $(function(){
 		}
 		if(use1Range==1){
 			var d = dialog({
-				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成使用（反射率）清单'+'</p></div>'
+				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.endUse1+'</p></div>'
 			});
 			d.show();
 			setTimeout(function() {
@@ -5213,7 +5208,7 @@ $(function(){
 		}
 		if(use2Range==1){
 			var d = dialog({
-				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成使用（透水率）清单'+'</p></div>'
+				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.endUse2+'</p></div>'
 			});
 			d.show();
 			setTimeout(function() {
@@ -5280,7 +5275,7 @@ $(function(){
 		}
 		if(use3Range==1){
 			var d = dialog({
-				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成使用（滚动阻力）清单'+'</p></div>'
+				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.endUse3+'</p></div>'
 			});
 			d.show();
 			setTimeout(function() {
@@ -5347,7 +5342,7 @@ $(function(){
 		}
 		if(recycleRange==1){
 			var d = dialog({
-				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成回收清单'+'</p></div>'
+				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.endRecycle+'</p></div>'
 			});
 			d.show();
 			setTimeout(function() {
@@ -5599,7 +5594,7 @@ $(function(){
 		if(energyRange){
 			$("#energyInfluence").show();
 			//能耗显示
-			$("#energyValue").text(influenceData.energyConsume.toFixed(3)+'MJ');
+			$("#energyValue").text(influenceData.energyConsume.toFixed(3)+' MJ');
 			$("#energyEnvCostInput").show();
 			energyRange=2;
 		}else{
@@ -5642,7 +5637,7 @@ $(function(){
 		var g=$gwpSelect.select2("data")[0];
 		if(g==undefined){
 			var d = dialog({
-				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您选择数据集/年份'+'</p></div>'
+				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.chooDatasetYear+'</p></div>'
 			});
 			d.show();
 			setTimeout(function() {
@@ -5656,7 +5651,7 @@ $(function(){
 				influenceData.gwpValueUp=influenceData.emissionCo2Up*g.co2+influenceData.emissionCh4Up*g.ch4+influenceData.emissionN2oUp*g.n2o;
 				influenceData.gwpValueDown=influenceData.emissionCo2Down*g.co2+influenceData.emissionCh4Down*g.ch4+influenceData.emissionN2oDown*g.n2o;
 			}
-			$("#gwpValue").text(influenceData.gwpValue.toFixed(3)+'kg');
+			$("#gwpValue").text(influenceData.gwpValue.toFixed(3)+' kg');
 			carbonRange=2;
 			influenceData.envEconomicCostFlag=false;
 		}
@@ -5667,7 +5662,7 @@ $(function(){
 		var g=$sourSelect.select2("data")[0];
 		if(g==undefined){
 			var d = dialog({
-				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您选择数据集'+'</p></div>'
+				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.chooDataset+'</p></div>'
 			});
 			d.show();
 			setTimeout(function() {
@@ -5681,7 +5676,7 @@ $(function(){
 				influenceData.sourValueUp=influenceData.emissionSo2Up*g.so2+influenceData.emissionNoxUp*g.nox;
 				influenceData.sourValueDown=influenceData.emissionSo2Down*g.so2+influenceData.emissionNoxDown*g.nox;
 			}
-			$("#sourValue").text(influenceData.sourValue.toFixed(3)+'kg');
+			$("#sourValue").text(influenceData.sourValue.toFixed(3)+' kg');
 			sourRange=2;
 			influenceData.envEconomicCostFlag=false;
 		}
@@ -5692,7 +5687,7 @@ $(function(){
 		var g=$eutrophicationSelect.select2("data")[0];
 		if(g==undefined){
 			var d = dialog({
-				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您选择数据集'+'</p></div>'
+				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.chooDataset+'</p></div>'
 			});
 			d.show();
 			setTimeout(function() {
@@ -5706,7 +5701,7 @@ $(function(){
 				influenceData.eutrophicationValueUp=influenceData.emissionNoxUp*(g.noxds+g.noxhs);
 				influenceData.eutrophicationValueDown=influenceData.emissionNoxDown*(g.noxds+g.noxhs);
 			}
-			$("#eutrophicationValue").text(influenceData.eutrophicationValue.toFixed(3)+'kg');
+			$("#eutrophicationValue").text(influenceData.eutrophicationValue.toFixed(3)+' kg');
 			eutrophicationRange=2;
 			influenceData.envEconomicCostFlag=false;
 		}
@@ -5761,7 +5756,7 @@ $(function(){
 			}
 			if(carbonRange==1){
 				var d = dialog({
-					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成温室效应评价'+'</p></div>'
+					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.endGreenhouse+'</p></div>'
 				});
 				d.show();
 				setTimeout(function() {
@@ -5780,7 +5775,7 @@ $(function(){
 			}
 			if(sourRange==1){
 				var d = dialog({
-					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成酸化评价'+'</p></div>'
+					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.endSour+'</p></div>'
 				});
 				d.show();
 				setTimeout(function() {
@@ -5799,7 +5794,7 @@ $(function(){
 			}
 			if(eutrophicationRange==1){
 				var d = dialog({
-					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成富营养化评价'+'</p></div>'
+					content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.endEutr+'</p></div>'
 				});
 				d.show();
 				setTimeout(function() {
@@ -5817,7 +5812,7 @@ $(function(){
 				x+=influenceData.eutrophicationCost;
 			}
 			influenceData.envEconomicCost=x;
-			$("#envEconomicCost").text(x.toFixed(2)+'元');
+			$("#envEconomicCost").text(x.toFixed(2)+" "+iMsg.rmb);
 			influenceData.totalEconomicCost=x+influenceData.cost;
 			if(conserveRange==2){
 				influenceData.envEconomicCostUp=xUp;
@@ -5838,7 +5833,7 @@ $(function(){
 	$("#influence-nextStep").click(function(){
 		if(!influenceData.envEconomicCostFlag){
 			var d = dialog({
-				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+'请您完成环境经济成本计算'+'</p></div>'
+				content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.endEnvCost+'</p></div>'
 			});
 			d.show();
 			setTimeout(function() {
@@ -5854,7 +5849,7 @@ $(function(){
 		var legend=[];
 		var chartCostInventoryData=[],chartEnergyInventoryData=[],chartCo2InventoryData=[],chartSo2InventoryData=[],chartPbInventoryData=[],chartZnInventoryData=[];
 		if(materialRange==2){
-			legend.push('原材料获取');
+			legend.push(iMsg.material);
 			chartCostInventoryData.push(materialData.result.cost.toFixed(2));
 			chartEnergyInventoryData.push(materialData.result.energyConsume);
 			chartCo2InventoryData.push(materialData.result.emissionCo2);
@@ -5863,7 +5858,7 @@ $(function(){
 			chartZnInventoryData.push(materialData.result.emissionZn);
 		}
 		if(transConsRange==2){
-			legend.push('运输与施工');
+			legend.push(iMsg.transCons);
 			chartCostInventoryData.push(transConsData.result.cost.toFixed(2));
 			chartEnergyInventoryData.push(transConsData.result.energyConsume);
 			chartCo2InventoryData.push(transConsData.result.emissionCo2);
@@ -5872,7 +5867,7 @@ $(function(){
 			chartZnInventoryData.push(transConsData.result.emissionZn);
 		}
 		if(use2Range==2){
-			legend.push('使用(透水)');
+			legend.push(iMsg.use2);
 			chartCostInventoryData.push(use2Data.result.cost.toFixed(2));
 			chartEnergyInventoryData.push(use2Data.result.energyConsume);
 			chartCo2InventoryData.push(use2Data.result.emissionCo2);
@@ -5881,7 +5876,7 @@ $(function(){
 			chartZnInventoryData.push(use2Data.result.emissionZn);
 		}
 		if(use3Range==2){
-			legend.push('使用(滚动阻力)');
+			legend.push(iMsg.use3);
 			chartCostInventoryData.push(use3Data.result.cost.toFixed(2));
 			chartEnergyInventoryData.push(use3Data.result.energyConsume);
 			chartCo2InventoryData.push(use3Data.result.emissionCo2);
@@ -5890,7 +5885,7 @@ $(function(){
 			chartZnInventoryData.push(use3Data.result.emissionZn);
 		}
 		if(conserveRange==2){
-			legend.push('养护');
+			legend.push(iMsg.cons);
 			chartCostInventoryData.push(conserveData.result.cost.toFixed(2));
 			chartEnergyInventoryData.push(conserveData.result.energyConsume);
 			chartCo2InventoryData.push(conserveData.result.emissionCo2);
@@ -5899,7 +5894,7 @@ $(function(){
 			chartZnInventoryData.push(conserveData.result.emissionZn);
 		}
 		if(recycleRange==2){
-			legend.push('回收');
+			legend.push(iMsg.recycle);
 			chartCostInventoryData.push(recycleData.result.cost.toFixed(2));
 			chartEnergyInventoryData.push(recycleData.result.energyConsume);
 			chartCo2InventoryData.push(recycleData.result.emissionCo2);
@@ -5910,7 +5905,7 @@ $(function(){
 		chartData={};
 		chartData.chartCostInventory = echarts.init(document.getElementById('chartCostInventory')); 
 		chartData.chartCostInventory.setOption({
-			title : {text: '经济成本'},
+			title : {text: iMsg.enecCost},
 		    tooltip : {trigger: 'axis'},
 		    toolbox: {
 		        show : true,
@@ -5922,7 +5917,7 @@ $(function(){
 		        }
 		    },
 		    xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:30}}],
-		    yAxis : [{type : 'value',name:'经济成本(元)'}],
+		    yAxis : [{type : 'value',name:iMsg.enecCost+"/"+iMsg.rmb}],
 		    series : [{
 	            type:'bar',
 	            data:chartCostInventoryData,
@@ -5931,7 +5926,7 @@ $(function(){
 		}); 
 		chartData.chartEnergyInventory = echarts.init(document.getElementById('chartEnergyInventory')); 
 		chartData.chartEnergyInventory.setOption({
-			title : {text: '能耗'},
+			title : {text: iMsg.energy},
 			tooltip : {trigger: 'axis'},
 			toolbox: {
 				show : true,
@@ -5943,7 +5938,7 @@ $(function(){
 				}
 			},
 			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:30}}],
-			yAxis : [{type : 'value',name:'能耗(MJ)'}],
+			yAxis : [{type : 'value',name:iMsg.energy+'/MJ'}],
 			series : [{
 				type:'bar',
 				data:chartEnergyInventoryData,
@@ -5964,7 +5959,7 @@ $(function(){
 				}
 			},
 			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:30}}],
-			yAxis : [{type : 'value',name:'排放(kg)'}],
+			yAxis : [{type : 'value',name:iMsg.emission+'/kg'}],
 			series : [{
 				type:'bar',
 				data:chartCo2InventoryData,
@@ -5985,7 +5980,7 @@ $(function(){
 				}
 			},
 			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:30}}],
-			yAxis : [{type : 'value',name:'排放(kg)'}],
+			yAxis : [{type : 'value',name:iMsg.emission+'/kg'}],
 			series : [{
 				type:'bar',
 				data:chartSo2InventoryData,
@@ -6006,7 +6001,7 @@ $(function(){
 				}
 			},
 			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:30}}],
-			yAxis : [{type : 'value',name:'排放(kg)'}],
+			yAxis : [{type : 'value',name:iMsg.emission+'/kg'}],
 			series : [{
 				type:'bar',
 				data:chartPbInventoryData,
@@ -6027,7 +6022,7 @@ $(function(){
 				}
 			},
 			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:30}}],
-			yAxis : [{type : 'value',name:'排放(kg)'}],
+			yAxis : [{type : 'value',name:iMsg.emission+'/kg'}],
 			series : [{
 				type:'bar',
 				data:chartZnInventoryData,
@@ -6037,30 +6032,30 @@ $(function(){
 		// 影响评价作图
 		var influenceType=[];
 		var chartCostInfluenceData=[];
-		influenceType.push("成本");
-		chartCostInfluenceData.push({name:"成本",value:influenceData.cost.toFixed(2)});
+		influenceType.push(iMsg.cost);
+		chartCostInfluenceData.push({name:iMsg.cost,value:influenceData.cost.toFixed(2)});
 		if(energyRange==2){
-			influenceType.push("能耗");
-			chartCostInfluenceData.push({name:"能耗",value:influenceData.energyConsumeCost.toFixed(2)});
+			influenceType.push(iMsg.energy);
+			chartCostInfluenceData.push({name:iMsg.energy,value:influenceData.energyConsumeCost.toFixed(2)});
 		}
 		if(carbonRange==2){
-			influenceType.push("温室效应");
-			chartCostInfluenceData.push({name:"温室效应",value:influenceData.gwpCost.toFixed(2)});
+			influenceType.push(iMsg.greenHouse);
+			chartCostInfluenceData.push({name:iMsg.greenHouse,value:influenceData.gwpCost.toFixed(2)});
 		}
 		if(sourRange==2){
-			influenceType.push("酸化");
-			chartCostInfluenceData.push({name:"酸化",value:influenceData.sourCost.toFixed(2)});
+			influenceType.push(iMsg.sour);
+			chartCostInfluenceData.push({name:iMsg.sour,value:influenceData.sourCost.toFixed(2)});
 		}
 		if(eutrophicationRange==2){
-			influenceType.push("富营养化");
-			chartCostInfluenceData.push({name:"富营养化",value:influenceData.eutrophicationCost.toFixed(2)});
+			influenceType.push(iMsg.eutro);
+			chartCostInfluenceData.push({name:iMsg.eutro,value:influenceData.eutrophicationCost.toFixed(2)});
 		}
 		chartData.chartCostInfluence = echarts.init(document.getElementById('chartCostInfluence'));
 		chartData.chartCostInfluence.setOption({
 			title : {
-		        text: '各类经济成本比例',
+		        text: iMsg.allCostProp,
 		        x:'center',
-		        subtext:'总经济成本(含污染经济成本)：'+influenceData.totalEconomicCost.toFixed(2)+"元",
+		        subtext:iMsg.totalCost+': '+influenceData.totalEconomicCost.toFixed(2)+iMsg.rmb,
 		    },
 		    tooltip : {
 		        trigger: 'item',
@@ -6097,10 +6092,10 @@ $(function(){
 		// 概率分析作图
 		if(conserveRange==2){
 			$("#chartProbability").show();
-			var legendData=['向下波动'+conserveData.conserveUncertainty+'%','确定值','向上波动'+conserveData.conserveUncertainty+'%'];
+			var legendData=[iMsg.downWave+conserveData.conserveUncertainty+'%',iMsg.okValue,iMsg.upWave+conserveData.conserveUncertainty+'%'];
 			chartData.chartCostProbability = echarts.init(document.getElementById('chartCostProbability')); 
 			chartData.chartCostProbability.setOption({
-				title : {text: '成本波动'},
+				title : {text: iMsg.costWave},
 				tooltip : {trigger: 'axis'},
 				toolbox: {
 					show : true,
@@ -6112,7 +6107,7 @@ $(function(){
 					}
 				},
 				xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
-				yAxis : [{type : 'value',scale:true,name:'经济成本(元)'}],
+				yAxis : [{type : 'value',scale:true,name:iMsg.enecCost+"/"+iMsg.rmb}],
 				series : [{
 					type:'bar',
 					data:[influenceData.costDown.toFixed(2),influenceData.cost.toFixed(2),influenceData.costUp.toFixed(2)],
@@ -6123,7 +6118,7 @@ $(function(){
 				$("#chartEnergyProbability").show();
 				chartData.chartEnergyProbability = echarts.init(document.getElementById('chartEnergyProbability'));
 				chartData.chartEnergyProbability.setOption({
-					title : {text: '能耗波动(折算为经济成本)'},
+					title : {text: iMsg.energyWave},
 					tooltip : {trigger: 'axis'},
 					toolbox: {
 						show : true,
@@ -6135,7 +6130,7 @@ $(function(){
 						}
 					},
 					xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
-					yAxis : [{type : 'value',scale:true,name:'经济成本(元)'}],
+					yAxis : [{type : 'value',scale:true,name:iMsg.enecCost+"/"+iMsg.rmb}],
 					series : [{
 						type:'bar',
 						data:[influenceData.energyConsumeCostDown.toFixed(2),influenceData.energyConsumeCost.toFixed(2),influenceData.energyConsumeCostUp.toFixed(2)],
@@ -6149,7 +6144,7 @@ $(function(){
 				$("#chartGwpProbability").show();
 				chartData.chartGwpProbability = echarts.init(document.getElementById('chartGwpProbability'));
 				chartData.chartGwpProbability.setOption({
-					title : {text: '温室效应波动(折算为经济成本)'},
+					title : {text: iMsg.greenWave},
 					tooltip : {trigger: 'axis'},
 					toolbox: {
 						show : true,
@@ -6161,7 +6156,7 @@ $(function(){
 						}
 					},
 					xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
-					yAxis : [{type : 'value',scale:true,name:'经济成本(元)'}],
+					yAxis : [{type : 'value',scale:true,name:iMsg.enecCost+"/"+iMsg.rmb}],
 					series : [{
 						type:'bar',
 						data:[influenceData.gwpCostDown.toFixed(2),influenceData.gwpCost.toFixed(2),influenceData.gwpCostUp.toFixed(2)],
@@ -6175,7 +6170,7 @@ $(function(){
 				$("#chartSourProbability").show();
 				chartData.chartSourProbability = echarts.init(document.getElementById('chartSourProbability'));
 				chartData.chartSourProbability.setOption({
-					title : {text: '酸化效应波动(折算为经济成本)'},
+					title : {text: iMsg.sourWave},
 					tooltip : {trigger: 'axis'},
 					toolbox: {
 						show : true,
@@ -6187,7 +6182,7 @@ $(function(){
 						}
 					},
 					xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
-					yAxis : [{type : 'value',scale:true,name:'经济成本(元)'}],
+					yAxis : [{type : 'value',scale:true,name:iMsg.enecCost+"/"+iMsg.rmb}],
 					series : [{
 						type:'bar',
 						data:[influenceData.sourCostDown.toFixed(2),influenceData.sourCost.toFixed(2),influenceData.sourCostUp.toFixed(2)],
@@ -6201,7 +6196,7 @@ $(function(){
 				$("#chartEutrophicationProbability").show();
 				chartData.chartEutrophicationProbability = echarts.init(document.getElementById('chartEutrophicationProbability'));
 				chartData.chartEutrophicationProbability.setOption({
-					title : {text: '富营养化波动(折算为经济成本)'},
+					title : {text: iMsg.eutroWave},
 					tooltip : {trigger: 'axis'},
 					toolbox: {
 						show : true,
@@ -6213,7 +6208,7 @@ $(function(){
 						}
 					},
 					xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
-					yAxis : [{type : 'value',scale:true,name:'经济成本(元)'}],
+					yAxis : [{type : 'value',scale:true,name:iMsg.enecCost+"/"+iMsg.rmb}],
 					series : [{
 						type:'bar',
 						data:[influenceData.eutrophicationCostDown.toFixed(2),influenceData.eutrophicationCost.toFixed(2),influenceData.eutrophicationCostUp.toFixed(2)],
@@ -6233,16 +6228,16 @@ $(function(){
 			chartData.chartCostAndEnvCost = echarts.init(document.getElementById('chartCostAndEnvCost'));
 			chartData.chartCostAndEnvCost.setOption({
 				title : {
-					text: '经济成本和环境经济成本变化范围',
-					subtext: '五角星为确定值:('+xx+'，'+yy+')'
+					text: iMsg.allCostRange,
+					subtext: iMsg.okValue+'('+xx+', '+yy+')'
 				},
 				tooltip : {
 					trigger: 'axis',
 					showDelay : 0,
 					formatter : function (params) {
 						if (params.value.length > 1) {
-							return '经济成本：'+params.value[0]+' 元<br/>'
-							+'环境经济成本：'+params.value[1]+' 元';
+							return iMsg.enecCost+': '+params.value[0]+" "+iMsg.rmb+'<br/>'
+							+iMsg.envEnecCost+': '+params.value[1]+" "+iMsg.rmb;
 						}
 					},  
 					axisPointer:{
@@ -6264,7 +6259,7 @@ $(function(){
 				xAxis : [
 					{
 						type : 'value',
-						name:'经济成本(元)',
+						name:iMsg.enecCost+"/"+iMsg.rmb,
 						scale:true
 					}
 				],
@@ -6272,7 +6267,7 @@ $(function(){
 					{
 						type : 'value',
 						scale:true,
-						name:'环境经济成本(元)'
+						name:iMsg.envEnecCost+"/"+iMsg.rmb
 					}
 				],
 				series : [
@@ -6295,10 +6290,10 @@ $(function(){
 						},
 						markLine : {
 							data : [
-							{type : 'max', name: '环境经济成本最大值',itemStyle:{normal:{lineStyle: {type : 'solid'}}}},
-							{type : 'min', name: '环境经济成本最小值',itemStyle:{normal:{lineStyle: {type : 'solid'}}}},
-							{type : 'min', name: '经济成本最小值',valueIndex : 0,itemStyle:{normal:{lineStyle: {type : 'solid'}}}},
-							{type : 'max', name: '经济成本最大值',valueIndex : 0,itemStyle:{normal:{lineStyle: {type : 'solid'}}}}
+							{type : 'max', name: iMsg.envCostMax,itemStyle:{normal:{lineStyle: {type : 'solid'}}}},
+							{type : 'min', name: iMsg.envCostMin,itemStyle:{normal:{lineStyle: {type : 'solid'}}}},
+							{type : 'min', name: iMsg.costMin,valueIndex : 0,itemStyle:{normal:{lineStyle: {type : 'solid'}}}},
+							{type : 'max', name: iMsg.costMax,valueIndex : 0,itemStyle:{normal:{lineStyle: {type : 'solid'}}}}
 							]
 						}
 					}     
@@ -6356,17 +6351,17 @@ $(function(){
 			}
 			influenceData.beta=(m+n/2)/totalResList.length;
 			if(influenceData.beta>0.7){
-				influenceData.betaAnalysis="结果可靠";
+				influenceData.betaAnalysis=iMsg.resReliableA;
 			}else if(influenceData.beta>0.4){
-				influenceData.betaAnalysis="结果相对可靠";
+				influenceData.betaAnalysis=iMsg.resReliableB;
 			}else if(influenceData.beta>0.2){
-				influenceData.betaAnalysis="结果具有参照意义";
+				influenceData.betaAnalysis=iMsg.resReliableC;
 			}else{
-				influenceData.betaAnalysis="结果可靠性差，仅供参考";
+				influenceData.betaAnalysis=iMsg.resReliableD;
 			}
 			$("#beta").text(influenceData.beta.toFixed(3)+"("+influenceData.betaAnalysis+")");
 		}else{
-			$("#beta").text("无");
+			$("#beta").text(iMsg.none);
 		}
 		// echarts 自动调节宽度
 		$(window).resize(function() {
@@ -6405,84 +6400,84 @@ $(function(){
 	});
 	$("#download").click(function(){
 		var doc = new DDoc();
-        doc.addParagraph("LCA评价结果报告",{
+        doc.addParagraph(iMsg.repoTit,{
             fontSize:"28",
             bold:true,
         });
-        doc.addParagraph("目标和范围",{
+        doc.addParagraph(iMsg.targetRange,{
             bold:true,
         });
-        doc.addParagraph("本次评价的对象是长"+(basicData.rLength/1000)+"km,宽"+basicData.rWidth+"m的"+basicData.roadType+"；");
-        var x="评价的阶段范围是：";
-        if(materialRange==2) x+="原材料获取、";
-        if(transConsRange==2) x+="运输与施工、";
-        if(use1Range==2) x+="使用（反射率）、";
-        if(use2Range==2) x+="使用（透水率）、";
-        if(use3Range==2) x+="使用（滚动阻力）、";
-        if(conserveRange==2) x+="养护、";
-        if(recycleRange==2) x+="回收、";
-        x=x.substring(0,x.length-1)+"；";
+        doc.addParagraph(iMsg.repoBase1.fillArgs(basicData.rLength/1000,basicData.rWidth,basicData.roadType));
+        var x=iMsg.repoBase2;
+        if(materialRange==2) x+=iMsg.material+", ";
+        if(transConsRange==2) x+=iMsg.transCons+", ";
+        if(use1Range==2) x+=iMsg.use1+", ";
+        if(use2Range==2) x+=iMsg.use2+", ";
+        if(use3Range==2) x+=iMsg.use3+", ";
+        if(conserveRange==2) x+=iMsg.cons+", ";
+        if(recycleRange==2) x+=iMsg.recycle+", ";
+        x=x.substring(0,x.length-2)+";";
         doc.addParagraph(x);
-        x="评价的影响范围是：";
-        if(energyRange==2) x+="能耗、";
-        if(carbonRange==2) x+="温室效应、";
-        if(sourRange==2) x+="酸化、";
-        if(eutrophicationRange==2) x+="富营养化、";
-        x=x.substring(0,x.length-1)+"；";
+        x=iMsg.repoBase3;
+        if(energyRange==2) x+=iMsg.energy+", ";
+        if(carbonRange==2) x+=iMsg.greenHouse+", ";
+        if(sourRange==2) x+=iMsg.sour+", ";
+        if(eutrophicationRange==2) x+=iMsg.eutro+", ";
+        x=x.substring(0,x.length-2)+";";
         doc.addParagraph(x);
-        doc.addParagraph("注：本评价只针对路面实体，并且大量在不同案例中具有一致性的因素，如填挖方、车辆正常油耗、房屋正常供暖/制冷/照明等被忽略，因此更适用于多方案的比较，尤其对使用阶段而言，单个结果不具备实践意义");
-        doc.addParagraph("清单分析结果",{
+        doc.addParagraph(iMsg.repoBase4);
+        doc.addParagraph(iMsg.repoBase5,{
             bold:true,
         });
-        doc.addParagraph("路面的总经济成本为："+influenceData.cost.toFixed(2)+" 元，各阶段经济成本的比例如下图：");
+        doc.addParagraph(iMsg.repoBase6.fillArgs(influenceData.cost.toFixed(2)));
         doc.addImage(chartData.chartCostInventory.getDataURL(),$("#chartCostInventory").width(),400,{
             textAlign:doc.AlignType.Center
         });
-        doc.addParagraph("路面的总能耗为："+influenceData.energyConsume.toFixed(0)+" MJ，各阶段能耗的比例如下图：");
+        doc.addParagraph(iMsg.repoBase7.fillArgs(iMsg.energy,influenceData.energyConsume.toFixed(0)+" MJ"));
         doc.addImage(chartData.chartEnergyInventory.getDataURL(),$("#chartEnergyInventory").width(),400,{
         	textAlign:doc.AlignType.Center
         });
-        doc.addParagraph("路面的总CO2为："+influenceData.emissionCo2+" kg，各阶段CO2的比例如下图：");
+        doc.addParagraph(iMsg.repoBase7.fillArgs("CO2",influenceData.emissionCo2+" kg"));
         doc.addImage(chartData.chartCo2Inventory.getDataURL(),$("#chartCo2Inventory").width(),400,{
         	textAlign:doc.AlignType.Center
         });
-        doc.addParagraph("路面的总SO2为："+influenceData.emissionSo2+" kg，各阶段SO2的比例如下图：");
+        doc.addParagraph(iMsg.repoBase7.fillArgs("SO2",influenceData.emissionSo2+" kg"));
         doc.addImage(chartData.chartSo2Inventory.getDataURL(),$("#chartSo2Inventory").width(),400,{
         	textAlign:doc.AlignType.Center
         });
-        doc.addParagraph("路面的总Pb为："+influenceData.emissionPb+" kg，各阶段Pb的比例如下图：");
+        doc.addParagraph(iMsg.repoBase7.fillArgs("Pb",influenceData.emissionPb+" kg"));
         doc.addImage(chartData.chartPbInventory.getDataURL(),$("#chartPbInventory").width(),400,{
         	textAlign:doc.AlignType.Center
         });
-        doc.addParagraph("路面的总Zn为："+influenceData.emissionZn+" kg，各阶段Zn的比例如下图：");
+        doc.addParagraph(iMsg.repoBase7.fillArgs("Zn",influenceData.emissionZn+" kg"));
         doc.addImage(chartData.chartZnInventory.getDataURL(),$("#chartZnInventory").width(),400,{
         	textAlign:doc.AlignType.Center
         });
-        doc.addParagraph("影响评价结果",{
+        doc.addParagraph(iMsg.repoBase8,{
             bold:true,
         });
-        doc.addParagraph("路面的总经济成本为："+influenceData.cost.toFixed(2)+" 元；");
+        doc.addParagraph(iMsg.repoBase9.fillArgs(influenceData.cost.toFixed(2)));
         if(energyRange==2){
-        	doc.addParagraph("路面的总能耗为："+influenceData.energyConsume.toFixed(0)+" MJ，折算为经济成本为："+influenceData.energyConsumeCost.toFixed(2)+" 元；");
+        	doc.addParagraph(iMsg.repoBase10.fillArgs(iMsg.energy,influenceData.energyConsume.toFixed(0)+" MJ",influenceData.energyConsumeCost.toFixed(2)));
         }
         if(carbonRange==2){
-        	doc.addParagraph("路面的总温室效应为："+influenceData.gwpValue.toFixed(0)+" kg，折算为经济成本为："+influenceData.gwpCost.toFixed(2)+" 元；");
+        	doc.addParagraph(iMsg.repoBase10.fillArgs(iMsg.greenHouse,influenceData.gwpValue.toFixed(0)+" kg",influenceData.gwpCost.toFixed(2)));
         }
         if(sourRange==2){
-        	doc.addParagraph("路面的总酸化效应为："+influenceData.sourValue.toFixed(0)+" kg，折算为经济成本为："+influenceData.sourCost.toFixed(2)+" 元；");
+        	doc.addParagraph(iMsg.repoBase10.fillArgs(iMsg.sour,influenceData.sourValue.toFixed(0)+" kg",influenceData.sourCost.toFixed(2)));
         }
         if(eutrophicationRange==2){
-        	doc.addParagraph("路面的总富营养化效应为："+influenceData.eutrophicationValue.toFixed(0)+" kg，折算为经济成本为："+influenceData.eutrophicationCost.toFixed(2)+" 元；");
+        	doc.addParagraph(iMsg.repoBase10.fillArgs(iMsg.eutro,influenceData.eutrophicationValue.toFixed(0)+" kg",influenceData.eutrophicationCost.toFixed(2)));
         }
-        doc.addParagraph("各类经济成本的比例如下图：");
+        doc.addParagraph(iMsg.repoBase11);
         doc.addImage(chartData.chartCostInfluence.getDataURL(),$("#chartCostInfluence").width(),400,{
         	textAlign:doc.AlignType.Center
         });
         if(conserveRange==2){
-        	doc.addParagraph("数据的概率性分析",{
+        	doc.addParagraph(iMsg.repoBase12,{
         		bold:true,
         	});
-        	doc.addParagraph("根据不确定性："+conserveData.conserveUncertainty+"%，各类影响的取值范围如下：");
+        	doc.addParagraph(iMsg.repoBase13.fillArgs(conserveData.conserveUncertainty));
         	doc.addImage(chartData.chartCostProbability.getDataURL(),$("#chartCostProbability").width(),400,{
         		textAlign:doc.AlignType.Center
         	});
@@ -6506,20 +6501,20 @@ $(function(){
         			textAlign:doc.AlignType.Center
         		});
         	}
-        	doc.addParagraph("经济成本和环境经济成本的范围如下：");
+        	doc.addParagraph(iMsg.repoBase14);
         	doc.addImage(chartData.chartCostAndEnvCost.getDataURL(),$("#chartCostAndEnvCost").width(),400,{
     			textAlign:doc.AlignType.Center
     		});
         }
-        doc.addParagraph("数据适用性分析",{
+        doc.addParagraph(iMsg.repoBase15,{
         	bold:true,
         });
-        doc.addParagraph("本次评价结果的数据来源可靠性：");
+        doc.addParagraph(iMsg.repoBase16);
         if(influenceData.beta!=null){
-        	doc.addParagraph("数据适用性参数β="+influenceData.beta.toFixed(3));
+        	doc.addParagraph(iMsg.repoBase16.fillArgs(influenceData.beta.toFixed(3)));
         	doc.addParagraph(influenceData.betaAnalysis);
         }else{
-        	doc.addParagraph("无");
+        	doc.addParagraph(iMsg.none);
         }
         doc.generate();
 	});
