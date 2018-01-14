@@ -29,8 +29,6 @@ var iMsg = {
 	edit:"编辑",
 	editSuccess : "修改成功",
 	editFail : "修改失败",
-	onlyPermitOwnEdit:"只能修改您提交的记录",
-	onlyPermitOwnDelete:"只能删除您提交的记录",
 	remove:"删除",
 	removeOne:"确认删除 {0} 吗?",
 	removeMultiple:"确认删除选中的 {0} 条记录吗?",
@@ -61,6 +59,8 @@ var iMsg = {
 	sSortDescending : ": 以降序排列此列",
 	superuser:"管理员",
 	normal:"普通",
+	onlyPermitOwnEdit:"只能修改您提交的记录",
+	onlyPermitOwnDelete:"只能删除您提交的记录",
 	asphRoad:"沥青路面",
 	concRoad:"混凝土路面",
 	brickRoad:"铺砖路面",
@@ -120,7 +120,6 @@ var iMsg = {
 	endMaterial:'请您完成原材料获取清单',
 	endTranCons:'请您完成运输与施工清单',
 	endUse1:'请您完成使用(反射率)清单',
-	endUse2:'请您完成使用(透水率)清单',
 	endUse3:'请您完成使用(滚动阻力)清单',
 	endRecycle:'请您完成回收清单',
 	chooDatasetYear:'请您选择数据集/年份',
@@ -143,7 +142,7 @@ var iMsg = {
 	sour:"酸化效应",
 	eutro:"富营养化",
 	allCostProp:'各类经济成本比例',
-	totalCost:"总经济成本(含污染经济成本)",
+	totalCost:"总经济成本",
 	downWave:'向下波动',
 	upWave:'向上波动',
 	okValue:'确定值',
@@ -170,9 +169,9 @@ var iMsg = {
 	repoBase1:"本次评价的对象是长 {0} km, 宽 {1} m的{2};",
 	repoBase2:"评价的阶段范围是: ",
 	repoBase3:"评价的影响范围是: ",
-	repoBase4:"注：本评价只针对路面实体，并且大量在不同案例中具有一致性的因素，如填挖方、车辆正常油耗、房屋正常供暖/制冷/照明等被忽略，因此更适用于多方案的比较，尤其对使用阶段而言，单个结果不具备实践意义",
+	repoBase4:"注：本评价只针对路面实体，并且大量在不同案例中具有一致性的因素，如填挖方、车辆正常油耗、房屋正常供暖/制冷/照明等被忽略，因此更适用于多方案的比较，尤其对使用阶段而言，单个结果不具备实践意义;",
 	repoBase5:"清单分析结果",
-	repoBase6:"路面的总经济成本为: {0} 元，各阶段经济成本的比例如下图: ",
+	repoBase6:"路面的总经济成本为: {0} 元, 各阶段经济成本的比例如下图: ",
 	repoBase7:"路面的总{0}为: {1}, 各阶段{0}的比例如下图: ",
 	repoBase8:"影响评价结果",
 	repoBase9:"路面的总经济成本为: {0} 元;",
@@ -183,7 +182,7 @@ var iMsg = {
 	repoBase14:"经济成本和环境经济成本的范围如下: ",
 	repoBase15:"数据适用性分析",
 	repoBase16:"本次评价结果的数据来源可靠性: ",
-	repoBase16:"数据适用性参数β={0}"
+	repoBase17:"数据适用性参数 β = {0}"
 }
 /* 
  * var str0 = "{0} must smaller than {1}" 

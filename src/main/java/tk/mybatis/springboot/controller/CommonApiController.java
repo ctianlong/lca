@@ -18,8 +18,8 @@ public class CommonApiController {
 	
 	@PostMapping("/api/common/changelanguage")
 	public ResponseEntity<Void> changeLanguage(HttpServletRequest request, HttpServletResponse response, String lang) {
-		LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
 		try {
+			LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
 			LocaleEditor localeEditor = new LocaleEditor();
 			localeEditor.setAsText(lang);
 			localeResolver.setLocale(request, response, (Locale) localeEditor.getValue());

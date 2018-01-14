@@ -1,24 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>燃料清单</title>
+    <title th:text="#{system.db.inventory.fuel}"></title>
     <div th:replace="common/head"></div>
-    <!-- 表格样式 -->    
     <link th:href="@{/css/myTable.css}" rel="stylesheet"/>
 </head>
 <body>
-
 <div id="wrapper">
         <div th:replace="common/navigation"></div>
-
         <div id="page-wrapper">
-
             <div class="container-fluid">
                 <div class="row page-header-box">
                     <div class="col-lg-12">
-                        <h1 class="page-header">
-                            燃料清单管理
-                        </h1>
+                        <h1 class="page-header" th:text="#{system.db.inventory.fuel}"></h1>
                     </div>
                 </div>
                 <!-- Page Heading -->
@@ -27,7 +21,7 @@
                         <div class="king-panel-control">
                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="fa fa-minus-square-o fa-lg"></a>
                         </div>
-                        <h3 class="panel-title">查询条件</h3>
+                        <h3 class="panel-title" th:text="#{system.query.condition}"></h3>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                     <div class='panel-body'>
@@ -36,8 +30,8 @@
 	                            <div class="col-sm-6 col-md-6 col-lg-4">
 		                            <div class="form-group">
 		                                <div class="input-group">
-		                                    <div class="input-group-addon">燃料种类</div>
-		                                    <input id="fuelTypeQuery" class="form-control" type="text" placeholder="请输入燃料种类">
+		                                    <div class="input-group-addon" th:text="#{tool.fuel-type}"></div>
+		                                    <input id="fuelTypeQuery" class="form-control" type="text" th:placeholder="#{system.input}">
 		                                </div>
 		                            </div>
 	                            </div>
@@ -45,9 +39,9 @@
                             <div class="row">
 	                            <div class="col-lg-12">
 	                                <hr class="mt5 mb15">
-	                                <button type="submit" class="king-btn king-info king-radius"><i class="fa fa-search"></i> 查询</button> 
-	                                <button type="button" class="king-btn king-success king-radius" id="btn-reset-refresh"><i class="fa fa-refresh"></i> 刷新</button>
-	                                <button type="button" class="king-btn king-radius king-warning" id="btn-add"><i class="fa fa-plus"></i> 添加</button>
+	                                <button type="submit" class="king-btn king-info king-radius"><i class="fa fa-search"></i> <span th:text="#{system.query}"></span></button> 
+	                                <button type="button" class="king-btn king-success king-radius" id="btn-reset-refresh"><i class="fa fa-refresh"></i> <span th:text="#{system.refresh}"></span></button>
+	                                <button type="button" class="king-btn king-radius king-warning" id="btn-add"><i class="fa fa-plus"></i> <span th:text="#{system.add}"></span></button>
 	                            </div>
                             </div>
                         </form>
@@ -60,7 +54,7 @@
                         <div class="king-panel-control">
                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" class="fa fa-minus-square-o fa-lg"></a>
                         </div>
-                        <h3 class="panel-title">燃料清单</h3>
+                        <h3 class="panel-title" th:text="#{system.db.inventory.fuel}"></h3>
                     </div>
                     <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
                     <div class='panel-body'>
@@ -68,16 +62,16 @@
                             <table id="table-fuel" class="table table-bordered table-hover table-striped table-condensed">
                                 <thead>
                                     <tr>
-                                        <th rowspan="2">燃料种类</th>
-                                        <th rowspan="2">单位</th>
-                                        <th rowspan="2">价格</th>
-                                        <th rowspan="2">货币种类</th>
-                                        <th rowspan="2">价格来源</th>
-                                        <th rowspan="2">净热值(MJ)</th>
-                                        <th class="text-center" colspan="8" style="width: 800px;">排放(kg)</th>
-                                        <th rowspan="2">数据来源</th>
-                                        <th rowspan="2">数据收集时间</th>
-                                        <th rowspan="2">操作</th>
+                                        <th rowspan="2" th:text="#{tool.fuel-type}"></th>
+                                        <th rowspan="2" th:text="#{db.unit}"></th>
+                                        <th rowspan="2" th:text="#{tool.cost}"></th>
+                                        <th rowspan="2" th:title="#{db.currency-type}" th:text="#{db.currency-type}"></th>
+                                        <th rowspan="2" th:text="#{db.cost-source}"></th>
+                                        <th rowspan="2" th:title="#{db.net-calorific}+'(MJ)'" th:text="#{db.net-calorific}+'(MJ)'"></th>
+                                        <th class="text-center" colspan="8" style="width: 800px;" th:text="#{tool.emission}+'(kg)'"></th>
+                                        <th rowspan="2" th:text="#{db.data-source}"></th>
+                                        <th rowspan="2" th:title="#{db.data-coll-time}" th:text="#{db.data-coll-time}"></th>
+                                        <th rowspan="2" th:text="#{system.operation}"></th>
                                     </tr>
                                     <tr>
                                         <th>CO<sub>2</sub></th>
@@ -97,7 +91,6 @@
                     </div>
                     </div>
                 </div>
-                
                 <!-- 材料modal -->
                 <div class="modal fade" data-backdrop="static" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-lg" role="document">
@@ -113,35 +106,17 @@
                             <div class="col-md-6">
                                 <input type="hidden" name="id" id="id"/>
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label" title="必填"><span class="king-required-tip text-danger mr5">*</span>燃料种类：</label>
+                                    <label class="col-md-4 control-label" th:title="#{system.required}"><span class="king-required-tip text-danger mr5">*</span><span th:text="#{tool.fuel-type}"></span></label>
                                     <div class="col-md-8">
-                                        <input type="text" name="fuelType" class="form-control" id="fuelType" placeholder="请输入燃料种类"/>
+                                        <input type="text" name="fuelType" class="form-control" id="fuelType" th:placeholder="#{system.input}"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">单位：</label>
+                                    <label class="col-md-4 control-label" th:text="#{db.unit}"></label>
                                     <div class="col-md-8">
-                                        <input type="text" name="unit" class="form-control" id="unit" placeholder="请输入单位，如 1kg"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">价格：</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="cost" class="form-control" id="cost" placeholder="请输入价格，如 0.2"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">货币种类：</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="currencyType" class="form-control" id="currencyType" placeholder="请输入货币种类，如 ¥"/>
+                                        <input type="text" name="unit" class="form-control" id="unit" th:placeholder="#{system.input}"/>
                                     </div>
                                 </div>
                             </div>
@@ -149,35 +124,17 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">价格来源：</label>
+                                    <label class="col-md-4 control-label" th:text="#{tool.cost}"></label>
                                     <div class="col-md-8">
-                                        <input type="text" name="costSource" class="form-control" id="costSource" placeholder="请输入价格来源"/>
+                                        <input type="text" name="cost" class="form-control" id="cost" th:placeholder="#{system.input}"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">净热值(MJ)：</label>
+                                    <label class="col-md-4 control-label" th:text="#{db.currency-type}"></label>
                                     <div class="col-md-8">
-                                        <input type="text" name="energyConsume" class="form-control" id="energyConsume" placeholder="请输入净热值，支持科学计数法"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">CO<sub>2</sub>排放(kg)：</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="emissionCo2" class="form-control" id="emissionCo2" placeholder="请输入CO2排放量，支持科学计数法"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">CH<sub>4</sub>排放(kg)：</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="emissionCh4" class="form-control" id="emissionCh4" placeholder="请输入CH4排放量，支持科学计数法"/>
+                                        <input type="text" name="currencyType" class="form-control" id="currencyType" th:placeholder="#{system.input}"/>
                                     </div>
                                 </div>
                             </div>
@@ -185,35 +142,17 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">N<sub>2</sub>O排放(kg)：</label>
+                                    <label class="col-md-4 control-label" th:text="#{db.cost-source}"></label>
                                     <div class="col-md-8">
-                                        <input type="text" name="emissionN2o" class="form-control" id="emissionN2o" placeholder="请输入N2O排放量，支持科学计数法"/>
+                                        <input type="text" name="costSource" class="form-control" id="costSource" th:placeholder="#{system.input}"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">CO排放(kg)：</label>
+                                    <label class="col-md-4 control-label" th:text="#{db.net-calorific}+'(MJ)'"></label>
                                     <div class="col-md-8">
-                                        <input type="text" name="emissionCo" class="form-control" id="emissionCo" placeholder="请输入CO排放量，支持科学计数法"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">SO<sub>2</sub>排放(kg)：</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="emissionSo2" class="form-control" id="emissionSo2" placeholder="请输入SO2排放量，支持科学计数法"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">NO<sub>x</sub>排放(kg)：</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="emissionNox" class="form-control" id="emissionNox" placeholder="请输入NOx排放量，支持科学计数法"/>
+                                        <input type="text" name="energyConsume" class="form-control" id="energyConsume" th:placeholder="#{db.sci-not}"/>
                                     </div>
                                 </div>
                             </div>
@@ -221,17 +160,17 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">Pb排放(kg)：</label>
+                                    <label class="col-md-4 control-label">CO<sub>2</sub>&nbsp;<span th:text="#{tool.emission}"></span>(kg)</label>
                                     <div class="col-md-8">
-                                        <input type="text" name="emissionPb" class="form-control" id="emissionPb" placeholder="请输入Pb排放量，支持科学计数法"/>
+                                        <input type="text" name="emissionCo2" class="form-control" id="emissionCo2" th:placeholder="#{db.sci-not}"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">Zn排放(kg)：</label>
+                                    <label class="col-md-4 control-label">CH<sub>4</sub>&nbsp;<span th:text="#{tool.emission}"></span>(kg)</label>
                                     <div class="col-md-8">
-                                        <input type="text" name="emissionZn" class="form-control" id="emissionZn" placeholder="请输入Zn排放量，支持科学计数法"/>
+                                        <input type="text" name="emissionCh4" class="form-control" id="emissionCh4" th:placeholder="#{db.sci-not}"/>
                                     </div>
                                 </div>
                             </div>
@@ -239,25 +178,79 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">数据来源：</label>
+                                    <label class="col-md-4 control-label">N<sub>2</sub>O&nbsp;<span th:text="#{tool.emission}"></span>(kg)</label>
                                     <div class="col-md-8">
-                                        <input type="text" name="dataSource" class="form-control" id="dataSource" placeholder="请输入数据来源"/>
+                                        <input type="text" name="emissionN2o" class="form-control" id="emissionN2o" th:placeholder="#{db.sci-not}"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">数据收集时间：</label>
+                                    <label class="col-md-4 control-label">CO&nbsp;<span th:text="#{tool.emission}"></span>(kg)</label>
                                     <div class="col-md-8">
-                                        <input type="text" name="collectTime" class="form-control" id="collectTime" placeholder="请输入数据收集时间，如 2017"/>
+                                        <input type="text" name="emissionCo" class="form-control" id="emissionCo" th:placeholder="#{db.sci-not}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">SO<sub>2</sub>&nbsp;<span th:text="#{tool.emission}"></span>(kg)</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="emissionSo2" class="form-control" id="emissionSo2" th:placeholder="#{db.sci-not}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">NO<sub>x</sub>&nbsp;<span th:text="#{tool.emission}"></span>(kg)</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="emissionNox" class="form-control" id="emissionNox" th:placeholder="#{db.sci-not}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Pb&nbsp;<span th:text="#{tool.emission}"></span>(kg)</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="emissionPb" class="form-control" id="emissionPb" th:placeholder="#{db.sci-not}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Zn&nbsp;<span th:text="#{tool.emission}"></span>(kg)</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="emissionZn" class="form-control" id="emissionZn" th:placeholder="#{db.sci-not}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" th:text="#{db.data-source}"></label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="dataSource" class="form-control" id="dataSource" th:placeholder="#{system.input}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" th:text="#{db.data-coll-time}"></label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="collectTime" class="form-control" id="collectTime" th:placeholder="#{db.in-year}"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                       </div>
                       <div class="modal-footer">
-                        <button type="submit" class="king-btn king-radius king-primary">保存</button>
-                        <button type="button" class="king-btn king-radius king-default" data-dismiss="modal">取消</button>
+                        <button type="submit" class="king-btn king-radius king-primary"><span th:text="#{system.save}"></span></button>
+                        <button type="button" class="king-btn king-radius king-default" data-dismiss="modal"><span th:text="#{system.cancel}"></span></button>
                       </div>
                       </form>
                     </div>
@@ -266,18 +259,13 @@
                   <!-- /.modal-dialog -->
                 </div>
                 <!-- /.modal -->
-
             </div>
             <!-- /.container-fluid -->
-
         </div>
         <!-- /#page-wrapper -->
-
     </div>
     <!-- /#wrapper -->
-    
     <div th:replace="common/script"></div>
-    
     <!-- js -->
     <script th:src="@{/js/constant.js}"></script>
     <script th:src="@{/js/fuel-manage.js}"></script>

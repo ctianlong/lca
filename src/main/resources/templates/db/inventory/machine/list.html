@@ -1,24 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>机械清单</title>
+    <title th:text="#{system.db.inventory.machine}"></title>
     <div th:replace="common/head"></div>
-    <!-- 表格样式 -->    
     <link th:href="@{/css/myTable.css}" rel="stylesheet"/>
 </head>
 <body>
-
 <div id="wrapper">
         <div th:replace="common/navigation"></div>
-
         <div id="page-wrapper">
-
             <div class="container-fluid">
                 <div class="row page-header-box">
                     <div class="col-lg-12">
-                        <h1 class="page-header">
-                            机械清单管理
-                        </h1>
+                        <h1 class="page-header" th:text="#{system.db.inventory.machine}"></h1>
                     </div>
                 </div>
                 <!-- Page Heading -->
@@ -27,7 +21,7 @@
                         <div class="king-panel-control">
                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="fa fa-minus-square-o fa-lg"></a>
                         </div>
-                        <h3 class="panel-title">查询条件</h3>
+                        <h3 class="panel-title" th:text="#{system.query.condition}"></h3>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                     <div class='panel-body'>
@@ -36,7 +30,7 @@
 	                            <div class="col-sm-6 col-md-6 col-lg-4">           
 	                                <div class="form-group">
 	                                    <div class="input-group">
-	                                        <div class="input-group-addon">机械类别</div>
+	                                        <div class="input-group-addon" th:text="#{db.mach-type}"></div>
 	                                        <select id="typeCdQuery" class="form-control" style="width: 100%">
 	                                            <option></option>
 	                                        </select>
@@ -46,8 +40,8 @@
 	                            <div class="col-sm-6 col-md-6 col-lg-4">
 		                            <div class="form-group">
 		                                <div class="input-group">
-		                                    <div class="input-group-addon">机械名称</div>
-		                                    <input id="nameQuery" class="form-control" type="text" placeholder="请输入机械名称">
+		                                    <div class="input-group-addon" th:text="#{db.mach-name}"></div>
+		                                    <input id="nameQuery" class="form-control" type="text" th:placeholder="#{system.input}">
 		                                </div>
 		                            </div>
 	                            </div>
@@ -55,9 +49,9 @@
                             <div class="row">
 	                            <div class="col-lg-12">
 	                                <hr class="mt5 mb15">
-	                                <button type="submit" class="king-btn king-info king-radius"><i class="fa fa-search"></i> 查询</button> 
-	                                <button type="button" class="king-btn king-success king-radius" id="btn-reset-refresh"><i class="fa fa-refresh"></i> 刷新</button>
-	                                <button type="button" class="king-btn king-radius king-warning" id="btn-add"><i class="fa fa-plus"></i> 添加</button>
+	                                <button type="submit" class="king-btn king-info king-radius"><i class="fa fa-search"></i> <span th:text="#{system.query}"></span></button> 
+	                                <button type="button" class="king-btn king-success king-radius" id="btn-reset-refresh"><i class="fa fa-refresh"></i> <span th:text="#{system.refresh}"></span></button>
+	                                <button type="button" class="king-btn king-radius king-warning" id="btn-add"><i class="fa fa-plus"></i> <span th:text="#{system.add}"></span></button>
 	                            </div>
                             </div>
                         </form>
@@ -70,7 +64,7 @@
                         <div class="king-panel-control">
                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" class="fa fa-minus-square-o fa-lg"></a>
                         </div>
-                        <h3 class="panel-title">机械清单</h3>
+                        <h3 class="panel-title" th:text="#{system.db.inventory.machine}"></h3>
                     </div>
                     <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
                     <div class='panel-body'>
@@ -78,30 +72,30 @@
                             <table id="table-machine" class="table table-bordered table-hover table-striped table-condensed">
                                 <thead>
                                     <tr>
-                                        <th rowspan="2">代号</th>
-                                        <th rowspan="2">机械名称</th>
-                                        <th rowspan="2">机械类别</th>
-                                        <th rowspan="2">主机型号</th>
-                                        <th rowspan="2">不变费用(元)</th>
-                                        <th class="text-center" colspan="9" style="width: 900px;">可变费用</th>
-                                        <th rowspan="2">定额基价(元)</th>
-                                        <th rowspan="2">备注</th>
-                                        <th rowspan="2">能耗(MJ)</th>
-                                        <th class="text-center" colspan="8" style="width: 800px;">排放(kg)</th>
-                                        <th rowspan="2">数据来源</th>
-                                        <th rowspan="2">数据收集时间</th>
-                                        <th rowspan="2">操作</th>
+                                        <th rowspan="2" th:text="#{db.code}"></th>
+                                        <th rowspan="2" th:text="#{db.mach-name}"></th>
+                                        <th rowspan="2" th:text="#{db.mach-type}"></th>
+                                        <th rowspan="2" th:text="#{db.host-modal}"></th>
+                                        <th rowspan="2"><span th:title="#{db.fixed-cost}" th:text="#{db.fixed-cost}"></span></th>
+                                        <th class="text-center" colspan="9" style="width: 900px;" th:text="#{db.change-cost}"></th>
+                                        <th rowspan="2" th:title="#{db.fix-base-cost}" th:text="#{db.fix-base-cost}"></th>
+                                        <th rowspan="2" th:text="#{db.remarks}"></th>
+                                        <th rowspan="2" th:title="#{tool.energy}+'(MJ)'" th:text="#{tool.energy}+'(MJ)'"></th>
+                                        <th class="text-center" colspan="8" style="width: 800px;" th:text="#{tool.emission}+'(kg)'"></th>
+                                        <th rowspan="2" th:text="#{db.data-source}"></th>
+                                        <th rowspan="2" th:title="#{db.data-coll-time}" th:text="#{db.data-coll-time}"></th>
+                                        <th rowspan="2" th:text="#{system.operation}"></th>
                                     </tr>
                                     <tr>
-                                        <th>人工(工日)</th>
-                                        <th>汽油(kg)</th>
-                                        <th>柴油(kg)</th>
-                                        <th>重油(kg)</th>
-                                        <th>煤(kg)</th>
-                                        <th>电(kw·h)</th>
-                                        <th>水(m3)</th>
-                                        <th>木柴(kg)</th>
-                                        <th><span title="养路费及车船使用税(元)">养路费及车船使用税(元)</span></th>
+                                        <th th:text="#{db.labor}" th:title="#{db.labor}"></th>
+                                        <th th:text="#{tool.gasoline}+'(kg)'" th:title="#{tool.gasoline}+'(kg)'"></th>
+                                        <th th:text="#{tool.diesel}+'(kg)'"></th>
+                                        <th th:text="#{tool.heavyoil}+'(kg)'" th:title="#{tool.heavyoil}+'(kg)'"></th>
+                                        <th th:text="#{db.coal}+'(kg)'"></th>
+                                        <th th:text="#{tool.elec}+'(kw·h)'" th:title="#{tool.elec}+'(kw·h)'"></th>
+                                        <th th:text="#{db.water}+'(m3)'"></th>
+                                        <th th:text="#{db.firewood}+'(kg)'" th:title="#{db.firewood}+'(kg)'"></th>
+                                        <th><span th:title="#{db.road-tax}" th:text="#{db.road-tax}"></span></th>
                                         <th>CO<sub>2</sub></th>
                                         <th>CH<sub>4</sub></th>
                                         <th>N<sub>2</sub>O</th>
@@ -119,7 +113,6 @@
                     </div>
                     </div>
                 </div>
-                
                 <!-- 材料modal -->
                 <div class="modal fade" data-backdrop="static" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-lg" role="document">
@@ -135,15 +128,15 @@
                             <div class="col-md-6">
                                 <input type="hidden" name="id" id="id"/>
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label" title="必填"><span class="king-required-tip text-danger mr5">*</span>机械名称：</label>
+                                    <label class="col-md-4 control-label" th:title="#{system.required}"><span class="king-required-tip text-danger mr5">*</span><span th:text="#{db.mach-name}"></span></label>
                                     <div class="col-md-8">
-                                        <input type="text" name="name" class="form-control" id="name" placeholder="请输入机械名称"/>
+                                        <input type="text" name="name" class="form-control" id="name" th:placeholder="#{system.input}"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label" title="必填"><span class="king-required-tip text-danger mr5">*</span>机械类别：</label>
+                                    <label class="col-md-4 control-label" th:title="#{system.required}"><span class="king-required-tip text-danger mr5">*</span><span th:text="#{db.mach-type}"></span></label>
                                     <div class="col-md-8">
                                         <select id="typeCd" name="typeCd" class="form-control" style="width: 100%">
                                         </select>
@@ -154,35 +147,17 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">代号：</label>
+                                    <label class="col-md-4 control-label" th:text="#{db.code}"></label>
                                     <div class="col-md-8">
-                                        <input type="text" name="code" class="form-control" id="code" placeholder="请输入代号"/>
+                                        <input type="text" name="code" class="form-control" id="code" th:placeholder="#{system.input}"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">主机型号：</label>
+                                    <label class="col-md-4 control-label" th:text="#{db.host-modal}"></label>
                                     <div class="col-md-8">
-                                        <input type="text" name="hostModel" class="form-control" id="hostModel" placeholder="请输入主机型号"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">不变费用(元)：</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="constantFee" class="form-control" id="constantFee" placeholder="请输入不变费用"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">人工(工日)：</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="labor" class="form-control" id="labor" placeholder="请输入人工"/>
+                                        <input type="text" name="hostModel" class="form-control" id="hostModel" th:placeholder="#{system.input}"/>
                                     </div>
                                 </div>
                             </div>
@@ -190,35 +165,17 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">汽油(kg)：</label>
+                                    <label class="col-md-4 control-label" th:text="#{db.fixed-cost}"></label>
                                     <div class="col-md-8">
-                                        <input type="text" name="gasoline" class="form-control" id="gasoline" placeholder="请输入汽油"/>
+                                        <input type="text" name="constantFee" class="form-control" id="constantFee" th:placeholder="#{system.input}"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">柴油(kg)：</label>
+                                    <label class="col-md-4 control-label" th:text="#{db.labor}"></label>
                                     <div class="col-md-8">
-                                        <input type="text" name="diesel" class="form-control" id="diesel" placeholder="请输入柴油"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">重油(kg)：</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="heavyOil" class="form-control" id="heavyOil" placeholder="请输入重油"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">煤(kg)：</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="coal" class="form-control" id="coal" placeholder="请输入煤"/>
+                                        <input type="text" name="labor" class="form-control" id="labor" th:placeholder="#{system.input}"/>
                                     </div>
                                 </div>
                             </div>
@@ -226,35 +183,17 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">电(kw·h)：</label>
+                                    <label class="col-md-4 control-label" th:text="#{tool.gasoline}+'(kg)'"></label>
                                     <div class="col-md-8">
-                                        <input type="text" name="electricity" class="form-control" id="electricity" placeholder="请输入电"/>
+                                        <input type="text" name="gasoline" class="form-control" id="gasoline" th:placeholder="#{system.input}"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">水(m3)：</label>
+                                    <label class="col-md-4 control-label" th:text="#{tool.diesel}+'(kg)'"></label>
                                     <div class="col-md-8">
-                                        <input type="text" name="water" class="form-control" id="water" placeholder="请输入水"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">木柴(kg)：</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="firewood" class="form-control" id="firewood" placeholder="请输入木柴"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">养路费及车船使用税(元)：</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="tax" class="form-control" id="tax" placeholder="请输入养路费及车船使用税"/>
+                                        <input type="text" name="diesel" class="form-control" id="diesel" th:placeholder="#{system.input}"/>
                                     </div>
                                 </div>
                             </div>
@@ -262,27 +201,17 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">定额基价(元)：</label>
+                                    <label class="col-md-4 control-label" th:text="#{tool.heavyoil}+'(kg)'"></label>
                                     <div class="col-md-8">
-                                        <input type="text" name="basePrice" class="form-control" id="basePrice" placeholder="请输入定额基价"/>
+                                        <input type="text" name="heavyOil" class="form-control" id="heavyOil" th:placeholder="#{system.input}"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">备注：</label>
+                                    <label class="col-md-4 control-label" th:text="#{db.coal}+'(kg)'"></label>
                                     <div class="col-md-8">
-                                        <input type="text" name="remarks" class="form-control" id="remarks" placeholder="请输入备注"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">能耗(MJ)：</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="energyConsume" class="form-control" id="energyConsume" placeholder="请输入能耗，支持科学计数法"/>
+                                        <input type="text" name="coal" class="form-control" id="coal" th:placeholder="#{system.input}"/>
                                     </div>
                                 </div>
                             </div>
@@ -290,35 +219,17 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">CO<sub>2</sub>排放(kg)：</label>
+                                    <label class="col-md-4 control-label" th:text="#{tool.elec}+'(kw·h)'"></label>
                                     <div class="col-md-8">
-                                        <input type="text" name="emissionCo2" class="form-control" id="emissionCo2" placeholder="请输入CO2排放量，支持科学计数法"/>
+                                        <input type="text" name="electricity" class="form-control" id="electricity" th:placeholder="#{system.input}"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">CH<sub>4</sub>排放(kg)：</label>
+                                    <label class="col-md-4 control-label" th:text="#{db.water}+'(m3)'"></label>
                                     <div class="col-md-8">
-                                        <input type="text" name="emissionCh4" class="form-control" id="emissionCh4" placeholder="请输入CH4排放量，支持科学计数法"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">N<sub>2</sub>O排放(kg)：</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="emissionN2o" class="form-control" id="emissionN2o" placeholder="请输入N2O排放量，支持科学计数法"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">CO排放(kg)：</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="emissionCo" class="form-control" id="emissionCo" placeholder="请输入CO排放量，支持科学计数法"/>
+                                        <input type="text" name="water" class="form-control" id="water" th:placeholder="#{system.input}"/>
                                     </div>
                                 </div>
                             </div>
@@ -326,35 +237,17 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">SO<sub>2</sub>排放(kg)：</label>
+                                    <label class="col-md-4 control-label" th:text="#{db.firewood}+'(kg)'"></label>
                                     <div class="col-md-8">
-                                        <input type="text" name="emissionSo2" class="form-control" id="emissionSo2" placeholder="请输入SO2排放量，支持科学计数法"/>
+                                        <input type="text" name="firewood" class="form-control" id="firewood" th:placeholder="#{system.input}"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">NO<sub>x</sub>排放(kg)：</label>
+                                    <label class="col-md-4 control-label" th:text="#{db.road-tax}"></label>
                                     <div class="col-md-8">
-                                        <input type="text" name="emissionNox" class="form-control" id="emissionNox" placeholder="请输入NOx排放量，支持科学计数法"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Pb排放(kg)：</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="emissionPb" class="form-control" id="emissionPb" placeholder="请输入Pb排放量，支持科学计数法"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Zn排放(kg)：</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="emissionZn" class="form-control" id="emissionZn" placeholder="请输入Zn排放量，支持科学计数法"/>
+                                        <input type="text" name="tax" class="form-control" id="tax" th:placeholder="#{system.input}"/>
                                     </div>
                                 </div>
                             </div>
@@ -362,25 +255,125 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">数据来源：</label>
+                                    <label class="col-md-4 control-label" th:text="#{db.fix-base-cost}"></label>
                                     <div class="col-md-8">
-                                        <input type="text" name="dataSource" class="form-control" id="dataSource" placeholder="请输入数据来源"/>
+                                        <input type="text" name="basePrice" class="form-control" id="basePrice" th:placeholder="#{system.input}"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">数据收集时间：</label>
+                                    <label class="col-md-4 control-label" th:text="#{db.remarks}"></label>
                                     <div class="col-md-8">
-                                        <input type="text" name="collectTime" class="form-control" id="collectTime" placeholder="请输入数据收集时间，如 2017"/>
+                                        <input type="text" name="remarks" class="form-control" id="remarks" th:placeholder="#{system.input}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" th:text="#{tool.energy}+'(MJ)'"></label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="energyConsume" class="form-control" id="energyConsume" th:placeholder="#{db.sci-not}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">CO<sub>2</sub>&nbsp;<span th:text="#{tool.emission}"></span>(kg)</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="emissionCo2" class="form-control" id="emissionCo2" th:placeholder="#{db.sci-not}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">CH<sub>4</sub>&nbsp;<span th:text="#{tool.emission}"></span>(kg)</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="emissionCh4" class="form-control" id="emissionCh4" th:placeholder="#{db.sci-not}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">N<sub>2</sub>O&nbsp;<span th:text="#{tool.emission}"></span>(kg)</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="emissionN2o" class="form-control" id="emissionN2o" th:placeholder="#{db.sci-not}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">CO&nbsp;<span th:text="#{tool.emission}"></span>(kg)</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="emissionCo" class="form-control" id="emissionCo" th:placeholder="#{db.sci-not}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">SO<sub>2</sub>&nbsp;<span th:text="#{tool.emission}"></span>(kg)</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="emissionSo2" class="form-control" id="emissionSo2" th:placeholder="#{db.sci-not}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">NO<sub>x</sub>&nbsp;<span th:text="#{tool.emission}"></span>(kg)</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="emissionNox" class="form-control" id="emissionNox" th:placeholder="#{db.sci-not}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Pb&nbsp;<span th:text="#{tool.emission}"></span>(kg)</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="emissionPb" class="form-control" id="emissionPb" th:placeholder="#{db.sci-not}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Zn&nbsp;<span th:text="#{tool.emission}"></span>(kg)</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="emissionZn" class="form-control" id="emissionZn" th:placeholder="#{db.sci-not}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" th:text="#{db.data-source}"></label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="dataSource" class="form-control" id="dataSource" th:placeholder="#{system.input}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" th:text="#{db.data-coll-time}"></label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="collectTime" class="form-control" id="collectTime" th:placeholder="#{db.in-year}"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                       </div>
                       <div class="modal-footer">
-                        <button type="submit" class="king-btn king-radius king-primary">保存</button>
-                        <button type="button" class="king-btn king-radius king-default" data-dismiss="modal">取消</button>
+                        <button type="submit" class="king-btn king-radius king-primary"><span th:text="#{system.save}"></span></button>
+                        <button type="button" class="king-btn king-radius king-default" data-dismiss="modal"><span th:text="#{system.cancel}"></span></button>
                       </div>
                       </form>
                     </div>
@@ -389,18 +382,13 @@
                   <!-- /.modal-dialog -->
                 </div>
                 <!-- /.modal -->
-
             </div>
             <!-- /.container-fluid -->
-
         </div>
         <!-- /#page-wrapper -->
-
     </div>
     <!-- /#wrapper -->
-    
     <div th:replace="common/script"></div>
-    
     <!-- js -->
     <script th:src="@{/js/constant.js}"></script>
     <script th:src="@{/js/machine-manage.js}"></script>

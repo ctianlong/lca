@@ -126,7 +126,7 @@ $(function(){
 		        return param;
 		    },
 		    addItemInit : function() {
-				$("#myModalLabel").text("新增");
+				$("#myModalLabel").text(iMsg.add);
 				validator.resetForm();
 		        $("#form-machine")[0].reset();
 		        $("#id").val('');
@@ -137,7 +137,7 @@ $(function(){
 		        if (!item) {
 		            return;
 		        }
-				$("#myModalLabel").text("修改");
+				$("#myModalLabel").text(iMsg.edit);
 				validator.resetForm();
 		        $("#form-machine")[0].reset();
 		        $("#id").val(item.id);
@@ -180,7 +180,7 @@ $(function(){
 	                success:function (data, textStatus, jqXHR) {
 	                	$("#modal-default").modal("hide");
 	                	var d = dialog({
-                            content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">新增成功</p></div>'
+                            content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">'+iMsg.addSuccess+'</p></div>'
                         });
                         d.show();
                         setTimeout(function() {
@@ -190,9 +190,9 @@ $(function(){
 	                },
 	                error:function (XMLHttpRequest, textStatus, errorThrown) {
 	                	var status=XMLHttpRequest.status;
-                    	var msg="新增失败";
+                    	var msg=iMsg.addFail;
                     	if(status==400){
-                    		msg="您的输入格式有误";
+                    		msg=iMsg.formatSizeErr;
                     	}
                     	var d = dialog({
                              content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+msg+'</p></div>',
@@ -215,7 +215,7 @@ $(function(){
 	                success:function (data, textStatus, jqXHR) {
 	                	$("#modal-default").modal("hide");
 	                	var d = dialog({
-	                        content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">修改成功</p></div>'
+	                        content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">'+iMsg.editSuccess+'</p></div>'
 	                    });
 	                    d.show();
 	                    setTimeout(function() {
@@ -225,11 +225,11 @@ $(function(){
 	                },
 	                error:function (XMLHttpRequest, textStatus, errorThrown) {
 	                	var status=XMLHttpRequest.status;
-	                	var msg="修改失败";
+	                	var msg=iMsg.editFail;
 	                	if(status==400){
-	                		msg="您的输入格式有误";
+	                		msg=iMsg.formatSizeErr;
 	                	}else if(status==403) {
-							msg="只能修改您提交的记录";
+							msg=iMsg.onlyPermitOwnEdit;
 						}
 	                	var d = dialog({
 	                         content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+msg+'</p></div>',
@@ -246,15 +246,15 @@ $(function(){
 		        var message;
 		        if (selectedItems&&selectedItems.length) {
 		            if (selectedItems.length == 1) {
-		                message = "确认删除 '"+selectedItems[0].name+"' 吗?";
+		                message = iMsg.removeOne.fillArgs(selectedItems[0].name);
 		            }else{
-		                message = "确认删除选中的"+selectedItems.length+"条记录吗?";
+		                message = iMsg.removeMultiple.fillArgs(selectedItems.length);
 		            }
 					dialog({
-				        title: '确认',
+				        title: iMsg.confirm,
 				        content: message,
 				        zIndex: 2048,
-				        okValue: '确定',
+				        okValue: iMsg.ok,
 				        ok: function() {
 				        	NProgress.start();
 				            $.ajax({
@@ -263,7 +263,7 @@ $(function(){
 			                    success:function (data, textStatus, jqXHR) {
 			                    	NProgress.done();
 			                    	 var d = dialog({
-			                             content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">删除成功</p></div>'
+			                             content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">'+iMsg.removeSuccess+'</p></div>'
 			                         });
 			                         d.show();
 			                         setTimeout(function() {
@@ -274,11 +274,11 @@ $(function(){
 			                    error:function (XMLHttpRequest, textStatus, errorThrown) {
 			                    	NProgress.done();
 			                    	var status=XMLHttpRequest.status;
-			                    	var msg="删除失败";
+			                    	var msg=iMsg.removeFail;
 			                    	if(status==403){
-			                    		msg="只能删除您提交的记录";
+			                    		msg=iMsg.onlyPermitOwnDelete;
 			                    	}else if(status==404){
-			                    		msg="该记录不存在或已经被删除";
+			                    		msg=iMsg.userNotExist;
 			                    	}
 			                    	var d = dialog({
 			                             content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+msg+'</p></div>'
@@ -293,7 +293,7 @@ $(function(){
 			                    }
 			                });
 				        },
-				        cancelValue: '取消',
+				        cancelValue: iMsg.cancel,
 				        cancel: function() {}
 				    }).showModal();
 		        }else{
@@ -301,7 +301,6 @@ $(function(){
 		        }
 		    }
     	};
-
 	var $wrapper = $("#div-table-container");
 	var $table = $("#table-machine");
 	var _table = $table.dataTable($.extend(true,{},CONSTANT.DATA_TABLES.DEFAULT_OPTION, {
@@ -332,7 +331,7 @@ $(function(){
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
                     	var d = dialog({
-                            content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">查询失败</p></div>'
+                            content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.queryFail+'</p></div>'
                         });
                         d.show();
                         setTimeout(function() {
@@ -528,8 +527,8 @@ $(function(){
             //$('td', row).eq(5).addClass(data.superuser?"text-primary":"");
             //不使用render，改用jquery文档操作呈现单元格
         	if(data.createUserId==loginUserId || isSuperuser==true){
-        		var $btnEdit = $('<a class="king-btn king-info king-radius king-btn-mini btn-edit"><i class="fa fa-edit btn-icon"></i> 修改</a>');
-        		var $btnDel = $('<a class="king-btn king-danger king-radius king-btn-mini btn-del"><i class="fa fa-close btn-icon"></i> 删除</a>');
+        		var $btnEdit = $('<a class="king-btn king-info king-radius king-btn-mini btn-edit"><i class="fa fa-edit btn-icon"></i> '+iMsg.edit+'</a>');
+        		var $btnDel = $('<a class="king-btn king-danger king-radius king-btn-mini btn-del"><i class="fa fa-close btn-icon"></i> '+iMsg.remove+'</a>');
         		$('td', row).eq(27).append($btnEdit).append($btnDel);
         	}
         },
@@ -541,20 +540,19 @@ $(function(){
             //$("tbody tr",$table).eq(0).click();
         }
     })).api();
-	
 	// 下拉菜单初始化，select2
 	$("#typeCdQuery").select2({
 		data:cdMachineCategory,
-		placeholder:"全部",
+		placeholder:iMsg.all,
 		allowClear:true,
 		minimumResultsForSearch:-1,
-		language:"zh-CN"
+		language:iMsg.select2LangCode
 	});
 	
 	$("#typeCd").select2({
 		data:cdMachineCategory,
 		minimumResultsForSearch:-1,
-		language:"zh-CN"
+		language:iMsg.select2LangCode
 	});
 	
 	// 添加按钮
@@ -711,6 +709,5 @@ $(function(){
     	},
     	onkeyup:false
     });
- 
 });
 

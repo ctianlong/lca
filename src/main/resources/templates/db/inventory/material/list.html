@@ -41,7 +41,7 @@
 		                            <div class="form-group">
 		                                <div class="input-group">
 		                                    <div class="input-group-addon" th:text="#{tool.mater-name}"></div>
-		                                    <input id="materialNameQuery" class="form-control" type="text" placeholder="请输入材料名称">
+		                                    <input id="materialNameQuery" class="form-control" type="text" th:placeholder="#{system.input}">
 		                                </div>
 		                            </div>
 	                            </div>
@@ -73,14 +73,14 @@
                                 <thead>
                                     <tr>
                                         <th rowspan="2" th:text="#{tool.mater-name}"></th>
-                                        <th rowspan="2" th:text="#{db.mater-type}"></th>
+                                        <th rowspan="2" th:title="#{db.mater-type}" th:text="#{db.mater-type}"></th>
                                         <th rowspan="2" th:text="#{db.unit}"></th>
                                         <th rowspan="2" th:text="#{tool.cost}"></th>
                                         <th rowspan="2" th:text="#{db.cost-source}"></th>
-                                        <th rowspan="2" th:text="#{tool.energy}+'(MJ)'"></th>
+                                        <th rowspan="2" th:title="#{tool.energy}+'(MJ)'" th:text="#{tool.energy}+'(MJ)'"></th>
                                         <th class="text-center" colspan="8" style="width: 800px;" th:text="#{tool.emission}+'(kg)'"></th>
                                         <th rowspan="2" th:text="#{db.data-source}"></th>
-                                        <th rowspan="2" th:text="#{db.data-coll-time}"></th>
+                                        <th rowspan="2" th:title="#{db.data-coll-time}" th:text="#{db.data-coll-time}"></th>
                                         <th rowspan="2" th:text="#{system.operation}"></th>
                                     </tr>
                                     <tr>
@@ -101,7 +101,6 @@
                     </div>
                     </div>
                 </div>
-                
                 <!-- 材料modal -->
                 <div class="modal fade" data-backdrop="static" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-lg" role="document">

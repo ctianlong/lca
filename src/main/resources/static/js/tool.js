@@ -425,7 +425,7 @@ $(function(){
 			},
 			cache:true
 		},
-		placeholder:'请选择一种具体燃料',
+		placeholder:iMsg.chooFuel,
 		allowClear:true,
 		minimumResultsForSearch:-1,
 		language:iMsg.select2LangCode,
@@ -5910,13 +5910,10 @@ $(function(){
 		    toolbox: {
 		        show : true,
 		        feature : {
-		            dataView : {show: true, readOnly: true},
-		            magicType : {show: true, type: ['line', 'bar']},
-		            restore : {show: true},
 		            saveAsImage : {show: true}
 		        }
 		    },
-		    xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:30}}],
+		    xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:15}}],
 		    yAxis : [{type : 'value',name:iMsg.enecCost+"/"+iMsg.rmb}],
 		    series : [{
 	            type:'bar',
@@ -5931,13 +5928,10 @@ $(function(){
 			toolbox: {
 				show : true,
 				feature : {
-					dataView : {show: true, readOnly: true},
-					magicType : {show: true, type: ['line', 'bar']},
-					restore : {show: true},
 					saveAsImage : {show: true}
 				}
 			},
-			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:30}}],
+			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:15}}],
 			yAxis : [{type : 'value',name:iMsg.energy+'/MJ'}],
 			series : [{
 				type:'bar',
@@ -5952,13 +5946,10 @@ $(function(){
 			toolbox: {
 				show : true,
 				feature : {
-					dataView : {show: true, readOnly: true},
-					magicType : {show: true, type: ['line', 'bar']},
-					restore : {show: true},
 					saveAsImage : {show: true}
 				}
 			},
-			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:30}}],
+			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:15}}],
 			yAxis : [{type : 'value',name:iMsg.emission+'/kg'}],
 			series : [{
 				type:'bar',
@@ -5973,13 +5964,10 @@ $(function(){
 			toolbox: {
 				show : true,
 				feature : {
-					dataView : {show: true, readOnly: true},
-					magicType : {show: true, type: ['line', 'bar']},
-					restore : {show: true},
 					saveAsImage : {show: true}
 				}
 			},
-			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:30}}],
+			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:15}}],
 			yAxis : [{type : 'value',name:iMsg.emission+'/kg'}],
 			series : [{
 				type:'bar',
@@ -5994,13 +5982,10 @@ $(function(){
 			toolbox: {
 				show : true,
 				feature : {
-					dataView : {show: true, readOnly: true},
-					magicType : {show: true, type: ['line', 'bar']},
-					restore : {show: true},
 					saveAsImage : {show: true}
 				}
 			},
-			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:30}}],
+			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:15}}],
 			yAxis : [{type : 'value',name:iMsg.emission+'/kg'}],
 			series : [{
 				type:'bar',
@@ -6015,13 +6000,10 @@ $(function(){
 			toolbox: {
 				show : true,
 				feature : {
-					dataView : {show: true, readOnly: true},
-					magicType : {show: true, type: ['line', 'bar']},
-					restore : {show: true},
 					saveAsImage : {show: true}
 				}
 			},
-			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:30}}],
+			xAxis : [{type : 'category',data : legend,axisLabel: {interval:0,rotate:15}}],
 			yAxis : [{type : 'value',name:iMsg.emission+'/kg'}],
 			series : [{
 				type:'bar',
@@ -6069,7 +6051,6 @@ $(function(){
 		    toolbox: {
 		        show : true,
 		        feature : {
-		            dataView : {show: true, readOnly: true},
 					saveAsImage : {show: true}
 		        }
 		    },
@@ -6092,7 +6073,7 @@ $(function(){
 		// 概率分析作图
 		if(conserveRange==2){
 			$("#chartProbability").show();
-			var legendData=[iMsg.downWave+conserveData.conserveUncertainty+'%',iMsg.okValue,iMsg.upWave+conserveData.conserveUncertainty+'%'];
+			var legendData=[iMsg.downWave+' '+conserveData.conserveUncertainty+'%',iMsg.okValue,iMsg.upWave+' '+conserveData.conserveUncertainty+'%'];
 			chartData.chartCostProbability = echarts.init(document.getElementById('chartCostProbability')); 
 			chartData.chartCostProbability.setOption({
 				title : {text: iMsg.costWave},
@@ -6100,13 +6081,10 @@ $(function(){
 				toolbox: {
 					show : true,
 					feature : {
-						dataView : {show: true, readOnly: true},
-						magicType : {show: true, type: ['line', 'bar']},
-						restore : {show: true},
 						saveAsImage : {show: true}
 					}
 				},
-				xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
+				xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:15}}],
 				yAxis : [{type : 'value',scale:true,name:iMsg.enecCost+"/"+iMsg.rmb}],
 				series : [{
 					type:'bar',
@@ -6123,13 +6101,10 @@ $(function(){
 					toolbox: {
 						show : true,
 						feature : {
-							dataView : {show: true, readOnly: true},
-							magicType : {show: true, type: ['line', 'bar']},
-							restore : {show: true},
 							saveAsImage : {show: true}
 						}
 					},
-					xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
+					xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:15}}],
 					yAxis : [{type : 'value',scale:true,name:iMsg.enecCost+"/"+iMsg.rmb}],
 					series : [{
 						type:'bar',
@@ -6149,13 +6124,10 @@ $(function(){
 					toolbox: {
 						show : true,
 						feature : {
-							dataView : {show: true, readOnly: true},
-							magicType : {show: true, type: ['line', 'bar']},
-							restore : {show: true},
 							saveAsImage : {show: true}
 						}
 					},
-					xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
+					xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:15}}],
 					yAxis : [{type : 'value',scale:true,name:iMsg.enecCost+"/"+iMsg.rmb}],
 					series : [{
 						type:'bar',
@@ -6175,13 +6147,10 @@ $(function(){
 					toolbox: {
 						show : true,
 						feature : {
-							dataView : {show: true, readOnly: true},
-							magicType : {show: true, type: ['line', 'bar']},
-							restore : {show: true},
 							saveAsImage : {show: true}
 						}
 					},
-					xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
+					xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:15}}],
 					yAxis : [{type : 'value',scale:true,name:iMsg.enecCost+"/"+iMsg.rmb}],
 					series : [{
 						type:'bar',
@@ -6201,13 +6170,10 @@ $(function(){
 					toolbox: {
 						show : true,
 						feature : {
-							dataView : {show: true, readOnly: true},
-							magicType : {show: true, type: ['line', 'bar']},
-							restore : {show: true},
 							saveAsImage : {show: true}
 						}
 					},
-					xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:30}}],
+					xAxis : [{type : 'category',data : legendData,axisLabel: {interval:0,rotate:15}}],
 					yAxis : [{type : 'value',scale:true,name:iMsg.enecCost+"/"+iMsg.rmb}],
 					series : [{
 						type:'bar',
@@ -6359,7 +6325,7 @@ $(function(){
 			}else{
 				influenceData.betaAnalysis=iMsg.resReliableD;
 			}
-			$("#beta").text(influenceData.beta.toFixed(3)+"("+influenceData.betaAnalysis+")");
+			$("#beta").text(influenceData.beta.toFixed(3)+" ("+influenceData.betaAnalysis+")");
 		}else{
 			$("#beta").text(iMsg.none);
 		}
@@ -6511,7 +6477,7 @@ $(function(){
         });
         doc.addParagraph(iMsg.repoBase16);
         if(influenceData.beta!=null){
-        	doc.addParagraph(iMsg.repoBase16.fillArgs(influenceData.beta.toFixed(3)));
+        	doc.addParagraph(iMsg.repoBase17.fillArgs(influenceData.beta.toFixed(3)));
         	doc.addParagraph(influenceData.betaAnalysis);
         }else{
         	doc.addParagraph(iMsg.none);

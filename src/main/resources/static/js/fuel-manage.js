@@ -68,7 +68,7 @@ $(function(){
 		        return param;
 		    },
 		    addItemInit : function() {
-				$("#myModalLabel").text("新增");
+				$("#myModalLabel").text(iMsg.add);
 				validator.resetForm();
 		        $("#form-fuel")[0].reset();
 		        $("#id").val('');
@@ -78,7 +78,7 @@ $(function(){
 		        if (!item) {
 		            return;
 		        }
-				$("#myModalLabel").text("修改");
+				$("#myModalLabel").text(iMsg.edit);
 				validator.resetForm();
 		        $("#form-fuel")[0].reset();
 		        $("#id").val(item.id);
@@ -110,7 +110,7 @@ $(function(){
 	                success:function (data, textStatus, jqXHR) {
 	                	$("#modal-default").modal("hide");
 	                	var d = dialog({
-                            content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">新增成功</p></div>'
+                            content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">'+iMsg.addSuccess+'</p></div>'
                         });
                         d.show();
                         setTimeout(function() {
@@ -120,9 +120,9 @@ $(function(){
 	                },
 	                error:function (XMLHttpRequest, textStatus, errorThrown) {
 	                	var status=XMLHttpRequest.status;
-                    	var msg="新增失败";
+                    	var msg=iMsg.addFail;
                     	if(status==400){
-                    		msg="您的输入格式有误";
+                    		msg=iMsg.formatSizeErr;
                     	}
                     	var d = dialog({
                              content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+msg+'</p></div>',
@@ -145,7 +145,7 @@ $(function(){
 	                success:function (data, textStatus, jqXHR) {
 	                	$("#modal-default").modal("hide");
 	                	var d = dialog({
-	                        content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">修改成功</p></div>'
+	                        content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">'+iMsg.editSuccess+'</p></div>'
 	                    });
 	                    d.show();
 	                    setTimeout(function() {
@@ -155,11 +155,11 @@ $(function(){
 	                },
 	                error:function (XMLHttpRequest, textStatus, errorThrown) {
 	                	var status=XMLHttpRequest.status;
-	                	var msg="修改失败";
+	                	var msg=iMsg.editFail;
 	                	if(status==400){
-	                		msg="您的输入格式有误";
+	                		msg=iMsg.formatSizeErr;
 	                	}else if(status==403) {
-							msg="只能修改您提交的记录";
+							msg=iMsg.onlyPermitOwnEdit;
 						}
 	                	var d = dialog({
 	                         content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+msg+'</p></div>',
@@ -176,15 +176,15 @@ $(function(){
 		        var message;
 		        if (selectedItems&&selectedItems.length) {
 		            if (selectedItems.length == 1) {
-		                message = "确认删除 '"+selectedItems[0].fuelType+"' 吗?";
+		                message = iMsg.removeOne.fillArgs(selectedItems[0].fuelType);
 		            }else{
-		                message = "确认删除选中的"+selectedItems.length+"条记录吗?";
+		                message = iMsg.removeMultiple.fillArgs(selectedItems.length);
 		            }
 					dialog({
-				        title: '确认',
+				        title: iMsg.confirm,
 				        content: message,
 				        zIndex: 2048,
-				        okValue: '确定',
+				        okValue: iMsg.ok,
 				        ok: function() {
 				        	NProgress.start();
 				            $.ajax({
@@ -193,7 +193,7 @@ $(function(){
 			                    success:function (data, textStatus, jqXHR) {
 			                    	NProgress.done();
 			                    	 var d = dialog({
-			                             content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">删除成功</p></div>'
+			                             content:'<div class="king-notice-box king-notice-success"><p class="king-notice-text">'+iMsg.removeSuccess+'</p></div>'
 			                         });
 			                         d.show();
 			                         setTimeout(function() {
@@ -204,11 +204,11 @@ $(function(){
 			                    error:function (XMLHttpRequest, textStatus, errorThrown) {
 			                    	NProgress.done();
 			                    	var status=XMLHttpRequest.status;
-			                    	var msg="删除失败";
+			                    	var msg=iMsg.removeFail;
 			                    	if(status==403){
-			                    		msg="只能删除您提交的记录";
+			                    		msg=iMsg.onlyPermitOwnDelete;
 			                    	}else if(status==404){
-			                    		msg="该记录不存在或已经被删除";
+			                    		msg=iMsg.userNotExist;
 			                    	}
 			                    	var d = dialog({
 			                             content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+msg+'</p></div>'
@@ -223,7 +223,7 @@ $(function(){
 			                    }
 			                });
 				        },
-				        cancelValue: '取消',
+				        cancelValue: iMsg.cancel,
 				        cancel: function() {}
 				    }).showModal();
 		        }else{
@@ -262,7 +262,7 @@ $(function(){
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
                     	var d = dialog({
-                            content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">查询失败</p></div>'
+                            content:'<div class="king-notice-box king-notice-fail"><p class="king-notice-text">'+iMsg.queryFail+'</p></div>'
                         });
                         d.show();
                         setTimeout(function() {
@@ -389,8 +389,8 @@ $(function(){
             //$('td', row).eq(5).addClass(data.superuser?"text-primary":"");
             //不使用render，改用jquery文档操作呈现单元格
         	if(data.createUserId==loginUserId || isSuperuser==true){
-        		var $btnEdit = $('<a class="king-btn king-info king-radius king-btn-mini btn-edit"><i class="fa fa-edit btn-icon"></i> 修改</a>');
-        		var $btnDel = $('<a class="king-btn king-danger king-radius king-btn-mini btn-del"><i class="fa fa-close btn-icon"></i> 删除</a>');
+        		var $btnEdit = $('<a class="king-btn king-info king-radius king-btn-mini btn-edit"><i class="fa fa-edit btn-icon"></i> '+iMsg.edit+'</a>');
+        		var $btnDel = $('<a class="king-btn king-danger king-radius king-btn-mini btn-del"><i class="fa fa-close btn-icon"></i> '+iMsg.remove+'</a>');
         		$('td', row).eq(16).append($btnEdit).append($btnDel);
         	}
         },
@@ -402,27 +402,23 @@ $(function(){
             //$("tbody tr",$table).eq(0).click();
         }
     })).api();
-	
 	// 添加按钮
 	$("#btn-add").click(function(){
 		fuelManage.currentItem = null;
 		fuelManage.addItemInit();
     });
-	
 	// 具体字段查询
     $("#form-fuel-query").submit(function(){
     	_table.order([]);
         _table.draw();
         return false;
     });	
- 
     // 刷新按钮
     $("#btn-reset-refresh").click(function(){
     	$("#form-fuel-query")[0].reset();
     	_table.order([]);
     	_table.draw();
     });
- 
 	// 批量删除
 //    $("#btn-del").click(function(){
 //        var arrItemId = [];
@@ -432,7 +428,6 @@ $(function(){
 //        });
 //        userManage.deleteItem(arrItemId);
 //    });
- 
     //行点击事件
     $("tbody",$table).on("click","tr",function(event) {
         $(this).addClass("info").siblings().removeClass("info");
@@ -440,7 +435,6 @@ $(function(){
 //        var item = _table.row($(this).closest('tr')).data();
 //        userManage.currentItem = item;
     });
- 
     $table.on("change",":checkbox",function() {
 //        if ($(this).is("[name='cb-check-all']")) {
 //            //全选
@@ -463,7 +457,6 @@ $(function(){
         var item = _table.row($(this).closest('tr')).data();
         fuelManage.deleteItem([item]);
     });
-    
     // 材料表单校验规则
     var validator = $("#form-fuel").validate({
         errorClass: 'text-danger',
@@ -516,6 +509,5 @@ $(function(){
     	},
     	onkeyup:false
     });
- 
 });
 

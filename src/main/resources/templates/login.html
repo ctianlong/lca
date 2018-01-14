@@ -159,7 +159,8 @@
 	            url: ctxPath + "/api/common/changelanguage",
 	            data: {lang:language},
 	            error: function(data, error) {
-	                alert("change language error!");
+	                //alert("change language error!");
+	                window.location.reload();
 	            },
 	            success: function(data){
 	                window.location.reload();
