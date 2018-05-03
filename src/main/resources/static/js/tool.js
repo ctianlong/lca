@@ -3908,14 +3908,14 @@ $(function(){
 							break;
 						}
 					}
-					gasoline+=(iri-1)*0.0313*(i5*basicData.rLength/1000*i3*Math.pow(1+i7,i));
-					diesel+=(iri-1)*0.00739*(i6*basicData.rLength/1000*i3*Math.pow(1+i7,i));
+					gasoline+=(iri-1)*0.0313*365*(i5*basicData.rLength/1000*i3*Math.pow(1+i7,i));
+					diesel+=(iri-1)*0.00739*365*0.1*(i6*basicData.rLength/1000*i3*Math.pow(1+i7,i));
 				}
 			}else{
 				for (var i = 1; i <= i1; i++) {
 					var iri=Math.pow(-0.174+0.0000966*Math.sqrt((i3*i4*y+i3*(1-i4)*z)*365*(Math.pow(1+i7,i)-1)/i7)+1.15*Math.sqrt(x),2);
-					gasoline+=(iri-1)*0.0313*(i5*basicData.rLength/1000*i3*Math.pow(1+i7,i));
-					diesel+=(iri-1)*0.00739*(i6*basicData.rLength/1000*i3*Math.pow(1+i7,i));
+					gasoline+=(iri-1)*0.0313*365*(i5*basicData.rLength/1000*i3*Math.pow(1+i7,i));
+					diesel+=(iri-1)*0.00739*365*0.1*(i6*basicData.rLength/1000*i3*Math.pow(1+i7,i));
 				}
 			}
 			use3Data.fuelList=[];
